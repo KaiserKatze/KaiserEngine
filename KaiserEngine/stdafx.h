@@ -19,3 +19,5 @@
 
 
 // TODO: reference additional headers your program requires here
+#include <gl/GL.h>
+#include <gl/GLU.h>
