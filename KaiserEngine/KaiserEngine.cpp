@@ -111,7 +111,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    return TRUE;
 }
 
-int InitOpenGL(HDC hdc)
+int InitPixelFormat(HDC hdc)
 {
     // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
     PIXELFORMATDESCRIPTOR pfd =
