@@ -137,6 +137,8 @@ int InitPixelFormat(HDC hdc)
     int format = ChoosePixelFormat(hdc, &pfd);
     if (format == 0)
     {
+        // could not find a pixel format that matches the description,
+        // or the PDF was not filled out correctly
         return -1;
     }
 
