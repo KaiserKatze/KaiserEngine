@@ -159,8 +159,22 @@ int InitPixelFormat(HDC hdc)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    static HDC hDC;
+    static HGLRC hRC;
+
     switch (message)
     {
+    case WM_CREATE:
+        {
+            hDC = GetDC(hWnd);
+            InitPixelFormat(hDC);
+            hRC = wglCreateContext(hDC);
+            wglMakeCurrent(hDC, hRC);
+
+            //MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
+            //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
+            //PROC proc = wglGetProcAddress("wglGetExtensionsStringARB");
+        }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -187,6 +201,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+        wglMakeCurrent(hDC, NULL);
+        wglDeleteContext(hRC);
+
         PostQuitMessage(0);
         break;
     default:
