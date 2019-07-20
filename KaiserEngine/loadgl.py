@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os.path
+import os
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -32,6 +32,7 @@ def GenerateCpp():
 """)
         # misc function declaration
         file.write("""void * GetAnyGLFuncAddress(const char * name);""")
+        file.write("\n")
         file.write("""void ErrorExit(LPTSTR lpszFunction);""")
 
         # function LoadOpenglFunctions

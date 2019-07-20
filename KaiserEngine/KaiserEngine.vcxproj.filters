@@ -30,12 +30,18 @@
     <ClInclude Include="KaiserEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="loadgl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KaiserEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="loadgl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
