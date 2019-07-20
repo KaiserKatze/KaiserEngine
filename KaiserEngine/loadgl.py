@@ -15,6 +15,7 @@ def GenerateCpp():
     with open(os.path.join(HERE, "loadgl.txt"),
               mode="r", encoding="utf-8") as file:
         lines = file.read().splitlines()
+        lines = list(dict.fromkeys(lines))
         for line in lines:
             gltype = "PFN{}PROC".format(line.upper())
             line = """
