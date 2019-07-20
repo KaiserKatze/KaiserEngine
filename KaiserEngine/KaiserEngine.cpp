@@ -147,21 +147,7 @@ int InitPixelFormat(HDC hdc)
     return 0;
 }
 
-void * GetAnyGLFuncAddress(const char * name)
-{
-    void * p = (void *) wglGetProcAddress(name);
-    if (p == (void *) 0
-        || (p == (void *) 0x1)
-        || (p == (void *) 0x2)
-        || (p == (void *) 0x3)
-        || (p == (void *) -1))
-    {
-        HMODULE module = LoadLibraryA("opengl32.dll");
-        p = (void *) GetProcAddress(module, name);
-    }
-
-    return p;
-}
+#include "loadgl.h"
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -187,6 +173,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             //MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
             //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
             //PROC proc = wglGetProcAddress("wglGetExtensionsStringARB");
+
+            LoadOpenglFunctions();
         }
         break;
     case WM_COMMAND:
