@@ -293,9 +293,12 @@ void gl_init(HWND hWnd)
     if (screenHeight <= 0)
         throw 1;
 
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60, float(screenWidth) / float(screenHeight), 0.1, 100.0);
+    //gluPerspective(60.0f, float(screenWidth) / float(screenHeight), 0.1f, 100.0f);
     glMatrixMode(GL_TEXTURE);
     glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);
@@ -342,6 +345,8 @@ void vao_exit()
 //---------------------------------------------------------------------------
 void vao_draw()
 {
+    glClearColor(.0f, .0f, .0f, .0f);
+
     glBindVertexArray(vao[0]);
     //  glDrawArrays(GL_LINE_LOOP,0,8);                 // lines ... no indices
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, 0);  // indices (choose just one line not both !!!)
