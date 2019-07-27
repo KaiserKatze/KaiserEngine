@@ -18,6 +18,8 @@ def GenerateCpp():
         lines = file.read().splitlines()
         lines = list(dict.fromkeys(lines))
         for line in lines:
+            if not line:
+                continue
             func = line
             gltype = "PFN{}PROC".format(line.upper())
 
