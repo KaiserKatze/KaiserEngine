@@ -10,7 +10,7 @@ def GenerateCpp():
     Generate loadgl.h and loadgl.cpp
     """
 
-    buffer = []
+    buffer_cpp = []
 
     with open(os.path.join(HERE, "loadgl.txt"),
               mode="r", encoding="utf-8") as file:
@@ -21,7 +21,7 @@ def GenerateCpp():
             line = """
     {0} {1} = ({0}) GetAnyGLFuncAddress("{1}");
     if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, line)
-            buffer.append(line)
+            buffer_cpp.append(line)
 
     # Generate loadgl.h
     with open(os.path.join(HERE, "loadgl.h"),
@@ -51,7 +51,7 @@ void LoadOpenglFunctions();
 void LoadOpenglFunctions()
 {""")
 
-        for line in buffer:
+        for line in buffer_cpp:
             file.write(line)
 
         # misc function definition
@@ -74,7 +74,7 @@ void * GetAnyGLFuncAddress(const char * name)
     return p;
 }
 """)
-        
+
         file.write("""
 #include <strsafe.h>
 
