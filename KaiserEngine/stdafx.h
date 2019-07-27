@@ -22,3 +22,6 @@
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #pragma comment(lib, "Opengl32.lib")
+
+#include "include/glext.h"
+#include "include/wglext.h"

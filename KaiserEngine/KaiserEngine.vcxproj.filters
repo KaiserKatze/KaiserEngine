@@ -34,6 +34,12 @@
     <ClInclude Include="loadgl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\glext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\wglext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

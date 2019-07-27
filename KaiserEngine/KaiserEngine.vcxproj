@@ -150,6 +150,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\glext.h" />
+    <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
     <ClInclude Include="loadgl.h" />
     <ClInclude Include="resource.h" />
