@@ -7,7 +7,7 @@ HERE = os.path.abspath(os.path.dirname(__file__))
 
 def GenerateCpp():
     """
-    Generate loadgl.cpp
+    Generate loadgl.h and loadgl.cpp
     """
 
     buffer = []
@@ -23,6 +23,16 @@ def GenerateCpp():
     if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, line)
             buffer.append(line)
 
+    # Generate loadgl.h
+    with open(os.path.join(HERE, "loadgl.h"),
+              mode="w", encoding="utf-8") as file:
+        file.write("""#pragma once
+
+void LoadOpenglFunctions();
+
+""")
+
+    # Generate loadgl.cpp
     with open(os.path.join(HERE, "loadgl.cpp"),
               mode="w", encoding="utf-8") as file:
         # include headers
