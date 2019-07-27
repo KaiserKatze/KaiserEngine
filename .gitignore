@@ -269,4 +269,5 @@ wglext.h
 khrplatform.h
 
 # Generated files
+loadgl.h
 loadgl.cpp
