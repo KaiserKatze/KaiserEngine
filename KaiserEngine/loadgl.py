@@ -11,17 +11,27 @@ def GenerateCpp():
     """
 
     buffer_cpp = []
+    buffer_h = []
 
     with open(os.path.join(HERE, "loadgl.txt"),
               mode="r", encoding="utf-8") as file:
         lines = file.read().splitlines()
         lines = list(dict.fromkeys(lines))
         for line in lines:
+            func = line
             gltype = "PFN{}PROC".format(line.upper())
+
+            # cpp
             line = """
     {0} {1} = ({0}) GetAnyGLFuncAddress("{1}");
-    if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, line)
+    if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
             buffer_cpp.append(line)
+
+            # h
+            line = """
+            {0} {1} = ({0}) NULL;
+            """.format(gltype, func)
+            buffer_h.append(line)
 
     # Generate loadgl.h
     with open(os.path.join(HERE, "loadgl.h"),
@@ -31,6 +41,9 @@ def GenerateCpp():
 void LoadOpenglFunctions();
 
 """)
+
+        for line in buffer_h:
+            file.write(line)
 
     # Generate loadgl.cpp
     with open(os.path.join(HERE, "loadgl.cpp"),
