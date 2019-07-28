@@ -178,6 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
             //PROC proc = wglGetProcAddress("wglGetExtensionsStringARB");
 
+            // Get WGL Extensions
             LoadOpenglFunctions();
         }
         break;
