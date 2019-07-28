@@ -208,6 +208,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_DESTROY:
         {
+            CleanDll();
             HDC hDC = wglGetCurrentDC();
             HGLRC hRC = wglGetCurrentContext();
             wglMakeCurrent(hDC, NULL);
