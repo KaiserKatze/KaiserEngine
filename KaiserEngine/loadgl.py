@@ -86,6 +86,8 @@ void LoadOpenglFunctions()
         file.write("""
 }
 
+static HMODULE module = (HMODULE) NULL;
+
 void * GetAnyGLFuncAddress(const char * name)
 {
     void * p = (void *) wglGetProcAddress(name);
@@ -95,11 +97,21 @@ void * GetAnyGLFuncAddress(const char * name)
         || (p == (void *) 0x3)
         || (p == (void *) -1))
     {
-        HMODULE module = LoadLibraryA("opengl32.dll");
+        if (!module)
+            module = LoadLibraryA("opengl32.dll");
         p = (void *) GetProcAddress(module, name);
     }
 
     return p;
+}
+
+void Cleanup()
+{
+    if (module)
+    {
+        FreeLibrary(module);
+        module = (HMODULE) NULL;
+    }
 }
 """)
 
