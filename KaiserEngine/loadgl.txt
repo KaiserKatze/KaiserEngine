@@ -10,3 +10,4 @@ glVertexAttribPointer
 glDeleteBuffers
 wglChoosePixelFormatARB
 wglCreateContextAttribsARB
+wglMakeContextCurrentARB
