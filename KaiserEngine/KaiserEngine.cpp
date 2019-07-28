@@ -143,15 +143,71 @@ int InitPixelFormat(HDC hdc)
     {
         // could not find a pixel format that matches the description,
         // or the PDF was not filled out correctly
+        ErrorExit(L"ChoosePixelFormat");
         return -1;
     }
 
-    SetPixelFormat(hdc, format, &pfd);
+    if (!SetPixelFormat(hdc, format, &pfd))
+    {
+        ErrorExit(L"SetPixelFormat");
+        return -1;
+    }
 
     return 0;
 }
 
 #include "loadgl.h"
+
+int RecreateContext(HDC hdc)
+{
+    const int attribList_pixel_format[] = {
+        WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+        WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+        WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
+        WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+        WGL_COLOR_BITS_ARB, 32,
+        WGL_DEPTH_BITS_ARB, 24,
+        WGL_STENCIL_BITS_ARB, 8,
+        0, // End
+    };
+    //const FLOAT pfAttribFList[] = { 0 };
+    int pixelFormat;
+    UINT numFormats;
+    int format = wglChoosePixelFormatARB(hdc, attribList_pixel_format, (const FLOAT *) NULL, 1, &pixelFormat, &numFormats);
+    if (format == 0)
+    {
+        ErrorExit(L"wglChoosePixelFormatARB");
+        return -1;
+    }
+
+    if (SetPixelFormat(hdc, format, NULL))
+    {
+        ErrorExit(L"SetPixelFormat");
+        return -1;
+    }
+
+    const int attribList_context[] = {
+        WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
+        WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
+        WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
+        WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
+        0, // End
+    };
+    HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC) NULL, attribList_context);
+    if (hglrc == NULL)
+    {
+        ErrorExit(L"wglCreateContextAttribsARB");
+        return -1;
+    }
+
+    if (!wglMakeCurrent(hdc, hglrc))
+    {
+        ErrorExit(L"wglMakeCurrent");
+        return -1;
+    }
+
+    return 0;
+}
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -170,9 +226,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
         {
             HDC hDC = GetDC(hWnd);
-            InitPixelFormat(hDC);
+            if (hDC == NULL) return -1;
+            if (InitPixelFormat(hDC) < 0) return -1;
             HGLRC hRC = wglCreateContext(hDC);
-            wglMakeCurrent(hDC, hRC);
+            if (hRC == NULL)
+            {
+                ErrorExit(L"wglCreateContext");
+                return -1;
+            }
+            if (!wglMakeCurrent(hDC, hRC))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
 
             //MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
             //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
@@ -180,6 +246,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             // Get WGL Extensions
             LoadOpenglFunctions();
+
+            // Clean up dummy context
+            if (!wglMakeCurrent(hDC, NULL))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
+            if (!wglDeleteContext(hRC))
+            {
+                ErrorExit(L"wglDeleteContext");
+                return -1;
+            }
+
+            // Recreate context
+            if (RecreateContext(hDC) < 0) return -1;
         }
         break;
     case WM_COMMAND:
