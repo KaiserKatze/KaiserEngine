@@ -1,0 +1,10 @@
+glGenVertexArrays
+glBindVertexArray
+glDeleteVertexArrays
+glGenBuffers
+glBindBuffer
+glBufferData
+glEnableVertexAttribArray
+glDisableVertexAttribArray
+glVertexAttribPointer
+glDeleteBuffers
