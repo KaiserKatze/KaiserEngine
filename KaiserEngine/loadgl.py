@@ -47,7 +47,7 @@ def GenerateCpp():
 #pragma once
 
 void LoadOpenglFunctions();
-void Cleanup();
+void CleanDll();
 
 #include "stdafx.h"
 
@@ -106,7 +106,7 @@ void * GetAnyGLFuncAddress(const char * name)
     return p;
 }
 
-void Cleanup()
+void CleanDll()
 {
     if (module)
     {
