@@ -25,3 +25,5 @@
 
 #include "include/glext.h"
 #include "include/wglext.h"
+
+void ErrorExit(LPTSTR lpszFunction);
