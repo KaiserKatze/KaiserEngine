@@ -47,6 +47,7 @@ def GenerateCpp():
 #pragma once
 
 void LoadOpenglFunctions();
+void Cleanup();
 
 #include "stdafx.h"
 
