@@ -114,6 +114,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 int InitPixelFormat(HDC hdc)
 {
     // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
+    // Good pixel format to choose for the dummy context
+    //  * 32-bit RGBA color buffer
+    //  * 24-bit depth color buffer
+    //  * 8-bit stencil
     PIXELFORMATDESCRIPTOR pfd =
     {
         sizeof(PIXELFORMATDESCRIPTOR),
