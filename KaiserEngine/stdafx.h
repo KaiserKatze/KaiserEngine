@@ -20,8 +20,9 @@
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
+#pragma comment(lib, "OpenGL32.Lib")
 #include <gl/GLU.h>
-#pragma comment(lib, "Opengl32.lib")
+#pragma comment(lib, "GlU32.Lib")
 
 #include "include/glext.h"
 #include "include/wglext.h"
