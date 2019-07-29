@@ -227,6 +227,7 @@ void vao_draw();
 //  WM_PAINT    - Paint the main window
 //  WM_DESTROY  - post a quit message and return
 //
+//  @see: https://www.khronos.org/opengl/wiki/Platform_specifics:_Windows#When_do_I_render_my_scene.3F
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -249,16 +250,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 return -1;
             }
 
+            // install timer
+            UINT_PTR timerId = SetTimer(hWnd,
+                0, // timer id
+                500, // timeout value, in milliseconds
+                NULL); // make system post WM_TIMER message
+#ifdef _DEBUG
             // change window title name
             std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
             std::wstring wsWindowTitle(szTitle);
-            std::string sOpenglVersion((char *) glGetString(GL_VERSION));
-            std::string sNewTitle;
-            sNewTitle.append(converter.to_bytes(wsWindowTitle));
-            sNewTitle.append(" (");
-            sNewTitle.append(sOpenglVersion);
-            sNewTitle.append(")");
-            SetWindowTextA(hWnd, sNewTitle.c_str());
+            std::string sOpenglVersion((char *)glGetString(GL_VERSION));
+            std::stringstream sNewTitle;
+            sNewTitle << converter.to_bytes(wsWindowTitle);
+            sNewTitle << " (OpenGL version: ";
+            sNewTitle << sOpenglVersion;
+            sNewTitle << ", TimerId: ";
+            sNewTitle << timerId;
+            sNewTitle << ")";
+            SetWindowTextA(hWnd, sNewTitle.str().c_str());
+#endif
 
             // Get WGL Extensions
             LoadOpenglFunctions();
@@ -305,7 +315,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: Add any drawing code that uses hdc here...
-            vao_draw();
             EndPaint(hWnd, &ps);
         }
         break;
@@ -319,6 +328,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             wglDeleteContext(hRC);
 
             PostQuitMessage(0);
+        }
+        break;
+    case WM_TIMER:
+        {
+            vao_draw();
         }
         break;
     default:
@@ -452,4 +466,7 @@ void vao_draw()
     //  glDrawArrays(GL_LINE_LOOP,0,8);                 // lines ... no indices
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, 0);  // indices (choose just one line not both !!!)
     glBindVertexArray(0);
+
+    HDC hdc = wglGetCurrentDC();
+    SwapBuffers(hdc);
 }
