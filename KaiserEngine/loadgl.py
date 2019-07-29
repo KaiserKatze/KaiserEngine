@@ -47,7 +47,6 @@ def GenerateCpp():
 #pragma once
 
 void LoadOpenglFunctions();
-void CleanDll();
 
 #include "stdafx.h"
 
@@ -68,11 +67,6 @@ void CleanDll();
         for line in buffer_init:
             file.write(line)
 
-        # misc function declaration
-        file.write("""
-void * GetAnyGLFuncAddress(const char * name);""")
-        file.write("\n")
-
         # function LoadOpenglFunctions
         file.write("""
 
@@ -86,33 +80,6 @@ void LoadOpenglFunctions()
         file.write("""
 }
 
-static HMODULE module = (HMODULE) NULL;
-
-void * GetAnyGLFuncAddress(const char * name)
-{
-    void * p = (void *) wglGetProcAddress(name);
-    if (p == (void *) 0
-        || (p == (void *) 0x1)
-        || (p == (void *) 0x2)
-        || (p == (void *) 0x3)
-        || (p == (void *) -1))
-    {
-        if (!module)
-            module = LoadLibraryA("opengl32.dll");
-        p = (void *) GetProcAddress(module, name);
-    }
-
-    return p;
-}
-
-void CleanDll()
-{
-    if (module)
-    {
-        FreeLibrary(module);
-        module = (HMODULE) NULL;
-    }
-}
 """)
 
 if __name__ == "__main__":
