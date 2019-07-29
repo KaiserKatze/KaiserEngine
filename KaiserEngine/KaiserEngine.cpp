@@ -459,6 +459,8 @@ void vao_exit()
 //---------------------------------------------------------------------------
 void vao_draw()
 {
+    const HDC hdc = wglGetCurrentDC();
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glClearColor(.0f, .0f, .0f, .0f);
 
@@ -467,6 +469,5 @@ void vao_draw()
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, 0);  // indices (choose just one line not both !!!)
     glBindVertexArray(0);
 
-    HDC hdc = wglGetCurrentDC();
     SwapBuffers(hdc);
 }
