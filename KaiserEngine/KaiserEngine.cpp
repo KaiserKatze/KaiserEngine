@@ -97,8 +97,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle,
+       WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, // window style, as usual but not resizable
+       0, 0, // initial position (x, y)
+       1280, 720, // initial size (width, height)
+       nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -114,6 +117,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 int InitPixelFormat(HDC hdc)
 {
     // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
+    // Good pixel format to choose for the dummy context
+    //  * 32-bit RGBA color buffer
+    //  * 24-bit depth color buffer
+    //  * 8-bit stencil
     PIXELFORMATDESCRIPTOR pfd =
     {
         sizeof(PIXELFORMATDESCRIPTOR),
@@ -139,15 +146,71 @@ int InitPixelFormat(HDC hdc)
     {
         // could not find a pixel format that matches the description,
         // or the PDF was not filled out correctly
+        ErrorExit(L"ChoosePixelFormat");
         return -1;
     }
 
-    SetPixelFormat(hdc, format, &pfd);
+    if (!SetPixelFormat(hdc, format, &pfd))
+    {
+        ErrorExit(L"SetPixelFormat");
+        return -1;
+    }
 
     return 0;
 }
 
 #include "loadgl.h"
+
+int RecreateContext(HDC hdc)
+{
+    const int attribList_pixel_format[] = {
+        WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+        WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+        WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
+        WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+        WGL_COLOR_BITS_ARB, 32,
+        WGL_DEPTH_BITS_ARB, 24,
+        WGL_STENCIL_BITS_ARB, 8,
+        0, // End
+    };
+    //const FLOAT pfAttribFList[] = { 0 };
+    int pixelFormat;
+    UINT numFormats;
+    int format = wglChoosePixelFormatARB(hdc, attribList_pixel_format, (const FLOAT *) NULL, 1, &pixelFormat, &numFormats);
+    if (format == 0)
+    {
+        ErrorExit(L"wglChoosePixelFormatARB");
+        return -1;
+    }
+
+    if (SetPixelFormat(hdc, format, NULL))
+    {
+        ErrorExit(L"SetPixelFormat");
+        return -1;
+    }
+
+    const int attribList_context[] = {
+        WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
+        WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
+        WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
+        WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
+        0, // End
+    };
+    HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC) NULL, attribList_context);
+    if (hglrc == NULL)
+    {
+        ErrorExit(L"wglCreateContextAttribsARB");
+        return -1;
+    }
+
+    if (!wglMakeCurrent(hdc, hglrc))
+    {
+        ErrorExit(L"wglMakeCurrent");
+        return -1;
+    }
+
+    return 0;
+}
 
 void gl_init(HWND hWnd);
 void vao_init();
@@ -171,15 +234,43 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
         {
             HDC hDC = GetDC(hWnd);
-            InitPixelFormat(hDC);
+            if (hDC == NULL) return -1;
+            if (InitPixelFormat(hDC) < 0) return -1;
             HGLRC hRC = wglCreateContext(hDC);
-            wglMakeCurrent(hDC, hRC);
+            if (hRC == NULL)
+            {
+                ErrorExit(L"wglCreateContext");
+                return -1;
+            }
+            if (!wglMakeCurrent(hDC, hRC))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
 
             //MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
             //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
             //PROC proc = wglGetProcAddress("wglGetExtensionsStringARB");
 
+            // Get WGL Extensions
             LoadOpenglFunctions();
+
+            // Clean up dummy context
+            if (!wglMakeCurrent(hDC, NULL))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
+            if (!wglDeleteContext(hRC))
+            {
+                ErrorExit(L"wglDeleteContext");
+                return -1;
+            }
+
+            // Recreate context
+            if (RecreateContext(hDC) < 0) return -1;
+
+            // Initialize OpenGL
             gl_init(hWnd);
             vao_init();
         }

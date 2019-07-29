@@ -25,3 +25,8 @@
 
 #include "include/glext.h"
 #include "include/wglext.h"
+
+void ErrorExit(LPTSTR lpszFunction);
+
+void * GetAnyGLFuncAddress(const char * name);
+void CleanDll();

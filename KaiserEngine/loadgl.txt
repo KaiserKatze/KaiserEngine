@@ -8,3 +8,6 @@ glEnableVertexAttribArray
 glDisableVertexAttribArray
 glVertexAttribPointer
 glDeleteBuffers
+wglChoosePixelFormatARB
+wglCreateContextAttribsARB
+wglMakeContextCurrentARB

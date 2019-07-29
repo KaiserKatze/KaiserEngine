@@ -47,7 +47,6 @@ def GenerateCpp():
 #pragma once
 
 void LoadOpenglFunctions();
-void CleanDll();
 
 #include "stdafx.h"
 
@@ -68,12 +67,6 @@ void CleanDll();
         for line in buffer_init:
             file.write(line)
 
-        # misc function declaration
-        file.write("""
-void * GetAnyGLFuncAddress(const char * name);""")
-        file.write("\n")
-        file.write("""void ErrorExit(LPTSTR lpszFunction);""")
-
         # function LoadOpenglFunctions
         file.write("""
 
@@ -87,71 +80,6 @@ void LoadOpenglFunctions()
         file.write("""
 }
 
-static HMODULE module = (HMODULE) NULL;
-
-void * GetAnyGLFuncAddress(const char * name)
-{
-    void * p = (void *) wglGetProcAddress(name);
-    if (p == (void *) 0
-        || (p == (void *) 0x1)
-        || (p == (void *) 0x2)
-        || (p == (void *) 0x3)
-        || (p == (void *) -1))
-    {
-        if (!module)
-            module = LoadLibraryA("opengl32.dll");
-        p = (void *) GetProcAddress(module, name);
-    }
-
-    return p;
-}
-
-void CleanDll()
-{
-    if (module)
-    {
-        FreeLibrary(module);
-        module = (HMODULE) NULL;
-    }
-}
-""")
-
-        file.write("""
-#include <strsafe.h>
-
-// @see: https://docs.microsoft.com/en-us/windows/win32/debug/retrieving-the-last-error-code
-void ErrorExit(LPTSTR lpszFunction)
-{
-    // Retrieve the system error message for the last-error code
-
-    LPVOID lpMsgBuf;
-    LPVOID lpDisplayBuf;
-    DWORD dw = GetLastError();
-
-    FormatMessage(
-        FORMAT_MESSAGE_ALLOCATE_BUFFER |
-        FORMAT_MESSAGE_FROM_SYSTEM |
-        FORMAT_MESSAGE_IGNORE_INSERTS,
-        NULL,
-        dw,
-        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-        (LPTSTR)&lpMsgBuf,
-        0, NULL);
-
-    // Display the error message and exit the process
-
-    lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT,
-        (lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR));
-    StringCchPrintf((LPTSTR)lpDisplayBuf,
-        LocalSize(lpDisplayBuf) / sizeof(TCHAR),
-        TEXT("%s failed with error %d: %s"),
-        lpszFunction, dw, lpMsgBuf);
-    MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
-
-    LocalFree(lpMsgBuf);
-    LocalFree(lpDisplayBuf);
-    ExitProcess(dw);
-}
 """)
 
 if __name__ == "__main__":
