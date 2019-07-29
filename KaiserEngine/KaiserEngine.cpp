@@ -218,6 +218,22 @@ void vao_init();
 void vao_exit();
 void vao_draw();
 
+size_t tickCounter;
+
+void updateWindowTitle()
+{
+#ifdef _DEBUG
+    // change window title name
+    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+    std::stringstream sNewTitle;
+    sNewTitle << converter.to_bytes(szTitle);
+    sNewTitle << " (OpenGL version: " << glGetString(GL_VERSION);
+    sNewTitle << ", Tick: " << tickCounter;
+    sNewTitle << ")";
+    SetWindowTextA(hWnd, sNewTitle.str().c_str());
+#endif
+}
+
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -250,25 +266,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 return -1;
             }
 
+            tickCounter = 0;
             // install timer
-            UINT_PTR timerId = SetTimer(hWnd,
+            SetTimer(hWnd,
                 0, // timer id
-                500, // timeout value, in milliseconds
+                20, // timeout value, in milliseconds;
+                    // this configuration setup fixs frame rate
+                    // 1000 MS = 1 FPS
+                    // 20 MS = 50 FPS
                 NULL); // make system post WM_TIMER message
-#ifdef _DEBUG
-            // change window title name
-            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-            std::wstring wsWindowTitle(szTitle);
-            std::string sOpenglVersion((char *)glGetString(GL_VERSION));
-            std::stringstream sNewTitle;
-            sNewTitle << converter.to_bytes(wsWindowTitle);
-            sNewTitle << " (OpenGL version: ";
-            sNewTitle << sOpenglVersion;
-            sNewTitle << ", TimerId: ";
-            sNewTitle << timerId;
-            sNewTitle << ")";
-            SetWindowTextA(hWnd, sNewTitle.str().c_str());
-#endif
+            // returned timer id should be 1,
+            // if no timer has been created yet
+            updateWindowTitle();
 
             // Get WGL Extensions
             LoadOpenglFunctions();
@@ -332,7 +341,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_TIMER:
         {
+            tickCounter++;
             vao_draw();
+            updateWindowTitle();
         }
         break;
     default:
