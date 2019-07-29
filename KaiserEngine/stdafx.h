@@ -17,6 +17,10 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include <iostream>
+#include <locale>
+#include <codecvt>
+#include <string>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>

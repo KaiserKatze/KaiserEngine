@@ -8,6 +8,7 @@
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
+HWND hWnd;                                      // current window
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 
@@ -97,7 +98,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle,
+   hWnd = CreateWindowW(szWindowClass, szTitle,
        WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, // window style, as usual but not resizable
        0, 0, // initial position (x, y)
        1280, 720, // initial size (width, height)
@@ -248,9 +249,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 return -1;
             }
 
-            //MessageBoxA(0, (char*)glGetString(GL_VERSION), "OPENGL VERSION", 0);
-            //MessageBoxA(0, (char*)glGetString(GL_EXTENSIONS), "OPENGL EXTENSIONS", 0);
-            //PROC proc = wglGetProcAddress("wglGetExtensionsStringARB");
+            // change window title name
+            std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+            std::wstring wsWindowTitle(szTitle);
+            std::string sOpenglVersion((char *) glGetString(GL_VERSION));
+            std::string sNewTitle;
+            sNewTitle.append(converter.to_bytes(wsWindowTitle));
+            sNewTitle.append(" (");
+            sNewTitle.append(sOpenglVersion);
+            sNewTitle.append(")");
+            SetWindowTextA(hWnd, sNewTitle.c_str());
 
             // Get WGL Extensions
             LoadOpenglFunctions();
