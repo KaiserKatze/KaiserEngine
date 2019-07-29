@@ -390,7 +390,7 @@ void gl_init(HWND hWnd)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    //gluPerspective(60.0f, float(screenWidth) / float(screenHeight), 0.1f, 100.0f);
+    gluPerspective(60.0f, float(screenWidth) / float(screenHeight), 0.1f, 100.0f);
     glMatrixMode(GL_TEXTURE);
     glLoadIdentity();
     glMatrixMode(GL_MODELVIEW);
