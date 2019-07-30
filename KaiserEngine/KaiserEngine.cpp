@@ -227,7 +227,7 @@ void updateWindowTitle()
     // change window title name
     std::wstringstream sNewTitle;
     sNewTitle << szTitle;
-    sNewTitle << " (OpenGL version: " << (char *) glGetString(GL_VERSION);
+    sNewTitle << " (OpenGL version: " << (LPCSTR) glGetString(GL_VERSION);
     sNewTitle << ", Tick: " << tickCounter;
     sNewTitle << ")";
     SetWindowText(hWnd, sNewTitle.str().c_str());
