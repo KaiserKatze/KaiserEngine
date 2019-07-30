@@ -7,7 +7,12 @@
 
 #include "targetver.h"
 
+#ifndef UNICODE
+#define UNICODE
+#endif
+#ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN             // Exclude rarely-used stuff from Windows headers
+#endif
 // Windows Header Files:
 #include <windows.h>
 
