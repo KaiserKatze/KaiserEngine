@@ -110,8 +110,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    const int x = (rectDisplay.right - width) / 2;
    const int y = (rectDisplay.bottom - height) / 2;
 
+   // window style
+   DWORD winStyle;
+#if RESIZABLE
+   winStyle = WS_OVERLAPPEDWINDOW;
+#else
+   winStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
+#endif
+
    hWnd = CreateWindowW(szWindowClass, szTitle,
-       WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, // window style, as usual but not resizable
+       winStyle,
        x, y, // initial position
        width, height, // initial size
        nullptr, // parent window
@@ -361,6 +369,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             updateWindowTitle();
         }
         break;
+#if RESIZABLE
+    case WM_SIZE:
+        {
+            // window resize event detected
+        }
+        break;
+#endif
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
