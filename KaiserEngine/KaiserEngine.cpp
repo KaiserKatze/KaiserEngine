@@ -11,6 +11,7 @@ HINSTANCE hInst;                                // current instance
 HWND hWnd;                                      // current window
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+std::atomic_bool isWindowClosing(false);
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -378,6 +379,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 #endif
+    case WM_CLOSE:
+        {
+            isWindowClosing.store(true);
+            // use `isWindowClosing.load()` to retrieve bool value
+        }
+        break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

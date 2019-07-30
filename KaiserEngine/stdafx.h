@@ -27,6 +27,7 @@
 #include <locale>
 #include <codecvt>
 #include <string>
+#include <atomic>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>

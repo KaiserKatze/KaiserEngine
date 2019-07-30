@@ -7,13 +7,6 @@
 
 #include <SDKDDKVer.h>
 
-#ifndef TRUE
-#   define TRUE (1)
-#endif
-#ifndef FALSE
-#   define FALSE (0)
-#endif
-
 #ifndef RESIZABLE
-#   define RESIZABLE FALSE
+#   define RESIZABLE false
 #endif
