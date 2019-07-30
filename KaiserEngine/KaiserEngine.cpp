@@ -99,16 +99,28 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
+   const int width = 1280;
+   const int height = 720;
+
+   // calcuate initial position (x, y)
+   // center window
+   RECT rectDisplay;
+   const HWND hDisplay = GetDesktopWindow();
+   GetWindowRect(hDisplay, &rectDisplay);
+   const int x = (rectDisplay.right - width) / 2;
+   const int y = (rectDisplay.bottom - height) / 2;
+
    hWnd = CreateWindowW(szWindowClass, szTitle,
        WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, // window style, as usual but not resizable
-       0, 0, // initial position (x, y)
-       1280, 720, // initial size (width, height)
+       x, y, // initial position
+       width, height, // initial size
        nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
       return FALSE;
    }
+
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
