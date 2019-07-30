@@ -114,7 +114,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME, // window style, as usual but not resizable
        x, y, // initial position
        width, height, // initial size
-       nullptr, nullptr, hInstance, nullptr);
+       nullptr, // parent window
+       nullptr, // menu
+       hInstance, // instance handle
+       nullptr); // additional application data
 
    if (!hWnd)
    {
