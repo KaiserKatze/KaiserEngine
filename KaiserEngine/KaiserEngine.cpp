@@ -373,6 +373,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
         {
             // window resize event detected
+            const int width = LOWORD(lParam);
+            const int height = HIWORD(lParam);
         }
         break;
 #endif
