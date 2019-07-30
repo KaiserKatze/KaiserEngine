@@ -225,13 +225,12 @@ void updateWindowTitle()
 {
 #ifdef _DEBUG
     // change window title name
-    std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-    std::stringstream sNewTitle;
-    sNewTitle << converter.to_bytes(szTitle);
-    sNewTitle << " (OpenGL version: " << glGetString(GL_VERSION);
+    std::wstringstream sNewTitle;
+    sNewTitle << szTitle;
+    sNewTitle << " (OpenGL version: " << (char *) glGetString(GL_VERSION);
     sNewTitle << ", Tick: " << tickCounter;
     sNewTitle << ")";
-    SetWindowTextA(hWnd, sNewTitle.str().c_str());
+    SetWindowText(hWnd, sNewTitle.str().c_str());
 #endif
 }
 
