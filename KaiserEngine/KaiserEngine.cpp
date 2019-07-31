@@ -376,9 +376,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_TIMER:
         {
-            tickCounter++;
-            vao_draw();
-            updateWindowTitle();
+            if (isWindowActivated)
+            {
+                tickCounter++;
+                vao_draw();
+                updateWindowTitle();
+            }
         }
         break;
 #if APP_RESIZABLE
