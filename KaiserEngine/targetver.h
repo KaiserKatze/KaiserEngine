@@ -7,6 +7,10 @@
 
 #include <SDKDDKVer.h>
 
+
+#ifndef APP_FULLSCREEN
+#   define APP_FULLSCREEN false
+#endif
 #ifndef APP_RESIZABLE
 #   define APP_RESIZABLE false
 #endif
