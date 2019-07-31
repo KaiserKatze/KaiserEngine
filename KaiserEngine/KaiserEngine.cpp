@@ -3,6 +3,7 @@
 
 #include "stdafx.h"
 #include "KaiserEngine.h"
+#include "UserInput.h"
 
 #define MAX_LOADSTRING 100
 
@@ -263,38 +264,6 @@ void updateWindowTitle()
     SetWindowText(hWnd, sNewTitle.str().c_str());
 #endif
 }
-
-#if APP_USERINPUT
-// @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/mouse-clicks
-LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    const int x = GET_X_LPARAM(lParam);
-    const int y = GET_Y_LPARAM(lParam);
-    const BOOL isKeyDown_ctrl = wParam & MK_CONTROL; // check if the CTRL key is down
-    const BOOL isKeyDown_shift = wParam & MK_SHIFT; // check if the SHIFT key is down
-    // If you need to find the state of other keys besides CTRL and SHIFT, use the GetKeyState function
-    switch (message)
-    {
-    case WM_LBUTTONDOWN:
-        break;
-    case WM_LBUTTONUP:
-        break;
-    case WM_MBUTTONDOWN:
-        break;
-    case WM_MBUTTONUP:
-        break;
-    case WM_RBUTTONDOWN:
-        break;
-    case WM_RBUTTONUP:
-        break;
-    case WM_XBUTTONDOWN:
-        break;
-    case WM_XBUTTONUP:
-        break;
-    }
-    return 0;
-}
-#endif
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
