@@ -12,6 +12,7 @@ HWND hWnd;                                      // current window
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 std::atomic_bool isWindowClosing(false);
+std::atomic_bool isWindowActivated(false);
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -136,6 +137,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
+
+   isWindowActivated = true;
 
    return TRUE;
 }
