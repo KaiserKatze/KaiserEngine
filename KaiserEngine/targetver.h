@@ -15,5 +15,8 @@
 #   define APP_RESIZABLE false
 #endif
 #ifndef APP_USERINPUT
+// enable user input (mouse, keyboard, etc.)
 #   define APP_USERINPUT true
+// enable double clicks
+#   define APP_USERINPUT_DBLCLKS true
 #endif
