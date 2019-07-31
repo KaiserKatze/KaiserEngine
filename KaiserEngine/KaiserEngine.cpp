@@ -12,7 +12,9 @@ HWND hWnd;                                      // current window
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 std::atomic_bool isWindowClosing(false);
+#if APP_FULLSCREEN
 std::atomic_bool isWindowActivated(false);
+#endif
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -137,8 +139,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
-
+#if APP_FULLSCREEN
    isWindowActivated = true;
+#endif
 
    return TRUE;
 }
@@ -376,12 +379,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_TIMER:
         {
-            if (isWindowActivated)
-            {
-                tickCounter++;
-                vao_draw();
-                updateWindowTitle();
-            }
+#if APP_FULLSCREEN
+            if (!isWindowActivated)
+                break;
+#endif
+            tickCounter++;
+            vao_draw();
+            updateWindowTitle();
         }
         break;
 #if APP_RESIZABLE
