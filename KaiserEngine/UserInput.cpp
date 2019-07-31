@@ -57,7 +57,8 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     ss << " @ (" << x << ", " << y << ")";
-    MessageBoxA(0, ss.str().c_str(), "Mouse Event", 0);
+    ss << std::endl;
+    OutputDebugStringA(ss.str().c_str());
     return 0;
 }
 #endif
