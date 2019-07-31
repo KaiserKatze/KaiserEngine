@@ -399,8 +399,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 #endif
     case WM_CLOSE:
         {
-            isWindowClosing.store(true);
-            // use `isWindowClosing.load()` to retrieve bool value
+            isWindowClosing = true;
         }
         break;
     default:
