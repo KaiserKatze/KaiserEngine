@@ -15,6 +15,7 @@
 #endif
 // Windows Header Files:
 #include <windows.h>
+#include <windowsx.h>
 
 // C RunTime Header Files
 #include <stdlib.h>
