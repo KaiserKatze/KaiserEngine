@@ -14,3 +14,6 @@
 #ifndef APP_RESIZABLE
 #   define APP_RESIZABLE false
 #endif
+#ifndef APP_USERINPUT
+#   define APP_USERINPUT true
+#endif

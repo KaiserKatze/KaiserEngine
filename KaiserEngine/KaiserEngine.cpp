@@ -264,6 +264,25 @@ void updateWindowTitle()
 #endif
 }
 
+#if APP_USERINPUT
+LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+    case WM_LBUTTONDOWN:
+    case WM_LBUTTONUP:
+    case WM_MBUTTONDOWN:
+    case WM_MBUTTONUP:
+    case WM_RBUTTONDOWN:
+    case WM_RBUTTONUP:
+    case WM_XBUTTONDOWN:
+    case WM_XBUTTONUP:
+        break;
+    }
+    return 0;
+}
+#endif
+
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -402,6 +421,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             isWindowClosing = true;
         }
         return DefWindowProc(hWnd, message, wParam, lParam);
+#if APP_USERINPUT
+    case WM_LBUTTONDOWN:
+    case WM_LBUTTONUP:
+    case WM_MBUTTONDOWN:
+    case WM_MBUTTONUP:
+    case WM_RBUTTONDOWN:
+    case WM_RBUTTONUP:
+    case WM_XBUTTONDOWN:
+    case WM_XBUTTONUP:
+        return HandleMouseInput(hWnd, message, wParam, lParam);
+#endif
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
