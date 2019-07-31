@@ -113,7 +113,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // window style
    DWORD winStyle;
-#if RESIZABLE
+#if APP_RESIZABLE
    winStyle = WS_OVERLAPPEDWINDOW;
 #else
    winStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
@@ -370,7 +370,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             updateWindowTitle();
         }
         break;
-#if RESIZABLE
+#if APP_RESIZABLE
     case WM_SIZE:
         {
             // window resize event detected

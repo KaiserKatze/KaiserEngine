@@ -7,6 +7,6 @@
 
 #include <SDKDDKVer.h>
 
-#ifndef RESIZABLE
-#   define RESIZABLE false
+#ifndef APP_RESIZABLE
+#   define APP_RESIZABLE false
 #endif
