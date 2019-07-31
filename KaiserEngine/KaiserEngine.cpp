@@ -349,8 +349,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 #if APP_FULLSCREEN
     case WM_ACTIVATEAPP:
     {
-        BOOL isWindowActivated = (BOOL)wParam;
         // prevent CPU "hogging" when it is not necessary
+        isWindowActivated = (BOOL)wParam;
     }
     break;
 #endif
