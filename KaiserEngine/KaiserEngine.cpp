@@ -423,6 +423,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_RBUTTONDBLCLK:
     case WM_XBUTTONDBLCLK:
 #endif
+    case WM_MOUSEMOVE:
         return HandleMouseInput(hWnd, message, wParam, lParam);
 #endif
     default:
