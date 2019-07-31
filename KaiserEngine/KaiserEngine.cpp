@@ -417,6 +417,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_RBUTTONUP:
     case WM_XBUTTONDOWN:
     case WM_XBUTTONUP:
+#if APP_USERINPUT_DBLCLKS
+    case WM_LBUTTONDBLCLK:
+    case WM_MBUTTONDBLCLK:
+    case WM_RBUTTONDBLCLK:
+    case WM_XBUTTONDBLCLK:
+#endif
         return HandleMouseInput(hWnd, message, wParam, lParam);
 #endif
     default:

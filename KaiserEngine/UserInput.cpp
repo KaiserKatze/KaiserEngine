@@ -40,6 +40,18 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_XBUTTONUP:
         ss << "XB up";
         break;
+    case WM_LBUTTONDBLCLK:
+        ss << "LB double click";
+        break;
+    case WM_MBUTTONDBLCLK:
+        ss << "MB double click";
+        break;
+    case WM_RBUTTONDBLCLK:
+        ss << "RB double click";
+        break;
+    case WM_XBUTTONDBLCLK:
+        ss << "XB double click";
+        break;
     }
     ss << " @ (" << x << ", " << y << ")";
     MessageBoxA(0, ss.str().c_str(), "Mouse Event", 0);
