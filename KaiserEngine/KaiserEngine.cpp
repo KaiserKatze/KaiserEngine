@@ -120,7 +120,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    winStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
 #endif
 
-   hWnd = CreateWindowW(szWindowClass, szTitle,
+   hWnd = CreateWindow(szWindowClass, szTitle,
        winStyle,
        x, y, // initial position
        width, height, // initial size
