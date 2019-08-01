@@ -136,8 +136,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 #if (!APP_RESIZABLE)
    winStyle ^= WS_THICKFRAME;
 #endif
-   winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
 #endif
+   winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
 
    hWnd = CreateWindow(szWindowClass, szTitle,
        winStyle,
