@@ -129,11 +129,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // window style
    DWORD winStyle;
+#if APP_FULLSCREEN
+   winStyle = WS_POPUP;
+#else
    winStyle = WS_OVERLAPPEDWINDOW;
 #if (!APP_RESIZABLE)
    winStyle ^= WS_THICKFRAME;
 #endif
    winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
+#endif
 
    hWnd = CreateWindow(szWindowClass, szTitle,
        winStyle,
