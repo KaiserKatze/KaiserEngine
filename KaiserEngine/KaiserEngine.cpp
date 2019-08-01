@@ -558,7 +558,7 @@ void gl_init(HWND hWnd)
         throw 1;
 
     // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
-    glClearColor(.0f, .0f, .0f, .0f);
+    glClearColor(.4f, .6f, .9f, .0f);
     glClearDepth(.0f);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
