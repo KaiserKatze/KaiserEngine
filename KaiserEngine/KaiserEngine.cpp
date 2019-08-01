@@ -134,6 +134,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 #else
    winStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
 #endif
+   winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
 
    hWnd = CreateWindow(szWindowClass, szTitle,
        winStyle,
