@@ -129,10 +129,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    // window style
    DWORD winStyle;
-#if APP_RESIZABLE
    winStyle = WS_OVERLAPPEDWINDOW;
-#else
-   winStyle = WS_OVERLAPPEDWINDOW ^ WS_THICKFRAME;
+#if (!APP_RESIZABLE)
+   winStyle ^= WS_THICKFRAME;
 #endif
    winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
 
