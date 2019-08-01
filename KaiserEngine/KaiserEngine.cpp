@@ -612,7 +612,6 @@ void vao_draw()
     const HDC hdc = wglGetCurrentDC();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(.0f, .0f, .0f, .0f);
 
     glBindVertexArray(vao[0]);
     //  glDrawArrays(GL_LINE_LOOP,0,8);                 // lines ... no indices
