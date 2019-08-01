@@ -116,22 +116,33 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   const int width = 1280;
-   const int height = 720;
+   int x;
+   int y;
+   int width;
+   int height;
 
-   // calcuate initial position (x, y)
-   // center window
    RECT rectDisplay;
    const HWND hDisplay = GetDesktopWindow();
    GetWindowRect(hDisplay, &rectDisplay);
-   const int x = (rectDisplay.right - width) / 2;
-   const int y = (rectDisplay.bottom - height) / 2;
 
    // window style
    DWORD winStyle;
 #if APP_FULLSCREEN
+   x = 0;
+   y = 0;
+   width = rectDisplay.right;
+   height = rectDisplay.bottom;
+
    winStyle = WS_POPUP;
 #else
+   // calcuate initial position (x, y)
+   // center window
+   width = 1280;
+   height = 720;
+   x = (rectDisplay.right - width) / 2;
+   y = (rectDisplay.bottom - height) / 2;
+
+
    winStyle = WS_OVERLAPPEDWINDOW;
 #if (!APP_RESIZABLE)
    winStyle ^= WS_THICKFRAME;
