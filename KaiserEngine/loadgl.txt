@@ -1,3 +1,6 @@
+wglGetExtensionsStringARB
+wglGetExtensionsStringEXT
+
 glGenVertexArrays
 glBindVertexArray
 glDeleteVertexArrays
