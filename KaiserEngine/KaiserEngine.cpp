@@ -514,6 +514,7 @@ void gl_init(HWND hWnd)
     glShadeModel(GL_SMOOTH);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
 
+    glViewport(0, 0, screenWidth, screenHeight);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
