@@ -60,6 +60,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
+
+#ifdef _DEBUG
+        // close window when key 'ESC' is pressed
+        if (GetAsyncKeyState(VK_ESCAPE))
+            PostMessage(hWnd, WM_CLOSE, (WPARAM) 0, (LPARAM) 0);
+#endif
     }
 
 #if APP_FULLSCREEN
