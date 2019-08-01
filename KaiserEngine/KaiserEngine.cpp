@@ -277,6 +277,32 @@ void updateWindowTitle()
 #endif
 }
 
+void kglViewport(int width, int height)
+{
+    const int trimX = 10;
+    const int trimY = 10;
+
+    if (height <= 0) height = 1;
+
+    glViewport(trimX, trimY, width - 2 * trimX, height - 2 * trimY);
+
+    const double aspectRatio = double(width) / double(height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0f, aspectRatio, 0.1f, 100.0f);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glMatrixMode(GL_TEXTURE);
+    glLoadIdentity();
+}
+
+void OnResize(int width, int height)
+{
+    kglViewport(width, height);
+}
+
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
@@ -408,6 +434,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // window resize event detected
             const int width = LOWORD(lParam);
             const int height = HIWORD(lParam);
+            OnResize(width, height);
         }
         break;
 #endif
@@ -514,22 +541,9 @@ void gl_init(HWND hWnd)
     glShadeModel(GL_SMOOTH);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
 
-    const int trimX = 10;
-    const int trimY = 10;
-    glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
+    kglViewport(screenWidth, screenHeight);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0f, float(screenWidth) / float(screenHeight), 0.1f, 100.0f);
-
-    glMatrixMode(GL_TEXTURE);
-    glLoadIdentity();
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    glTranslatef(0.0, 0.0, -10.0);
 }
 void vao_init()
 {
