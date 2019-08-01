@@ -506,7 +506,15 @@ void gl_init(HWND hWnd)
     if (screenHeight <= 0)
         throw 1;
 
+    // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
+    glClearColor(.0f, .0f, .0f, .0f);
+    glClearDepth(.0f);
     glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glShadeModel(GL_SMOOTH);
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
+
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
