@@ -337,13 +337,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         {
             HDC hDC = GetDC(hWnd);
             if (hDC == NULL) return -1;
+
             if (InitPixelFormat(hDC) < 0) return -1;
+
             HGLRC hRC = wglCreateContext(hDC);
             if (hRC == NULL)
             {
                 ErrorExit(L"wglCreateContext");
                 return -1;
             }
+
             if (!wglMakeCurrent(hDC, hRC))
             {
                 ErrorExit(L"wglMakeCurrent");
