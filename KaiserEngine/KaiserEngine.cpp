@@ -499,10 +499,10 @@ void gl_init(HWND hWnd)
 {
     RECT rect = { 0 };
     GetWindowRect(hWnd, &rect);
-    const static int screenWidth = rect.right - rect.left;
+    const int screenWidth = rect.right - rect.left;
     if (screenWidth <= 0)
         throw 1;
-    const static int screenHeight = rect.bottom - rect.top;
+    const int screenHeight = rect.bottom - rect.top;
     if (screenHeight <= 0)
         throw 1;
 
