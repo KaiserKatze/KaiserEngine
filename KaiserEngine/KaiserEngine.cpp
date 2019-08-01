@@ -44,6 +44,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         return FALSE;
     }
+#if APP_FULLSCREEN
+    SetCapture(hWnd);
+#endif
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_KAISERENGINE));
 
@@ -58,6 +61,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
     }
+
+#if APP_FULLSCREEN
+    ReleaseCapture();
+#endif
 
     return (int) msg.wParam;
 }
