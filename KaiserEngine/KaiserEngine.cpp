@@ -438,10 +438,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             vao_exit();
             CleanDll();
             HDC hDC = wglGetCurrentDC();
-            ReleaseDC(hWnd, hDC);
             HGLRC hRC = wglGetCurrentContext();
             wglMakeCurrent(hDC, NULL);
             wglDeleteContext(hRC);
+            wglMakeCurrent(NULL, NULL);
+            ReleaseDC(hWnd, hDC);
 
             isWindowClosing = true;
         }
