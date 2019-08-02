@@ -94,7 +94,7 @@ void DetectGLError(int mark)
     else
         ss << "GL_NO_ERROR";
     ss << ' ';
-    ss << err;
+    ss << std::hex << err << std::dec;
     ss << std::endl;
 
     OutputDebugString(ss.str().c_str());
