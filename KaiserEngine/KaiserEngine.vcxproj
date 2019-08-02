@@ -109,6 +109,7 @@
     </Link>
     <PreBuildEvent>
       <Command>python loadgl.py</Command>
+      <Message>Generate loadgl.h and loadgl.cpp</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
