@@ -98,6 +98,4 @@ void DetectGLError(int mark)
     ss << std::endl;
 
     OutputDebugString(ss.str().c_str());
-    if (err != GL_NO_ERROR)
-        MessageBox(nullptr, ss.str().c_str(), TEXT("OpenGL Error"), MB_OK);
 }
