@@ -17,6 +17,74 @@ std::atomic_bool isWindowClosing(false);
 std::atomic_bool isWindowActivated(false);
 #endif
 
+
+
+// private
+
+template <typename WindowType>
+ATOM BaseWindow<WindowType>::RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
+{
+    WNDCLASSEXW wcex;
+
+    wcex.cbSize = sizeof(WNDCLASSEX);
+    wcex.lpfnWndProc = wndproc;
+    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC | CS_DBLCLKS;
+    wcex.cbClsExtra = 0;
+    wcex.cbWndExtra = 0;
+    wcex.hInstance = hInstance;
+    // load icon
+    wcex.hIcon = nullptr;
+    // load cursor
+    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+    // background color
+    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+    // window class
+    wcex.lpszClassName = lpClass;
+    // load small icon
+    wcex.hIconSm = nullptr;
+
+    return RegisterClassEx(&wcex);
+}
+
+// protected
+
+template <typename WindowType>
+static LRESULT CALLBACK WindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    WindowType *pThis = NULL;
+
+    if (message == WM_NCCREATE)
+    {
+        CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
+        pThis = (WindowType*)pCreate->lpCreateParams;
+        SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pThis);
+
+        pThis->hWnd = hwnd;
+    }
+    else
+    {
+        pThis = (WindowType*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    }
+    if (pThis)
+    {
+        return pThis->HandleMessage(message, wParam, lParam);
+    }
+    else
+    {
+        return DefWindowProc(hwnd, message, wParam, lParam);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
