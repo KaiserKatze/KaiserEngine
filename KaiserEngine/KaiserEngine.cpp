@@ -551,7 +551,7 @@ const GLuint vao_ix[] =
 void gl_init(HWND hWnd)
 {
     RECT rect = { 0 };
-    GetWindowRect(hWnd, &rect);
+    GetClientRect(hWnd, &rect);
     const int screenWidth = rect.right - rect.left;
     if (screenWidth <= 0)
         throw 1;
