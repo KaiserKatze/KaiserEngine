@@ -430,6 +430,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_DESTROY:
         {
+            PostQuitMessage(0);
+        }
+        break;
+    case WM_CLOSE:
+        {
             vao_exit();
             CleanDll();
             HDC hDC = wglGetCurrentDC();
@@ -438,11 +443,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             wglMakeCurrent(hDC, NULL);
             wglDeleteContext(hRC);
 
-            PostQuitMessage(0);
-        }
-        break;
-    case WM_CLOSE:
-        {
             isWindowClosing = true;
         }
         return DefWindowProc(hWnd, message, wParam, lParam);
