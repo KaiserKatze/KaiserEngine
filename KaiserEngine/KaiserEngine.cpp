@@ -290,9 +290,15 @@ void updateWindowTitle()
 {
 #ifdef _DEBUG
     // change window title name
+    GLint iMajorVersion, iMinorVersion;
+    glGetIntegerv(GL_MAJOR_VERSION, &iMajorVersion);
+    glGetIntegerv(GL_MINOR_VERSION, &iMinorVersion);
+
     std::wstringstream sNewTitle;
     sNewTitle << szTitle;
-    sNewTitle << " (OpenGL version: " << (LPCSTR) glGetString(GL_VERSION);
+    sNewTitle << " (OpenGL version: ";
+    sNewTitle << iMajorVersion << '.' << iMinorVersion;
+    //sNewTitle << (LPCSTR)glGetString(GL_VERSION);
     sNewTitle << ", Tick: " << tickCounter;
     sNewTitle << ")";
     SetWindowText(hWnd, sNewTitle.str().c_str());
@@ -376,17 +382,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // Get WGL Extensions
             LoadOpenglFunctions();
 
+            DetectGLError(1);
+
             // Clean up dummy context
             if (!wglMakeCurrent(hDC, NULL))
             {
                 ErrorExit(L"wglMakeCurrent");
                 return -1;
             }
+
+            DetectGLError(2);
+
             if (!wglDeleteContext(hRC))
             {
                 ErrorExit(L"wglDeleteContext");
                 return -1;
             }
+
+            DetectGLError(3);
 
             // Recreate context
             if (RecreateContext(hDC) < 0) return -1;
@@ -613,14 +626,18 @@ void vao_draw()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glBegin(GL_LINES);
-        glColor3f(1.0f, 1.0f, 1.0f);
-        glVertex3f(100.0f, 100.0f, 0.0f); // origin of the FIRST line
-        glVertex3f(200.0f, 140.0f, 5.0f); // ending point of the FIRST line
-        glVertex3f(120.0f, 170.0f, 10.0f); // origin of the SECOND line
-        glVertex3f(240.0f, 120.0f, 5.0f); // ending point of the SECOND line
-    glEnd();
+    glBegin(GL_TRIANGLES);
+        glPointSize(5.0f);
 
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(.0f, .0f, 0.0f);             // A
+
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glVertex3f(2000.f, 2000.f, 0.0f);       // B
+
+        glColor3f(0.0f, 0.0f, 1.0f);
+        glVertex3f(2000.f, 0.0f, 0.0f);         // C
+    glEnd();
     glBindVertexArray(vao[0]);
     //  glDrawArrays(GL_LINE_LOOP,0,8);                 // lines ... no indices
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, 0);  // indices (choose just one line not both !!!)
