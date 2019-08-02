@@ -640,4 +640,6 @@ void vao_draw()
     glBindVertexArray(0);
 
     SwapBuffers(hdc);
+
+    DetectGLError(9);
 }
