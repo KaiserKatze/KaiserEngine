@@ -90,7 +90,7 @@ void DetectGLError(int mark)
     ss << mark;
     ss << ' ';
     if (err != GL_NO_ERROR)
-        ss << codelist[err & 0x1];
+        ss << codelist[err & 0xf];
     else
         ss << "GL_NO_ERROR";
     ss << ' ';
