@@ -382,8 +382,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // Get WGL Extensions
             LoadOpenglFunctions();
 
-            DetectGLError(1);
-
+#if APP_RECREATE
             // Clean up dummy context
             if (!wglMakeCurrent(hDC, NULL))
             {
@@ -391,18 +390,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 return -1;
             }
 
-            DetectGLError(2);
-
             if (!wglDeleteContext(hRC))
             {
                 ErrorExit(L"wglDeleteContext");
                 return -1;
             }
 
-            DetectGLError(3);
-
             // Recreate context
             if (RecreateContext(hDC) < 0) return -1;
+#endif
 
             // Initialize OpenGL
             gl_init(hWnd);
