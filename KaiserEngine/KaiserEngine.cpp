@@ -622,18 +622,6 @@ void vao_draw()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glBegin(GL_TRIANGLES);
-        glPointSize(5.0f);
-
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex3f(.0f, .0f, 0.0f);             // A
-
-        glColor3f(0.0f, 1.0f, 0.0f);
-        glVertex3f(2000.f, 2000.f, 0.0f);       // B
-
-        glColor3f(0.0f, 0.0f, 1.0f);
-        glVertex3f(2000.f, 0.0f, 0.0f);         // C
-    glEnd();
     glBindVertexArray(vao[0]);
     //  glDrawArrays(GL_LINE_LOOP,0,8);                 // lines ... no indices
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_INT, 0);  // indices (choose just one line not both !!!)
