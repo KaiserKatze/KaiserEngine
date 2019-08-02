@@ -132,6 +132,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    GetWindowRect(hDisplay, &rectDisplay);
 
    // window style
+   // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
    DWORD winStyle;
 #if APP_FULLSCREEN
    x = 0;
