@@ -108,7 +108,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>python loadgl.py</Command>
+      <Command>python $(ProjectDir)loadgl.py</Command>
       <Message>Generate loadgl.h and loadgl.cpp</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
