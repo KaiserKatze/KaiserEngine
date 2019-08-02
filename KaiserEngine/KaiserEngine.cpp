@@ -441,6 +441,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PostQuitMessage(0);
         }
         break;
+    case WM_CLOSE:
+        {
+            isWindowClosing = true;
+        }
+        return DefWindowProc(hWnd, message, wParam, lParam);
     case WM_TIMER:
         {
 #if APP_FULLSCREEN
@@ -462,11 +467,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
 #endif
-    case WM_CLOSE:
-        {
-            isWindowClosing = true;
-        }
-        return DefWindowProc(hWnd, message, wParam, lParam);
 #if APP_USERINPUT
     case WM_LBUTTONDOWN:
     case WM_LBUTTONUP:
