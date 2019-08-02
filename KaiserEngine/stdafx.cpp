@@ -70,3 +70,34 @@ void CleanDll()
         module = (HMODULE)NULL;
     }
 }
+
+static LPCSTR const codelist[] = {
+    "GL_NO_ERROR",
+    "GL_INVALID_ENUM",
+    "GL_INVALID_VALUE",
+    "GL_INVALID_OPERATION",
+    "GL_STACK_OVERFLOW",
+    "GL_STACK_UNDERFLOW",
+    "GL_OUT_OF_MEMORY"
+};
+
+void DetectGLError(int mark)
+{
+    GLenum err = glGetError();
+
+    std::wstringstream ss;
+    ss << "[GL ERROR> IDX:";
+    ss << mark;
+    ss << ' ';
+    if (err != GL_NO_ERROR)
+        ss << codelist[err & 0x1];
+    else
+        ss << "GL_NO_ERROR";
+    ss << ' ';
+    ss << err;
+    ss << std::endl;
+
+    OutputDebugString(ss.str().c_str());
+    if (err != GL_NO_ERROR)
+        MessageBox(nullptr, ss.str().c_str(), TEXT("OpenGL Error"), MB_OK);
+}
