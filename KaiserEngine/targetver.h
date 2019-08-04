@@ -17,7 +17,10 @@
 #   define APP_CHECK_FULLSCREEN         ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
 #endif
 #ifndef APP_RESIZABLE
-#   define APP_RESIZABLE                false
+#   define APP_RESIZABLE_NEVER          0
+#   define APP_RESIZABLE_ALWAYS         1
+
+#   define APP_RESIZABLE                APP_RESIZABLE_NEVER
 #endif
 #ifndef APP_USERINPUT
 // enable user input (mouse, keyboard, etc.)

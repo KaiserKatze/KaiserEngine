@@ -240,7 +240,7 @@ public:
     }
 #endif
 
-#if (defined _DEBUG)
+#if (defined _DEBUG) || ((APP_RESIZABLE != APP_RESIZABLE_ALWAYS) && (APP_RESIZABLE != APP_RESIZABLE_NEVER))
     BOOL SetResizable(BOOL isResizable)
     {
         if (isFullscreen)
