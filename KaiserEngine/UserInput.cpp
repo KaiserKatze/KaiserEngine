@@ -66,6 +66,7 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 {
     const int keyCode = (wParam);
     // previous key state
+    // lParam: bit 30, the "previous key state" flag, which is set to 1 for repeated key-down messages
     const int oldKeyCode = ((lParam >> 30) & 1);
     switch (message)
     {
