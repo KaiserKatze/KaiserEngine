@@ -22,7 +22,7 @@
 #endif
 #ifndef APP_USERINPUT
 // enable user input (mouse, keyboard, etc.)
-#   define APP_USERINPUT                false
+#   define APP_USERINPUT                true
 #   if APP_USERINPUT
 // enable double clicks
 #       define APP_USERINPUT_DBLCLKS    true
