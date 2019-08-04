@@ -9,16 +9,21 @@
 
 
 #ifndef APP_FULLSCREEN
-#   define APP_FULLSCREEN false
+#   define APP_FULLSCREEN_NEVER         0
+#   define APP_FULLSCREEN_ALWAYS        1
+
+#   define APP_FULLSCREEN               APP_FULLSCREEN_NEVER
+
+#   define APP_CHECK_FULLSCREEN         ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
 #endif
 #ifndef APP_RESIZABLE
-#   define APP_RESIZABLE false
+#   define APP_RESIZABLE                false
 #endif
 #ifndef APP_USERINPUT
 // enable user input (mouse, keyboard, etc.)
-#   define APP_USERINPUT false
+#   define APP_USERINPUT                false
 #   if APP_USERINPUT
 // enable double clicks
-#       define APP_USERINPUT_DBLCLKS true
-#endif
+#       define APP_USERINPUT_DBLCLKS    true
+#   endif
 #endif

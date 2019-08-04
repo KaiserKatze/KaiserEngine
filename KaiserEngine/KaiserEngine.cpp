@@ -3,80 +3,165 @@
 
 #include "stdafx.h"
 #include "KaiserEngine.h"
+#include "loadgl.h"
 #include "UserInput.h"
 
 #define MAX_LOADSTRING 100
 
-// Global Variables:
-HINSTANCE hInst;                                // current instance
-HWND hWnd;                                      // current window
-WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
-WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
-std::atomic_bool isWindowClosing(false);
-#if APP_FULLSCREEN
-std::atomic_bool isWindowActivated(false);
+
+int InitPixelFormat(HDC hdc);
+
+RECT GetDisplayRect()
+{
+    RECT rectDisplay;
+    GetWindowRect(GetDesktopWindow(), &rectDisplay);
+    return rectDisplay;
+}
+
+class MainWindow : public BaseWindow<MainWindow>
+{
+public:
+    MainWindow(){}
+
+    LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
+    {
+        switch (message)
+        {
+        case WM_CREATE:
+        {
+            HDC hDC = GetDC(hWnd);
+            if (hDC == NULL) return -1;
+
+            if (InitPixelFormat(hDC) < 0) return -1;
+
+            HGLRC hRC = wglCreateContext(hDC);
+            if (hRC == NULL)
+            {
+                ErrorExit(L"wglCreateContext");
+                return -1;
+            }
+
+            if (!wglMakeCurrent(hDC, hRC))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
+
+            // install timer
+            SetTimer(hWnd,
+                0, // timer id
+                20, // timeout value, in milliseconds;
+                    // this configuration setup fixs frame rate
+                    // 1000 MS = 1 FPS
+                    // 20 MS = 50 FPS
+                NULL); // make system post WM_TIMER message
+            // returned timer id should be 1,
+            // if no timer has been created yet
+
+            // Get WGL Extensions
+            LoadOpenglFunctions();
+
+#if APP_RECREATE
+            // Clean up dummy context
+            if (!wglMakeCurrent(hDC, NULL))
+            {
+                ErrorExit(L"wglMakeCurrent");
+                return -1;
+            }
+
+            if (!wglDeleteContext(hRC))
+            {
+                ErrorExit(L"wglDeleteContext");
+                return -1;
+            }
+
+            // Recreate context
+            if (RecreateContext(hDC) < 0) return -1;
 #endif
 
+            // Initialize OpenGL
+            //gl_init(hWnd);
+            //vao_init();
+        }
+        break;
+#if APP_FULLSCREEN
+        case WM_ACTIVATEAPP:
+        {
+            // prevent CPU "hogging" when it is not necessary
+            isWindowActivated = (BOOL)wParam;
+        }
+        break;
+#endif
+        case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+            HDC hdc = BeginPaint(hWnd, &ps);
+            // TODO: Add any drawing code that uses hdc here...
+            EndPaint(hWnd, &ps);
+        }
+        break;
+        case WM_DESTROY:
+        {
+            PostQuitMessage(0);
+        }
+        break;
+        case WM_CLOSE:
+        {
+            //vao_exit();
+            CleanDll();
+            HDC hDC = wglGetCurrentDC();
+            HGLRC hRC = wglGetCurrentContext();
+            wglMakeCurrent(hDC, NULL);
+            wglDeleteContext(hRC);
+            wglMakeCurrent(NULL, NULL);
+            ReleaseDC(hWnd, hDC);
 
-
-// private
-
-template <typename WindowType>
-ATOM BaseWindow<WindowType>::RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
-{
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-    wcex.lpfnWndProc = wndproc;
-    wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC | CS_DBLCLKS;
-    wcex.cbClsExtra = 0;
-    wcex.cbWndExtra = 0;
-    wcex.hInstance = hInstance;
-    // load icon
-    wcex.hIcon = nullptr;
-    // load cursor
-    wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    // background color
-    wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    // window class
-    wcex.lpszClassName = lpClass;
-    // load small icon
-    wcex.hIconSm = nullptr;
-
-    return RegisterClassEx(&wcex);
-}
-
-// protected
-
-template <typename WindowType>
-static LRESULT CALLBACK WindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    WindowType *pThis = NULL;
-
-    if (message == WM_NCCREATE)
-    {
-        CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-        pThis = (WindowType*)pCreate->lpCreateParams;
-        SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pThis);
-
-        pThis->hWnd = hwnd;
+            isWindowClosing = true;
+        }
+        return DefWindowProc(hWnd, message, wParam, lParam);
+        case WM_TIMER:
+        {
+#if APP_FULLSCREEN
+            if (!isWindowActivated)
+                break;
+#endif
+            //vao_draw();
+        }
+        break;
+#if APP_RESIZABLE
+        case WM_SIZE:
+        {
+            // window resize event detected
+            const int width = LOWORD(lParam);
+            const int height = HIWORD(lParam);
+            OnResize(width, height);
+        }
+        break;
+#endif
+#if APP_USERINPUT
+        case WM_LBUTTONDOWN:
+        case WM_LBUTTONUP:
+        case WM_MBUTTONDOWN:
+        case WM_MBUTTONUP:
+        case WM_RBUTTONDOWN:
+        case WM_RBUTTONUP:
+        case WM_XBUTTONDOWN:
+        case WM_XBUTTONUP:
+#if APP_USERINPUT_DBLCLKS
+        case WM_LBUTTONDBLCLK:
+        case WM_MBUTTONDBLCLK:
+        case WM_RBUTTONDBLCLK:
+        case WM_XBUTTONDBLCLK:
+#endif
+        case WM_MOUSEMOVE:
+            return HandleMouseInput(hWnd, message, wParam, lParam);
+#endif
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
+        }
+        return 0;
     }
-    else
-    {
-        pThis = (WindowType*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-    }
-    if (pThis)
-    {
-        return pThis->HandleMessage(message, wParam, lParam);
-    }
-    else
-    {
-        return DefWindowProc(hwnd, message, wParam, lParam);
-    }
-}
-
-
-
+};
 
 
 
@@ -103,23 +188,20 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // TODO: Place code here.
 
     // Initialize global strings
+    wchar_t szTitle[MAX_LOADSTRING];
+    wchar_t szWindowClass[MAX_LOADSTRING];
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
 
-    // Perform application initialization:
-    if (!InitInstance (hInstance, nCmdShow))
-    {
-        return FALSE;
-    }
+    MainWindow win;
+    win.Create(hInstance, szWindowClass, szTitle);
+
 #if APP_FULLSCREEN
     SetCapture(hWnd);
 #endif
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_KAISERENGINE));
-
     MSG msg;
-
     // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
@@ -132,7 +214,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #ifdef _DEBUG
         // close window when key 'ESC' is pressed
         if (GetAsyncKeyState(VK_ESCAPE))
-            PostMessage(hWnd, WM_CLOSE, (WPARAM) 0, (LPARAM) 0);
+            PostMessage(win.getWindowHandle(), WM_CLOSE, (WPARAM) 0, (LPARAM) 0);
 #endif
     }
 
@@ -145,109 +227,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 
-//
-//  FUNCTION: MyRegisterClass()
-//
-//  PURPOSE: Registers the window class.
-//
-ATOM MyRegisterClass(HINSTANCE hInstance)
-{
-    WNDCLASSEXW wcex;
-
-    wcex.cbSize = sizeof(WNDCLASSEX);
-
-    UINT style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-#if APP_USERINPUT_DBLCLKS
-    style |= CS_DBLCLKS;
-#endif
-
-    wcex.style          = style;
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_KAISERENGINE));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = nullptr; // MAKEINTRESOURCEW(IDC_KAISERENGINE);
-    wcex.lpszClassName  = szWindowClass;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
-
-    return RegisterClassExW(&wcex);
-}
-
-//
-//   FUNCTION: InitInstance(HINSTANCE, int)
-//
-//   PURPOSE: Saves instance handle and creates main window
-//
-//   COMMENTS:
-//
-//        In this function, we save the instance handle in a global variable and
-//        create and display the main program window.
-//
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
-{
-   hInst = hInstance; // Store instance handle in our global variable
-
-   int x;
-   int y;
-   int width;
-   int height;
-
-   RECT rectDisplay;
-   const HWND hDisplay = GetDesktopWindow();
-   GetWindowRect(hDisplay, &rectDisplay);
-
-   // window style
-   // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
-   DWORD winStyle;
-#if APP_FULLSCREEN
-   x = 0;
-   y = 0;
-   width = rectDisplay.right;
-   height = rectDisplay.bottom;
-
-   winStyle = WS_POPUP;
-#else
-   // calcuate initial position (x, y)
-   // center window
-   width = 1280;
-   height = 720;
-   x = (rectDisplay.right - width) / 2;
-   y = (rectDisplay.bottom - height) / 2;
-
-
-   winStyle = WS_OVERLAPPEDWINDOW;
-#if (!APP_RESIZABLE)
-   winStyle ^= WS_THICKFRAME;
-#endif
-#endif
-   winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
-
-   hWnd = CreateWindow(szWindowClass, szTitle,
-       winStyle,
-       x, y, // initial position
-       width, height, // initial size
-       nullptr, // parent window
-       nullptr, // menu
-       hInstance, // instance handle
-       nullptr); // additional application data
-
-   if (!hWnd)
-   {
-      return FALSE;
-   }
-
-
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
-#if APP_FULLSCREEN
-   isWindowActivated = true;
-#endif
-
-   return TRUE;
-}
 
 int InitPixelFormat(HDC hdc)
 {
@@ -293,8 +272,6 @@ int InitPixelFormat(HDC hdc)
 
     return 0;
 }
-
-#include "loadgl.h"
 
 int RecreateContext(HDC hdc)
 {
@@ -352,27 +329,6 @@ void vao_init();
 void vao_exit();
 void vao_draw();
 
-size_t tickCounter;
-
-void updateWindowTitle()
-{
-#ifdef _DEBUG
-    // change window title name
-    GLint iMajorVersion, iMinorVersion;
-    glGetIntegerv(GL_MAJOR_VERSION, &iMajorVersion);
-    glGetIntegerv(GL_MINOR_VERSION, &iMinorVersion);
-
-    std::wstringstream sNewTitle;
-    sNewTitle << szTitle;
-    sNewTitle << " (OpenGL version: ";
-    sNewTitle << iMajorVersion << '.' << iMinorVersion;
-    //sNewTitle << (LPCSTR)glGetString(GL_VERSION);
-    sNewTitle << ", Tick: " << tickCounter;
-    sNewTitle << ")";
-    SetWindowText(hWnd, sNewTitle.str().c_str());
-#endif
-}
-
 void kglViewport(int width, int height)
 {
     const int trimX = 10;
@@ -397,177 +353,6 @@ void kglViewport(int width, int height)
 void OnResize(int width, int height)
 {
     kglViewport(width, height);
-}
-
-//
-//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  PURPOSE:  Processes messages for the main window.
-//
-//  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
-//  WM_DESTROY  - post a quit message and return
-//
-//  @see: https://www.khronos.org/opengl/wiki/Platform_specifics:_Windows#When_do_I_render_my_scene.3F
-//
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    switch (message)
-    {
-    case WM_CREATE:
-        {
-            HDC hDC = GetDC(hWnd);
-            if (hDC == NULL) return -1;
-
-            if (InitPixelFormat(hDC) < 0) return -1;
-
-            HGLRC hRC = wglCreateContext(hDC);
-            if (hRC == NULL)
-            {
-                ErrorExit(L"wglCreateContext");
-                return -1;
-            }
-
-            if (!wglMakeCurrent(hDC, hRC))
-            {
-                ErrorExit(L"wglMakeCurrent");
-                return -1;
-            }
-
-            tickCounter = 0;
-            // install timer
-            SetTimer(hWnd,
-                0, // timer id
-                20, // timeout value, in milliseconds;
-                    // this configuration setup fixs frame rate
-                    // 1000 MS = 1 FPS
-                    // 20 MS = 50 FPS
-                NULL); // make system post WM_TIMER message
-            // returned timer id should be 1,
-            // if no timer has been created yet
-            updateWindowTitle();
-
-            // Get WGL Extensions
-            LoadOpenglFunctions();
-
-#if APP_RECREATE
-            // Clean up dummy context
-            if (!wglMakeCurrent(hDC, NULL))
-            {
-                ErrorExit(L"wglMakeCurrent");
-                return -1;
-            }
-
-            if (!wglDeleteContext(hRC))
-            {
-                ErrorExit(L"wglDeleteContext");
-                return -1;
-            }
-
-            // Recreate context
-            if (RecreateContext(hDC) < 0) return -1;
-#endif
-
-            // Initialize OpenGL
-            gl_init(hWnd);
-            vao_init();
-        }
-        break;
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // Parse the menu selections:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
-#if APP_FULLSCREEN
-    case WM_ACTIVATEAPP:
-    {
-        // prevent CPU "hogging" when it is not necessary
-        isWindowActivated = (BOOL)wParam;
-    }
-    break;
-#endif
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
-            EndPaint(hWnd, &ps);
-        }
-        break;
-    case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-        }
-        break;
-    case WM_CLOSE:
-        {
-            vao_exit();
-            CleanDll();
-            HDC hDC = wglGetCurrentDC();
-            HGLRC hRC = wglGetCurrentContext();
-            wglMakeCurrent(hDC, NULL);
-            wglDeleteContext(hRC);
-            wglMakeCurrent(NULL, NULL);
-            ReleaseDC(hWnd, hDC);
-
-            isWindowClosing = true;
-        }
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    case WM_TIMER:
-        {
-#if APP_FULLSCREEN
-            if (!isWindowActivated)
-                break;
-#endif
-            tickCounter++;
-            vao_draw();
-            updateWindowTitle();
-        }
-        break;
-#if APP_RESIZABLE
-    case WM_SIZE:
-        {
-            // window resize event detected
-            const int width = LOWORD(lParam);
-            const int height = HIWORD(lParam);
-            OnResize(width, height);
-        }
-        break;
-#endif
-#if APP_USERINPUT
-    case WM_LBUTTONDOWN:
-    case WM_LBUTTONUP:
-    case WM_MBUTTONDOWN:
-    case WM_MBUTTONUP:
-    case WM_RBUTTONDOWN:
-    case WM_RBUTTONUP:
-    case WM_XBUTTONDOWN:
-    case WM_XBUTTONUP:
-#if APP_USERINPUT_DBLCLKS
-    case WM_LBUTTONDBLCLK:
-    case WM_MBUTTONDBLCLK:
-    case WM_RBUTTONDBLCLK:
-    case WM_XBUTTONDBLCLK:
-#endif
-    case WM_MOUSEMOVE:
-        return HandleMouseInput(hWnd, message, wParam, lParam);
-#endif
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
 }
 
 // Message handler for about box.
