@@ -3,10 +3,15 @@
 #include "stdafx.h"
 #include "resource.h"
 
+RECT GetDisplayRect();
+
 template <typename WindowType>
 class BaseWindow
 {
 private:
+    std::atomic_bool isFullscreen;
+    std::atomic_bool isResizable;
+
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
         if (hInstance == nullptr)
@@ -140,6 +145,8 @@ protected:
 public:
     BaseWindow() :
         hWnd(nullptr),
+        isFullscreen(false),
+        isResizable(false),
         isWindowActivated(false),
         isWindowClosing(false)
     {}
@@ -164,4 +171,63 @@ public:
         return RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
             && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h);
     }
+
+#if (defined _DEBUG) || ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
+    BOOL SetFullscreen(BOOL isFullscreen)
+    {
+        if (this->isFullscreen == isFullscreen)
+            return true;
+        this->isFullscreen = isFullscreen;
+
+        // change window style
+        LONG wndStyle;
+        //wndStyle = GetWindowLong(hWnd, GWL_STYLE);
+        if (isFullscreen)
+        {
+            wndStyle = WS_POPUP;
+        }
+        else
+        {
+            winStyle = WS_OVERLAPPEDWINDOW;
+            if (!this->isResizable)
+                winStyle ^= WS_THICKFRAME;
+        }
+        winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
+        SetWindowLong(hWnd, GWL_STYLE, winStyle);
+
+        if (isFullscreen)
+        {
+            const RECT rectDisplay = GetDisplayRect();
+
+            const int x = 0;
+            const int y = 0;
+            const int width = rectDisplay.right;
+            const int height = rectDisplay.bottom;
+
+            SetWindowPos(
+                hWnd,
+                HWND_TOP,
+                x, y,
+                width, height,
+                SWP_NOZORDER // Retains the current Z order
+                | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
+                | SWP_NOCOPYBITS // Discards the entire contents of the client area
+                | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
+            );
+        }
+        else
+        {
+            SetWindowPos(
+                hWnd,
+                HWND_TOP,
+                0, 0, 0, 0,
+                SWP_NOZORDER // Retains the current Z order
+                | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
+                | SWP_NOCOPYBITS // Discards the entire contents of the client area
+                | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
+                | SWP_DRAWFRAME // Draws a frame (defined in the window's class description) around the window
+            );
+        }
+    }
+#endif
 };
