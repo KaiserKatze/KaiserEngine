@@ -19,8 +19,16 @@ private:
         WNDCLASSEX wcex = { 0 };
 
         wcex.cbSize = sizeof(WNDCLASSEX);
+
+        UINT wndStyle;
+        wndStyle = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+#if (APP_USERINPUT)
+#   if (APP_USERINPUT_DBLCLKS)
+        wndStyle |= CS_DBLCLKS;
+#   endif
+#endif
+        wcex.style = wndStyle;
         wcex.lpfnWndProc = wndproc;
-        wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC | CS_DBLCLKS;
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
         wcex.hInstance = hInstance;
@@ -30,6 +38,8 @@ private:
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         // background color
         wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+        // menu
+        wcex.lpszMenuName = nullptr;
         // window class
         wcex.lpszClassName = lpClass;
         // load small icon
