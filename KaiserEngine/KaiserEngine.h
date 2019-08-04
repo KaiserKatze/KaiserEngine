@@ -193,7 +193,10 @@ public:
                 winStyle ^= WS_THICKFRAME;
         }
         winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
-        SetWindowLong(hWnd, GWL_STYLE, winStyle);
+        if (SetWindowLong(hWnd, GWL_STYLE, winStyle) == 0)
+        {
+            return false;
+        }
 
         if (isFullscreen)
         {
@@ -204,7 +207,7 @@ public:
             const int width = rectDisplay.right;
             const int height = rectDisplay.bottom;
 
-            SetWindowPos(
+            if (SetWindowPos(
                 hWnd,
                 HWND_TOP,
                 x, y,
@@ -213,11 +216,14 @@ public:
                 | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
                 | SWP_NOCOPYBITS // Discards the entire contents of the client area
                 | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
-            );
+            ) == 0)
+            {
+                return false;
+            }
         }
         else
         {
-            SetWindowPos(
+            if (SetWindowPos(
                 hWnd,
                 HWND_TOP,
                 0, 0, 0, 0,
@@ -226,7 +232,10 @@ public:
                 | SWP_NOCOPYBITS // Discards the entire contents of the client area
                 | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
                 | SWP_DRAWFRAME // Draws a frame (defined in the window's class description) around the window
-            );
+            ) == 0)
+            {
+                return false;
+            }
         }
 
         return true;
