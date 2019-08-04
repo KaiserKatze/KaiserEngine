@@ -8,20 +8,12 @@
 
 #define MAX_LOADSTRING 100
 
-
 int InitPixelFormat(HDC hdc);
-
-RECT GetDisplayRect()
-{
-    RECT rectDisplay;
-    GetWindowRect(GetDesktopWindow(), &rectDisplay);
-    return rectDisplay;
-}
 
 class MainWindow : public BaseWindow<MainWindow>
 {
 public:
-    MainWindow(){}
+    MainWindow() {}
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
     {
@@ -163,18 +155,11 @@ public:
     }
 };
 
-
-
-
-
-
-
-
 // @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/winmain--the-application-entry-point
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -208,7 +193,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #ifdef _DEBUG
         // close window when key 'ESC' is pressed
         if (GetAsyncKeyState(VK_ESCAPE))
-            PostMessage(win.getWindowHandle(), WM_CLOSE, (WPARAM) 0, (LPARAM) 0);
+            PostMessage(win.getWindowHandle(), WM_CLOSE, (WPARAM)0, (LPARAM)0);
 #endif
     }
 
@@ -216,11 +201,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     ReleaseCapture();
 #endif
 
-    return (int) msg.wParam;
+    return (int)msg.wParam;
 }
 
 
-
+RECT GetDisplayRect()
+{
+    RECT rectDisplay;
+    GetWindowRect(GetDesktopWindow(), &rectDisplay);
+    return rectDisplay;
+}
 
 int InitPixelFormat(HDC hdc)
 {
