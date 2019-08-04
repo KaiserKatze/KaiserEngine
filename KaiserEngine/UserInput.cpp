@@ -61,4 +61,9 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     OutputDebugStringA(ss.str().c_str());
     return 0;
 }
+
+LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+
+}
 #endif

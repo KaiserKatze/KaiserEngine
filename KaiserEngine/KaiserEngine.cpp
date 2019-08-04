@@ -131,6 +131,7 @@ public:
         break;
 #endif
 #if APP_USERINPUT
+        // mouse input
         case WM_LBUTTONDOWN:
         case WM_LBUTTONUP:
         case WM_MBUTTONDOWN:
@@ -147,6 +148,12 @@ public:
 #endif
         case WM_MOUSEMOVE:
             return HandleMouseInput(hWnd, message, wParam, lParam);
+        // keyboard input
+        case WM_SYSKEYDOWN:
+        case WM_KEYDOWN:
+        case WM_KEYUP:
+        case WM_SYSKEYUP:
+            return HandleKeyboardInput(hWnd, message, wParam, lParam);
 #endif
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);
