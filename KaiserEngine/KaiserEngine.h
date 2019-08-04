@@ -188,12 +188,12 @@ public:
         }
         else
         {
-            winStyle = WS_OVERLAPPEDWINDOW;
+            wndStyle = WS_OVERLAPPEDWINDOW;
             if (!this->isResizable)
-                winStyle ^= WS_THICKFRAME;
+                wndStyle ^= WS_THICKFRAME;
         }
-        winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
-        if (SetWindowLong(hWnd, GWL_STYLE, winStyle) == 0)
+        wndStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
+        if (SetWindowLong(hWnd, GWL_STYLE, wndStyle) == 0)
         {
             return false;
         }
