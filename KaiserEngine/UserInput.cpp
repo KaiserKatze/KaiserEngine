@@ -64,6 +64,18 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    const int keyCode = (wParam);
+    // previous key state
+    const int oldKeyCode = ((lParam >> 30) & 1);
+    switch (message)
+    {
+    case WM_KEYDOWN:
+    case WM_KEYUP:
+        break;
+    case WM_SYSKEYDOWN:
+    case WM_SYSKEYUP:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
     return 0;
 }
 #endif
