@@ -228,6 +228,8 @@ public:
                 | SWP_DRAWFRAME // Draws a frame (defined in the window's class description) around the window
             );
         }
+
+        return true;
     }
 #endif
 };
