@@ -128,6 +128,7 @@ protected:
         }
     }
 
+#ifdef _DEBUG
     void UpdateWindowTitle()
     {
         // change window title name
@@ -142,6 +143,7 @@ protected:
         sNewTitle << ")";
         SetWindowText(hWnd, sNewTitle.str().c_str());
     }
+#endif
 public:
     BaseWindow() :
         hWnd(nullptr),
