@@ -215,7 +215,6 @@ public:
                 SWP_NOZORDER // Retains the current Z order
                 | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
                 | SWP_NOCOPYBITS // Discards the entire contents of the client area
-                | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
             ) == 0)
             {
                 return false;
@@ -230,12 +229,66 @@ public:
                 SWP_NOZORDER // Retains the current Z order
                 | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
                 | SWP_NOCOPYBITS // Discards the entire contents of the client area
-                | SWP_FRAMECHANGED // Applies new frame styles set using the SetWindowLong function
                 | SWP_DRAWFRAME // Draws a frame (defined in the window's class description) around the window
             ) == 0)
             {
                 return false;
             }
+        }
+
+        return true;
+    }
+#endif
+
+#if (defined _DEBUG)
+    BOOL SetResizable(BOOL isResizable)
+    {
+        if (isFullscreen)
+            return false;
+        if (this->isResizable == isResizable)
+            return true;
+        this->isResizable = isResizable;
+
+        LONG wndStyle;
+        wndStyle = GetWindowLong(hWnd, GWL_STYLE);
+        if (wndStyle == 0)
+        {
+            return false;
+        }
+
+        if (isResizable)
+        {
+            if (!isFullscreen)
+                wndStyle |= WS_THICKFRAME;
+        }
+        else
+        {
+            wndStyle ^= WS_THICKFRAME;
+        }
+
+        if (SetWindowLong(hWnd, GWL_STYLE, wndStyle) == 0)
+        {
+            return false;
+        }
+
+        UINT uFlags;
+        uFlags = SWP_NOZORDER // Retains the current Z order
+            | SWP_NOREPOSITION // Does not change the owner window's position in the Z order
+            | SWP_NOMOVE // Retains the current position (ignores X and Y parameters)
+            | SWP_NOOWNERZORDER // Does not change the owner window's position in the Z order
+            | SWP_NOSIZE // Retains the current size (ignores the cx and cy parameters)
+            | SWP_NOCOPYBITS; // Discards the entire contents of the client area
+        if (!isFullscreen)
+        {
+            uFlags |= SWP_DRAWFRAME; // Draws a frame (defined in the window's class description) around the window
+        }
+        if (SetWindowPos(
+            hWnd,
+            HWND_TOP,
+            0, 0, 0, 0,
+            uFlags) == 0)
+        {
+            return false;
         }
 
         return true;
