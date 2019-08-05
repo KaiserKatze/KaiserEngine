@@ -159,6 +159,16 @@ public:
         case WM_KEYUP:
         case WM_SYSKEYUP:
             return HandleKeyboardInput(hWnd, message, wParam, lParam);
+        case WM_INPUTLANGCHANGE:
+            {
+                if (!isInputMethodEnabled)
+                    return 0;
+                std::stringstream ss;
+                ss << "WM_INPUTLANGCHANGE";
+                ss << std::endl;
+                OutputDebugStringA(ss.str().c_str());
+            }
+            return DefWindowProc(hWnd, message, wParam, lParam);
 #endif
         default:
             return DefWindowProc(hWnd, message, wParam, lParam);

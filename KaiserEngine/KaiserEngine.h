@@ -11,8 +11,6 @@ class BaseWindow
 private:
     std::atomic_bool isFullscreen;
     std::atomic_bool isResizable;
-    // enable input method
-    std::atomic_bool isInputMethodEnabled;
 
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
@@ -101,6 +99,8 @@ protected:
     HWND hWnd;
     std::atomic_bool isWindowActivated;
     std::atomic_bool isWindowClosing;
+    // enable input method
+    std::atomic_bool isInputMethodEnabled;
 
     virtual LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 

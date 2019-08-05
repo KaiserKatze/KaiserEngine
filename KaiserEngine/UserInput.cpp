@@ -101,10 +101,26 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             // The value is always 1 for a WM_KEYUP message
             // The value is always 0 for a WM_KEYDOWN message
             int ts = (int)(0x1 & (lParam >> 31));
+
+            std::stringstream ss;
+            ss << (ts ? "WM_KEYUP" : "WM_KEYDOWN");
+            ss << std::endl;
+            OutputDebugStringA(ss.str().c_str());
         }
         break;
     case WM_SYSKEYDOWN:
     case WM_SYSKEYUP:
+        {
+            // Transition state
+            // The value is always 1 for a WM_SYSKEYUP message
+            // The value is always 0 for a WM_SYSKEYDOWN message
+            int ts = (int)(0x1 & (lParam >> 31));
+
+            std::stringstream ss;
+            ss << (ts ? "WM_SYSKEYUP" : "WM_SYSKEYDOWN");
+            ss << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
