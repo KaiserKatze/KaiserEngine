@@ -24,116 +24,116 @@ public:
         switch (message)
         {
         case WM_CREATE:
-        {
-            HDC hDC = GetDC(hWnd);
-            if (hDC == NULL) return -1;
-
-            if (InitPixelFormat(hDC) < 0) return -1;
-
-            HGLRC hRC = wglCreateContext(hDC);
-            if (hRC == NULL)
             {
-                ErrorExit(L"wglCreateContext");
-                return -1;
-            }
+                HDC hDC = GetDC(hWnd);
+                if (hDC == NULL) return -1;
 
-            if (!wglMakeCurrent(hDC, hRC))
-            {
-                ErrorExit(L"wglMakeCurrent");
-                return -1;
-            }
+                if (InitPixelFormat(hDC) < 0) return -1;
 
-            // install timer
-            SetTimer(hWnd,
-                0, // timer id
-                20, // timeout value, in milliseconds;
-                    // this configuration setup fixs frame rate
-                    // 1000 MS = 1 FPS
-                    // 20 MS = 50 FPS
-                NULL); // make system post WM_TIMER message
-            // returned timer id should be 1,
-            // if no timer has been created yet
+                HGLRC hRC = wglCreateContext(hDC);
+                if (hRC == NULL)
+                {
+                    ErrorExit(L"wglCreateContext");
+                    return -1;
+                }
 
-            // Get WGL Extensions
-            LoadOpenglFunctions();
+                if (!wglMakeCurrent(hDC, hRC))
+                {
+                    ErrorExit(L"wglMakeCurrent");
+                    return -1;
+                }
+
+                // install timer
+                SetTimer(hWnd,
+                    0, // timer id
+                    20, // timeout value, in milliseconds;
+                        // this configuration setup fixs frame rate
+                        // 1000 MS = 1 FPS
+                        // 20 MS = 50 FPS
+                    NULL); // make system post WM_TIMER message
+                // returned timer id should be 1,
+                // if no timer has been created yet
+
+                // Get WGL Extensions
+                LoadOpenglFunctions();
 
 #if APP_RECREATE
-            // Clean up dummy context
-            if (!wglMakeCurrent(hDC, NULL))
-            {
-                ErrorExit(L"wglMakeCurrent");
-                return -1;
-            }
+                // Clean up dummy context
+                if (!wglMakeCurrent(hDC, NULL))
+                {
+                    ErrorExit(L"wglMakeCurrent");
+                    return -1;
+                }
 
-            if (!wglDeleteContext(hRC))
-            {
-                ErrorExit(L"wglDeleteContext");
-                return -1;
-            }
+                if (!wglDeleteContext(hRC))
+                {
+                    ErrorExit(L"wglDeleteContext");
+                    return -1;
+                }
 
-            // Recreate context
-            if (RecreateContext(hDC) < 0) return -1;
+                // Recreate context
+                if (RecreateContext(hDC) < 0) return -1;
 #endif
 
-            // Initialize OpenGL
-            //gl_init(hWnd);
-            //vao_init();
-        }
-        break;
+                // Initialize OpenGL
+                //gl_init(hWnd);
+                //vao_init();
+            }
+            break;
 #if APP_FULLSCREEN
-        case WM_ACTIVATEAPP:
-        {
-            // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
-            // prevent CPU "hogging" when it is not necessary
-            isWindowActivated = (bool)wParam;
-        }
-        break;
+            case WM_ACTIVATEAPP:
+            {
+                // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
+                // prevent CPU "hogging" when it is not necessary
+                isWindowActivated = (bool)wParam;
+            }
+            break;
 #endif
         case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
-            EndPaint(hWnd, &ps);
-        }
-        break;
+            {
+                PAINTSTRUCT ps;
+                HDC hdc = BeginPaint(hWnd, &ps);
+                // TODO: Add any drawing code that uses hdc here...
+                EndPaint(hWnd, &ps);
+            }
+            break;
         case WM_DESTROY:
-        {
-            PostQuitMessage(0);
-        }
-        break;
+            {
+                PostQuitMessage(0);
+            }
+            break;
         case WM_CLOSE:
-        {
-            //vao_exit();
-            CleanDll();
-            HDC hDC = wglGetCurrentDC();
-            HGLRC hRC = wglGetCurrentContext();
-            wglMakeCurrent(hDC, NULL);
-            wglDeleteContext(hRC);
-            wglMakeCurrent(NULL, NULL);
-            ReleaseDC(hWnd, hDC);
+            {
+                //vao_exit();
+                CleanDll();
+                HDC hDC = wglGetCurrentDC();
+                HGLRC hRC = wglGetCurrentContext();
+                wglMakeCurrent(hDC, NULL);
+                wglDeleteContext(hRC);
+                wglMakeCurrent(NULL, NULL);
+                ReleaseDC(hWnd, hDC);
 
-            isWindowClosing = true;
-        }
-        return DefWindowProc(hWnd, message, wParam, lParam);
+                isWindowClosing = true;
+            }
+            return DefWindowProc(hWnd, message, wParam, lParam);
         case WM_TIMER:
-        {
+            {
 #if APP_FULLSCREEN
-            if (!isWindowActivated)
-                break;
+                if (!isWindowActivated)
+                    break;
 #endif
-            //vao_draw();
-        }
-        break;
+                //vao_draw();
+            }
+            break;
 #if APP_RESIZABLE
         case WM_SIZE:
-        {
-            // window resize event detected
-            const int width = LOWORD(lParam);
-            const int height = HIWORD(lParam);
-            OnResize(width, height);
-        }
-        break;
+            {
+                // window resize event detected
+                const int width = LOWORD(lParam);
+                const int height = HIWORD(lParam);
+                OnResize(width, height);
+            }
+            break;
 #endif
 #if APP_USERINPUT
         // mouse input
