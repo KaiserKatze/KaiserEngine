@@ -13,7 +13,10 @@ int InitPixelFormat(HDC hdc);
 class MainWindow : public BaseWindow<MainWindow>
 {
 public:
-    MainWindow() {}
+    MainWindow()
+    {
+        SetInputMethodEnabled(true);
+    }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
     {
