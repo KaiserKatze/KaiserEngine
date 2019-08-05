@@ -76,6 +76,19 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             // Virtual-key code
             // @see: https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
             int vk = (int)(0xff & wParam);
+            // Repeat code
+            // The number of times the keystroke is autorepeated
+            // as a result of the user holding down the key.
+            // The repeat count is always 1 for a WM_KEYUP message
+            int rc = (int)(0xffff & lParam);
+            // Scan code
+            // The value depends on the OEM
+            int sc = (int)(0x7f & (lParam >> 16));
+            // Extended key
+            // Indicates whether the key is an extended key, such as the right-hand ALT
+            // and CTRL keys that appear on an enhanced 101- or 102-key keyboard
+            // The value is 1 if it is an extended key; otherwise, it is 0
+            int ek = (int)(0x1 & (lParam >> 24));
         }
         break;
     case WM_SYSKEYDOWN:
