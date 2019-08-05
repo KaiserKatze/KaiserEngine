@@ -72,6 +72,11 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
     {
     case WM_KEYDOWN:
     case WM_KEYUP:
+        {
+            // Virtual-key code
+            // @see: https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+            int vk = (int)(0xff & wParam);
+        }
         break;
     case WM_SYSKEYDOWN:
     case WM_SYSKEYUP:
