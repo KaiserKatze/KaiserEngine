@@ -15,7 +15,7 @@ class MainWindow : public BaseWindow<MainWindow>
 public:
     MainWindow()
     {
-        SetInputMethodEnabled(true);
+        SetInputMethodEnabled(false);
     }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
