@@ -20,6 +20,7 @@ public:
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
     {
+        // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
         switch (message)
         {
         case WM_CREATE:
