@@ -91,12 +91,15 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             int ek = (int)(0x1 & (lParam >> 24));
             // Context code
             // The value is always 0 for a WM_KEYUP message
+            // The value is always 0 for a WM_KEYDOWN message
             int cc = (int)(0x1 & (lParam >> 29));
             // Previous key state
             // The value is always 1 for a WM_KEYUP message
+            // The value is 1 if the key is down before the message is sent, or it is zero if the key is up
             int ks = (int)(0x1 & (lParam >> 30));
             // Transition state
             // The value is always 1 for a WM_KEYUP message
+            // The value is always 0 for a WM_KEYDOWN message
             int ts = (int)(0x1 & (lParam >> 31));
         }
         break;
