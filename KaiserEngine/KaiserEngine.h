@@ -11,6 +11,8 @@ class BaseWindow
 private:
     std::atomic_bool isFullscreen;
     std::atomic_bool isResizable;
+    // enable input method
+    std::atomic_bool isInputMethodEnabled;
 
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
@@ -149,6 +151,7 @@ public:
         hWnd(nullptr),
         isFullscreen(false),
         isResizable(false),
+        isInputMethodEnabled(false),
         isWindowActivated(false),
         isWindowClosing(false)
     {}
@@ -296,4 +299,25 @@ public:
         return true;
     }
 #endif
+
+    BOOL SetInputMethodEnabled(BOOL isEnabled)
+    {
+        if (GetSystemMetrics(SM_IMMENABLED) == 0)
+        {
+            // Input Method Manager/Input Method Editor features
+            // ain't enabled on system
+            isInputMethodEnabled = false;
+            return false;
+        }
+        if (GetSystemMetrics(SM_DBCSENABLED) == 0)
+        {
+            // the ANSI-to-Unicode conversion may not be performed correctly,
+            // or some components like fonts or registry settings may not be present
+            isInputMethodEnabled = false;
+            return false;
+        }
+        if (isInputMethodEnabled == isEnabled)
+            return true;
+        isInputMethodEnabled = isEnabled;
+    }
 };
