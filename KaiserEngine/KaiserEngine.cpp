@@ -169,7 +169,8 @@ public:
         case WM_INPUTLANGCHANGE:
             {
                 if (!isInputMethodEnabled)
-                    return 0;
+                    //return 0;
+                    return DefWindowProc(hWnd, WM_NULL, 0, 0);
                 std::stringstream ss;
                 ss << "WM_INPUTLANGCHANGE";
                 ss << std::endl;
