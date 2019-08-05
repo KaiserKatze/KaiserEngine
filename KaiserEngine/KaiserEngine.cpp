@@ -15,7 +15,14 @@ class MainWindow : public BaseWindow<MainWindow>
 public:
     MainWindow()
     {
-        SetInputMethodEnabled(false);
+        {
+            bool res = SetInputMethodEnabled(false);
+            std::stringstream ss;
+            ss << "SetInputMethodEnabled(false) -> ";
+            ss << std::boolalpha << res << std::noboolalpha;
+            ss << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
     }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
