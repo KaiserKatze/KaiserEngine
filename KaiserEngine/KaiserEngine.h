@@ -324,5 +324,6 @@ public:
         if (isInputMethodEnabled == isEnabled)
             return true;
         isInputMethodEnabled = isEnabled;
+        return true;
     }
 };
