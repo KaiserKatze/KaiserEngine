@@ -173,8 +173,13 @@ public:
         int h = CW_USEDEFAULT
     )
     {
-        return RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
-            && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h);
+        if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
+            && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h))
+        {
+            SetFocus(hWnd);
+            return true;
+        }
+        return false;
     }
 
 #if (defined _DEBUG) || ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
