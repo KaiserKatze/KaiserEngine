@@ -85,7 +85,7 @@ public:
         {
             // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
             // prevent CPU "hogging" when it is not necessary
-            isWindowActivated = (BOOL)wParam;
+            isWindowActivated = (bool)wParam;
         }
         break;
 #endif

@@ -55,7 +55,7 @@ private:
         return RegisterClassEx(&wcex);
     }
 
-    BOOL InitWindowInstance(HINSTANCE hInstance,
+    bool InitWindowInstance(HINSTANCE hInstance,
         LPCWSTR lpClass, LPCWSTR lpTitle,
         int x, int y,
         int width, int height)
@@ -161,7 +161,7 @@ public:
         return hWnd;
     }
 
-    BOOL Create(
+    bool Create(
         HINSTANCE hInstance,
         LPCWSTR lpClass,
         LPCWSTR lpTitle,
@@ -183,7 +183,7 @@ public:
     }
 
 #if (defined _DEBUG) || ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
-    BOOL SetFullscreen(BOOL isFullscreen)
+    bool SetFullscreen(bool isFullscreen)
     {
         if (this->isFullscreen == isFullscreen)
             return true;
@@ -251,7 +251,7 @@ public:
 #endif
 
 #if (defined _DEBUG) || ((APP_RESIZABLE != APP_RESIZABLE_ALWAYS) && (APP_RESIZABLE != APP_RESIZABLE_NEVER))
-    BOOL SetResizable(BOOL isResizable)
+    bool SetResizable(bool isResizable)
     {
         if (isFullscreen)
             return false;
@@ -305,7 +305,7 @@ public:
     }
 #endif
 
-    BOOL SetInputMethodEnabled(BOOL isEnabled)
+    bool SetInputMethodEnabled(bool isEnabled)
     {
         if (GetSystemMetrics(SM_IMMENABLED) == 0)
         {

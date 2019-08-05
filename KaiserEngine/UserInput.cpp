@@ -9,8 +9,8 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     const int x = GET_X_LPARAM(lParam);
     const int y = GET_Y_LPARAM(lParam);
-    const BOOL isKeyDown_ctrl = wParam & MK_CONTROL; // check if the CTRL key is down
-    const BOOL isKeyDown_shift = wParam & MK_SHIFT; // check if the SHIFT key is down
+    const bool isKeyDown_ctrl = wParam & MK_CONTROL; // check if the CTRL key is down
+    const bool isKeyDown_shift = wParam & MK_SHIFT; // check if the SHIFT key is down
     // If you need to find the state of other keys besides CTRL and SHIFT, use the GetKeyState function
     std::stringstream ss;
     ss << "Mouse ";
