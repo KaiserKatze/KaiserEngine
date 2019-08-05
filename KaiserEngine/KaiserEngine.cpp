@@ -88,7 +88,7 @@ public:
             }
             break;
 #if APP_FULLSCREEN
-            case WM_ACTIVATEAPP:
+        case WM_ACTIVATEAPP:
             {
                 // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
                 // prevent CPU "hogging" when it is not necessary
