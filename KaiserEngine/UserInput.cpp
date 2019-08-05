@@ -89,6 +89,15 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             // and CTRL keys that appear on an enhanced 101- or 102-key keyboard
             // The value is 1 if it is an extended key; otherwise, it is 0
             int ek = (int)(0x1 & (lParam >> 24));
+            // Context code
+            // The value is always 0 for a WM_KEYUP message
+            int cc = (int)(0x1 & (lParam >> 29));
+            // Previous key state
+            // The value is always 1 for a WM_KEYUP message
+            int ks = (int)(0x1 & (lParam >> 30));
+            // Transition state
+            // The value is always 1 for a WM_KEYUP message
+            int ts = (int)(0x1 & (lParam >> 31));
         }
         break;
     case WM_SYSKEYDOWN:
