@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "UserInput.h"
+#include "KaiserEngine.h"
 
 #if APP_USERINPUT
 #include <windowsx.h>
@@ -64,10 +65,6 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    const int keyCode = (wParam);
-    // previous key state
-    // lParam: bit 30, the "previous key state" flag, which is set to 1 for repeated key-down messages
-    const int oldKeyCode = ((lParam >> 30) & 1);
     switch (message)
     {
     case WM_KEYDOWN:
