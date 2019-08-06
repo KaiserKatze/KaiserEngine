@@ -168,7 +168,7 @@ public:
             return HandleKeyboardInput(hWnd, message, wParam, lParam);
         case WM_INPUTLANGCHANGE:
             {
-                if (!isInputMethodEnabled)
+                if (!IsInputMethodEnabled())
                     //return 0;
                     return DefWindowProc(hWnd, WM_NULL, 0, 0);
                 std::stringstream ss;
