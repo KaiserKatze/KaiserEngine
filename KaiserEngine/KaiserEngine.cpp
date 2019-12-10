@@ -8,8 +8,6 @@
 
 #define MAX_LOADSTRING 100
 
-int InitPixelFormat(HDC hdc);
-
 class MainWindow : public BaseWindow<MainWindow>
 {
 public:
@@ -185,6 +183,52 @@ public:
         }
         return 0;
     }
+
+private:
+    int InitPixelFormat(HDC hdc)
+    {
+        // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
+        // Good pixel format to choose for the dummy context
+        //  * 32-bit RGBA color buffer
+        //  * 24-bit depth color buffer
+        //  * 8-bit stencil
+        PIXELFORMATDESCRIPTOR pfd =
+        {
+            sizeof(PIXELFORMATDESCRIPTOR),
+            1,
+            PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    // Flags
+            PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
+            32,                   // Colordepth of the framebuffer.
+            0, 0, 0, 0, 0, 0,
+            0,
+            0,
+            0,
+            0, 0, 0, 0,
+            24,                   // Number of bits for the depthbuffer
+            8,                    // Number of bits for the stencilbuffer
+            0,                    // Number of Aux buffers in the framebuffer.
+            PFD_MAIN_PLANE,
+            0,
+            0, 0, 0
+        };
+
+        int format = ChoosePixelFormat(hdc, &pfd);
+        if (format == 0)
+        {
+            // could not find a pixel format that matches the description,
+            // or the PDF was not filled out correctly
+            ErrorExit(L"ChoosePixelFormat");
+            return -1;
+        }
+
+        if (!SetPixelFormat(hdc, format, &pfd))
+        {
+            ErrorExit(L"SetPixelFormat");
+            return -1;
+        }
+
+        return 0;
+    }
 };
 
 // @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/winmain--the-application-entry-point
@@ -254,51 +298,6 @@ RECT GetDisplayRect()
     RECT rectDisplay;
     GetWindowRect(GetDesktopWindow(), &rectDisplay);
     return rectDisplay;
-}
-
-int InitPixelFormat(HDC hdc)
-{
-    // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
-    // Good pixel format to choose for the dummy context
-    //  * 32-bit RGBA color buffer
-    //  * 24-bit depth color buffer
-    //  * 8-bit stencil
-    PIXELFORMATDESCRIPTOR pfd =
-    {
-        sizeof(PIXELFORMATDESCRIPTOR),
-        1,
-        PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    // Flags
-        PFD_TYPE_RGBA,        // The kind of framebuffer. RGBA or palette.
-        32,                   // Colordepth of the framebuffer.
-        0, 0, 0, 0, 0, 0,
-        0,
-        0,
-        0,
-        0, 0, 0, 0,
-        24,                   // Number of bits for the depthbuffer
-        8,                    // Number of bits for the stencilbuffer
-        0,                    // Number of Aux buffers in the framebuffer.
-        PFD_MAIN_PLANE,
-        0,
-        0, 0, 0
-    };
-
-    int format = ChoosePixelFormat(hdc, &pfd);
-    if (format == 0)
-    {
-        // could not find a pixel format that matches the description,
-        // or the PDF was not filled out correctly
-        ErrorExit(L"ChoosePixelFormat");
-        return -1;
-    }
-
-    if (!SetPixelFormat(hdc, format, &pfd))
-    {
-        ErrorExit(L"SetPixelFormat");
-        return -1;
-    }
-
-    return 0;
 }
 
 int RecreateContext(HDC hdc)
