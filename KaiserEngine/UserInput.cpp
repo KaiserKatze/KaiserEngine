@@ -15,48 +15,54 @@ LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     // If you need to find the state of other keys besides CTRL and SHIFT, use the GetKeyState function
     std::stringstream ss;
     ss << "Mouse ";
+
+    std::string sMessage;
+
     switch (message)
     {
     case WM_LBUTTONDOWN:
-        ss << "LB down";
+        sMessage = "LB down";
         break;
     case WM_LBUTTONUP:
-        ss << "LB up";
+        sMessage = "LB up";
         break;
     case WM_MBUTTONDOWN:
-        ss << "MB down";
+        sMessage = "MB down";
         break;
     case WM_MBUTTONUP:
-        ss << "MB up";
+        sMessage = "MB up";
         break;
     case WM_RBUTTONDOWN:
-        ss << "RB down";
+        sMessage = "RB down";
         break;
     case WM_RBUTTONUP:
-        ss << "RB up";
+        sMessage = "RB up";
         break;
     case WM_XBUTTONDOWN:
-        ss << "XB down";
+        sMessage = "XB down";
         break;
     case WM_XBUTTONUP:
-        ss << "XB up";
+        sMessage = "XB up";
         break;
     case WM_LBUTTONDBLCLK:
-        ss << "LB double click";
+        sMessage = "LB double click";
         break;
     case WM_MBUTTONDBLCLK:
-        ss << "MB double click";
+        sMessage = "MB double click";
         break;
     case WM_RBUTTONDBLCLK:
-        ss << "RB double click";
+        sMessage = "RB double click";
         break;
     case WM_XBUTTONDBLCLK:
-        ss << "XB double click";
+        sMessage = "XB double click";
         break;
     case WM_MOUSEMOVE:
-        ss << "move";
+        sMessage = "move";
         break;
     }
+
+    ss << sMessage;
+
     ss << " @ (" << x << ", " << y << ")";
     ss << std::endl;
     OutputDebugStringA(ss.str().c_str());
