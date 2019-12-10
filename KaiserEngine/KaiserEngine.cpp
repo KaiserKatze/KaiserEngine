@@ -8,7 +8,7 @@
 
 #define MAX_LOADSTRING 100
 
-class BaseWindow : public AbstractWindow<BaseWindow>
+ABSTRACT class BaseWindow : public AbstractWindow<BaseWindow>
 {
 public:
     BaseWindow()
@@ -184,9 +184,15 @@ public:
         return 0;
     }
 
-private:
+protected:
+    virtual int InitPixelFormat(HDC hdc) = 0;
+};
+
+class MainWindow : public BaseWindow
+{
+public:
     // RecreateContext(HDC hdc)
-    int InitPixelFormat(HDC hdc)
+    int InitPixelFormat(HDC hdc) override
     {
         const int attribList_pixel_format[] = {
             WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
@@ -238,10 +244,10 @@ private:
     }
 };
 
-class DummyWindow : BaseWindow
+class DummyWindow : public BaseWindow
 {
-protected:
-    int InitPixelFormat(HDC hdc)
+public:
+    int InitPixelFormat(HDC hdc) override
     {
         // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
         // Good pixel format to choose for the dummy context
@@ -316,7 +322,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
 
-    BaseWindow win;
+    DummyWindow win;
     win.Create(hInstance, szWindowClass, szTitle);
 
 #if APP_FULLSCREEN

@@ -28,3 +28,7 @@
 #       define APP_USERINPUT_DBLCLKS    true
 #   endif
 #endif
+
+#ifndef ABSTRACT
+#   define ABSTRACT
+#endif
