@@ -195,6 +195,18 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
+#ifdef _DEBUG
+    {
+        std::wstringstream ss;
+        ss
+            << "--------------------------------------------" << std::endl
+            << "CmdLine: \"" << lpCmdLine << "\"" << std::endl
+            << "CmdShow: " << nCmdShow << std::endl
+            << "--------------------------------------------" << std::endl
+            << std::endl;
+        OutputDebugString(ss.str().c_str());
+    }
+#endif
 
     // Initialize global strings
     wchar_t szTitle[MAX_LOADSTRING];
