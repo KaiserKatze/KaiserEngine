@@ -185,6 +185,62 @@ public:
     }
 
 private:
+    // RecreateContext(HDC hdc)
+    int InitPixelFormat(HDC hdc)
+    {
+        const int attribList_pixel_format[] = {
+            WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+            WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+            WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
+            WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+            WGL_COLOR_BITS_ARB, 32,
+            WGL_DEPTH_BITS_ARB, 24,
+            WGL_STENCIL_BITS_ARB, 8,
+            0, // End
+        };
+        //const FLOAT pfAttribFList[] = { 0 };
+        int pixelFormat;
+        UINT numFormats;
+        int format = wglChoosePixelFormatARB(hdc, attribList_pixel_format, (const FLOAT *)NULL, 1, &pixelFormat, &numFormats);
+        if (format == 0)
+        {
+            ErrorExit(L"wglChoosePixelFormatARB");
+            return -1;
+        }
+
+        if (SetPixelFormat(hdc, format, NULL))
+        {
+            ErrorExit(L"SetPixelFormat");
+            return -1;
+        }
+
+        const int attribList_context[] = {
+            WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
+            WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
+            WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
+            WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
+            0, // End
+        };
+        HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC)NULL, attribList_context);
+        if (hglrc == NULL)
+        {
+            ErrorExit(L"wglCreateContextAttribsARB");
+            return -1;
+        }
+
+        if (!wglMakeCurrent(hdc, hglrc))
+        {
+            ErrorExit(L"wglMakeCurrent");
+            return -1;
+        }
+
+        return 0;
+    }
+};
+
+class DummyWindow : MainWindow
+{
+protected:
     int InitPixelFormat(HDC hdc)
     {
         // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
@@ -298,57 +354,6 @@ RECT GetDisplayRect()
     RECT rectDisplay;
     GetWindowRect(GetDesktopWindow(), &rectDisplay);
     return rectDisplay;
-}
-
-int RecreateContext(HDC hdc)
-{
-    const int attribList_pixel_format[] = {
-        WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
-        WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
-        WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
-        WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
-        WGL_COLOR_BITS_ARB, 32,
-        WGL_DEPTH_BITS_ARB, 24,
-        WGL_STENCIL_BITS_ARB, 8,
-        0, // End
-    };
-    //const FLOAT pfAttribFList[] = { 0 };
-    int pixelFormat;
-    UINT numFormats;
-    int format = wglChoosePixelFormatARB(hdc, attribList_pixel_format, (const FLOAT *) NULL, 1, &pixelFormat, &numFormats);
-    if (format == 0)
-    {
-        ErrorExit(L"wglChoosePixelFormatARB");
-        return -1;
-    }
-
-    if (SetPixelFormat(hdc, format, NULL))
-    {
-        ErrorExit(L"SetPixelFormat");
-        return -1;
-    }
-
-    const int attribList_context[] = {
-        WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
-        WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
-        WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
-        WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
-        0, // End
-    };
-    HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC) NULL, attribList_context);
-    if (hglrc == NULL)
-    {
-        ErrorExit(L"wglCreateContextAttribsARB");
-        return -1;
-    }
-
-    if (!wglMakeCurrent(hdc, hglrc))
-    {
-        ErrorExit(L"wglMakeCurrent");
-        return -1;
-    }
-
-    return 0;
 }
 
 void gl_init(HWND hWnd);
