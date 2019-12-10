@@ -58,7 +58,8 @@ private:
     bool InitWindowInstance(HINSTANCE hInstance,
         LPCWSTR lpClass, LPCWSTR lpTitle,
         int x, int y,
-        int width, int height)
+        int width, int height,
+        int nCmdShow)
     {
         if (hInstance == nullptr)
             return false;
@@ -88,8 +89,7 @@ private:
             return false;
         }
 
-        int nCmdShow;
-        nCmdShow = SW_SHOW;
+        // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
         ShowWindow(hWnd, nCmdShow);
         UpdateWindow(hWnd);
 
@@ -97,6 +97,7 @@ private:
 
         return true;
     }
+
 protected:
     HWND hWnd;
     std::atomic_bool isWindowActivated;
@@ -175,11 +176,12 @@ public:
         int x = CW_USEDEFAULT,
         int y = CW_USEDEFAULT,
         int w = CW_USEDEFAULT,
-        int h = CW_USEDEFAULT
+        int h = CW_USEDEFAULT,
+        int nCmdShow = SW_SHOW
     )
     {
         if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
-            && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h))
+            && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h, nCmdShow))
         {
             SetFocus(hWnd);
             return true;
