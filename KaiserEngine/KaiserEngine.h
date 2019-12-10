@@ -6,7 +6,7 @@
 RECT GetDisplayRect();
 
 template <typename WindowType>
-class BaseWindow
+class AbstractWindow
 {
 private:
     std::atomic_bool isFullscreen;
@@ -147,7 +147,7 @@ protected:
     }
 #endif
 public:
-    BaseWindow() :
+    AbstractWindow() :
         hWnd(nullptr),
         isFullscreen(false),
         isResizable(false),

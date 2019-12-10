@@ -8,10 +8,10 @@
 
 #define MAX_LOADSTRING 100
 
-class MainWindow : public BaseWindow<MainWindow>
+class BaseWindow : public AbstractWindow<BaseWindow>
 {
 public:
-    MainWindow()
+    BaseWindow()
     {
 #ifdef _DEBUG
         {
@@ -238,7 +238,7 @@ private:
     }
 };
 
-class DummyWindow : MainWindow
+class DummyWindow : BaseWindow
 {
 protected:
     int InitPixelFormat(HDC hdc)
@@ -316,7 +316,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
 
-    MainWindow win;
+    BaseWindow win;
     win.Create(hInstance, szWindowClass, szTitle);
 
 #if APP_FULLSCREEN
