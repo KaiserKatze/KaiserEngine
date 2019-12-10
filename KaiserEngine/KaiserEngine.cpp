@@ -15,6 +15,7 @@ class MainWindow : public BaseWindow<MainWindow>
 public:
     MainWindow()
     {
+#ifdef _DEBUG
         {
             bool res = SetInputMethodEnabled(false);
             std::stringstream ss;
@@ -23,6 +24,7 @@ public:
             ss << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
+#endif
     }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
