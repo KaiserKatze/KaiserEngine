@@ -31,61 +31,7 @@ public:
         switch (message)
         {
         case WM_CREATE:
-            {
-                HDC hDC = GetDC(hWnd);
-                if (hDC == NULL) return -1;
-
-                if (InitPixelFormat(hDC) < 0) return -1;
-
-                HGLRC hRC = wglCreateContext(hDC);
-                if (hRC == NULL)
-                {
-                    ErrorExit(L"wglCreateContext");
-                    return -1;
-                }
-
-                if (!wglMakeCurrent(hDC, hRC))
-                {
-                    ErrorExit(L"wglMakeCurrent");
-                    return -1;
-                }
-
-                // install timer
-                SetTimer(hWnd,
-                    0, // timer id
-                    20, // timeout value, in milliseconds;
-                        // this configuration setup fixs frame rate
-                        // 1000 MS = 1 FPS
-                        // 20 MS = 50 FPS
-                    NULL); // make system post WM_TIMER message
-                // returned timer id should be 1,
-                // if no timer has been created yet
-
-                // Get WGL Extensions
-                LoadOpenglFunctions();
-
-#if APP_RECREATE
-                // Clean up dummy context
-                if (!wglMakeCurrent(hDC, NULL))
-                {
-                    ErrorExit(L"wglMakeCurrent");
-                    return -1;
-                }
-
-                if (!wglDeleteContext(hRC))
-                {
-                    ErrorExit(L"wglDeleteContext");
-                    return -1;
-                }
-
-                // Recreate context
-                if (RecreateContext(hDC) < 0) return -1;
-#endif
-
-                // Initialize OpenGL
-                //gl_init(hWnd);
-                //vao_init();
-            }
+            OnCreate();
             break;
 #if APP_FULLSCREEN
         case WM_ACTIVATEAPP:
@@ -186,6 +132,7 @@ public:
 
 protected:
     virtual int InitPixelFormat(HDC hdc) = 0;
+    virtual int OnCreate() = 0;
 };
 
 class MainWindow : public BaseWindow
@@ -242,6 +189,43 @@ public:
 
         return 0;
     }
+
+    int OnCreate() override
+    {
+        HDC hDC = GetDC(hWnd);
+        if (hDC == NULL) return -1;
+
+        if (InitPixelFormat(hDC) < 0) return -1;
+
+        HGLRC hRC = wglCreateContext(hDC);
+        if (hRC == NULL)
+        {
+            ErrorExit(L"wglCreateContext");
+            return -1;
+        }
+
+        if (!wglMakeCurrent(hDC, hRC))
+        {
+            ErrorExit(L"wglMakeCurrent");
+            return -1;
+        }
+
+        // install timer
+        SetTimer(hWnd,
+            0, // timer id
+            20, // timeout value, in milliseconds;
+                // this configuration setup fixs frame rate
+                // 1000 MS = 1 FPS
+                // 20 MS = 50 FPS
+            NULL); // make system post WM_TIMER message
+        // returned timer id should be 1,
+        // if no timer has been created yet
+
+        // Initialize OpenGL
+        //gl_init(hWnd);
+        //vao_init();
+        return 0;
+    }
 };
 
 class DummyWindow : public BaseWindow
@@ -288,6 +272,32 @@ public:
             ErrorExit(L"SetPixelFormat");
             return -1;
         }
+
+        return 0;
+    }
+
+    int OnCreate() override
+    {
+        HDC hDC = GetDC(hWnd);
+        if (hDC == NULL) return -1;
+
+        if (InitPixelFormat(hDC) < 0) return -1;
+
+        HGLRC hRC = wglCreateContext(hDC);
+        if (hRC == NULL)
+        {
+            ErrorExit(L"wglCreateContext");
+            return -1;
+        }
+
+        if (!wglMakeCurrent(hDC, hRC))
+        {
+            ErrorExit(L"wglMakeCurrent");
+            return -1;
+        }
+
+        // Get WGL Extensions
+        LoadOpenglFunctions();
 
         return 0;
     }
