@@ -329,11 +329,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Initialize global strings
     wchar_t szTitle[MAX_LOADSTRING];
     wchar_t szWindowClass[MAX_LOADSTRING];
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
+    LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
 
     DummyWindow dummy;
     dummy.Create(hInstance, szWindowClass, szTitle);
+
+    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 
     MainWindow win;
     win.Create(hInstance, szWindowClass, szTitle);
