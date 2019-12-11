@@ -180,6 +180,22 @@ public:
         int nCmdShow = SW_SHOW
     )
     {
+#ifdef _DEBUG
+        std::wstringstream ss;
+        ss << "AbstractWindow::Create(" << std::endl
+            << "\thInstance={}," << std::endl
+            << "\tlpClass=" << lpClass << "," << std::endl
+            << "\tlpTitle=" << lpTitle << "," << std::endl
+            << "\tdwStyle=" << dwStyle << "," << std::endl
+            << "\tdwExStyle=" << dwExStyle << "," << std::endl
+            << "\tx=" << x << "," << std::endl
+            << "\ty=" << y << "," << std::endl
+            << "\tw=" << w << "," << std::endl
+            << "\th=" << h << "," << std::endl
+            << "\tnCmdShow=" << nCmdShow << ");" << std::endl;
+        OutputDebugStringW(ss.str().c_str());
+#endif
+
         if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
             && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h, nCmdShow))
         {
