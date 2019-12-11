@@ -333,10 +333,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
 
     DummyWindow dummy;
-    dummy.Create(hInstance, szWindowClass, szTitle, SW_HIDE);
+    dummy.Create(hInstance, szWindowClass, szTitle);
 
     MainWindow win;
-    win.Create(hInstance, szWindowClass, szTitle, SW_SHOW);
+    win.Create(hInstance, szWindowClass, szTitle);
 
 #if APP_FULLSCREEN
     SetCapture(hWnd);
