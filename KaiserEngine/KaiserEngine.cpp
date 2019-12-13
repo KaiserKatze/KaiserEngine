@@ -362,6 +362,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MainWindow win;
     win.Create(hInstance, szWindowClass, szTitle);
+    win.AttachInput();
 
 #if APP_FULLSCREEN
     SetCapture(hWnd);
