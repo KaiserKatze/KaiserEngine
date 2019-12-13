@@ -350,4 +350,25 @@ public:
         isInputMethodEnabled = isEnabled;
         return true;
     }
+
+    void StartMessageLoop(HINSTANCE hInstance)
+    {
+        HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_KAISERENGINE));
+        MSG msg;
+        // Main message loop:
+        while (GetMessage(&msg, nullptr, 0, 0))
+        {
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+
+#ifdef _DEBUG
+            // close window when key 'ESC' is pressed
+            if (GetAsyncKeyState(VK_ESCAPE))
+                PostMessage(getWindowHandle(), WM_CLOSE, (WPARAM)0, (LPARAM)0);
+#endif
+        }
+    }
 };
