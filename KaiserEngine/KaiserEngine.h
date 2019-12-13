@@ -23,6 +23,7 @@ private:
         if (lpClass == nullptr)
             return 0;
 
+        // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa
         WNDCLASSEX wcex = { 0 };
 
         wcex.cbSize = sizeof(WNDCLASSEX);
