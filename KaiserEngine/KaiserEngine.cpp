@@ -11,7 +11,8 @@
 ABSTRACT class BaseWindow : public AbstractWindow<BaseWindow>
 {
 public:
-    BaseWindow()
+    BaseWindow() :
+        isInputEnabled(false)
     {
 #ifdef _DEBUG
         {
@@ -23,6 +24,16 @@ public:
             OutputDebugStringA(ss.str().c_str());
         }
 #endif
+    }
+
+    void AttachInput()
+    {
+        isInputEnabled = true;
+    }
+
+    void DetachInput()
+    {
+        isInputEnabled = false;
     }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
@@ -105,13 +116,19 @@ public:
         case WM_XBUTTONDBLCLK:
 #endif
         case WM_MOUSEMOVE:
-            return HandleMouseInput(hWnd, message, wParam, lParam);
+            if (isInputEnabled)
+                return HandleMouseInput(hWnd, message, wParam, lParam);
+            else
+                return DefWindowProc(hWnd, message, wParam, lParam);
         // keyboard input
         case WM_SYSKEYDOWN:
         case WM_KEYDOWN:
         case WM_KEYUP:
         case WM_SYSKEYUP:
-            return HandleKeyboardInput(hWnd, message, wParam, lParam);
+            if (isInputEnabled)
+                return HandleKeyboardInput(hWnd, message, wParam, lParam);
+            else
+                return DefWindowProc(hWnd, message, wParam, lParam);
         case WM_INPUTLANGCHANGE:
             {
                 if (!IsInputMethodEnabled())
@@ -133,6 +150,9 @@ public:
 protected:
     virtual int InitPixelFormat(HDC hdc) = 0;
     virtual int OnCreate() = 0;
+
+private:
+    std::atomic_bool isInputEnabled;
 };
 
 class MainWindow : public BaseWindow
