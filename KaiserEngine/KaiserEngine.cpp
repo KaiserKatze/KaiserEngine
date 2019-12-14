@@ -8,6 +8,11 @@
 
 #define MAX_LOADSTRING 100
 
+void gl_init(HWND hWnd);
+void vao_init();
+void vao_exit();
+void vao_draw();
+
 ABSTRACT class BaseWindow : public AbstractWindow<BaseWindow>
 {
 public:
@@ -443,11 +448,6 @@ RECT GetDisplayRect()
     GetWindowRect(GetDesktopWindow(), &rectDisplay);
     return rectDisplay;
 }
-
-void gl_init(HWND hWnd);
-void vao_init();
-void vao_exit();
-void vao_draw();
 
 void kglViewport(int width, int height)
 {
