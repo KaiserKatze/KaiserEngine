@@ -53,6 +53,7 @@ private:
         // load small icon
         wcex.hIconSm = nullptr;
 
+        // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw
         return RegisterClassEx(&wcex);
     }
 
