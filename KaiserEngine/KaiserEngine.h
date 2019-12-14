@@ -17,11 +17,11 @@ private:
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
         if (hInstance == nullptr)
-            return 0;
+            throw std::exception("Invalid argument: 'hInstance' is nullptr!");
         if (wndproc == nullptr)
-            return 0;
+            throw std::exception("Invalid argument: 'wndproc' is nullptr!");
         if (lpClass == nullptr)
-            return 0;
+            throw std::exception("Invalid argument: 'lpClass' is nullptr!");
 
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa
         WNDCLASSEX wcex = { 0 };
