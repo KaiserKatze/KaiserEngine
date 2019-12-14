@@ -158,9 +158,14 @@ private:
 class MainWindow : public BaseWindow
 {
 public:
-    MainWindow(HINSTANCE hInstance, LPCWSTR lpClass, LPCWSTR lpTitle)
+    MainWindow(HINSTANCE hInstance)
     {
-        Create(hInstance, lpClass, lpTitle);
+        wchar_t szTitle[MAX_LOADSTRING];
+        wchar_t szWindowClass[MAX_LOADSTRING];
+        LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
+        LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+
+        Create(hInstance, szWindowClass, szTitle);
         AttachUserInput();
     }
 
@@ -257,9 +262,14 @@ public:
 class DummyWindow : public BaseWindow
 {
 public:
-    DummyWindow(HINSTANCE hInstance, LPCWSTR lpClass, LPCWSTR lpTitle)
+    DummyWindow(HINSTANCE hInstance)
     {
-        Create(hInstance, lpClass, lpTitle);
+        wchar_t szWindowClass[MAX_LOADSTRING];
+        wchar_t szTitle[MAX_LOADSTRING];
+        LoadStringW(hInstance, IDC_KAISERENGINE_OPENLOADER, szWindowClass, MAX_LOADSTRING);
+        LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
+
+        Create(hInstance, szWindowClass, szTitle);
         DetachUserInput();
     }
 
@@ -375,21 +385,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 #endif
 
-    // Initialize global strings
-    wchar_t szTitle[MAX_LOADSTRING];
-    wchar_t szWindowClass[MAX_LOADSTRING];
-
-    {
-        LoadStringW(hInstance, IDC_KAISERENGINE_OPENLOADER, szWindowClass, MAX_LOADSTRING);
-        LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
-        DummyWindow dummy(hInstance, szWindowClass, szTitle);
-    }
-
-    {
-        LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
-        LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-        MainWindow win(hInstance, szWindowClass, szTitle);
-    }
+    DummyWindow dummy(hInstance);
+    MainWindow win(hInstance);
 
 #if APP_FULLSCREEN
     SetCapture(hWnd);
