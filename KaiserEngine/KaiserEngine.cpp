@@ -226,6 +226,9 @@ public:
 
     int OnCreate() override
     {
+        if (wglGetCurrentDC())
+            return -1;
+
         HDC hDC = GetDC(hWnd);
         if (hDC == NULL) return -1;
 
@@ -283,6 +286,7 @@ public:
         Create(hInstance, szWindowClass, szTitle);
         //Create(hInstance, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE);
         DetachUserInput();
+        OnCreate();
     }
 
     int InitPixelFormat(HDC hdc) override
@@ -332,6 +336,9 @@ public:
 
     int OnCreate() override
     {
+        if (wglGetCurrentDC())
+            return -1;
+
         HDC hDC = GetDC(hWnd);
         if (hDC == NULL) return -1;
 
