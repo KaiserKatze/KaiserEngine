@@ -18,6 +18,14 @@ void ErrorExit(LPTSTR lpszFunction)
     LPVOID lpDisplayBuf = NULL;
     DWORD dw = GetLastError();
 
+    {
+        std::stringstream ss;
+        ss
+            << "$ ErrorExit(lpszFunction=\"" << lpszFunction << "\") = " << dw
+            << std::endl;
+        OutputDebugStringA(ss.str().c_str());
+    }
+
     FormatMessage(
         FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_FROM_SYSTEM |
