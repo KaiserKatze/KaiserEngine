@@ -58,6 +58,7 @@ private:
     }
 
     bool InitWindowInstance(HINSTANCE hInstance,
+        HWND parent,
         LPCWSTR lpClass, LPCWSTR lpTitle,
         int x, int y,
         int width, int height,
@@ -81,7 +82,7 @@ private:
             winStyle,
             x, y, // initial position
             width, height, // initial size
-            nullptr, // parent window
+            parent, // parent window
             nullptr, // menu
             hInstance, // instance handle
             this); // additional application data
@@ -163,6 +164,7 @@ protected:
 
     bool Create(
         HINSTANCE hInstance,
+        HWND parent,
         LPCWSTR lpClass,
         LPCWSTR lpTitle,
         DWORD dwStyle = 0,
@@ -177,7 +179,8 @@ protected:
 #ifdef _DEBUG
         std::wstringstream ss;
         ss << "AbstractWindow::Create(" << std::endl
-            << "\thInstance={}," << std::endl
+            << "\thInstance=" << static_cast<void*>(hInstance) << "," << std::endl
+            << "\tparent=" << static_cast<void*>(parent) << "," << std::endl
             << "\tlpClass=" << lpClass << "," << std::endl
             << "\tlpTitle=" << lpTitle << "," << std::endl
             << "\tdwStyle=" << dwStyle << "," << std::endl
@@ -192,7 +195,7 @@ protected:
         bool result;
 
         if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
-            && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h, nCmdShow))
+            && InitWindowInstance(hInstance, parent, lpClass, lpTitle, x, y, w, h, nCmdShow))
         {
             SetFocus(hWnd);
 #ifdef _DEBUG
