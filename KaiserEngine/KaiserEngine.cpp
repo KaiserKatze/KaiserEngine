@@ -192,6 +192,7 @@ public:
             return -1;
         }
 
+        // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-setpixelformat
         if (SetPixelFormat(hdc, format, NULL))
         {
             ErrorExit(L"SetPixelFormat");
