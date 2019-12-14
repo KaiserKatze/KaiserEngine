@@ -174,17 +174,30 @@ protected:
             << "\ty=" << y << "," << std::endl
             << "\tw=" << w << "," << std::endl
             << "\th=" << h << "," << std::endl
-            << "\tnCmdShow=" << nCmdShow << ");" << std::endl;
-        OutputDebugStringW(ss.str().c_str());
+            << "\tnCmdShow=" << nCmdShow << ");";
 #endif
+
+        bool result;
 
         if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
             && InitWindowInstance(hInstance, lpClass, lpTitle, x, y, w, h, nCmdShow))
         {
             SetFocus(hWnd);
-            return true;
+#ifdef _DEBUG
+            ss << "\t... Success!" << std::endl;
+#endif
+            result = true;
         }
-        return false;
+        else
+        {
+#ifdef _DEBUG
+            ss << "\t... Failure!" << std::endl;
+#endif
+            result = false;
+        }
+
+        OutputDebugStringW(ss.str().c_str());
+        return result;
     }
 
 public:
