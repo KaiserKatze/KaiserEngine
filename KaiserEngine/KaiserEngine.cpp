@@ -187,7 +187,12 @@ public:
         //const FLOAT pfAttribFList[] = { 0 };
         int pixelFormat;
         UINT numFormats;
-        int format = wglChoosePixelFormatARB(hdc, attribList_pixel_format, (const FLOAT *)NULL, 1, &pixelFormat, &numFormats);
+        int format = wglChoosePixelFormatARB(hdc,
+            attribList_pixel_format,
+            (const FLOAT *)NULL,
+            1,
+            &pixelFormat,
+            &numFormats);
         if (format == 0)
         {
             ErrorExit(L"wglChoosePixelFormatARB");
