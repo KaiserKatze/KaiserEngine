@@ -114,6 +114,7 @@ private:
 
 protected:
     HWND hWnd;
+    HGLRC hglrc;
     std::atomic_bool isWindowActivated;
     std::atomic_bool isWindowClosing;
 
@@ -218,6 +219,7 @@ protected:
 public:
     AbstractWindow() :
         hWnd(nullptr),
+        hglrc(nullptr),
         isFullscreen(false),
         isResizable(false),
         isInputMethodEnabled(false),
@@ -228,6 +230,11 @@ public:
     HWND getWindowHandle() const
     {
         return hWnd;
+    }
+
+    HGLRC getContext() const
+    {
+        return hglrc;
     }
 
     const std::atomic_bool & IsInputMethodEnabled() const
