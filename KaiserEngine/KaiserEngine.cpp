@@ -80,7 +80,7 @@ public:
                 if (!isWindowActivated)
                     break;
 #endif
-                //vao_draw();
+                OnTimer();
             }
             break;
 #if APP_RESIZABLE
@@ -144,6 +144,11 @@ public:
 protected:
     virtual int InitPixelFormat(HDC hdc) = 0;
     virtual int OnCreate() = 0;
+
+    int OnTimer()
+    {
+        return 0;
+    }
 
     int OnClose()
     {
@@ -272,8 +277,16 @@ public:
         // if no timer has been created yet
 
         // Initialize OpenGL
-        //gl_init(hWnd);
-        //vao_init();
+        gl_init(hWnd);
+        vao_init();
+
+        return 0;
+    }
+
+    int OnTimer()
+    {
+        vao_draw();
+
         return 0;
     }
 
@@ -281,6 +294,7 @@ public:
     {
         CleanDll();
         this->BaseWindow::OnClose();
+        vao_exit();
 
         return 0;
     }
