@@ -199,8 +199,11 @@ public:
             return -1;
         }
 
+        PIXELFORMATDESCRIPTOR pfd = { 0 };
+        DescribePixelFormat(hdc, pixelFormat, sizeof(pfd), &pfd);
+
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-setpixelformat
-        if (!SetPixelFormat(hdc, format, NULL))
+        if (!SetPixelFormat(hdc, format, &pfd))
         {
             ErrorExit(L"SetPixelFormat");
             return -1;
