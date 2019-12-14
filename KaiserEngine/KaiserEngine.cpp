@@ -296,7 +296,7 @@ public:
         DetachUserInput();
         OnCreate();
         OnClose();
-        DestroyWindow(this->getWindowHandle());
+        //DestroyWindow(this->getWindowHandle());
     }
 
     int InitPixelFormat(HDC hdc) override
