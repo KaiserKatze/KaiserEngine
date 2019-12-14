@@ -28,6 +28,7 @@
 #include <codecvt>
 #include <string>
 #include <atomic>
+#include <thread>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
