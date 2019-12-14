@@ -91,7 +91,7 @@ private:
         }
 
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        ShowWindow(hWnd, nCmdShow);
+        ::ShowWindow(hWnd, nCmdShow);
         UpdateWindow(hWnd);
 
         isWindowActivated = true;
@@ -350,5 +350,10 @@ public:
             return true;
         isInputMethodEnabled = isEnabled;
         return true;
+    }
+
+    void ShowWindow(bool show)
+    {
+        ::ShowWindow(getWindowHandle(), show ? SW_SHOW : SW_HIDE);
     }
 };

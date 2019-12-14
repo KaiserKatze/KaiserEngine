@@ -386,9 +386,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         DummyWindow dummy(hInstance, szWindowClass, szTitle);
     }
 
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-
-    MainWindow win(hInstance, szWindowClass, szTitle);
+    {
+        LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
+        MainWindow win(hInstance, szWindowClass, szTitle);
+    }
 
 #if APP_FULLSCREEN
     SetCapture(hWnd);
