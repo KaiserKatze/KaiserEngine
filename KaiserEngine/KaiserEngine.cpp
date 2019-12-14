@@ -67,18 +67,7 @@ public:
             }
             break;
         case WM_CLOSE:
-            {
-                //vao_exit();
-                CleanDll();
-                HDC hDC = wglGetCurrentDC();
-                HGLRC hRC = wglGetCurrentContext();
-                wglMakeCurrent(hDC, NULL);
-                wglDeleteContext(hRC);
-                wglMakeCurrent(NULL, NULL);
-                ReleaseDC(hWnd, hDC);
-
-                isWindowClosing = true;
-            }
+            OnClose();
             return DefWindowProc(hWnd, message, wParam, lParam);
         case WM_TIMER:
             {
@@ -150,6 +139,19 @@ public:
 protected:
     virtual int InitPixelFormat(HDC hdc) = 0;
     virtual int OnCreate() = 0;
+
+    int OnClose()
+    {
+        HDC hDC = wglGetCurrentDC();
+        HGLRC hRC = wglGetCurrentContext();
+        wglMakeCurrent(hDC, NULL);
+        wglDeleteContext(hRC);
+        wglMakeCurrent(NULL, NULL);
+        ReleaseDC(hWnd, hDC);
+        isWindowClosing = true;
+
+        return 0;
+    }
 
 private:
     std::atomic_bool isInputEnabled;
@@ -258,6 +260,14 @@ public:
         //vao_init();
         return 0;
     }
+
+    int OnClose()
+    {
+        CleanDll();
+        this->BaseWindow::OnClose();
+
+        return 0;
+    }
 };
 
 class DummyWindow : public BaseWindow
@@ -341,6 +351,8 @@ public:
 
         // Get WGL Extensions
         LoadOpenglFunctions();
+
+        //::DestroyWindow(getWindowHandle());
 
         return 0;
     }
