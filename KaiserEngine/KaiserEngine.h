@@ -86,6 +86,16 @@ private:
             hInstance, // instance handle
             this); // additional application data
 
+#ifdef _DEBUG
+        {
+            std::wstringstream wss;
+            wss << lpTitle
+                << " (hWnd=" << static_cast<void*>(hWnd)
+                << ")";
+            SetWindowTextW(hWnd, wss.str().c_str());
+        }
+#endif
+
         if (!hWnd)
         {
             ErrorExit(L"CreateWindow");

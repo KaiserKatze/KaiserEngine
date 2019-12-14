@@ -383,6 +383,13 @@ WPARAM StartMessageLoop(HINSTANCE hInstance)
     // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
+#ifdef _DEBUG
+        {
+            std::stringstream ss;
+            ss << "GetMessage from (" << static_cast<void*>(msg.hwnd) << ")!" << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+#endif
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
             TranslateMessage(&msg);
