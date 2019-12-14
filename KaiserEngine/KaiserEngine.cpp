@@ -291,12 +291,10 @@ public:
         LoadStringW(hInstance, IDC_KAISERENGINE_OPENLOADER, szWindowClass, MAX_LOADSTRING);
         LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
 
-        Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle);
-        //Create(hInstance, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE);
+        Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE);
         DetachUserInput();
         OnCreate();
         OnClose();
-        //DestroyWindow(this->getWindowHandle());
     }
 
     int InitPixelFormat(HDC hdc) override
@@ -369,8 +367,6 @@ public:
 
         // Get WGL Extensions
         LoadOpenglFunctions();
-
-        //::DestroyWindow(getWindowHandle());
 
         return 0;
     }
