@@ -323,7 +323,7 @@ public:
     }
 };
 
-void StartMessageLoop(HINSTANCE hInstance)
+WPARAM StartMessageLoop(HINSTANCE hInstance)
 {
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_KAISERENGINE));
     MSG msg;
@@ -336,6 +336,8 @@ void StartMessageLoop(HINSTANCE hInstance)
             DispatchMessage(&msg);
         }
     }
+
+    return msg.wParam;
 }
 
 // @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/winmain--the-application-entry-point
@@ -383,13 +385,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     SetCapture(hWnd);
 #endif
 
-    StartMessageLoop(hInstance);
+    int retCode;
+    retCode = StartMessageLoop(hInstance);
 
 #if APP_FULLSCREEN
     ReleaseCapture();
 #endif
 
-    return 0;
+    return retCode;
 }
 
 
