@@ -287,6 +287,8 @@ public:
         //Create(hInstance, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE);
         DetachUserInput();
         OnCreate();
+        OnClose();
+        DestroyWindow(this->getWindowHandle());
     }
 
     int InitPixelFormat(HDC hdc) override
