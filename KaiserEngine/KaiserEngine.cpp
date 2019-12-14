@@ -158,6 +158,12 @@ private:
 class MainWindow : public BaseWindow
 {
 public:
+    MainWindow(HINSTANCE hInstance, LPCWSTR lpClass, LPCWSTR lpTitle)
+    {
+        Create(hInstance, lpClass, lpTitle);
+        AttachUserInput();
+    }
+
     // RecreateContext(HDC hdc)
     int InitPixelFormat(HDC hdc) override
     {
@@ -251,6 +257,12 @@ public:
 class DummyWindow : public BaseWindow
 {
 public:
+    DummyWindow(HINSTANCE hInstance, LPCWSTR lpClass, LPCWSTR lpTitle)
+    {
+        Create(hInstance, lpClass, lpTitle);
+        DetachUserInput();
+    }
+
     int InitPixelFormat(HDC hdc) override
     {
         // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
@@ -371,15 +383,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     {
         LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
-        DummyWindow dummy;
-        dummy.Create(hInstance, szWindowClass, szTitle);
+        DummyWindow dummy(hInstance, szWindowClass, szTitle);
     }
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 
-    MainWindow win;
-    win.Create(hInstance, szWindowClass, szTitle);
-    win.AttachUserInput();
+    MainWindow win(hInstance, szWindowClass, szTitle);
 
 #if APP_FULLSCREEN
     SetCapture(hWnd);

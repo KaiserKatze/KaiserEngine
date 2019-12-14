@@ -148,25 +148,6 @@ protected:
         SetWindowText(hWnd, sNewTitle.str().c_str());
     }
 #endif
-public:
-    AbstractWindow() :
-        hWnd(nullptr),
-        isFullscreen(false),
-        isResizable(false),
-        isInputMethodEnabled(false),
-        isWindowActivated(false),
-        isWindowClosing(false)
-    {}
-
-    HWND getWindowHandle()
-    {
-        return hWnd;
-    }
-
-    const std::atomic_bool & IsInputMethodEnabled() const
-    {
-        return isInputMethodEnabled;
-    }
 
     bool Create(
         HINSTANCE hInstance,
@@ -204,6 +185,26 @@ public:
             return true;
         }
         return false;
+    }
+
+public:
+    AbstractWindow() :
+        hWnd(nullptr),
+        isFullscreen(false),
+        isResizable(false),
+        isInputMethodEnabled(false),
+        isWindowActivated(false),
+        isWindowClosing(false)
+    {}
+
+    HWND getWindowHandle() const
+    {
+        return hWnd;
+    }
+
+    const std::atomic_bool & IsInputMethodEnabled() const
+    {
+        return isInputMethodEnabled;
     }
 
 #if (defined _DEBUG) || ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
