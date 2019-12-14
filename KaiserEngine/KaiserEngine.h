@@ -87,6 +87,7 @@ private:
 
         if (!hWnd)
         {
+            ErrorExit(L"CreateWindow");
             return false;
         }
 
