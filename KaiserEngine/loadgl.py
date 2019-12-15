@@ -19,7 +19,11 @@ def GenerateCpp():
         lines = file.read().splitlines()
         lines = list(dict.fromkeys(lines))
         for line in lines:
+            # Skip empty line
             if not line:
+                continue
+            # Skip comment line (starting with hash sign '#')
+            if line[0] == '#':
                 continue
             func = line
             gltype = "PFN{}PROC".format(line.upper())
