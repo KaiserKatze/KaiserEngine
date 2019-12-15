@@ -45,7 +45,7 @@ private:
         // load cursor
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         // background color
-        wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
+        wcex.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
         // menu
         wcex.lpszMenuName = nullptr;
         // window class
