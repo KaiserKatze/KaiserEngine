@@ -156,10 +156,12 @@ protected:
         HGLRC hRC = getRenderContext();
         wglMakeCurrent(hDC, nullptr);
         setRenderContext(nullptr);
-        wglDeleteContext(hRC);
+        if (hRC)
+            wglDeleteContext(hRC);
         wglMakeCurrent(nullptr, nullptr);
         setDeviceContext(nullptr);
-        ReleaseDC(hWnd, hDC);
+        if (hDC)
+            ReleaseDC(hWnd, hDC);
         isWindowClosing = true;
 
         return 0;
@@ -360,6 +362,7 @@ public:
 
         HDC hDC = GetDC(hWnd);
         if (hDC == NULL) return -1;
+        setDeviceContext(hDC);
 
         if (InitPixelFormat(hDC) < 0) return -1;
 
@@ -369,6 +372,7 @@ public:
             ErrorExit(L"wglCreateContext");
             return -1;
         }
+        setRenderContext(hRC);
 
         if (!wglMakeCurrent(hDC, hRC))
         {
@@ -378,6 +382,9 @@ public:
 
         // Get WGL Extensions
         LoadOpenglFunctions();
+
+        // Clean up
+        OnClose();
 
         return 0;
     }
