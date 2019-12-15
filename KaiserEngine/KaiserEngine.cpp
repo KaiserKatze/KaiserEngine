@@ -221,26 +221,6 @@ public:
             return -1;
         }
 
-        const int attribList_context[] = {
-            WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
-            WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
-            WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
-            WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
-            0, // End
-        };
-        HGLRC hglrc = wglCreateContextAttribsARB(hdc, (HGLRC)NULL, attribList_context);
-        if (hglrc == NULL)
-        {
-            ErrorExit(L"wglCreateContextAttribsARB");
-            return -1;
-        }
-
-        if (!wglMakeCurrent(hdc, hglrc))
-        {
-            ErrorExit(L"wglMakeCurrent");
-            return -1;
-        }
-
         return 0;
     }
 
@@ -251,15 +231,25 @@ public:
 
         HDC hDC = GetDC(hWnd);
         if (hDC == NULL) return -1;
+        setDeviceContext(hDC);
 
         if (InitPixelFormat(hDC) < 0) return -1;
 
-        HGLRC hRC = wglCreateContext(hDC);
+        const int attribList_context[] = {
+            WGL_CONTEXT_MAJOR_VERSION_ARB, 4, // opengl major version
+            WGL_CONTEXT_MINOR_VERSION_ARB, 6, // opengl minor version
+            WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
+            WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
+            0, // End
+        };
+
+        HGLRC hRC = wglCreateContextAttribsARB(hDC, (HGLRC)NULL, attribList_context);
         if (hRC == NULL)
         {
-            ErrorExit(L"wglCreateContext");
+            ErrorExit(L"wglCreateContextAttribsARB");
             return -1;
         }
+        setRenderContext(hRC);
 
         if (!wglMakeCurrent(hDC, hRC))
         {
