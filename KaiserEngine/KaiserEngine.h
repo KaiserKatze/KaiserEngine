@@ -114,6 +114,7 @@ private:
 
 protected:
     HWND hWnd;
+    HDC hdc;
     HGLRC hglrc;
     std::atomic_bool isWindowActivated;
     std::atomic_bool isWindowClosing;
@@ -219,6 +220,7 @@ protected:
 public:
     AbstractWindow() :
         hWnd(nullptr),
+        hdc(nullptr),
         hglrc(nullptr),
         isFullscreen(false),
         isResizable(false),
@@ -232,9 +234,24 @@ public:
         return hWnd;
     }
 
-    HGLRC getContext() const
+    HDC getDeviceContext() const
+    {
+        return hdc;
+    }
+
+    void setDeviceContext(HDC handle)
+    {
+        hdc = handle;
+    }
+
+    HGLRC getRenderContext() const
     {
         return hglrc;
+    }
+
+    void setRenderContext(HGLRC handle)
+    {
+        hglrc = handle;
     }
 
     const std::atomic_bool & IsInputMethodEnabled() const
