@@ -152,11 +152,13 @@ protected:
 
     int OnClose()
     {
-        HDC hDC = wglGetCurrentDC();
-        HGLRC hRC = wglGetCurrentContext();
-        wglMakeCurrent(hDC, NULL);
+        HDC hDC = getDeviceContext();
+        HGLRC hRC = getRenderContext();
+        wglMakeCurrent(hDC, nullptr);
+        setRenderContext(nullptr);
         wglDeleteContext(hRC);
-        wglMakeCurrent(NULL, NULL);
+        wglMakeCurrent(nullptr, nullptr);
+        setDeviceContext(nullptr);
         ReleaseDC(hWnd, hDC);
         isWindowClosing = true;
 
