@@ -29,6 +29,6 @@
 #   endif
 #endif
 
-#ifndef ABSTRACT
-#   define ABSTRACT
+#ifndef _WIN32
+#   define abstract
 #endif

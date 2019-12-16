@@ -13,7 +13,8 @@ void vao_init();
 void vao_exit();
 void vao_draw();
 
-ABSTRACT class BaseWindow : public AbstractWindow<BaseWindow>
+class BaseWindow abstract :
+    public AbstractWindow<BaseWindow>
 {
 public:
     BaseWindow() :
