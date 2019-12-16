@@ -13,8 +13,8 @@ void vao_init();
 void vao_exit();
 void vao_draw();
 
-class BaseWindow abstract :
-    public AbstractWindow<BaseWindow>
+class BaseWindow abstract
+    : public AbstractWindow<BaseWindow>
 {
 public:
     BaseWindow() :
@@ -172,8 +172,8 @@ private:
     std::atomic_bool isInputEnabled;
 };
 
-class MainWindow :
-    public BaseWindow
+class MainWindow
+    : public BaseWindow
 {
 public:
     MainWindow(HINSTANCE hInstance)
@@ -296,8 +296,8 @@ public:
     }
 };
 
-class DummyWindow :
-    public BaseWindow
+class DummyWindow
+    : public BaseWindow
 {
 public:
     DummyWindow(HINSTANCE hInstance)
