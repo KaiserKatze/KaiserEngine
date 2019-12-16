@@ -151,6 +151,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Event.h" />
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="UserInput.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
     <ClCompile Include="loadgl.cpp" />
     <ClCompile Include="stdafx.cpp">
