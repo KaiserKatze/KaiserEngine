@@ -107,7 +107,21 @@ LRESULT HandleKeyboardInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
             // The value is always 0 for a WM_KEYDOWN message
             int ts = (int)(0x1 & (lParam >> 31));
 
+            char ch = 0;
+            if (0x30 <= vk && vk <= 0x39)
+            {
+                ch = vk - 0x30 + '0';
+            }
+            else if (0x41 <= vk && vk <= 0x5A)
+            {
+                ch = vk - 0x41 + 'A';
+            }
+
             ss << (ts ? "WM_KEYUP" : "WM_KEYDOWN");
+            ss << " (vk=";
+            if (ch)
+                ss << "\"" << ch << "\"" << " ";
+            ss << vk << ")";
             ss << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
