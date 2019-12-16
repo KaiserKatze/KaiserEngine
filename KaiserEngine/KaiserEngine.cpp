@@ -172,7 +172,8 @@ private:
     std::atomic_bool isInputEnabled;
 };
 
-class MainWindow : public BaseWindow
+class MainWindow :
+    public BaseWindow
 {
 public:
     MainWindow(HINSTANCE hInstance)
@@ -295,7 +296,8 @@ public:
     }
 };
 
-class DummyWindow : public BaseWindow
+class DummyWindow :
+    public BaseWindow
 {
 public:
     DummyWindow(HINSTANCE hInstance)
