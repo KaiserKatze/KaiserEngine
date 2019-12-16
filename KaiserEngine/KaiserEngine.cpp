@@ -400,7 +400,7 @@ WPARAM StartMessageLoop(HINSTANCE hInstance)
     // Main message loop:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
-#ifdef _DEBUG
+#if 0
         {
             std::stringstream ss;
             ss << "GetMessage from (" << static_cast<void*>(msg.hwnd) << ")!" << std::endl;
