@@ -3,8 +3,6 @@
 #include "KaiserEngine.h"
 
 #if APP_USERINPUT
-#include <windowsx.h>
-
 // @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/mouse-clicks
 LRESULT HandleMouseInput(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
