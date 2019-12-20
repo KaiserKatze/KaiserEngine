@@ -42,13 +42,6 @@
 
 void ErrorExit(LPTSTR lpszFunction);
 
-// @see: https://stackoverflow.com/a/25231384/4927212
-template<typename BaseType, typename T>
-inline bool instanceof(const T*)
-{
-    return std::is_base_of<BaseType, T>::value;
-}
-
 void * GetAnyGLFuncAddress(const char * name);
 void CleanDll();
 void DetectGLError(int mark);
