@@ -30,6 +30,7 @@
 #include <string>
 #include <atomic>
 #include <thread>
+#include <list>
 #include <type_traits>
 
 // TODO: reference additional headers your program requires here
