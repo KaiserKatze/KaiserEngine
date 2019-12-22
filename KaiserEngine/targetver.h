@@ -20,14 +20,6 @@
 
 #   define APP_RESIZABLE                APP_RESIZABLE_NEVER
 #endif
-#ifndef APP_USERINPUT
-// enable user input (mouse, keyboard, etc.)
-#   define APP_USERINPUT                true
-#   if APP_USERINPUT
-// enable double clicks
-#       define APP_USERINPUT_DBLCLKS    true
-#   endif
-#endif
 
 #ifndef _WIN32
 #   define abstract
