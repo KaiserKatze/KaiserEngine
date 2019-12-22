@@ -5,6 +5,8 @@
 #include "KaiserEngine.h"
 #include "loadgl.h"
 #include "UserInput.h"
+#include "Event.h"
+#include "EventManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -15,10 +17,10 @@ void vao_draw();
 
 class BaseWindow abstract
     : public AbstractWindow<BaseWindow>
+    , public EventManager
 {
 public:
-    BaseWindow() :
-        isInputEnabled(false)
+    BaseWindow()
     {
 #ifdef _DEBUG
         {
@@ -34,112 +36,18 @@ public:
 
     void AttachUserInput()
     {
-        isInputEnabled = true;
+        EnableWindow(getWindowHandle(), true);
     }
 
     void DetachUserInput()
     {
-        isInputEnabled = false;
+        EnableWindow(getWindowHandle(), false);
     }
 
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam)
     {
         // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
-        switch (message)
-        {
-        case WM_CREATE:
-            OnCreate();
-            break;
-#if APP_FULLSCREEN
-        case WM_ACTIVATEAPP:
-            {
-                // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
-                // prevent CPU "hogging" when it is not necessary
-                isWindowActivated = (bool)wParam;
-            }
-            break;
-#endif
-        case WM_PAINT:
-            {
-                PAINTSTRUCT ps;
-                HDC hdc = BeginPaint(hWnd, &ps);
-                // TODO: Add any drawing code that uses hdc here...
-                EndPaint(hWnd, &ps);
-            }
-            break;
-        case WM_DESTROY:
-            {
-                PostQuitMessage(0);
-            }
-            break;
-        case WM_CLOSE:
-            OnClose();
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        case WM_TIMER:
-            {
-#if APP_FULLSCREEN
-                if (!isWindowActivated)
-                    break;
-#endif
-                OnTimer();
-            }
-            break;
-#if APP_RESIZABLE
-        case WM_SIZE:
-            {
-                // window resize event detected
-                const int width = LOWORD(lParam);
-                const int height = HIWORD(lParam);
-                OnResize(width, height);
-            }
-            break;
-#endif
-#if APP_USERINPUT
-        // mouse input
-        case WM_LBUTTONDOWN:
-        case WM_LBUTTONUP:
-        case WM_MBUTTONDOWN:
-        case WM_MBUTTONUP:
-        case WM_RBUTTONDOWN:
-        case WM_RBUTTONUP:
-        case WM_XBUTTONDOWN:
-        case WM_XBUTTONUP:
-#if APP_USERINPUT_DBLCLKS
-        case WM_LBUTTONDBLCLK:
-        case WM_MBUTTONDBLCLK:
-        case WM_RBUTTONDBLCLK:
-        case WM_XBUTTONDBLCLK:
-#endif
-        case WM_MOUSEMOVE:
-            if (isInputEnabled)
-                return HandleMouseInput(hWnd, message, wParam, lParam);
-            else
-                return DefWindowProc(hWnd, message, wParam, lParam);
-        // keyboard input
-        case WM_SYSKEYDOWN:
-        case WM_KEYDOWN:
-        case WM_KEYUP:
-        case WM_SYSKEYUP:
-            if (isInputEnabled)
-                return HandleKeyboardInput(hWnd, message, wParam, lParam);
-            else
-                return DefWindowProc(hWnd, message, wParam, lParam);
-        case WM_INPUTLANGCHANGE:
-            {
-                if (!IsInputMethodEnabled())
-                    //return 0;
-                    return DefWindowProc(hWnd, WM_NULL, 0, 0);
-                std::stringstream ss;
-                ss << "WM_INPUTLANGCHANGE";
-                ss << std::endl;
-                OutputDebugStringA(ss.str().c_str());
-            }
-            return DefWindowProc(hWnd, message, wParam, lParam);
-#endif
-        default:
-            return DefWindowProc(hWnd, message, wParam, lParam);
-        }
-        return 0;
+        return TraverseList(hWnd, message, wParam, lParam);
     }
 
 protected:
@@ -167,9 +75,6 @@ protected:
 
         return 0;
     }
-
-private:
-    std::atomic_bool isInputEnabled;
 };
 
 class MainWindow
@@ -184,6 +89,7 @@ public:
         LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 
         Create(hInstance, nullptr, szWindowClass, szTitle);
+        Setup(getWindowHandle());
         AttachUserInput();
     }
 
