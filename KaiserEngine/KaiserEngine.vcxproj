@@ -154,6 +154,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
     <ClCompile Include="loadgl.cpp" />
     <ClCompile Include="stdafx.cpp">
