@@ -1,6 +1,16 @@
 #include "stdafx.h"
 #include "EventHandler.h"
 
+EventHandler::
+EventHandler()
+{
+}
+
+EventHandler::
+~EventHandler()
+{
+}
+
 LRESULT
 EventHandler::
 TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
