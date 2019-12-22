@@ -12,4 +12,5 @@ EventManager(const HWND& hWnd)
 EventManager::
 ~EventManager()
 {
+    this->RemoveAllListeners();
 }
