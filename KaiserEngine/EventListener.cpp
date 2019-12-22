@@ -174,6 +174,5 @@ LRESULT
 WindowEventListener::
 OnTimer() const
 {
-
     return 0;
 }
