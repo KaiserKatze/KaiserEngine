@@ -15,7 +15,7 @@ class MouseEvent
 public:
     MouseEvent(UINT message, WPARAM wParam, LPARAM lParam);
     MouseButton getButton() const;
-    POINT getPoint() const;
+    const POINT getPoint() const;
     bool isCtrlKeyDown() const;
     bool isShiftKeyDown() const;
 private:
