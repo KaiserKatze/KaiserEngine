@@ -32,6 +32,7 @@
 #include <thread>
 #include <list>
 #include <type_traits>
+#include <memory>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
