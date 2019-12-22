@@ -15,3 +15,11 @@ private:
     const int combination;
     const POINT point;
 };
+
+enum MouseButton
+{
+    UnknownButton = 0,
+    LeftButton = 1,
+    RightButton = 2,
+    MiddleButton = 3,
+};
