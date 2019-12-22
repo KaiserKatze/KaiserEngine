@@ -32,6 +32,7 @@ private:
         wndStyle = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
 #if (APP_USERINPUT)
 #   if (APP_USERINPUT_DBLCLKS)
+        // decides whether or not to handle double-click mouse event
         wndStyle |= CS_DBLCLKS;
 #   endif
 #endif
