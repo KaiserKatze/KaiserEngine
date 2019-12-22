@@ -3,8 +3,9 @@
 #include "stdafx.h"
 
 class EventManager
+    : public EventHandler
 {
 public:
-    EventManager();
+    EventManager(const HWND& hWnd);
 };
 
