@@ -5,5 +5,7 @@
 #include "EventListener.h"
 
 EventManager::EventManager(const HWND& hWnd)
+EventManager::
+~EventManager()
 {
 }
