@@ -4,7 +4,11 @@
 #include "EventHandler.h"
 #include "EventListener.h"
 
-EventManager::EventManager(const HWND& hWnd)
+EventManager::
+EventManager(const HWND& hWnd)
+{
+}
+
 EventManager::
 ~EventManager()
 {
