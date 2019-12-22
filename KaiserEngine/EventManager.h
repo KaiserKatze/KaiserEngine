@@ -9,7 +9,8 @@ class EventManager
     : public EventHandler
 {
 public:
-    EventManager(const HWND& hWnd);
+    EventManager();
     ~EventManager();
+    void Setup(const HWND& hWnd);
 };
 
