@@ -187,6 +187,9 @@ public:
 
     int OnTimer()
     {
+#ifdef _DEBUG
+        OutputDebugStringA("On drawing OpenGL ...");
+#endif
         vao_draw();
 
         return 0;
