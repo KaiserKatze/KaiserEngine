@@ -7,5 +7,6 @@ class EventManager
 {
 public:
     EventManager(const HWND& hWnd);
+    ~EventManager();
 };
 
