@@ -16,7 +16,7 @@ void
 EventManager::
 Setup(const HWND& hWnd)
 {
-    AddListener(new WindowEventListener(hWnd));
-    AddListener(new KeyboardEventListener(hWnd));
-    AddListener(new MouseEventListener(hWnd));
+    AddListener(new WindowEventListener(this, hWnd));
+    AddListener(new KeyboardEventListener(this, hWnd));
+    AddListener(new MouseEventListener(this, hWnd));
 }

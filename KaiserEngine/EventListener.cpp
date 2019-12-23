@@ -3,8 +3,9 @@
 #include "UserInput.h"
 
 EventListener::
-EventListener(const HWND& handle) :
-    hWnd{ handle }
+EventListener(const EventHandler* handler, const HWND& handle)
+    : hdlr{ handler }
+    , hWnd{ handle }
 {
 }
 
@@ -21,10 +22,14 @@ getWindowHandle() const
 }
 
 KeyboardEventListener::
-KeyboardEventListener(const HWND& hWnd)
-    : EventListener(hWnd)
+KeyboardEventListener(const EventHandler* hdlr, const HWND& hWnd)
+    : EventListener(hdlr, hWnd)
 {
 }
+
+KeyboardEventListener::
+~KeyboardEventListener()
+{}
 
 LRESULT
 KeyboardEventListener::
@@ -51,10 +56,14 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
 }
 
 MouseEventListener::
-MouseEventListener(const HWND& hWnd)
-    : EventListener(hWnd)
+MouseEventListener(const EventHandler* hdlr, const HWND& hWnd)
+    : EventListener(hdlr, hWnd)
 {
 }
+
+MouseEventListener::
+~MouseEventListener()
+{}
 
 LRESULT
 MouseEventListener::
@@ -89,10 +98,14 @@ OnClick(const MouseEvent) const
 }
 
 WindowEventListener::
-WindowEventListener(const HWND& hWnd)
-    : EventListener(hWnd)
+WindowEventListener(const EventHandler* hdlr, const HWND& hWnd)
+    : EventListener(hdlr, hWnd)
 {
 }
+
+WindowEventListener::
+~WindowEventListener()
+{}
 
 LRESULT
 WindowEventListener::
