@@ -2,6 +2,11 @@
 
 #include "stdafx.h"
 
+// Forward declaration
+// because "EventHandler.h" and "EventListener.h" are including each other
+class EventHandler;
+class EventListener;
+
 enum MouseButton
 {
     UnknownButton = 0,
