@@ -16,7 +16,9 @@ void
 EventManager::
 Setup(const HWND& hWnd)
 {
-    AddListener(new WindowEventListener(this, hWnd));
-    AddListener(new KeyboardEventListener(this, hWnd));
-    AddListener(new MouseEventListener(this, hWnd));
+    LPEventListener& listeners = GetListeners();
+    listeners.push_back(std::make_unique<WindowEventListener>(this, hWnd));
+    listeners.push_back(std::make_unique<KeyboardEventListener>(this, hWnd));
+    listeners.push_back(std::make_unique<MouseEventListener>(this, hWnd));
+
 }

@@ -26,14 +26,14 @@ TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
 void
 EventHandler::
-AddListener(EventListener* listener)
-{
-    listeners.push_back(std::unique_ptr<EventListener>(listener));
-}
-
-void
-EventHandler::
 RemoveAllListeners()
 {
     listeners.clear();
+}
+
+LPEventListener&
+EventHandler::
+GetListeners()
+{
+    return listeners;
 }

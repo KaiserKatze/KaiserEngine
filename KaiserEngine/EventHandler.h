@@ -4,14 +4,17 @@
 #include "Event.h"
 #include "EventListener.h"
 
+using PEventListener = std::unique_ptr<EventListener>;
+using LPEventListener = std::vector<PEventListener>;
+
 class EventHandler
 {
 public:
     EventHandler();
     ~EventHandler();
     LRESULT TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-    void AddListener(EventListener* listener);
     void RemoveAllListeners();
+    LPEventListener& GetListeners();
 private:
-    std::vector<std::unique_ptr<EventListener>> listeners;
+    LPEventListener listeners;
 };
