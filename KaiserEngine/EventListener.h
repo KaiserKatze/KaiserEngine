@@ -18,7 +18,8 @@ private:
     const HWND& hWnd;
 };
 
-class KeyboardEventListener : public EventListener
+class KeyboardEventListener
+    : public EventListener
 {
 public:
     KeyboardEventListener(const EventHandler* hdlr, const HWND& hWnd);
@@ -26,7 +27,8 @@ public:
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 };
 
-class MouseEventListener : public EventListener
+class MouseEventListener
+    : public EventListener
 {
 public:
     MouseEventListener(const EventHandler* hdlr, const HWND& hWnd);
@@ -36,7 +38,8 @@ protected:
     LRESULT OnClick(const MouseEvent) const;
 };
 
-class WindowEventListener : public EventListener
+class WindowEventListener
+    : public EventListener
 {
 public:
     WindowEventListener(const EventHandler* hdlr, const HWND& hWnd);
