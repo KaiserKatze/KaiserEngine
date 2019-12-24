@@ -30,7 +30,7 @@
 #include <string>
 #include <atomic>
 #include <thread>
-#include <list>
+#include <vector>
 #include <type_traits>
 #include <memory>
 
