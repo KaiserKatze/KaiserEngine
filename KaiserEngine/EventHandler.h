@@ -13,5 +13,5 @@ public:
     void AddListener(EventListener* listener);
     void RemoveAllListeners();
 private:
-    std::vector<std::shared_ptr<EventListener>> listeners;
+    std::vector<std::unique_ptr<EventListener>> listeners;
 };

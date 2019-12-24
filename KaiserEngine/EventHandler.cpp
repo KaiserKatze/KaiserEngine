@@ -28,7 +28,7 @@ void
 EventHandler::
 AddListener(EventListener* listener)
 {
-    listeners.push_back(std::shared_ptr<EventListener>(listener));
+    listeners.push_back(std::unique_ptr<EventListener>(listener));
 }
 
 void
