@@ -43,13 +43,13 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
     case WM_SYSKEYUP:
         return HandleKeyboardInput(getWindowHandle(), message, wParam, lParam);
     case WM_INPUTLANGCHANGE:
-    {
-        std::stringstream ss;
-        ss << "WM_INPUTLANGCHANGE";
-        ss << std::endl;
-        OutputDebugStringA(ss.str().c_str());
-    }
-    return DefWindowProc(getWindowHandle(), message, wParam, lParam);
+        {
+            std::stringstream ss;
+            ss << "WM_INPUTLANGCHANGE";
+            ss << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+        return DefWindowProc(getWindowHandle(), message, wParam, lParam);
     default:
         return 0;
     }
