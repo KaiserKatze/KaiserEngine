@@ -21,3 +21,10 @@ Setup(const HWND& hWnd)
     listeners.push_back(std::make_unique<KeyboardEventListener>(this, hWnd));
     listeners.push_back(std::make_unique<MouseEventListener>(this, hWnd));
 }
+
+void
+EventManager::
+Dispose()
+{
+    RemoveAllListeners();
+}
