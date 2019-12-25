@@ -93,7 +93,7 @@ private:
         if (lpClass == nullptr)
             throw std::exception("Invalid argument: 'lpClass' is nullptr!");
         if (lpTitle == nullptr)
-            return false;
+            throw std::exception("Invalid argument: 'lpTitle' is nullptr!");
 
         hWnd = CreateWindow(lpClass, lpTitle,
             MakeWindowStyle(),
