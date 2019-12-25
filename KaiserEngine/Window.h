@@ -117,7 +117,7 @@ private:
 
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
         ::ShowWindow(hWnd, nCmdShow);
-        UpdateWindow(hWnd);
+        ::UpdateWindow(hWnd);
 
         isWindowActivated = true;
 
@@ -172,7 +172,7 @@ protected:
         sNewTitle << " (OpenGL version: ";
         sNewTitle << iMajorVersion << '.' << iMinorVersion;
         sNewTitle << ")";
-        SetWindowText(hWnd, sNewTitle.str().c_str());
+        SetWindowTextW(hWnd, sNewTitle.str().c_str());
     }
 #endif
 
