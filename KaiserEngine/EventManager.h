@@ -11,5 +11,6 @@ public:
     EventManager();
     ~EventManager();
     void Setup(const HWND& hWnd);
+    void Dispose();
 };
 
