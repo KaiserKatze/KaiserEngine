@@ -1,7 +1,7 @@
 #pragma once
 
 template <typename WindowType>
-class AbstractWindow
+class AbstractWindow abstract
 {
 private:
     std::atomic_bool isFullscreen;
