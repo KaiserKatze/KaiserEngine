@@ -77,9 +77,9 @@ private:
         int nCmdShow)
     {
         if (hInstance == nullptr)
-            return false;
+            throw std::exception("Invalid argument: 'hInstance' is nullptr!");
         if (lpClass == nullptr)
-            return false;
+            throw std::exception("Invalid argument: 'lpClass' is nullptr!");
         if (lpTitle == nullptr)
             return false;
 
