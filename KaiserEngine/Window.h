@@ -69,6 +69,18 @@ private:
         return RegisterClassEx(&wcex);
     }
 
+    // used in `InitWindowInstance()`
+    DWORD MakeWindowStyle()
+    {
+        // window style
+        // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
+        DWORD winStyle;
+        winStyle = WS_OVERLAPPEDWINDOW;
+        winStyle ^= WS_THICKFRAME;
+        winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
+        return winStyle;
+    }
+
     bool InitWindowInstance(HINSTANCE hInstance,
         HWND parent,
         LPCWSTR lpClass, LPCWSTR lpTitle,
@@ -83,15 +95,8 @@ private:
         if (lpTitle == nullptr)
             return false;
 
-        // window style
-        // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
-        DWORD winStyle;
-        winStyle = WS_OVERLAPPEDWINDOW;
-        winStyle ^= WS_THICKFRAME;
-        winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
-
         hWnd = CreateWindow(lpClass, lpTitle,
-            winStyle,
+            MakeWindowStyle(),
             x, y, // initial position
             width, height, // initial size
             parent, // parent window
