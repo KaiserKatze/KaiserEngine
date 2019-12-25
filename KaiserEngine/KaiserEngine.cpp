@@ -7,6 +7,7 @@
 #include "UserInput.h"
 #include "Event.h"
 #include "EventManager.h"
+#include "Window.h"
 
 #define MAX_LOADSTRING 100
 
@@ -366,13 +367,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     return retCode;
 }
 
-
-RECT GetDisplayRect()
-{
-    RECT rectDisplay;
-    GetWindowRect(GetDesktopWindow(), &rectDisplay);
-    return rectDisplay;
-}
 
 void kglViewport(int width, int height)
 {
