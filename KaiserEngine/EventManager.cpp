@@ -9,7 +9,7 @@ EventManager()
 EventManager::
 ~EventManager()
 {
-    this->RemoveAllListeners();
+    Dispose();
 }
 
 void
