@@ -16,6 +16,15 @@ private:
         return rectDisplay;
     }
 
+    // used in `RegisterWindowClass()`
+    UINT MakeWindowClassStyle()
+    {
+        return CS_HREDRAW // Redraws the entire window if a movement or size adjustment changes the width of the client area
+            | CS_VREDRAW // Redraws the entire window if a movement or size adjustment changes the height of the client area
+            | CS_OWNDC // enable GC, necessary for OpenGL
+            | CS_DBLCLKS // decides whether or not to handle double-click mouse event
+            ;
+    }
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
         if (hInstance == nullptr)
@@ -29,16 +38,9 @@ private:
         WNDCLASSEX wcex = { 0 };
 
         wcex.cbSize = sizeof(WNDCLASSEX);
-
-        UINT wndStyle;
-        wndStyle = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-#if (APP_USERINPUT)
-#   if (APP_USERINPUT_DBLCLKS)
-        // decides whether or not to handle double-click mouse event
-        wndStyle |= CS_DBLCLKS;
-#   endif
-#endif
-        wcex.style = wndStyle;
+        // window style
+        wcex.style = MakeWindowClassStyle();
+        // window procedure callback handling events
         wcex.lpfnWndProc = wndproc;
         wcex.cbClsExtra = 0;
         wcex.cbWndExtra = 0;
