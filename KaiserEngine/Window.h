@@ -25,6 +25,13 @@ private:
             | CS_DBLCLKS // decides whether or not to handle double-click mouse event
             ;
     }
+
+    // used in `RegisterWindowClass()`
+    HBRUSH MakeBackgroundColor()
+    {
+        return CreateSolidBrush(RGB(0, 0, 0));
+    }
+
     ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
         if (hInstance == nullptr)
@@ -50,7 +57,7 @@ private:
         // load cursor
         wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
         // background color
-        wcex.hbrBackground = (HBRUSH)CreateSolidBrush(RGB(0, 0, 0));
+        wcex.hbrBackground = MakeBackgroundColor();
         // menu
         wcex.lpszMenuName = nullptr;
         // window class
