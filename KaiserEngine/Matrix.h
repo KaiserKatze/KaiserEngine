@@ -66,6 +66,35 @@ public:
 
         return ss.str();
     }
+
+public:
+
+    // enables invoking `matrix[row][column]`
+
+    class MatrixVector
+    {
+    private:
+        const Matrix& parent;
+        const int first;
+
+    public:
+        MatrixVector(const Matrix& matrix, const int& firstIndex)
+            : parent{ matrix }
+            , first{ firstIndex }
+        {
+        }
+
+        _Ty& operator[](const int& secondIndex)
+        {
+            const int index = parent.convert2index(first, secondIndex);
+            return const_cast<_Ty&>(parent.data[index]);
+        }
+    };
+
+    MatrixVector operator[](const int& firstIndex)
+    {
+        return MatrixVector(*this, firstIndex);
+    }
 };
 
 // squre matrix
