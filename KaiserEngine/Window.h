@@ -34,7 +34,7 @@ private:
         return CreateSolidBrush(RGB(0, 0, 0));
     }
 
-    ATOM RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
+    bool RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
     {
         if (hInstance == nullptr)
             throw std::exception("Invalid argument: 'hInstance' is nullptr!");
@@ -68,7 +68,13 @@ private:
         wcex.hIconSm = nullptr;
 
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-registerclassexw
-        return RegisterClassEx(&wcex);
+        ATOM res = RegisterClassEx(&wcex);
+        if (res == 0)
+        {
+            ErrorExit(L"RegisterClassEx");
+            return false;
+        }
+        return true;
     }
 
     // used in `InitWindowInstance()`
