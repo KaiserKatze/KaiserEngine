@@ -200,6 +200,6 @@ LRESULT
 WindowEventListener::
 OnTimer() const
 {
-    OutputDebugStringA("On drawing OpenGL ...");
+    OutputDebugStringA("On drawing OpenGL ...\r\n");
     return 0;
 }
