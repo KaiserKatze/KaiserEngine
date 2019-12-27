@@ -151,6 +151,16 @@ LRESULT
 WindowEventListener::
 OnClose() const
 {
+    const HDC hDC = wglGetCurrentDC();
+    const HGLRC hRC = wglGetCurrentContext();
+    wglMakeCurrent(hDC, nullptr);
+    wglDeleteContext(hRC);
+    wglMakeCurrent(nullptr, nullptr);
+
+    HWND hwnd = getWindowHandle();
+    ReleaseDC(hwnd, hDC);
+    ::ShowWindow(hwnd, SW_HIDE);
+
     return 0;
 }
 
