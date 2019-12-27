@@ -440,6 +440,35 @@ public:
     }
 };
 
+template <typename WindowType>
+class BaseWindow abstract
+    : public AbstractWindow<WindowType>
+    , public EventManager
+{
+public:
+    LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) override
+    {
+        // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
+        return TraverseList(getWindowHandle(), message, wParam, lParam);
+    }
+};
+
+class FakeWindow
+    : public BaseWindow<FakeWindow>
+{
+public:
+    FakeWindow(const HINSTANCE& hInstance);
+    ~FakeWindow();
+};
+
+class MainWindow
+    : public BaseWindow<MainWindow>
+{
+public:
+    MainWindow(const HINSTANCE& hInstance);
+    ~MainWindow();
+};
+
 class AttributeListFactory
 {
 public:
