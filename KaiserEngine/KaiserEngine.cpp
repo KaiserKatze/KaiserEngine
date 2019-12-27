@@ -23,16 +23,6 @@ class BaseWindow abstract
 public:
     BaseWindow()
     {
-#ifdef _DEBUG
-        {
-            bool res = SetInputMethodEnabled(false);
-            std::stringstream ss;
-            ss << "SetInputMethodEnabled(false) -> "
-                << std::boolalpha << res << std::noboolalpha
-                << std::endl;
-            OutputDebugStringA(ss.str().c_str());
-        }
-#endif
     }
 
     void AttachUserInput()
