@@ -35,6 +35,7 @@
 #include <tuple>
 #include <type_traits>
 #include <memory>
+#include <cmath>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
