@@ -259,6 +259,11 @@ public:
         return hWnd;
     }
 
+    void setWindowHandle(const HWND& windowHandle)
+    {
+        hWnd = windowHandle;
+    }
+
     HDC getDeviceContext() const
     {
         return hdc;
