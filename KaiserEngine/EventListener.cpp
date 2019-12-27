@@ -158,6 +158,9 @@ LRESULT
 WindowEventListener::
 OnDestroy() const
 {
+    // clean up opengl functions
+    CleanDll();
+
     PostQuitMessage(0);
     return 0;
 }
