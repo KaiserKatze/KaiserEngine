@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "EventListener.h"
 #include "UserInput.h"
+#include "Window.h"
 
 EventListener::
 EventListener(const EventHandler* handler, const HWND& handle)
