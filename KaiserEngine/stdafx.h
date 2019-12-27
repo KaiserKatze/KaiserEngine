@@ -32,6 +32,7 @@
 #include <thread>
 #include <vector>
 #include <map>
+#include <tuple>
 #include <type_traits>
 #include <memory>
 
