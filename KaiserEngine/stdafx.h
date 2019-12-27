@@ -31,6 +31,7 @@
 #include <atomic>
 #include <thread>
 #include <vector>
+#include <map>
 #include <type_traits>
 #include <memory>
 
