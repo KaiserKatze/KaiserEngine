@@ -1,5 +1,7 @@
 #pragma once
 
+#include "EventManager.h"
+
 template <typename WindowType>
 class AbstractWindow abstract
 {
