@@ -22,5 +22,6 @@
 #endif
 
 #ifndef _WIN32
+// @see: https://docs.microsoft.com/en-us/cpp/extensions/abstract-cpp-component-extensions?view=vs-2019
 #   define abstract
 #endif
