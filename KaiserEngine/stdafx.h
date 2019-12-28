@@ -36,6 +36,8 @@
 #include <type_traits>
 #include <memory>
 #include <cmath>
+#include <initializer_list>
+#include <algorithm>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
