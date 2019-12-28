@@ -14,3 +14,6 @@ glDeleteBuffers
 wglChoosePixelFormatARB
 wglCreateContextAttribsARB
 wglMakeContextCurrentARB
+
+# https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glDebugMessageCallback.xhtml
+glDebugMessageCallback
