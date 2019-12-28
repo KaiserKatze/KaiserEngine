@@ -1,5 +1,14 @@
 #pragma once
 
+template <typename _Ty, typename std::enable_if<std::is_floating_point<_Ty>::value>::type* = nullptr>
+const _Ty
+degrees2radians(_Ty degrees)
+{
+    static const auto pi = std::acos(-1);
+    return static_cast<_Ty>(degrees / 180 * pi);
+}
+
+
 template <typename _Ty, int Width, int Height>
 class Matrix
 {
