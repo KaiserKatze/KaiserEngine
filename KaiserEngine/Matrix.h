@@ -149,3 +149,30 @@ using Matrix3f = MatrixQ<float, 3>;
 using Matrix4f = MatrixQ<float, 4>;
 using Matrix3d = MatrixQ<double, 3>;
 using Matrix4d = MatrixQ<double, 4>;
+
+// multiplying a (M x P) matrix and a (P x N) matrix,
+// result: a (M x N) matrix
+template <typename _Ty, int M, int P, int N>
+Matrix<_Ty, M, N> operator*(const Matrix<_Ty, M, P>& first, const Matrix<_Ty, P, N>& second)
+{
+    Matrix<_Ty, M, N> result;
+
+    for (int i = 0; i < M; i++)
+    {
+    for (int j = 0; j < N; j++)
+    {
+        _Ty sum = 0;
+
+        for (int k = 0; k < P; k++)
+        {
+            _Ty a_ik = first[i][k];
+            _Ty b_kj = second[k][j];
+            sum += a_ik * b_kj;
+        }
+
+        result[i][j] = sum;
+    }
+    }
+
+    return result;
+}
