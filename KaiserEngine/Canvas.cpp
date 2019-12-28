@@ -31,12 +31,12 @@ template <typename _Ty>
 const MatrixQ<_Ty, 4>
 MakeScalingMatrix(const _Ty& Sx, const _Ty& Sy, const _Ty& Sz)
 {
-    MatrixQ<_Ty, 4> result;
-    result[0][0] = Sx;
-    result[1][1] = Sy;
-    result[2][2] = Sz;
-    result[3][3] = 1;
-    return result;
+    return MatrixQ<_Ty, 4>{
+        Sx, 0, 0, 0,
+        0, Sy, 0, 0,
+        0, 0, Sz, 0,
+        0, 0, 0, 1,
+    };
 }
 
 template <typename _Ty>
