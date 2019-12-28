@@ -71,12 +71,13 @@ template <typename _Ty>
 const MatrixQ<_Ty, 4>
 MakeRotationMatrix_z(const _Ty& Rz)
 {
-    MatrixQ<_Ty, 4> Mz{ IdentityMatrix() };
-
-    Mz[0][0] = Mz[1][1] = std::cos(Rz);
-    Mz[0][1] = std::sin(Rz);
-    Mz[1][0] = -std::sin(Rz);
-
-    return Mz;
+    const _Ty cos = std::cos(Rz);
+    const _Ty sin = std::sin(Rz);
+    return MatrixQ<_Ty, 4>{
+        cos, -sin, 0, 0,
+        sin, cos, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1,
+    };
 }
 
