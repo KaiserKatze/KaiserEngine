@@ -99,6 +99,23 @@ public:
         return result;
     }
 
+    template <int RowSrc, int RowDst, int ColSrc, int ColDst>
+    Matrix<_Ty, RowDst - RowSrc, ColDst - ColSrc> submatrix() const
+    {
+        using ret_type = Matrix<_Ty, RowDst - RowSrc, ColDst - ColSrc>;
+        ret_type result;
+
+        for (int i = RowSrc; i < RowDst; i++)
+        {
+        for (int j = ColSrc; j < ColDst; j++)
+        {
+            result[i - RowSrc][j - ColSrc] = data[convert2index(i, j)];
+        }
+        }
+
+        return result;
+    }
+
     // print internal data structure, regardless of whether the matrix is transposed or not
     const std::string ToString() const
     {
