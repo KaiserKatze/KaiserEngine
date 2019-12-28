@@ -60,6 +60,14 @@ public:
         return result;
     }
 
+    void operator*=(const _Ty& multiplier)
+    {
+        for (int i = 0; i < Width * Height; i++)
+        {
+            this->data[i] *= multiplier;
+        }
+    }
+
     _Ty& operator[](const std::pair<int, int>& pos)
     {
         return data[convert2index(pos)];
