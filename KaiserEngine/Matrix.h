@@ -8,6 +8,8 @@ degrees2radians(_Ty degrees)
     return static_cast<_Ty>(degrees / 180 * pi);
 }
 
+namespace Matrix
+{
 
 // the entries in this class are stored in column-major order
 template <typename _Ty, int Height, int Width>
@@ -261,3 +263,5 @@ std::vector<Matrix<_Ty, N / 2, N / 2>> partition(const Matrix<_Ty, N, N>& parent
         parent.submatrix<N / 2, N, N / 2, N>(),
     };
 }
+
+} /* NAMESPACE: Matrix */
