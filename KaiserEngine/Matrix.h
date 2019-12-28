@@ -172,6 +172,8 @@ using Matrix4d = MatrixQ<double, 4>;
 
 // multiplying a (M x P) matrix and a (P x N) matrix,
 // result: a (M x N) matrix
+// no optimization is applied in the following function
+// @see: https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm
 template <typename _Ty, int M, int P, int N>
 Matrix<_Ty, M, N> operator*(const Matrix<_Ty, M, P>& first, const Matrix<_Ty, P, N>& second)
 {
