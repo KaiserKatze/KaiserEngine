@@ -9,7 +9,7 @@ degrees2radians(_Ty degrees)
 }
 
 
-template <typename _Ty, int Width, int Height>
+template <typename _Ty, int Height, int Width>
 class Matrix
 {
 private:
@@ -46,6 +46,18 @@ public:
     {
         return Height == 1 && Width > 0
             || Width == 1 && Height > 0;
+    }
+
+    Matrix<_Ty, Height, Width> operator+(Matrix<_Ty, Height, Width> other)
+    {
+        Matrix<_Ty, Height, Width> result;
+
+        for (int i = 0; i < Width * Height; i++)
+        {
+            result.data[i] = this->data[i] + other.data[i];
+        }
+
+        return result;
     }
 
     _Ty& operator[](const std::pair<int, int>& pos)
