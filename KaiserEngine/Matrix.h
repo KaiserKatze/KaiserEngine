@@ -13,8 +13,8 @@ template <typename _Ty, int Width, int Height>
 class Matrix
 {
 private:
-    int data[Width * Height];
     bool isTransposed;
+    _Ty data[Width * Height];
 
     // pos = (row, column)
     int convert2index(const std::pair<int, int>& pos) const
