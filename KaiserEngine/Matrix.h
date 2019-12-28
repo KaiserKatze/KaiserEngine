@@ -120,9 +120,20 @@ public:
             const int index = parent.convert2index(first, secondIndex);
             return const_cast<_Ty&>(parent.data[index]);
         }
+
+        const _Ty operator[](const int& secondIndex) const
+        {
+            const int index = parent.convert2index(first, secondIndex);
+            return parent.data[index];
+        }
     };
 
     MatrixVector operator[](const int& firstIndex)
+    {
+        return MatrixVector(*this, firstIndex);
+    }
+
+    const MatrixVector operator[](const int& firstIndex) const
     {
         return MatrixVector(*this, firstIndex);
     }
