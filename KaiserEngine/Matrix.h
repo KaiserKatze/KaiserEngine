@@ -151,6 +151,17 @@ public:
 template <typename _Ty, int N>
 using MatrixQ = Matrix<_Ty, N, N>;
 
+template <typename _Ty, int N>
+MatrixQ<_Ty, N> IdentityMatrix()
+{
+    MatrixQ<_Ty, N> result;
+    for (int i = 0; i < N; i++)
+    {
+        result[i][i] = 1;
+    }
+    return result;
+}
+
 using Matrix3i = MatrixQ<int, 3>;
 using Matrix4i = MatrixQ<int, 4>;
 using Matrix3f = MatrixQ<float, 3>;
