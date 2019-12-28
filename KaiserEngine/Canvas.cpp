@@ -17,6 +17,18 @@ Canvas::
 
 template <typename _Ty>
 const MatrixQ<_Ty, 4>
+MakeTranslationMatrix(const _Ty& x, const _Ty& y, const _Ty& z)
+{
+    return MatrixQ<_Ty, 4>{
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        x, y, z, 1,
+    };
+}
+
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
 MakeScalingMatrix(const _Ty& Sx, const _Ty& Sy, const _Ty& Sz)
 {
     MatrixQ<_Ty, 4> result;
