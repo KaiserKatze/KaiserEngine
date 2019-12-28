@@ -9,6 +9,7 @@ degrees2radians(_Ty degrees)
 }
 
 
+// the entries in this class are stored in column-major order
 template <typename _Ty, int Height, int Width>
 class Matrix
 {
