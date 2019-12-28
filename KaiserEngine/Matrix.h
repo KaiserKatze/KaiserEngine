@@ -13,7 +13,6 @@ template <typename _Ty, int Width, int Height>
 class Matrix
 {
 private:
-    bool isTransposed;
     _Ty data[Width * Height];
 
     // pos = (row, column)
@@ -32,15 +31,12 @@ private:
             throw std::domain_error("Invalid argument: column < 0!");
         if (column >= Width)
             throw std::domain_error("Invalid argument: column >= Width!");
-
-        if (isTransposed)   return row * Width + column;    // row-first
-        else                return row + column * Height;   // column-first
+        return row + column * Height;   // column-first
     }
 
 public:
-    Matrix(const bool& isTransposed = false)
-        : isTransposed{ isTransposed }
-        , data{ 0 }
+    Matrix()
+        : data{ 0 }
     {
     }
 
@@ -57,9 +53,17 @@ public:
         return data[convert2index(pos)];
     }
 
-    void transpose()
+    const Matrix<_Ty, Width, Height> transpose() const
     {
-        isTransposed = !isTransposed;
+        Matrix<_Ty, Width, Height> result;
+        for (int i = 0; i < Width; i++)
+        {
+        for (int j = 0; j < Height; j++)
+        {
+            result[i][j] = data[convert2index(j, i)];
+        }
+        }
+        return result;
     }
 
     // print internal data structure, regardless of whether the matrix is transposed or not
