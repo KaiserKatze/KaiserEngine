@@ -2,6 +2,7 @@
 #include "EventListener.h"
 #include "UserInput.h"
 #include "Window.h"
+#include "loadgl.h"
 
 EventListener::
 EventListener(const EventHandler* handler, const HWND& handle)
