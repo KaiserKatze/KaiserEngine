@@ -210,3 +210,24 @@ Matrix<_Ty, M, N> operator*(const Matrix<_Ty, M, P>& first, const Matrix<_Ty, P,
 
     return result;
 }
+
+template <typename _Ty>
+MatrixQ<_Ty, 2> operator*(const MatrixQ<_Ty, 2>& first, const MatrixQ<_Ty, 2>& second)
+{
+    const _Ty a11 = first[0][0];
+    const _Ty a12 = first[0][1];
+    const _Ty a21 = first[1][0];
+    const _Ty a22 = first[1][1];
+    const _Ty b11 = second[0][0];
+    const _Ty b12 = second[0][1];
+    const _Ty b21 = second[1][0];
+    const _Ty b22 = second[1][1];
+
+    const _Ty c11 = a11 * b11 + a12 * b21;
+    const _Ty c12 = a11 * b12 + a12 * b22;
+    const _Ty c21 = a21 * b11 + a22 * b21;
+    const _Ty c22 = a21 * b12 + a22 * b22;
+
+    MatrixQ<_Ty, 2> result{ c11, c21, c12, c22 };
+    return result;
+}
