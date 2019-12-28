@@ -2,6 +2,9 @@
 #include "Canvas.h"
 #include "Matrix.h"
 
+template <typename _Ty, int N>
+using MatrixQ = Matrix::MatrixQ<_Ty, N>;
+
 Canvas::
 Canvas()
 {
