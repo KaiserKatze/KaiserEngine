@@ -35,9 +35,21 @@ private:
         return row + column * Height;   // column-first
     }
 
+    Matrix(const _Ty* buffer, int count)
+        : Matrix()
+    {
+        count = std::min<int>(count, Height * Width);
+        memcpy(static_cast<void*>(data), buffer, count * sizeof(_Ty));
+    }
+
 public:
     Matrix()
         : data{ 0 }
+    {
+    }
+
+    Matrix(std::initializer_list<_Ty> init)
+        : Matrix(std::vector<_Ty>(init.begin(), init.end()).data(), init.size())
     {
     }
 
