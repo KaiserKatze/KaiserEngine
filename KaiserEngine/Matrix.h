@@ -46,6 +46,12 @@ public:
 
     ~Matrix() {}
 
+    constexpr bool IsVector() const
+    {
+        return Height == 1 && Width > 0
+            || Width == 1 && Height > 0;
+    }
+
     _Ty& operator[](const std::pair<int, int>& pos)
     {
         return data[convert2index(pos)];
