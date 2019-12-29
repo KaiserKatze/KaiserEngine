@@ -104,6 +104,18 @@ public:
         return result;
     }
 
+    Matrix<_Ty, Height, Width> operator/(const _Ty& multiplier)
+    {
+        Matrix<_Ty, Height, Width> result;
+
+        for (int i = 0; i < Width * Height; i++)
+        {
+            result.data[i] = this->data[i] / multiplier;
+        }
+
+        return result;
+    }
+
     void operator*=(const _Ty& multiplier)
     {
         for (int i = 0; i < Width * Height; i++)
