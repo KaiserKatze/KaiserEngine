@@ -295,6 +295,7 @@ Matrix<_Ty, M, N> operator*(const Matrix<_Ty, M, P>& first, const Matrix<_Ty, P,
     return result;
 }
 
+// merely a minor optimization
 template <typename _Ty>
 MatrixQ<_Ty, 2> operator*(const MatrixQ<_Ty, 2>& first, const MatrixQ<_Ty, 2>& second)
 {
