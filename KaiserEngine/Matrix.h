@@ -11,6 +11,12 @@ degrees2radians(_Ty degrees)
 namespace Matrix
 {
 
+template <int Height, int Width>
+struct is_vector
+{
+    static constexpr bool value = (Height == 1 && Width > 0) || (Width == 1 && Height > 0);
+};
+
 // the entries in this class are stored in column-major order
 template <typename _Ty, int Height, int Width>
 class Matrix
@@ -59,8 +65,7 @@ public:
 
     constexpr bool IsVector() const
     {
-        return Height == 1 && Width > 0
-            || Width == 1 && Height > 0;
+        return is_vector<Height, Width>::value;
     }
 
     Matrix<_Ty, Height, Width> operator+(Matrix<_Ty, Height, Width> other)
