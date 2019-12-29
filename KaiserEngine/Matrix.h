@@ -116,6 +116,14 @@ public:
         return result;
     }
 
+    void operator+=(Matrix<_Ty, Height, Width> other)
+    {
+        for (int i = 0; i < Width * Height; i++)
+        {
+            this->data[i] += other.data[i];
+        }
+    }
+
     void operator*=(const _Ty& multiplier)
     {
         for (int i = 0; i < Width * Height; i++)
