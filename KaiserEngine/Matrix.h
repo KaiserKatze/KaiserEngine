@@ -80,6 +80,18 @@ public:
         return result;
     }
 
+    Matrix<_Ty, Height, Width> operator-(Matrix<_Ty, Height, Width> other)
+    {
+        Matrix<_Ty, Height, Width> result;
+
+        for (int i = 0; i < Width * Height; i++)
+        {
+            result.data[i] = this->data[i] - other.data[i];
+        }
+
+        return result;
+    }
+
     void operator*=(const _Ty& multiplier)
     {
         for (int i = 0; i < Width * Height; i++)
