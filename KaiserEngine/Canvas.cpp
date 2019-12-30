@@ -6,7 +6,8 @@ template <typename _Ty, int N>
 using MatrixQ = Matrix::MatrixQ<_Ty, N>;
 
 Canvas::
-Canvas()
+Canvas(const MainWindow& window)
+    : parent{ window }
 {
 }
 
