@@ -6,6 +6,7 @@ class Canvas
 {
 private:
     const MainWindow& parent;
+
 public:
     Canvas(const MainWindow& window);
     ~Canvas();
