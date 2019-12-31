@@ -189,7 +189,7 @@ public:
     }
 
     // print internal data structure, regardless of whether the matrix is transposed or not
-    const std::string ToString() const
+    const std::string toString() const
     {
         std::stringstream ss;
 
