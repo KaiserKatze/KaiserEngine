@@ -50,6 +50,8 @@ private:
         memcpy(static_cast<void*>(data), buffer, count * sizeof(_Ty));
     }
 
+    using same_type = Matrix<_Ty, Height, Width>;
+
 public:
     Matrix()
         : data{ 0 }
@@ -71,9 +73,9 @@ public:
     constexpr int getWidth() const { return Width; }
     constexpr int getHeight() const { return Height; }
 
-    Matrix<_Ty, Height, Width> operator+(Matrix<_Ty, Height, Width> other)
+    same_type operator+(same_type other)
     {
-        Matrix<_Ty, Height, Width> result;
+        same_type result;
 
         for (int i = 0; i < Width * Height; i++)
         {
@@ -83,9 +85,9 @@ public:
         return result;
     }
 
-    Matrix<_Ty, Height, Width> operator-(Matrix<_Ty, Height, Width> other)
+    same_type operator-(same_type other)
     {
-        Matrix<_Ty, Height, Width> result;
+        same_type result;
 
         for (int i = 0; i < Width * Height; i++)
         {
@@ -95,9 +97,9 @@ public:
         return result;
     }
 
-    Matrix<_Ty, Height, Width> operator*(const _Ty& multiplier)
+    same_type operator*(const _Ty& multiplier)
     {
-        Matrix<_Ty, Height, Width> result;
+        same_type result;
 
         for (int i = 0; i < Width * Height; i++)
         {
@@ -107,9 +109,9 @@ public:
         return result;
     }
 
-    Matrix<_Ty, Height, Width> operator/(const _Ty& multiplier)
+    same_type operator/(const _Ty& multiplier)
     {
-        Matrix<_Ty, Height, Width> result;
+        same_type result;
 
         for (int i = 0; i < Width * Height; i++)
         {
@@ -119,7 +121,7 @@ public:
         return result;
     }
 
-    void operator+=(Matrix<_Ty, Height, Width> other)
+    void operator+=(same_type other)
     {
         for (int i = 0; i < Width * Height; i++)
         {
@@ -127,7 +129,7 @@ public:
         }
     }
 
-    void operator-=(Matrix<_Ty, Height, Width> other)
+    void operator-=(same_type other)
     {
         for (int i = 0; i < Width * Height; i++)
         {
