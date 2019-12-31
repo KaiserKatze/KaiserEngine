@@ -67,6 +67,8 @@ public:
 
     constexpr bool isVector() const { return is_vector<Height, Width>::value; }
 
+    constexpr bool isSquare() const { return Height == Width && Height > 1; }
+
     constexpr int getWidth() const { return Width; }
     constexpr int getHeight() const { return Height; }
 
