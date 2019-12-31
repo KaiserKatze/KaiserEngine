@@ -14,7 +14,7 @@ namespace Matrix
 template <int Height, int Width>
 struct is_vector
 {
-    static constexpr bool value = (Height == 1 && Width > 0) || (Width == 1 && Height > 0);
+    static constexpr bool value = (Height == 1 && Width > 1) || (Width == 1 && Height > 1);
 };
 
 // the entries in this class are stored in column-major order
