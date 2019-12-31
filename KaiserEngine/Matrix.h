@@ -264,6 +264,7 @@ MatrixQ<_Ty, N> IdentityMatrix()
     return result;
 }
 
+using Matrix2i = MatrixQ<int, 2>;
 using Matrix3i = MatrixQ<int, 3>;
 using Matrix4i = MatrixQ<int, 4>;
 using Matrix3f = MatrixQ<float, 3>;
