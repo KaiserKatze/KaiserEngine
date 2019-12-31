@@ -68,6 +68,9 @@ public:
         return is_vector<Height, Width>::value;
     }
 
+    constexpr int getWidth() const { return Width; }
+    constexpr int getHeight() const { return Height; }
+
     Matrix<_Ty, Height, Width> operator+(Matrix<_Ty, Height, Width> other)
     {
         Matrix<_Ty, Height, Width> result;
