@@ -24,12 +24,6 @@ namespace Matrix
     private:
         const _Ty data[Width * Height];
 
-        // pos = (row, column)
-        int convert2index(const std::pair<int, int>& pos) const
-        {
-            return convert2index(pos.first, pos.second);
-        }
-
         int convert2index(const int& row, const int& column) const
         {
             if (row < 0)
