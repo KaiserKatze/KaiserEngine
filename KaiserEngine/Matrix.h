@@ -158,9 +158,12 @@ public:
         return data[convert2index(pos)];
     }
 
-    const Matrix<_Ty, Width, Height> transpose() const
+    using Transpose = Matrix<_Ty, Width, Height>;
+
+    const Transpose transpose() const
     {
-        Matrix<_Ty, Width, Height> result;
+        Transpose result;
+
         for (int i = 0; i < Width; i++)
         {
         for (int j = 0; j < Height; j++)
@@ -168,6 +171,7 @@ public:
             result[i][j] = data[convert2index(j, i)];
         }
         }
+
         return result;
     }
 
