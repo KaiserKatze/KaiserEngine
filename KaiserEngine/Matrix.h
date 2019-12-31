@@ -63,7 +63,7 @@ public:
 
     ~Matrix() {}
 
-    constexpr bool IsVector() const
+    constexpr bool isVector() const
     {
         return is_vector<Height, Width>::value;
     }
