@@ -22,7 +22,7 @@ template <typename _Ty, int Height, int Width>
 class Matrix
 {
 private:
-    _Ty data[Width * Height];
+    const _Ty data[Width * Height];
 
     // pos = (row, column)
     int convert2index(const std::pair<int, int>& pos) const
@@ -47,7 +47,7 @@ private:
         : Matrix()
     {
         count = std::min<int>(count, Height * Width);
-        memcpy(static_cast<void*>(data), buffer, count * sizeof(_Ty));
+        memcpy(const_cast<_Ty*>(data), buffer, count * sizeof(_Ty));
     }
 
     using same_type = Matrix<_Ty, Height, Width>;
