@@ -210,10 +210,10 @@ namespace Matrix
         {
             std::stringstream ss;
 
-            for (int row = 0; row < Height; row++)
+            for (int column = 0; column < Width; column++)
             {
                 ss << "| ";
-                for (int column = 0; column < Width; column++)
+                for (int row = 0; row < Height; row++)
                 {
                     ss << data[convert2index(row, column)]
                         << " ";
