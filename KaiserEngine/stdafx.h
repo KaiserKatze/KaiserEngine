@@ -33,6 +33,7 @@
 #include <vector>
 #include <map>
 #include <tuple>
+#include <array>
 #include <type_traits>
 #include <memory>
 #include <cmath>
