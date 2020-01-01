@@ -26,7 +26,7 @@ namespace Matrix
     class Matrix
     {
     private:
-        const _Ty data[Width * Height];
+        _Ty data[Width * Height];
 
         int convert2index(const int& row, const int& column) const
         {
