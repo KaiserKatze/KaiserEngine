@@ -75,6 +75,7 @@ namespace Matrix
 
         const bool isDiagonal() const
         {
+            if (!isSquare()) return false;
             for (int column = 0; column < Width; column++)
             {
                 for (int row = 0; row < Height; row++)
