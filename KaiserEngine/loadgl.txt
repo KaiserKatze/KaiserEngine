@@ -20,3 +20,4 @@ glDebugMessageCallback
 
 glUseProgram
 glUniformMatrix4dv
+glGetUniformLocation
