@@ -221,7 +221,7 @@ namespace Matrix
                 ss << "| ";
                 for (int row = 0; row < Height; row++)
                 {
-                    ss << data[convert2index(row, column)]
+                    ss << getData(row, column)
                         << " ";
                 }
                 ss << "|"
