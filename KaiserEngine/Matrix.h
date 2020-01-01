@@ -170,6 +170,13 @@ namespace Matrix
             }
         }
 
+        bool operator==(const same_type& other)
+        {
+            return this == &other
+                || std::equal(std::begin(data), std::end(data),
+                    std::begin(other.data), std::end(other.data));
+        }
+
         using Transpose = Matrix<_Ty, Width, Height>;
 
         const Transpose transpose() const
@@ -386,6 +393,13 @@ namespace Matrix
             {
                 this->data[i] /= divider;
             }
+        }
+
+        bool operator==(const same_type& other)
+        {
+            return this == &other
+                || std::equal(std::begin(data), std::end(data),
+                    std::begin(other.data), std::end(other.data));
         }
 
         using Transpose = Matrix<Matrix<_Ty, IWidth, IHeight>, Width, Height>;
