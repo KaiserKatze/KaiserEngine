@@ -598,9 +598,9 @@ namespace Matrix
     template <int N> struct is_even { static constexpr bool value = (N & 1) == 0; };
 
     template <typename _Ty, int N, typename std::enable_if<is_even<N>::value>::type* = nullptr>
-    std::vector<Matrix<_Ty, N / 2, N / 2>> partition(const Matrix<_Ty, N, N>& parent)
+    MatrixQ<MatrixQ<_Ty, N / 2>, 2> partition(const Matrix<_Ty, N, N>& parent)
     {
-        return std::vector<Matrix<_Ty, N / 2, N / 2>>{
+        return MatrixQ<MatrixQ<_Ty, N / 2>, 2>{
             parent.submatrix<0, N / 2, 0, N / 2>(),
             parent.submatrix<N / 2, N, 0, N / 2>(),
             parent.submatrix<0, N / 2, N / 2, N>(),
