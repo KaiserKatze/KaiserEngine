@@ -121,5 +121,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="loadgl.py" />
+    <None Include="vertex.shader">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
