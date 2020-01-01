@@ -187,7 +187,7 @@ namespace Matrix
             {
                 for (int j = 0; j < Height; j++)
                 {
-                    result[i][j] = data[convert2index(j, i)];
+                    result.setData(i, j, getData(j, i));
                 }
             }
 
