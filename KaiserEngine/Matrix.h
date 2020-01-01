@@ -265,6 +265,20 @@ namespace Matrix
     template <typename _Ty, int N>
     using MatrixQ = Matrix<_Ty, N, N>;
 
+    // identity matrix
+
+    template <typename _Ty, int N>
+    class IdentityMatrix
+        : public MatrixQ<_Ty, N>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<_Ty, N>()
+        {
+            for (int i = 0; i < N; i++)
+                this->setData(i, i, 1);
+        }
+    };
     using Matrix2i = MatrixQ<int, 2>;
     using Matrix3i = MatrixQ<int, 3>;
     using Matrix4i = MatrixQ<int, 4>;
