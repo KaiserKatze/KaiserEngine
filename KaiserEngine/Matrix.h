@@ -25,6 +25,8 @@ namespace Matrix
     template <typename _Ty, int Height, int Width>
     class Matrix
     {
+        static_assert(Height > 0, "Template argument 'Height' has negative value!");
+        static_assert(Width > 0, "Template argument 'Width' has negative value!");
     private:
         _Ty data[Width * Height];
 
