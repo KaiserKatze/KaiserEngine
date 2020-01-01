@@ -68,6 +68,13 @@ namespace Matrix
             return data[convert2index(row, column)];
         }
 
+        const std::array<_Ty, Height * Width> getData() const
+        {
+            std::array<_Ty, Height * Width> result;
+            std::copy(std::begin(data), std::end(data), std::begin(result));
+            return result;
+        }
+
         constexpr bool isVector() const { return (Height == 1 && Width > 1) || (Width == 1 && Height > 1); }
 
         constexpr bool isSquare() const { return Height == Width && Height > 1; }
