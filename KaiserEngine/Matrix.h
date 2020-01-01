@@ -10,13 +10,6 @@ degrees2radians(_Ty degrees)
 
 namespace Matrix
 {
-
-    template <int Height, int Width>
-    struct is_vector
-    {
-        static constexpr bool value = (Height == 1 && Width > 1) || (Width == 1 && Height > 1);
-    };
-
     // the entries in this class are stored in column-major order
     // template argument 'typename _Ty' can be one of the following:
     //  - real number (such as int, float, double, etc.)
@@ -76,7 +69,7 @@ namespace Matrix
 
         ~Matrix() {}
 
-        constexpr bool isVector() const { return is_vector<Height, Width>::value; }
+        constexpr bool isVector() const { return (Height == 1 && Width > 1) || (Width == 1 && Height > 1); }
 
         constexpr bool isSquare() const { return Height == Width && Height > 1; }
 
