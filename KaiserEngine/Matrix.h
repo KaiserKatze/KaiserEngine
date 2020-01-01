@@ -45,17 +45,6 @@ namespace Matrix
 
         using same_type = Matrix<_Ty, Height, Width>;
 
-    protected:
-        void setData(int row, int column, const _Ty& value)
-        {
-            data[convert2index(row, column)] = value;
-        }
-
-        const _Ty& getData(int row, int column) const
-        {
-            return data[convert2index(row, column)];
-        }
-
     public:
         Matrix()
             : data{ 0 }
@@ -68,6 +57,16 @@ namespace Matrix
         }
 
         ~Matrix() {}
+
+        void setData(int row, int column, const _Ty& value)
+        {
+            data[convert2index(row, column)] = value;
+        }
+
+        const _Ty& getData(int row, int column) const
+        {
+            return data[convert2index(row, column)];
+        }
 
         constexpr bool isVector() const { return (Height == 1 && Width > 1) || (Width == 1 && Height > 1); }
 
