@@ -73,6 +73,20 @@ namespace Matrix
 
         constexpr bool isSquare() const { return Height == Width && Height > 1; }
 
+        const bool isDiagonal() const
+        {
+            for (int column = 0; column < Width; column++)
+            {
+                for (int row = 0; row < Height; row++)
+                {
+                    if (row == column) continue;
+                    if (getData(row, column) != 0)
+                        return false;
+                }
+            }
+            return true;
+        }
+
         constexpr int getWidth() const { return Width; }
         constexpr int getHeight() const { return Height; }
 
