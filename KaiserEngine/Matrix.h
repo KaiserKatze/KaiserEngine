@@ -611,13 +611,9 @@ namespace Matrix
             _Ty sum = 0;
 
             for (int k = 0; k < P; k++)
-            {
-                _Ty a_ik = first[i][k];
-                _Ty b_kj = second[k][j];
-                sum += a_ik * b_kj;
-            }
+                sum += first.getData(i, k) * second.getData(k, j);
 
-            result[i][j] = sum;
+            result.setData(i, j, sum);
         }
         }
 
