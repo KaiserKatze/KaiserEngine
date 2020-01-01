@@ -45,7 +45,7 @@ namespace Matrix
             : Matrix()
         {
             count = std::min<int>(count, Height * Width);
-            memcpy(const_cast<_Ty*>(data), buffer, count * sizeof(_Ty));
+            memcpy(data, buffer, count * sizeof(_Ty));
         }
 
         using same_type = Matrix<_Ty, Height, Width>;
