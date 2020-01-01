@@ -171,11 +171,6 @@ namespace Matrix
             }
         }
 
-        _Ty& operator[](const std::pair<int, int>& pos)
-        {
-            return data[convert2index(pos)];
-        }
-
         using Transpose = Matrix<_Ty, Width, Height>;
 
         const Transpose transpose() const
