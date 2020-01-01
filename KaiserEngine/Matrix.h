@@ -127,13 +127,13 @@ namespace Matrix
             return result;
         }
 
-        same_type operator/(const _Ty& multiplier)
+        same_type operator/(const _Ty& divider)
         {
             same_type result;
 
             for (int i = 0; i < Width * Height; i++)
             {
-                result.data[i] = this->data[i] / multiplier;
+                result.data[i] = this->data[i] / divider;
             }
 
             return result;
