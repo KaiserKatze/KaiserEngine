@@ -163,11 +163,11 @@ namespace Matrix
             }
         }
 
-        void operator/=(const _Ty& multiplier)
+        void operator/=(const _Ty& divider)
         {
             for (int i = 0; i < Width * Height; i++)
             {
-                this->data[i] /= multiplier;
+                this->data[i] /= divider;
             }
         }
 
