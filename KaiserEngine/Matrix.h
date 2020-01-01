@@ -279,6 +279,97 @@ namespace Matrix
                 this->setData(i, i, 1);
         }
     };
+
+    template <>
+    class IdentityMatrix<int, 2>
+        : public MatrixQ<int, 2>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<int, 2>({ 1, 0, 0, 1 })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<int, 3>
+        : public MatrixQ<int, 3>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<int, 3>({ 1, 0, 0, 0, 1, 0, 0, 0, 1 })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<int, 4>
+        : public MatrixQ<int, 4>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<int, 4>({ 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<float, 2>
+        : public MatrixQ<float, 2>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<float, 2>({ 1.0f, 0.0f, 0.0f, 1.0f })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<float, 3>
+        : public MatrixQ<float, 3>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<float, 3>({ 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<float, 4>
+        : public MatrixQ<float, 4>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<float, 4>({ 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<double, 2>
+        : public MatrixQ<double, 2>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<double, 2>({ 1.0, 0.0, 0.0, 1.0 })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<double, 3>
+        : public MatrixQ<double, 3>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<double, 3>({ 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0 })
+        {}
+    };
+
+    template <>
+    class IdentityMatrix<double, 4>
+        : public MatrixQ<double, 4>
+    {
+    public:
+        IdentityMatrix()
+            : MatrixQ<double, 4>({ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 })
+        {}
+    };
+
     using Matrix2i = MatrixQ<int, 2>;
     using Matrix3i = MatrixQ<int, 3>;
     using Matrix4i = MatrixQ<int, 4>;
