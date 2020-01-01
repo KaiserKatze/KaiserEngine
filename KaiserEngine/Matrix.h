@@ -412,7 +412,7 @@ namespace Matrix
             for (int i = 0; i < Height; i++)
                 for (int j = 0; j < Width; j++)
                 {
-                    const inner_type& entry = getData(j, i);
+                    const inner_type& entry = getData(i, j);
                     for (int p = 0; p < entry.getHeight(); p++)
                         for (int q = 0; q < entry.getWidth(); q++)
                             result.setData(i * IHeight + p, j * IWidth + q, entry.getData(p, q));
