@@ -183,10 +183,10 @@ namespace Matrix
 
             for (int i = 0; i < Width; i++)
             {
-            for (int j = 0; j < Height; j++)
-            {
-                result[i][j] = data[convert2index(j, i)];
-            }
+                for (int j = 0; j < Height; j++)
+                {
+                    result[i][j] = data[convert2index(j, i)];
+                }
             }
 
             return result;
