@@ -313,9 +313,6 @@ namespace Matrix
             : Matrix()
         {
             const int count = std::min<int>(init.size(), Height * Width);
-            std::stringstream ss;
-            ss << "Matrix> Count: " << count << std::endl;
-            OutputDebugStringA(ss.str().c_str());
             int idx = 0;
             auto itr = init.begin();
             while (idx < count && itr != init.end())
