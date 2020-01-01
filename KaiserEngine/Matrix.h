@@ -265,6 +265,168 @@ namespace Matrix
         }
     };
 
+    // Outter: Height, Width
+    // Inner: IHeight, IWidth
+    template <typename _Ty, int IHeight, int IWidth, int Height, int Width>
+    class Matrix<Matrix<_Ty, IHeight, IWidth>, Height, Width>
+    {
+        static_assert(IHeight > 0, "Template argument 'IHeight' has negative value!");
+        static_assert(IWidth > 0, "Template argument 'IWidth' has negative value!");
+        static_assert(Height > 0, "Template argument 'Height' has negative value!");
+        static_assert(Width > 0, "Template argument 'Width' has negative value!");
+
+    public:
+        using inner_type = Matrix<_Ty, IHeight, IWidth>;
+        using same_type = Matrix<inner_type, Height, Width>;
+        using equivalent_type = Matrix<_Ty, Height * IHeight, Width * IWidth>;
+
+    private:
+        inner_type data[Height * Width];
+
+        int convert2index(const int& row, const int& column) const
+        {
+            if (row < 0)
+                throw std::domain_error("Invalid argument: row < 0!");
+            if (row >= Height)
+                throw std::domain_error("Invalid argument: row >= Height!");
+            if (column < 0)
+                throw std::domain_error("Invalid argument: column < 0!");
+            if (column >= Width)
+                throw std::domain_error("Invalid argument: column >= Width!");
+            return row + column * Height;   // column-first
+        }
+
+    public:
+        Matrix()
+        {
+            memset(data, 0, sizeof(data));
+        }
+
+        Matrix(std::initializer_list<inner_type> init)
+            : Matrix()
+        {
+            const int count = std::min<int>(init.size(), Height * Width);
+            std::stringstream ss;
+            ss << "Matrix> Count: " << count << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+            int idx = 0;
+            auto itr = init.begin();
+            while (idx < count && itr != init.end())
+            {
+                data[idx++] = *itr++;
+            }
+        }
+
+        ~Matrix() {}
+
+        constexpr int getHeight() const { return Height; }
+        constexpr int getWidth() const { return Width; }
+
+        void setData(int row, int column, const inner_type& value)
+        {
+            data[convert2index(row, column)] = value;
+        }
+
+        const inner_type& getData(int row, int column) const
+        {
+            return data[convert2index(row, column)];
+        }
+
+        same_type operator*(const _Ty& multiplier)
+        {
+            same_type result;
+
+            for (int i = 0; i < Width * Height; i++)
+            {
+                result.data[i] = this->data[i] * multiplier;
+            }
+
+            return result;
+        }
+
+        same_type operator/(const _Ty& divider)
+        {
+            same_type result;
+
+            for (int i = 0; i < Width * Height; i++)
+            {
+                result.data[i] = this->data[i] / divider;
+            }
+
+            return result;
+        }
+
+        void operator+=(same_type other)
+        {
+            for (int i = 0; i < Width * Height; i++)
+            {
+                this->data[i] += other.data[i];
+            }
+        }
+
+        void operator-=(same_type other)
+        {
+            for (int i = 0; i < Width * Height; i++)
+            {
+                this->data[i] -= other.data[i];
+            }
+        }
+
+        void operator*=(const _Ty& multiplier)
+        {
+            for (int i = 0; i < Width * Height; i++)
+            {
+                this->data[i] *= multiplier;
+            }
+        }
+
+        void operator/=(const _Ty& divider)
+        {
+            for (int i = 0; i < Width * Height; i++)
+            {
+                this->data[i] /= divider;
+            }
+        }
+
+        using Transpose = Matrix<Matrix<_Ty, IWidth, IHeight>, Width, Height>;
+
+        const Transpose transpose() const
+        {
+            Transpose result;
+
+            for (int i = 0; i < Transpose::getWidth(); i++) // result column
+            {
+                for (int j = 0; j < Transpose::getHeight(); j++) // result row
+                {
+                    result.setData(j, i, getData(i, j).transpose());
+                }
+            }
+
+            return result;
+        }
+
+        const equivalent_type merge() const
+        {
+            equivalent_type result;
+
+            for (int i = 0; i < Height; i++)
+                for (int j = 0; j < Width; j++)
+                {
+                    const inner_type& entry = getData(j, i);
+                    for (int p = 0; p < entry.getHeight(); p++)
+                        for (int q = 0; q < entry.getWidth(); q++)
+                            result.setData(i * IHeight + p, j * IWidth + q, entry.getData(p, q));
+                }
+
+            return result;
+        }
+
+        const std::string toString() const
+        {
+            return merge().toString();
+        }
+    };
+
     // squre matrix
     template <typename _Ty, int N>
     using MatrixQ = Matrix<_Ty, N, N>;
