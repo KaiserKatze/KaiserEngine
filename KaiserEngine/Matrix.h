@@ -204,7 +204,7 @@ namespace Matrix
             {
             for (int j = ColSrc; j < ColDst; j++)
             {
-                result[i - RowSrc][j - ColSrc] = data[convert2index(i, j)];
+                result.setData(i - RowSrc, j - ColSrc, getData(i, j));
             }
             }
 
