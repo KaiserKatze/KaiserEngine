@@ -15,6 +15,7 @@ Canvas(const MainWindow& window)
 Canvas::
 ~Canvas()
 {
+    this->dispose();
 }
 
 template <typename _Ty>
