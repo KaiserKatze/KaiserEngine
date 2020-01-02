@@ -10,9 +10,24 @@ const std::string slurp(std::ifstream& ifs)
 }
 
 Shader::
-Shader(const std::string& path)
-    : text{ slurp(std::ifstream{path}) }
+Shader(const std::string& path, const GLenum& type)
 {
+    const std::string text = slurp(std::ifstream{ path });
+    if (GLuint shaderId = glCreateShader(type))
+    {
+        const GLsizei count = 1;
+        const GLchar* string = text.c_str();
+        const GLint length = text.length();
+        glShaderSource(shaderId, count, &string, &length);
+        glCompileShader(shaderId);
+        GLint status{ 0 };
+        glGetShaderiv(shaderId, GL_COMPILE_STATUS, &status);
+        if (status == GL_FALSE)
+        {
+            ErrorExit(L"glCompileShader");
+            return;
+        }
+    }
 }
 
 Shader::
