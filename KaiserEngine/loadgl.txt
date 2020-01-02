@@ -19,6 +19,17 @@ wglMakeContextCurrentARB
 glDebugMessageCallback
 
 glCreateProgram
+glAttachShader
+glDetachShader
+glLinkProgram
 glUseProgram
+glDeleteProgram
+glIsProgram
 glUniformMatrix4dv
 glGetUniformLocation
+glGetProgramiv
+
+glCreateShader
+glShaderSource
+glCompileShader
+glGetShaderiv
