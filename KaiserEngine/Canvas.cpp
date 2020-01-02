@@ -264,3 +264,10 @@ render() const
 
     SwapBuffers(wglGetCurrentDC());
 }
+
+void
+Canvas::
+dispose() const
+{
+
+}
