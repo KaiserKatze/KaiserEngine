@@ -11,10 +11,9 @@ public:
     Canvas(const MainWindow& window);
     ~Canvas();
 
-    const RECT GetClientArea() const;
-
-    void Prepare() const;
-    void Render() const;
-    void Dispose() const;
+    void prepare() const;
+    void clear() const;
+    void render() const;
+    void dispose() const;
 };
 
