@@ -232,3 +232,17 @@ setup(const int& screenWidth, const int& screenHeight) const
         shaderId = 0;
     }
 }
+
+// @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
+void
+Canvas::
+prepare() const
+{
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(MessageCallback, nullptr);
+
+    // Setup an XNA like background color
+    glClearColor(0.4f, 0.6f, 0.9f, 0.0f);
+
+    this->setup();
+}
