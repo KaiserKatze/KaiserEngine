@@ -4,11 +4,8 @@
 
 class Shader
 {
-private:
-    const std::string text;
-
 public:
-    Shader(const std::string& path);
+    Shader(const std::string& path, const GLenum& type);
     ~Shader();
 };
 
