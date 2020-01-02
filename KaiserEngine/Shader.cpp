@@ -45,12 +45,12 @@ getID() const
 
 void
 ShaderProgram::
-LoadShader(const std::map<GLenum, std::string&>& map)
+LoadShader(const std::map<GLenum, std::string&>& shaders)
 {
     GLuint pId = glCreateProgram();
 
-    for (auto itr = map.begin();
-        itr != map.end();
+    for (auto itr = shaders.begin();
+        itr != shaders.end();
         itr++)
     {
         const Shader shader(itr->second, itr->first);
