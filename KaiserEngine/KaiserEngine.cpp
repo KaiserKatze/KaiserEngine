@@ -142,27 +142,6 @@ const GLuint vao_ix[] =
     2,3,7,6,
     3,0,4,7,
 };
-void gl_init(HWND hWnd)
-{
-    RECT rect = { 0 };
-    GetClientRect(hWnd, &rect);
-    const int screenWidth = rect.right - rect.left;
-    if (screenWidth <= 0)
-        throw 1;
-    const int screenHeight = rect.bottom - rect.top;
-    if (screenHeight <= 0)
-        throw 1;
-
-    // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
-    glClearColor(.4f, .6f, .9f, .0f);
-    glClearDepth(1.0f);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glShadeModel(GL_SMOOTH);
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_FASTEST);
-
-    kglViewport(screenWidth, screenHeight);
-}
 void vao_init()
 {
     GLuint i;
