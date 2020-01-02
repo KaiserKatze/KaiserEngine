@@ -82,3 +82,33 @@ GetUniformLocation(GLstring name) const
 {
     glGetUniformLocation(id, name);
 }
+
+void
+ShaderProgram::
+Setup(const std::map<GLenum, std::string&>& shaders,
+    const std::vector<std::string&>& attributes,
+    std::map<std::string&, GLint>& uniforms)
+{
+    LoadShader(shaders);
+
+    // get all attribute variable locations
+    for (auto itr = attributes.begin();
+        itr != attributes.end();
+        itr++)
+    {
+        auto index = std::distance(attributes.begin(), itr);
+        BindAttribute(index, itr->c_str());
+    }
+
+    LinkProgram();
+
+    // get all uniform variable locations
+    for (std::map<std::string&, GLint>::iterator itr = uniforms.begin();
+        itr != uniforms.end();
+        itr++)
+    {
+        std::string& uniformName{ itr->first };
+        GLint& uniformLocation{ itr->second };
+        uniformLocation = GetUniformLocation(uniformName.c_str());
+    }
+}
