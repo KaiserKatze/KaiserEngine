@@ -33,3 +33,5 @@ glCreateShader
 glShaderSource
 glCompileShader
 glGetShaderiv
+
+glBindAttribLocation
