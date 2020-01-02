@@ -87,6 +87,20 @@ MakeOrthographicProjectionMatrix(
 
 template <typename _Ty>
 const MatrixQ<_Ty, 4>
+MakeViewMatrix()
+{
+    return IdentityMatrix<_Ty, 4>();
+}
+
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
+MakeModelMatrix()
+{
+    return IdentityMatrix<_Ty, 4>();
+}
+
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
 MakeTranslationMatrix(const _Ty& x, const _Ty& y, const _Ty& z)
 {
     return MatrixQ<_Ty, 4>{
