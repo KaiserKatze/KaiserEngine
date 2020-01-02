@@ -50,6 +50,7 @@
 
 #include "include/glext.h"
 #include "include/wglext.h"
+using GLstring = const GLchar*;
 
 void ErrorExit(LPTSTR lpszFunction);
 
