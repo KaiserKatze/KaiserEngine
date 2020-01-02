@@ -253,3 +253,14 @@ clear() const
 {
     glClear(GL_COLOR_BUFFER_BIT);
 }
+
+void
+Canvas::
+render() const
+{
+    this->clear();
+
+    // TODO
+
+    SwapBuffers(wglGetCurrentDC());
+}
