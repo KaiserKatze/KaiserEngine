@@ -55,6 +55,38 @@ MakePerspectiveProjectionMatrix(
 
 template <typename _Ty>
 const MatrixQ<_Ty, 4>
+MakeOrthographicProjectionMatrix(
+    const _Ty& right,
+    const _Ty& left,
+    const _Ty& top,
+    const _Ty& bottom,
+    const _Ty& zFar,
+    const _Ty& zNear)
+{
+    return MatrixQ<_Ty, 4>{
+        2 / (right - left), 0, 0, 0,
+        0, 2 / (top - bottom), 0, 0,
+        0, 0, -2 / (zFar - zNear), 0,
+        (right + left) / (left - right), (top + bottom) / (bottom - top), (zFar + zNear) / (zNear - zFar), 1,
+    };
+}
+
+// simplified because:
+// (1) right + left = 0
+// (2) top + bottom = 0
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
+MakeOrthographicProjectionMatrix(
+    const _Ty& right,
+    const _Ty& top,
+    const _Ty& zFar,
+    const _Ty& zNear)
+{
+    return MakeOrthographicProjectionMatrix(right, -right, top, -top, zFar, zNear);
+}
+
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
 MakeTranslationMatrix(const _Ty& x, const _Ty& y, const _Ty& z)
 {
     return MatrixQ<_Ty, 4>{
