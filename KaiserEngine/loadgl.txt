@@ -35,3 +35,5 @@ glCompileShader
 glGetShaderiv
 
 glBindAttribLocation
+glGetAttribLocation
+glValidateProgram
