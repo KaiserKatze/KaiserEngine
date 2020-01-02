@@ -18,6 +18,41 @@ Canvas::
     this->dispose();
 }
 
+// @see: https://www.scratchapixel.com/
+// @see: http://www.songho.ca/opengl/gl_projectionmatrix.html
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
+MakePerspectiveProjectionMatrix(
+    const _Ty& aspectRatio,
+    const _Ty& fieldOfView,
+    const _Ty& zFar,
+    const _Ty& zNear)
+{
+    const _Ty yScale = 1 / std::tan(fieldOfView / 2);
+    const _Ty xScale = yScale / aspectRatio;
+    const _Ty negatvieFrustumLength = zNear - zFar;
+    MatrixQ<_Ty, 4> mq4;
+    mq4.setData(0, 0, xScale);
+    mq4.setData(1, 1, yScale);
+    mq4.setData(2, 2, (zFar + zNear) / negatvieFrustumLength);
+    mq4.setData(2, 3, (2 * zFar * zNear) / negatvieFrustumLength);
+    mq4.setData(3, 2, -1);
+
+    return mq4;
+}
+
+template <typename _Ty>
+const MatrixQ<_Ty, 4>
+MakePerspectiveProjectionMatrix(
+    const _Ty& width, const _Ty& height,
+    const _Ty& fieldOfView,
+    const _Ty& zFar,
+    const _Ty& zNear)
+{
+    const _Ty aspectRatio = width / height;
+    return MakePerspectiveProjectionMatrix<_Ty>(aspectRatio, fieldOfView, zFar, zNear);
+}
+
 template <typename _Ty>
 const MatrixQ<_Ty, 4>
 MakeTranslationMatrix(const _Ty& x, const _Ty& y, const _Ty& z)
