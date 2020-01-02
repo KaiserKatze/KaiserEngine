@@ -2,10 +2,9 @@
 #include "EventListener.h"
 #include "UserInput.h"
 #include "Window.h"
-#include "loadgl.h"
 
 EventListener::
-EventListener(const EventHandler* handler, const HWND& handle)
+EventListener(const EventHandler& handler, const HWND& handle)
     : hdlr{ handler }
     , hWnd{ handle }
 {
@@ -24,7 +23,7 @@ getWindowHandle() const
 }
 
 KeyboardEventListener::
-KeyboardEventListener(const EventHandler* hdlr, const HWND& hWnd)
+KeyboardEventListener(const EventHandler& hdlr, const HWND& hWnd)
     : EventListener(hdlr, hWnd)
 {
 }
@@ -58,7 +57,7 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
 }
 
 MouseEventListener::
-MouseEventListener(const EventHandler* hdlr, const HWND& hWnd)
+MouseEventListener(const EventHandler& hdlr, const HWND& hWnd)
     : EventListener(hdlr, hWnd)
 {
 }
@@ -100,7 +99,7 @@ OnClick(const MouseEvent) const
 }
 
 WindowEventListener::
-WindowEventListener(const EventHandler* hdlr, const HWND& hWnd)
+WindowEventListener(const EventHandler& hdlr, const HWND& hWnd)
     : EventListener(hdlr, hWnd)
 {
 }
