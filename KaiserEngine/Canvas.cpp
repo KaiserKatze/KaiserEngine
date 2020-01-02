@@ -4,6 +4,7 @@
 #include "loadgl.h"
 
 using namespace Matrix;
+using mat4 = MatrixQ<double, 4>;
 
 Canvas::
 Canvas(const MainWindow& window)
