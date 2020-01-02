@@ -35,3 +35,10 @@ Shader::
 ~Shader()
 {
 }
+
+const GLuint
+Shader::
+getID() const
+{
+    return id;
+}
