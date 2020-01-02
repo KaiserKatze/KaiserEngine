@@ -2,6 +2,7 @@
 #include "Canvas.h"
 #include "Matrix.h"
 #include "loadgl.h"
+#include "Shader.h"
 
 using namespace Matrix;
 using mat4 = MatrixQ<double, 4>;
