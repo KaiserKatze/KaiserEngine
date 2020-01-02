@@ -27,5 +27,5 @@ public:
     void LinkProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
 
-    void Setup(const std::map<GLenum, std::string&>& shaders, const std::vector<std::string&>& attributes);
+    void Setup(const std::map<GLenum, std::string&>& shaders, const std::vector<std::string&>& attributes, std::map<std::string&, GLint>& uniforms);
 };
