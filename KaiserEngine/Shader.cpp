@@ -27,6 +27,7 @@ Shader(const std::string& path, const GLenum& type)
             ErrorExit(L"glCompileShader");
             return;
         }
+        id = shaderId;
     }
 }
 
