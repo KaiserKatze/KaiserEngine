@@ -16,15 +16,6 @@ Canvas::
 {
 }
 
-const RECT
-Canvas::
-GetClientArea() const
-{
-    RECT rect = { 0 };
-    GetClientRect(parent.getWindowHandle(), &rect);
-    return rect;
-}
-
 template <typename _Ty>
 const MatrixQ<_Ty, 4>
 MakeTranslationMatrix(const _Ty& x, const _Ty& y, const _Ty& z)
