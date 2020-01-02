@@ -13,8 +13,8 @@ public:
 
     const RECT GetClientArea() const;
 
-    void Prepare();
-    void Paint();
-    void Dispose();
+    void Prepare() const;
+    void Render() const;
+    void Dispose() const;
 };
 
