@@ -3,8 +3,7 @@
 #include "Matrix.h"
 #include "loadgl.h"
 
-template <typename _Ty, int N>
-using MatrixQ = Matrix::MatrixQ<_Ty, N>;
+using namespace Matrix;
 
 Canvas::
 Canvas(const MainWindow& window)
