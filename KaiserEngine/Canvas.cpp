@@ -165,3 +165,19 @@ MakeRotationMatrix_z(const _Ty& Rz)
     };
 }
 
+
+static
+void
+CALLBACK
+MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+    std::stringstream ss;
+    ss << std::hex << "GL CALLBACK: "
+        << (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "")
+        << " type = 0x" << type
+        << ", severity = 0x" << severity
+        << ", message = " << message
+        << std::endl;
+    OutputDebugStringA(ss.str().c_str());
+}
+
