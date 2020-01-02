@@ -489,6 +489,10 @@ namespace Matrix
     template <typename _Ty, int N>
     using MatrixQ = Matrix<_Ty, N, N>;
 
+    // vector
+    template <typename _Ty, int N>
+    using Vector = Matrix<_Ty, N, 1>;
+
     // identity matrix
 
     template <typename _Ty, int N>
