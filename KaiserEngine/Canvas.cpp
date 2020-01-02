@@ -181,3 +181,54 @@ MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei 
     OutputDebugStringA(ss.str().c_str());
 }
 
+
+void
+Canvas::
+setup() const
+{
+    RECT rect = { 0 };
+    GetClientRect(parent.getWindowHandle(), &rect);
+    const LONG screenWidth = rect.right - rect.left;
+    const LONG screenHeight = rect.bottom - rect.top;
+    this->setup(screenWidth, screenHeight);
+}
+
+void
+Canvas::
+setup(const int& screenWidth, const int& screenHeight) const
+{
+    static const int trimX = 10;
+    static const int trimY = 10;
+
+    if (screenWidth <= 0) throw std::exception("Invalid screen width!");
+    if (screenHeight <= 0) throw std::exception("Invalid screen height!");
+
+    glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
+
+    // make matrices
+    const mat4 mp = MakePerspectiveProjectionMatrix(
+        static_cast<double>(screenWidth),
+        static_cast<double>(screenHeight),
+        degrees2radians(60.0),
+        100.0,
+        0.1
+    );
+    const mat4 mv = MakeViewMatrix<double>();
+    const mat4 mm = MakeModelMatrix<double>();
+    // load matrices into OpenGL
+    GLuint shaderId{ 0 };
+    shaderId = glCreateProgram();
+    if (shaderId)
+    {
+        glUseProgram(shaderId);
+        auto mp_loc = glGetUniformLocation(shaderId, "matrix_projection");
+        auto mv_loc = glGetUniformLocation(shaderId, "matrix_view");
+        auto mm_loc = glGetUniformLocation(shaderId, "matrix_model");
+
+        glUniformMatrix4dv(mp_loc, 1, GL_FALSE, mp.getData().data());
+        glUniformMatrix4dv(mv_loc, 1, GL_FALSE, mv.getData().data());
+        glUniformMatrix4dv(mm_loc, 1, GL_FALSE, mm.getData().data());
+        glUseProgram(0);
+        shaderId = 0;
+    }
+}
