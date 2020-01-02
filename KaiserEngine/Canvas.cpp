@@ -246,3 +246,10 @@ prepare() const
 
     this->setup();
 }
+
+void
+Canvas::
+clear() const
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+}
