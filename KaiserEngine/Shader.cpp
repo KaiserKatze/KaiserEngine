@@ -42,3 +42,43 @@ getID() const
 {
     return id;
 }
+
+void
+ShaderProgram::
+LoadShader(const std::map<GLenum, std::string&>& map)
+{
+    GLuint pId = glCreateProgram();
+
+    for (auto itr = map.begin();
+        itr != map.end();
+        itr++)
+    {
+        const Shader shader(itr->second, itr->first);
+        GLuint sId = shader.getID();
+        glAttachShader(pId, sId);
+    }
+
+    id = pId;
+}
+
+void
+ShaderProgram::
+BindAttribute(GLuint index, GLstring name) const
+{
+    glBindAttribLocation(id, index, name);
+}
+
+void
+ShaderProgram::
+LinkProgram() const
+{
+    glLinkProgram(id);
+    glValidateProgram(id);
+}
+
+const GLint
+ShaderProgram::
+GetUniformLocation(GLstring name) const
+{
+    glGetUniformLocation(id, name);
+}
