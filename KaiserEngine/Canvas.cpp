@@ -165,6 +165,16 @@ MakeRotationMatrix_z(const _Ty& Rz)
     };
 }
 
+template <typename _Ty>
+const Vector<_Ty, 4>
+Transform(const MatrixQ<_Ty, 4>& TranslationMatrix,
+    const MatrixQ<_Ty, 4>& RotationMatrix,
+    const MatrixQ<_Ty, 4>& ScaleMatrix,
+    const Vector<_Ty, 4>& OriginalVector)
+{
+    const Vector<_Ty, 4> TransformedVector = TranslationMatrix * RotationMatrix * ScaleMatrix * OriginalVector;
+    return TransformedVector;
+}
 
 static
 void
