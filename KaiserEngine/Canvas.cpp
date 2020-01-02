@@ -242,6 +242,22 @@ setup(const int& screenWidth, const int& screenHeight) const
         glUseProgram(0);
         shaderId = 0;
     }
+
+    // setup shaders
+    std::map<GLenum, std::string&> shaders;
+    shaders[GL_VERTEX_SHADER] = "vertex.shader";
+
+    std::vector<std::string&> attributes;
+    attributes.push_back(std::string{ "in_position" });
+    attributes.push_back(std::string{ "in_color" });
+
+    std::map<std::string&, GLint> uniforms;
+    uniforms[std::string{ "matrix_projection" }] = 0;
+    uniforms[std::string{ "matrix_view" }] = 0;
+    uniforms[std::string{ "matrix_model" }] = 0;
+
+    ShaderProgram shaderProgram;
+    shaderProgram.Setup(shaders, attributes, uniforms);
 }
 
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
