@@ -15,6 +15,10 @@ public:
     LRESULT TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
     void RemoveAllListeners();
     LPEventListener& GetListeners();
+
+    template <typename WindowType>
+    const WindowType* AsWindow() const;
+
 private:
     LPEventListener listeners;
 };
