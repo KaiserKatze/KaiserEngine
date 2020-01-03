@@ -474,6 +474,8 @@ private:
 public:
     MainWindow(const HINSTANCE& hInstance);
     ~MainWindow();
+
+    const std::unique_ptr<Canvas>& getCanvas() const;
 };
 
 

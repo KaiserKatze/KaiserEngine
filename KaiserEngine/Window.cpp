@@ -228,6 +228,13 @@ MainWindow::
 {
 }
 
+const std::unique_ptr<Canvas>&
+MainWindow::
+getCanvas() const
+{
+    return canvas;
+}
+
 
 AttributeListFactory::
 AttributeListFactory()
