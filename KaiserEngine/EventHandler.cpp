@@ -37,14 +37,3 @@ GetListeners()
 {
     return listeners;
 }
-
-template <typename WindowType>
-const WindowType*
-EventHandler::
-AsWindow() const
-{
-    // (WindowType) -> BaseWindow -> EventManager -> EventHandler
-    // downcast pointer to `eventHandler`
-    // from `const EventHandler*` to `const WindowType*`
-    return dynamic_cast<const WindowType*>(this);
-}
