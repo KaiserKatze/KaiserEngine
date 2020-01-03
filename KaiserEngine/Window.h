@@ -449,6 +449,14 @@ class BaseWindow abstract
     , public EventManager
 {
 public:
+    BaseWindow()
+    {
+    }
+
+    virtual ~BaseWindow()
+    {
+    }
+
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) override
     {
         // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
