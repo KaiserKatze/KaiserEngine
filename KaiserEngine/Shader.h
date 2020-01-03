@@ -22,10 +22,10 @@ public:
     ShaderProgram() {}
     ~ShaderProgram() {}
 
-    void LoadShader(const std::map<GLenum, std::string&>& shaders);
+    void LoadShader(const std::map<GLenum, std::string>& shaders);
     void BindAttribute(GLuint index, GLstring name) const;
     void LinkProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
 
-    void Setup(const std::map<GLenum, std::string&>& shaders, const std::vector<std::string&>& attributes, std::map<std::string&, GLint>& uniforms);
+    void Setup(const std::map<GLenum, std::string>& shaders, const std::vector<std::string>& attributes, std::map<std::string, GLint>& uniforms);
 };

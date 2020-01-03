@@ -45,12 +45,12 @@ getID() const
 
 void
 ShaderProgram::
-LoadShader(const std::map<GLenum, std::string&>& shaders)
+LoadShader(const std::map<GLenum, std::string>& shaders)
 {
     GLuint pId = glCreateProgram();
 
-    for (auto itr = shaders.begin();
-        itr != shaders.end();
+    for (auto itr = shaders.cbegin();
+        itr != shaders.cend();
         itr++)
     {
         const Shader shader(itr->second, itr->first);
@@ -80,35 +80,35 @@ const GLint
 ShaderProgram::
 GetUniformLocation(GLstring name) const
 {
-    glGetUniformLocation(id, name);
+    return glGetUniformLocation(id, name);
 }
 
 void
 ShaderProgram::
-Setup(const std::map<GLenum, std::string&>& shaders,
-    const std::vector<std::string&>& attributes,
-    std::map<std::string&, GLint>& uniforms)
+Setup(const std::map<GLenum, std::string>& shaders,
+    const std::vector<std::string>& attributes,
+    std::map<std::string, GLint>& uniforms)
 {
     LoadShader(shaders);
 
     // get all attribute variable locations
-    for (std::vector<std::string&>::const_iterator itr = attributes.cbegin();
+    for (auto itr = attributes.cbegin();
         itr != attributes.cend();
         itr++)
     {
         ptrdiff_t index = std::distance(attributes.cbegin(), itr);
-        std::string& attributeName = *itr;
+        const std::string& attributeName{ *itr };
         BindAttribute(static_cast<GLuint>(index), attributeName.c_str());
     }
 
     LinkProgram();
 
     // get all uniform variable locations
-    for (std::map<std::string&, GLint>::iterator itr = uniforms.begin();
+    for (auto itr = uniforms.begin();
         itr != uniforms.end();
         itr++)
     {
-        std::string& uniformName{ itr->first };
+        const std::string& uniformName{ itr->first };
         GLint& uniformLocation{ itr->second };
         uniformLocation = GetUniformLocation(uniformName.c_str());
     }
