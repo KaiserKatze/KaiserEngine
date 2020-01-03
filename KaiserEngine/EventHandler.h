@@ -11,7 +11,7 @@ class EventHandler
 {
 public:
     EventHandler();
-    ~EventHandler();
+    virtual ~EventHandler();
     LRESULT TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
     void RemoveAllListeners();
     LPEventListener& GetListeners();
