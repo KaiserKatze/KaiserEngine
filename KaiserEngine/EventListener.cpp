@@ -185,7 +185,7 @@ OnDestroy() const
 
 LRESULT
 WindowEventListener::
-OnResize(int newWdth, int newHeight) const
+OnResize(int newWidth, int newHeight) const
 {
     return 0;
 }
