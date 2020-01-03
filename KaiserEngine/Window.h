@@ -4,7 +4,7 @@
 #include "Canvas.h"
 
 template <typename WindowType>
-class AbstractWindow abstract
+class AbstractWindow
 {
 private:
     std::atomic_bool isFullscreen;
