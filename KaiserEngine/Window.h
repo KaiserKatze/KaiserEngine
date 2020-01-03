@@ -243,7 +243,7 @@ protected:
         return result;
     }
 
-public:
+protected:
     AbstractWindow() :
         hWnd(nullptr),
         hdc(nullptr),
@@ -256,6 +256,8 @@ public:
     {}
 
     virtual ~AbstractWindow() {}
+
+public:
 
     HWND getWindowHandle() const
     {
@@ -445,10 +447,10 @@ public:
 
 template <typename WindowType>
 class BaseWindow
-    : public virtual AbstractWindow<WindowType>
-    , public virtual EventManager
+    : public AbstractWindow<WindowType>
+    , public EventManager
 {
-public:
+protected:
     BaseWindow()
         : AbstractWindow<WindowType>()
         , EventManager()
@@ -459,6 +461,7 @@ public:
     {
     }
 
+public:
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) override
     {
         // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
@@ -467,7 +470,7 @@ public:
 };
 
 class FakeWindow
-    : public virtual BaseWindow<FakeWindow>
+    : public BaseWindow<FakeWindow>
 {
 public:
     FakeWindow(const HINSTANCE& hInstance);
@@ -478,7 +481,7 @@ public:
 class Canvas;
 
 class MainWindow
-    : public virtual BaseWindow<MainWindow>
+    : public BaseWindow<MainWindow>
 {
 private:
     std::unique_ptr<Canvas> canvas;
