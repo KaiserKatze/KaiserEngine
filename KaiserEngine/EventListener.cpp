@@ -192,6 +192,11 @@ LRESULT
 WindowEventListener::
 OnResize(int newWidth, int newHeight) const
 {
+    const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
+    if (window)
+    {
+        window->getCanvas()->setup(newWidth, newHeight);
+    }
     return 0;
 }
 
