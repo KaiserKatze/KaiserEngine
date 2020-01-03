@@ -50,7 +50,7 @@ protected:
     LRESULT OnCreate() const;
     LRESULT OnClose() const;
     LRESULT OnDestroy() const;
-    LRESULT OnResize(int newWdth, int newHeight) const;
+    LRESULT OnResize(int newWidth, int newHeight) const;
     LRESULT OnActivate(bool state) const;
     LRESULT OnPaint() const;
     LRESULT OnTimer() const;
