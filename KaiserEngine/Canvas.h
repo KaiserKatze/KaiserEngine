@@ -9,12 +9,12 @@ class Canvas
 private:
     const MainWindow& parent;
 
-    // Setup viewport
-    void setup() const;
-
 public:
     Canvas(const MainWindow& window);
     ~Canvas();
+
+    // Setup viewport
+    void setup() const;
 
     // Setup viewport
     void setup(const int& width, const int& height) const;
