@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EventManager.h"
+#include "Canvas.h"
 
 template <typename WindowType>
 class AbstractWindow abstract
@@ -461,13 +462,20 @@ public:
     ~FakeWindow();
 };
 
+
+class Canvas;
+
 class MainWindow
     : public BaseWindow<MainWindow>
 {
+private:
+    std::unique_ptr<Canvas> canvas;
+
 public:
     MainWindow(const HINSTANCE& hInstance);
     ~MainWindow();
 };
+
 
 class AttributeListFactory
 {

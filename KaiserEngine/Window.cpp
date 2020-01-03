@@ -218,6 +218,8 @@ MainWindow(const HINSTANCE& hInstance)
         Setup(getWindowHandle());
         // show window
         ShowWindow(true);
+
+        canvas = std::make_unique<Canvas>(*this);
     }
 }
 

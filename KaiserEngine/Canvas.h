@@ -2,6 +2,8 @@
 
 #include "Window.h"
 
+class MainWindow;
+
 class Canvas
 {
 private:
