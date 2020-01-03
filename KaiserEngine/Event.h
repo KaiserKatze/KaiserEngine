@@ -19,6 +19,7 @@ class MouseEvent
 {
 public:
     MouseEvent(UINT message, WPARAM wParam, LPARAM lParam);
+    ~MouseEvent();
     MouseButton getButton() const;
     const POINT getPoint() const;
     bool isCtrlKeyDown() const;
