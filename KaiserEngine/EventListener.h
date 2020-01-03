@@ -9,7 +9,7 @@ class EventListener abstract
 public:
     EventListener(const EventHandler& eventHandler, const HWND& windowHandle);
     EventListener(const EventListener&) = delete;
-    ~EventListener();
+    virtual ~EventListener();
     virtual LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const = 0;
 protected:
     const EventHandler& getEventHandler() const;
