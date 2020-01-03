@@ -12,6 +12,7 @@ public:
     ~EventListener();
     virtual LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const = 0;
 protected:
+    const EventHandler& getEventHandler() const;
     const HWND& getWindowHandle() const;
 private:
     const EventHandler& hdlr;

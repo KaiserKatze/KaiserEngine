@@ -15,6 +15,13 @@ EventListener::
 {
 }
 
+const EventHandler&
+EventListener::
+getEventHandler() const
+{
+    return hdlr;
+}
+
 const HWND&
 EventListener::
 getWindowHandle() const
