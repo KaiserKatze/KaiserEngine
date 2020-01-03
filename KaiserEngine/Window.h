@@ -445,8 +445,8 @@ public:
 
 template <typename WindowType>
 class BaseWindow
-    : public AbstractWindow<WindowType>
-    , public EventManager
+    : public virtual AbstractWindow<WindowType>
+    , public virtual EventManager
 {
 public:
     BaseWindow()
@@ -467,7 +467,7 @@ public:
 };
 
 class FakeWindow
-    : public BaseWindow<FakeWindow>
+    : public virtual BaseWindow<FakeWindow>
 {
 public:
     FakeWindow(const HINSTANCE& hInstance);
@@ -478,7 +478,7 @@ public:
 class Canvas;
 
 class MainWindow
-    : public BaseWindow<MainWindow>
+    : public virtual BaseWindow<MainWindow>
 {
 private:
     std::unique_ptr<Canvas> canvas;
