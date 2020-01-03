@@ -4,7 +4,7 @@
 #include "Event.h"
 #include "EventHandler.h"
 
-class EventListener abstract
+class EventListener
 {
 public:
     EventListener(const EventHandler& eventHandler, const HWND& windowHandle);
