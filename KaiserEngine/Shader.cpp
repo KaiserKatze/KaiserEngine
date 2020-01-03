@@ -92,12 +92,13 @@ Setup(const std::map<GLenum, std::string&>& shaders,
     LoadShader(shaders);
 
     // get all attribute variable locations
-    for (auto itr = attributes.begin();
-        itr != attributes.end();
+    for (std::vector<std::string&>::const_iterator itr = attributes.cbegin();
+        itr != attributes.cend();
         itr++)
     {
-        auto index = std::distance(attributes.begin(), itr);
-        BindAttribute(index, itr->c_str());
+        ptrdiff_t index = std::distance(attributes.cbegin(), itr);
+        std::string& attributeName = *itr;
+        BindAttribute(static_cast<GLuint>(index), attributeName.c_str());
     }
 
     LinkProgram();
