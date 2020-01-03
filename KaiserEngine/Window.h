@@ -255,6 +255,8 @@ public:
         isWindowClosing(false)
     {}
 
+    virtual ~AbstractWindow() {}
+
     HWND getWindowHandle() const
     {
         return hWnd;
