@@ -444,7 +444,7 @@ public:
 };
 
 template <typename WindowType>
-class BaseWindow abstract
+class BaseWindow
     : public AbstractWindow<WindowType>
     , public EventManager
 {
