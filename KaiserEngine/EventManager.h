@@ -5,7 +5,7 @@
 #include "EventHandler.h"
 
 class EventManager
-    : public EventHandler
+    : public virtual EventHandler
 {
 public:
     EventManager();
