@@ -190,7 +190,7 @@ OnDestroy() const
 
 LRESULT
 WindowEventListener::
-OnResize(int newWidth, int newHeight) const
+OnResize(const int& newWidth, const int& newHeight) const
 {
     const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
     if (window)
