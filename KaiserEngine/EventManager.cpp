@@ -3,6 +3,7 @@
 
 EventManager::
 EventManager()
+    : EventHandler()
 {
 }
 
