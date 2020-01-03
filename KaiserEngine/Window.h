@@ -450,6 +450,8 @@ class BaseWindow
 {
 public:
     BaseWindow()
+        : AbstractWindow<WindowType>()
+        , EventManager()
     {
     }
 
