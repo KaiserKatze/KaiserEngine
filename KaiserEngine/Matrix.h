@@ -56,7 +56,7 @@ namespace Matrix
         {
         }
 
-        ~Matrix() {}
+        virtual ~Matrix() {}
 
         void setData(int row, int column, const _Ty& value)
         {
@@ -505,6 +505,10 @@ namespace Matrix
         {
             for (int i = 0; i < N; i++)
                 this->setData(i, i, 1);
+        }
+
+        virtual ~IdentityMatrix()
+        {
         }
     };
 
