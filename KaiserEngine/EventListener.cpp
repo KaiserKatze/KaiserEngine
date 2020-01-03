@@ -211,6 +211,11 @@ LRESULT
 WindowEventListener::
 OnPaint() const
 {
+    const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
+    if (window)
+    {
+        window->getCanvas()->render();
+    }
     return 0;
 }
 
