@@ -12,6 +12,11 @@ MouseEvent(UINT message, WPARAM wParam, LPARAM lParam)
 {
 }
 
+MouseEvent::
+~MouseEvent()
+{
+}
+
 MouseButton
 MouseEvent::
 getButton() const
