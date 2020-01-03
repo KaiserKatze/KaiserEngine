@@ -9,7 +9,7 @@ class EventManager
 {
 public:
     EventManager();
-    ~EventManager();
+    virtual ~EventManager();
     void Setup(const HWND& hWnd);
     void Dispose();
 };
