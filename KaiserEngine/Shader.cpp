@@ -83,18 +83,23 @@ void
 ShaderProgram::
 LoadShader(const std::map<GLenum, std::string>& shaders)
 {
-    GLuint pId = glCreateProgram();
-
-    for (auto itr = shaders.cbegin();
-        itr != shaders.cend();
-        itr++)
+    if (GLuint pId = glCreateProgram())
     {
-        const Shader shader(itr->second, itr->first);
-        GLuint sId = shader.getID();
-        glAttachShader(pId, sId);
-    }
+        DetectGLError("glCreateProgram");
 
-    id = pId;
+        for (auto itr = shaders.cbegin();
+            itr != shaders.cend();
+            itr++)
+        {
+            const Shader shader(itr->second, itr->first);
+            GLuint sId = shader.getID();
+            glAttachShader(pId, sId);
+            DetectGLError("glAttachShader");
+        }
+
+        id = pId;
+    }
+    throw std::exception("Fail to load shader!");
 }
 
 void
@@ -102,6 +107,7 @@ ShaderProgram::
 BindAttribute(GLuint index, GLstring name) const
 {
     glBindAttribLocation(id, index, name);
+    DetectGLError("glBindAttribLocation");
 }
 
 void
@@ -109,14 +115,18 @@ ShaderProgram::
 LinkProgram() const
 {
     glLinkProgram(id);
+    DetectGLError("glLinkProgram");
     glValidateProgram(id);
+    DetectGLError("glValidateProgram");
 }
 
 const GLint
 ShaderProgram::
 GetUniformLocation(GLstring name) const
 {
-    return glGetUniformLocation(id, name);
+    GLint result = glGetUniformLocation(id, name);
+    DetectGLError("glGetUniformLocation");
+    return result;
 }
 
 void
