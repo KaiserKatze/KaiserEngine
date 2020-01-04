@@ -26,7 +26,11 @@ Shader(const std::string& path, const GLenum& type)
     {
         {
             std::stringstream ss;
-            ss << "Generated shader ID = " << shaderId << std::endl;
+            ss << "Generated shader ID = " << shaderId
+                << " "
+                << std::boolalpha
+                << static_cast<bool>(glIsShader(shaderId))
+                << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
         DetectGLError("glCreateShader");
