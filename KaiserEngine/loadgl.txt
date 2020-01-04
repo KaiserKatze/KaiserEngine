@@ -33,6 +33,9 @@ glGetProgramiv
 glCreateShader
 glShaderSource
 glCompileShader
+glReleaseShaderCompiler
+glDeleteShader
+glIsShader
 glGetShaderiv
 
 glBindAttribLocation
