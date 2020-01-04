@@ -12,13 +12,15 @@ const std::string slurp(std::ifstream& ifs)
 Shader::
 Shader(const std::string& path, const GLenum& type)
 {
+    if (path.empty())
+        throw std::invalid_argument("Invalid argument 'path'!");
     switch (type)
     {
     case GL_VERTEX_SHADER:
     case GL_FRAGMENT_SHADER:
         break;
     default:
-        throw std::exception("Invalid shader type!");
+        throw std::invalid_argument("Invalid argument 'type'!");
     }
 
     const std::string text = slurp(std::ifstream{ path });
