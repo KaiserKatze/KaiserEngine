@@ -215,6 +215,7 @@ setup(const int& screenWidth, const int& screenHeight) const
     if (screenHeight <= 0) throw std::exception("Invalid screen height!");
 
     glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
+    DetectGLError("glViewport");
 
     // make matrices
     const mat4 mp = MakePerspectiveProjectionMatrix(
@@ -227,19 +228,26 @@ setup(const int& screenWidth, const int& screenHeight) const
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
     // load matrices into OpenGL
-    GLuint shaderId{ 0 };
-    shaderId = glCreateProgram();
-    if (shaderId)
+    if (GLuint shaderId = glCreateProgram())
     {
+        DetectGLError("glCreateProgram");
         glUseProgram(shaderId);
+        DetectGLError("glUseProgram");
         auto mp_loc = glGetUniformLocation(shaderId, "matrix_projection");
+        DetectGLError("glGetUniformLocation(shaderId, \"matrix_projection\")");
         auto mv_loc = glGetUniformLocation(shaderId, "matrix_view");
+        DetectGLError("glGetUniformLocation(shaderId, \"matrix_view\")");
         auto mm_loc = glGetUniformLocation(shaderId, "matrix_model");
+        DetectGLError("glGetUniformLocation(shaderId, \"matrix_model\")");
 
         glUniformMatrix4dv(mp_loc, 1, GL_FALSE, mp.getData().data());
+        DetectGLError("glUniformMatrix4dv");
         glUniformMatrix4dv(mv_loc, 1, GL_FALSE, mv.getData().data());
+        DetectGLError("glUniformMatrix4dv");
         glUniformMatrix4dv(mm_loc, 1, GL_FALSE, mm.getData().data());
+        DetectGLError("glUniformMatrix4dv");
         glUseProgram(0);
+        DetectGLError("glUseProgram");
         shaderId = 0;
     }
 
