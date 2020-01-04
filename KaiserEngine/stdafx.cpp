@@ -96,7 +96,13 @@ void DetectGLError(int mark)
     ss << mark;
     ss << ' ';
     if (err != GL_NO_ERROR)
-        ss << codelist[err & 0xf];
+    {
+        err &= 0xf;
+        if (err < sizeof(codelist) / sizeof(LPCSTR))
+            ss << codelist[err];
+        else
+            ss << "GL_UNKNOWN_ERROR";
+    }
     else
         ss << "GL_NO_ERROR";
     ss << ' ';
