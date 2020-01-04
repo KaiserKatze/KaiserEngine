@@ -24,6 +24,11 @@ Shader(const std::string& path, const GLenum& type)
     const std::string text = slurp(std::ifstream{ path });
     if (GLuint shaderId = glCreateShader(type))
     {
+        {
+            std::stringstream ss;
+            ss << "Generated shader ID = " << shaderId << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
         const GLsizei count = 1;
         const GLchar* string = text.c_str();
         const GLint length = text.length();
