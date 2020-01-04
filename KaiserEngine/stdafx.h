@@ -57,4 +57,4 @@ void ErrorExit(LPTSTR lpszFunction);
 
 void * GetAnyGLFuncAddress(const char * name);
 void CleanDll();
-void DetectGLError(int mark);
+void DetectGLError(const char*);
