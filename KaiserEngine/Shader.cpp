@@ -55,6 +55,13 @@ Shader::
     if (id) glDeleteShader(id);
 }
 
+const bool
+Shader::
+isShader() const
+{
+    return id != 0 && glIsShader(id);
+}
+
 const GLuint
 Shader::
 getID() const
