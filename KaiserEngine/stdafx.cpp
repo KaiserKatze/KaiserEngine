@@ -7,8 +7,6 @@
 // TODO: reference any additional headers you need in STDAFX.H
 // and not in this file
 
-#include <strsafe.h>
-
 // @see: https://docs.microsoft.com/en-us/windows/win32/debug/retrieving-the-last-error-code
 void ErrorExit(LPTSTR lpszFunction)
 {
