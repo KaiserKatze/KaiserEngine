@@ -52,6 +52,7 @@ Shader(const std::string& path, const GLenum& type)
 Shader::
 ~Shader()
 {
+    if (id) glDeleteShader(id);
 }
 
 const GLuint
