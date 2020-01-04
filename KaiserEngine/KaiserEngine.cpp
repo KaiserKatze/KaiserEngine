@@ -81,32 +81,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 }
 
 
-void kglViewport(int width, int height)
-{
-    const int trimX = 10;
-    const int trimY = 10;
-
-    if (height <= 0) height = 1;
-
-    glViewport(trimX, trimY, width - 2 * trimX, height - 2 * trimY);
-
-    const double aspectRatio = double(width) / double(height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(45.0f, aspectRatio, 0.1f, 100.0f);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glMatrixMode(GL_TEXTURE);
-    glLoadIdentity();
-}
-
-void OnResize(int width, int height)
-{
-    kglViewport(width, height);
-}
-
 GLuint vbo[4] = { -1,-1,-1,-1 };
 GLuint vao[4] = { -1,-1,-1,-1 };
 const GLfloat vao_pos[] =
