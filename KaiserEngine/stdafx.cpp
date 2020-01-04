@@ -87,13 +87,13 @@ static LPCSTR const codelist[] = {
     "GL_OUT_OF_MEMORY"
 };
 
-void DetectGLError(const std::string& function)
+void DetectGLError(const char* function)
 {
     GLenum err = glGetError();
 
     std::wstringstream ss;
     ss << "[GL ERROR> IDX:"
-        << function.c_str()
+        << function
         << ' ';
     if (err != GL_NO_ERROR)
     {
