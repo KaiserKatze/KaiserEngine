@@ -29,13 +29,17 @@ Shader(const std::string& path, const GLenum& type)
             ss << "Generated shader ID = " << shaderId << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
+        DetectGLError("glCreateShader");
         const GLsizei count = 1;
         const GLchar* string = text.c_str();
         const GLint length = text.length();
         glShaderSource(shaderId, count, &string, &length);
+        DetectGLError("glShaderSource");
         glCompileShader(shaderId);
+        DetectGLError("glCompileShader");
         GLint status{ 0 };
         glGetShaderiv(shaderId, GL_COMPILE_STATUS, &status);
+        DetectGLError("glGetShaderiv");
         if (status == GL_FALSE)
         {
             ErrorExit(L"glCompileShader");
