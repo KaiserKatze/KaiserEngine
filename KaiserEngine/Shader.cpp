@@ -51,6 +51,10 @@ Shader(const std::string& path, const GLenum& type)
         }
         id = shaderId;
     }
+    else
+    {
+        throw std::exception("Fail to create shader as required!");
+    }
 }
 
 Shader::
