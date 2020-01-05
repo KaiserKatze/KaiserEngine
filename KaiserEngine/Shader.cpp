@@ -154,6 +154,13 @@ GetUniformLocation(GLstring name) const
     return result;
 }
 
+const GLuint
+GLProgram::
+getID() const
+{
+    return id;
+}
+
 
 void
 GLProgram::
