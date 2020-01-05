@@ -87,6 +87,7 @@ ShaderProgram()
 ShaderProgram::
 ~ShaderProgram()
 {
+    if (id) glDeleteProgram(id);
 }
 
 void
