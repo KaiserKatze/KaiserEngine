@@ -355,3 +355,11 @@ GLTexture()
 {
     glGenTextures(1, &id);
 }
+
+GLTexture::
+~GLTexture()
+{
+    if (id == 0) return;
+    glDeleteTextures(1, &id);
+    id = 0;
+}
