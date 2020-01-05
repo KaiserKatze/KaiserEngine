@@ -220,7 +220,6 @@ OnTimer() const
     if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
         window->getCanvas()->render();
-        std::exit(0); // TEST
     }
     return 0;
 }
