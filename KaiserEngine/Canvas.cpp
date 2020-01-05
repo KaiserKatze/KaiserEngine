@@ -217,6 +217,24 @@ setup(const int& screenWidth, const int& screenHeight) const
     glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
     DetectGLError("glViewport");
 
+    // setup shaders
+    std::map<GLenum, GLstring> shaders;
+    shaders[GL_VERTEX_SHADER] = "vertex.shader";
+
+    std::vector<GLstring> attributes;
+    attributes.push_back("in_position");
+    attributes.push_back("in_color");
+
+    std::map<GLstring, GLint> uniforms;
+    uniforms["matrix_projection"] = 0;
+    uniforms["matrix_view"] = 0;
+    uniforms["matrix_model"] = 0;
+
+    ShaderProgram shaderProgram;
+    shaderProgram.Setup(shaders, attributes, uniforms);
+
+    // beware the following matrices are instances of MatrixQ<double, 4>
+
     // make matrices
     const mat4 mp = MakePerspectiveProjectionMatrix(
         static_cast<double>(screenWidth),
@@ -227,49 +245,16 @@ setup(const int& screenWidth, const int& screenHeight) const
     );
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
-    // load matrices into OpenGL
-    if (GLuint shaderId = glCreateProgram())
-    {
-        DetectGLError("glCreateProgram");
-        glUseProgram(shaderId);
-        DetectGLError("glUseProgram");
 
-        // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml
-        auto mp_loc = glGetUniformLocation(shaderId, "matrix_projection");
-        DetectGLError("glGetUniformLocation(shaderId, \"matrix_projection\")");
-        auto mv_loc = glGetUniformLocation(shaderId, "matrix_view");
-        DetectGLError("glGetUniformLocation(shaderId, \"matrix_view\")");
-        auto mm_loc = glGetUniformLocation(shaderId, "matrix_model");
-        DetectGLError("glGetUniformLocation(shaderId, \"matrix_model\")");
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
+    glUniformMatrix4dv(uniforms["matrix_projection"], 1, GL_FALSE, mp.getData().data());
+    DetectGLError("glUniformMatrix4dv");
+    glUniformMatrix4dv(uniforms["matrix_view"], 1, GL_FALSE, mv.getData().data());
+    DetectGLError("glUniformMatrix4dv");
+    glUniformMatrix4dv(uniforms["matrix_model"], 1, GL_FALSE, mm.getData().data());
+    DetectGLError("glUniformMatrix4dv");
 
-        // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
-        glUniformMatrix4dv(mp_loc, 1, GL_FALSE, mp.getData().data());
-        DetectGLError("glUniformMatrix4dv");
-        glUniformMatrix4dv(mv_loc, 1, GL_FALSE, mv.getData().data());
-        DetectGLError("glUniformMatrix4dv");
-        glUniformMatrix4dv(mm_loc, 1, GL_FALSE, mm.getData().data());
-        DetectGLError("glUniformMatrix4dv");
-
-        shaderId = 0;
-    }
-    else
-        throw std::exception("Fail to create program!");
-
-    // setup shaders
-    std::map<GLenum, std::string> shaders;
-    shaders[GL_VERTEX_SHADER] = "vertex.shader";
-
-    std::vector<std::string> attributes;
-    attributes.push_back(std::string{ "in_position" });
-    attributes.push_back(std::string{ "in_color" });
-
-    std::map<std::string, GLint> uniforms;
-    uniforms[std::string{ "matrix_projection" }] = 0;
-    uniforms[std::string{ "matrix_view" }] = 0;
-    uniforms[std::string{ "matrix_model" }] = 0;
-
-    ShaderProgram shaderProgram;
-    shaderProgram.Setup(shaders, attributes, uniforms);
+    glUseProgram(0);
 }
 
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
