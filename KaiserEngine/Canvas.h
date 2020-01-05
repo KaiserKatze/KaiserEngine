@@ -30,6 +30,6 @@ public:
     void render() const;
 
     // Dispose OpenGL resources
-    void dispose() const;
+    void dispose();
 };
 

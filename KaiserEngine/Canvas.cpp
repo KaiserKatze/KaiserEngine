@@ -302,7 +302,7 @@ render() const
 
 void
 Canvas::
-dispose() const
+dispose()
 {
 
 }
