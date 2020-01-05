@@ -113,7 +113,7 @@ LoadShader(const std::map<GLenum, std::string>& shaders)
 
 void
 ShaderProgram::
-BindAttribute(GLuint index, GLstring name) const
+BindAttribute(const GLuint& index, GLstring name) const
 {
     glBindAttribLocation(id, index, name);
     DetectGLError("glBindAttribLocation");
