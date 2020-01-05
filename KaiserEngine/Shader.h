@@ -64,4 +64,6 @@ private:
 public:
     GLTexture();
     ~GLTexture();
+
+    const bool IsTexture() const;
 };
