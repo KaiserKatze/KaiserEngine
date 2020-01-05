@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Shader.h"
 #include "loadgl.h"
-#include "Matrix.h"
 
 const std::string slurp(std::ifstream& ifs)
 {
