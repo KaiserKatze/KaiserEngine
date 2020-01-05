@@ -30,5 +30,5 @@ public:
     void ValidateProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
 
-    void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>& attributes, std::map<GLstring, GLint>& uniforms);
+    void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>* attributes, std::map<GLstring, GLint>* uniforms);
 };
