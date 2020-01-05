@@ -244,7 +244,7 @@ setup(const int& screenWidth, const int& screenHeight) const
     shaderProgram.LoadUniformMatrix(uniforms["matrix_view"], mv);
     shaderProgram.LoadUniformMatrix(uniforms["matrix_model"], mm);
 
-    glUseProgram(0);
+    GLProgram::UseProgram();
 }
 
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
