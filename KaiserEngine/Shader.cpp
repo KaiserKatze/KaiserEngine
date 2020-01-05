@@ -142,7 +142,7 @@ void
 GLProgram::
 LinkProgram() const
 {
-    glLinkProgram(id);
+    glLinkProgram(getID());
     DetectGLError("glLinkProgram");
 }
 
