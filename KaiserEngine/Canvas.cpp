@@ -275,7 +275,7 @@ render() const
     this->clear();
 
     // TODO
-    OutputDebugStringA("Rendering ...");
+    OutputDebugStringA("Rendering ... \r\n");
 
     SwapBuffers(wglGetCurrentDC());
 }
