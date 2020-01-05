@@ -211,11 +211,6 @@ LRESULT
 WindowEventListener::
 OnPaint() const
 {
-    const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
-    if (window)
-    {
-        window->getCanvas()->render();
-    }
     return 0;
 }
 
@@ -224,5 +219,10 @@ WindowEventListener::
 OnTimer() const
 {
     //OutputDebugStringA("On drawing OpenGL ...\r\n");
+    const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
+    if (window)
+    {
+        window->getCanvas()->render();
+    }
     return 0;
 }
