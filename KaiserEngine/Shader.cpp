@@ -90,7 +90,7 @@ GLProgram()
         }
     }
     else
-        throw std::exception("Fail to load shader!");
+        throw std::exception("Fail to create program!");
 }
 
 GLProgram::
