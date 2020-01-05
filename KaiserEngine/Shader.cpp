@@ -151,9 +151,9 @@ Setup(const std::map<GLenum, std::string>& shaders,
         itr != attributes.cend();
         itr++)
     {
-        ptrdiff_t index = std::distance(attributes.cbegin(), itr);
+        GLuint index = static_cast<GLuint>(std::distance(attributes.cbegin(), itr));
         const std::string& attributeName{ *itr };
-        BindAttribute(static_cast<GLuint>(index), attributeName.c_str());
+        BindAttribute(index, attributeName.c_str());
     }
 
     LinkProgram();
