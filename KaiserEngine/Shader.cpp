@@ -363,3 +363,10 @@ GLTexture::
     glDeleteTextures(1, &id);
     id = 0;
 }
+
+const bool
+GLTexture::
+IsTexture() const
+{
+    return id != 0 && glIsTexture(id);
+}
