@@ -134,7 +134,7 @@ void
 GLProgram::
 BindAttribute(const GLuint& index, GLstring name) const
 {
-    glBindAttribLocation(id, index, name);
+    glBindAttribLocation(getID(), index, name);
     DetectGLError("glBindAttribLocation");
 }
 
