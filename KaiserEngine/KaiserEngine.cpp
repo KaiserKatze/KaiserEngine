@@ -70,7 +70,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     SetCapture(hWnd);
 #endif
 
-    int retCode;
+    int retCode{ 0 };
     retCode = StartMessageLoop(hInstance);
 
 #if APP_FULLSCREEN
