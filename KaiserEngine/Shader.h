@@ -23,6 +23,7 @@ public:
     ShaderProgram();
     ~ShaderProgram();
 
+    void AttachShader(const Shader& shader) const;
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
