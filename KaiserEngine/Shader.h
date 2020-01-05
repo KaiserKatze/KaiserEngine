@@ -24,7 +24,7 @@ public:
     ~ShaderProgram();
 
     void LoadShader(const std::map<GLenum, std::string>& shaders);
-    void BindAttribute(GLuint index, GLstring name) const;
+    void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
 
