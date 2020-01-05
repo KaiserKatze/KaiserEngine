@@ -66,4 +66,5 @@ public:
     ~GLTexture();
 
     const bool IsTexture() const;
+    void ActiveTexture(const GLenum& texture) const;
 };
