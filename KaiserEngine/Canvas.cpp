@@ -4,7 +4,7 @@
 #include "loadgl.h"
 #include "Shader.h"
 
-using namespace Matrix;
+using namespace MatrixMath;
 using mat4 = MatrixQ<double, 4>;
 
 Canvas::
