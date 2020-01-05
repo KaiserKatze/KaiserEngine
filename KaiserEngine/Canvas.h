@@ -21,7 +21,7 @@ public:
     void setup(const int& width, const int& height);
 
     // Prepare OpenGL resources
-    void prepare() const;
+    void prepare();
 
     // Clear canvas
     void clear() const;

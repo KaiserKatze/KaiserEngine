@@ -255,7 +255,7 @@ setup(const int& screenWidth, const int& screenHeight)
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
-prepare() const
+prepare()
 {
     glEnable(GL_DEBUG_OUTPUT);
     DetectGLError("glEnable");
