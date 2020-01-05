@@ -193,7 +193,7 @@ MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei 
 
 void
 Canvas::
-setup() const
+setup()
 {
     RECT rect = { 0 };
     GetClientRect(parent.getWindowHandle(), &rect);

@@ -15,7 +15,7 @@ public:
     ~Canvas();
 
     // Setup viewport
-    void setup() const;
+    void setup();
 
     // Setup viewport
     void setup(const int& width, const int& height) const;
