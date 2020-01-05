@@ -419,3 +419,26 @@ ActiveTexture(const GLenum& texture) const
     glActiveTexture(texture);
     DetectGLError("glActiveTexture");
 }
+
+void
+GLTexture::
+BindTexture(const GLenum& target) const
+{
+    switch (target)
+    {
+    case (GL_TEXTURE_1D):
+    case (GL_TEXTURE_1D_ARRAY):
+    case (GL_TEXTURE_2D):
+    case (GL_TEXTURE_2D_ARRAY):
+    case (GL_TEXTURE_3D):
+    case (GL_TEXTURE_RECTANGLE):
+    case (GL_TEXTURE_BUFFER):
+    case (GL_TEXTURE_CUBE_MAP):
+    case (GL_TEXTURE_CUBE_MAP_ARRAY):
+    case (GL_TEXTURE_2D_MULTISAMPLE):
+    case (GL_TEXTURE_2D_MULTISAMPLE_ARRAY):
+        break;
+    default:
+        throw std::invalid_argument("Invalid argument 'target'!");
+    }
+}
