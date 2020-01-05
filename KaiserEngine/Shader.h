@@ -56,3 +56,7 @@ public:
     void LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>& matrix);
     void LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>& matrix);
 };
+
+class GLTexture
+{
+};
