@@ -67,4 +67,5 @@ public:
 
     const bool IsTexture() const;
     void ActiveTexture(const GLenum& texture) const;
+    void BindTexture(const GLenum& target) const;
 };
