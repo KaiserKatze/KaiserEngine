@@ -20,8 +20,8 @@ private:
     GLuint id{ 0 };
 
 public:
-    ShaderProgram() {}
-    ~ShaderProgram() {}
+    ShaderProgram();
+    ~ShaderProgram();
 
     void LoadShader(const std::map<GLenum, std::string>& shaders);
     void BindAttribute(GLuint index, GLstring name) const;
