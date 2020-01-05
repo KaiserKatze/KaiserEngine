@@ -59,4 +59,6 @@ public:
 
 class GLTexture
 {
+private:
+    GLuint id{ 0 };
 };
