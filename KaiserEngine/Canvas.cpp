@@ -233,6 +233,8 @@ setup(const int& screenWidth, const int& screenHeight) const
         DetectGLError("glCreateProgram");
         glUseProgram(shaderId);
         DetectGLError("glUseProgram");
+
+        // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGetUniformLocation.xhtml
         auto mp_loc = glGetUniformLocation(shaderId, "matrix_projection");
         DetectGLError("glGetUniformLocation(shaderId, \"matrix_projection\")");
         auto mv_loc = glGetUniformLocation(shaderId, "matrix_view");
