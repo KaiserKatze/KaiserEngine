@@ -8,7 +8,7 @@ degrees2radians(_Ty degrees)
     return static_cast<_Ty>(degrees / 180 * pi);
 }
 
-namespace Matrix
+namespace MatrixMath
 {
     // the entries in this class are stored in column-major order
     // template argument 'typename _Ty' can be one of the following:
