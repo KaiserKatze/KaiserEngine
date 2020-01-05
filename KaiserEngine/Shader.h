@@ -24,6 +24,8 @@ public:
     GLProgram();
     ~GLProgram();
 
+    static void UseProgram(const GLProgram* program=nullptr);
+
     void AttachShader(const GLShader& shader) const;
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
