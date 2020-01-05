@@ -48,7 +48,7 @@ GLShader(GLstring path, const GLenum& type)
     }
     else
     {
-        throw std::exception("Fail to create shader as required!");
+        throw std::exception("Fail to create shader!");
     }
 }
 
