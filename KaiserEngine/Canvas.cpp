@@ -250,6 +250,8 @@ setup(const int& screenWidth, const int& screenHeight) const
         DetectGLError("glUseProgram");
         shaderId = 0;
     }
+    else
+        throw std::exception("Fail to create program!");
 
     // setup shaders
     std::map<GLenum, std::string> shaders;
