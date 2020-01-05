@@ -113,7 +113,7 @@ GLProgram::
 AttachShader(const GLShader& shader) const
 {
     GLuint sId = shader.getID();
-    glAttachShader(id, sId);
+    glAttachShader(getID(), sId);
     DetectGLError("glAttachShader");
 }
 
