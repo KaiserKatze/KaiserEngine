@@ -158,7 +158,7 @@ const GLint
 GLProgram::
 GetUniformLocation(GLstring name) const
 {
-    GLint result = glGetUniformLocation(id, name);
+    GLint result = glGetUniformLocation(getID(), name);
     DetectGLError("glGetUniformLocation");
     return result;
 }
