@@ -14,6 +14,24 @@ def GenerateCpp():
     buffer_init = []
     buffer_h = []
 
+    # detect possible file lock
+
+    try:
+        with open(os.path.join(HERE, "loadgl.h"),
+                  mode="w", encoding="utf-8") as file:
+            pass
+    except PermissionError:
+        raise AssertionError("Please ensure file 'loadgl.h' is writable!")
+
+    try:
+        with open(os.path.join(HERE, "loadgl.cpp"),
+                  mode="w", encoding="utf-8") as file:
+            pass
+    except PermissionError:
+        raise AssertionError("Please ensure file 'loadgl.cpp' is writable!")
+
+    # start generating c++ files
+
     with open(os.path.join(HERE, "loadgl.txt"),
               mode="r", encoding="utf-8") as file:
         lines = file.read().splitlines()
@@ -30,7 +48,7 @@ def GenerateCpp():
 
             # cpp
             line = """
-    {1} = ({0}) GetAnyGLFuncAddress("{1}");
+    {1} = static_cast<{0}>(GetAnyGLFuncAddress("{1}"));
     if ({1} == nullptr) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
             buffer_cpp.append(line)
 
