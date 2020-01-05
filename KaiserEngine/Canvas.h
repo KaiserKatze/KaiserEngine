@@ -9,6 +9,7 @@ class Canvas
 {
 private:
     const MainWindow& parent;
+    GLProgram program;
 
 public:
     Canvas(const MainWindow& window);
