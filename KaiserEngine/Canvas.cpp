@@ -236,13 +236,7 @@ setup(const int& screenWidth, const int& screenHeight) const
     // beware the following matrices are instances of MatrixQ<double, 4>
 
     // make matrices
-    const mat4 mp = MakePerspectiveProjectionMatrix(
-        static_cast<double>(screenWidth),
-        static_cast<double>(screenHeight),
-        degrees2radians(60.0),
-        100.0,
-        0.1
-    );
+    const mat4 mp = MakePerspectiveProjectionMatrix<double>(screenWidth, screenHeight, degrees2radians(60.0), 100.0, 0.1);
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
 
