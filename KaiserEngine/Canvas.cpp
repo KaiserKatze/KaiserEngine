@@ -246,7 +246,6 @@ setup(const int& screenWidth, const int& screenHeight) const
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
 
-    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
     glUniformMatrix4dv(uniforms["matrix_projection"], 1, GL_FALSE, mp.getData().data());
     DetectGLError("glUniformMatrix4dv");
     glUniformMatrix4dv(uniforms["matrix_view"], 1, GL_FALSE, mv.getData().data());

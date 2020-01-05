@@ -33,6 +33,7 @@ public:
 
     void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>* attributes, std::map<GLstring, GLint>* uniforms);
 
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
     void LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix);
     void LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& matrix);
     void LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& matrix);
