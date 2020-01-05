@@ -246,8 +246,7 @@ setup(const int& screenWidth, const int& screenHeight) const
         DetectGLError("glUniformMatrix4dv");
         glUniformMatrix4dv(mm_loc, 1, GL_FALSE, mm.getData().data());
         DetectGLError("glUniformMatrix4dv");
-        glUseProgram(0);
-        DetectGLError("glUseProgram");
+
         shaderId = 0;
     }
     else
