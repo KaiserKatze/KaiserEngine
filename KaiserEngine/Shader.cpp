@@ -221,31 +221,33 @@ static void LoadUniformMatrix(const GLint& location, const Matrix::Matrix<double
 void
 ShaderProgram::
 Setup(const std::map<GLenum, GLstring>& shaders,
-    const std::vector<GLstring>& attributes,
-    std::map<GLstring, GLint>& uniforms)
+    const std::vector<GLstring>* attributes,
+    std::map<GLstring, GLint>* uniforms)
 {
     LoadShader(shaders);
 
     // get all attribute variable locations
-    for (auto itr = attributes.cbegin();
-        itr != attributes.cend();
-        itr++)
-    {
-        GLuint index = static_cast<GLuint>(std::distance(attributes.cbegin(), itr));
-        const std::string& attributeName{ *itr };
-        BindAttribute(index, attributeName.c_str());
-    }
+    if (attributes != nullptr)
+        for (auto itr = attributes->cbegin();
+            itr != attributes->cend();
+            itr++)
+        {
+            GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
+            const std::string& attributeName{ *itr };
+            BindAttribute(index, attributeName.c_str());
+        }
 
     LinkProgram();
     ValidateProgram();
 
     // get all uniform variable locations
-    for (auto itr = uniforms.begin();
-        itr != uniforms.end();
-        itr++)
-    {
-        const std::string& uniformName{ itr->first };
-        GLint& uniformLocation{ itr->second };
-        uniformLocation = GetUniformLocation(uniformName.c_str());
-    }
+    if (uniforms != nullptr)
+        for (auto itr = uniforms->begin();
+            itr != uniforms->end();
+            itr++)
+        {
+            const std::string& uniformName{ itr->first };
+            GLint& uniformLocation{ itr->second };
+            uniformLocation = GetUniformLocation(uniformName.c_str());
+        }
 }
