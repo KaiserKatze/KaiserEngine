@@ -150,7 +150,7 @@ void
 GLProgram::
 ValidateProgram() const
 {
-    glValidateProgram(id);
+    glValidateProgram(getID());
     DetectGLError("glValidateProgram");
 }
 
