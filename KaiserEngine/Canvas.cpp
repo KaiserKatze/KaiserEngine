@@ -246,12 +246,9 @@ setup(const int& screenWidth, const int& screenHeight) const
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
 
-    glUniformMatrix4dv(uniforms["matrix_projection"], 1, GL_FALSE, mp.getData().data());
-    DetectGLError("glUniformMatrix4dv");
-    glUniformMatrix4dv(uniforms["matrix_view"], 1, GL_FALSE, mv.getData().data());
-    DetectGLError("glUniformMatrix4dv");
-    glUniformMatrix4dv(uniforms["matrix_model"], 1, GL_FALSE, mm.getData().data());
-    DetectGLError("glUniformMatrix4dv");
+    shaderProgram.LoadUniformMatrix(uniforms["matrix_projection"], mp);
+    shaderProgram.LoadUniformMatrix(uniforms["matrix_view"], mv);
+    shaderProgram.LoadUniformMatrix(uniforms["matrix_model"], mm);
 
     glUseProgram(0);
 }
