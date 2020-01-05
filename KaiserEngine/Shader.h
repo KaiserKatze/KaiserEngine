@@ -8,7 +8,7 @@ private:
     GLuint id{ 0 };
 
 public:
-    Shader(const std::string& path, const GLenum& type);
+    Shader(GLstring path, const GLenum& type);
     ~Shader();
     const bool isShader() const;
     const GLuint getID() const;
@@ -23,11 +23,11 @@ public:
     ShaderProgram();
     ~ShaderProgram();
 
-    void LoadShader(const std::map<GLenum, std::string>& shaders);
+    void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
     void ValidateProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
 
-    void Setup(const std::map<GLenum, std::string>& shaders, const std::vector<std::string>& attributes, std::map<std::string, GLint>& uniforms);
+    void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>& attributes, std::map<GLstring, GLint>& uniforms);
 };
