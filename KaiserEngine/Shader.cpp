@@ -331,8 +331,8 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             itr++)
         {
             GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
-            const std::string& attributeName{ *itr };
-            BindAttribute(index, attributeName.c_str());
+            GLstring attributeName{ *itr };
+            BindAttribute(index, attributeName);
         }
 
     LinkProgram();
