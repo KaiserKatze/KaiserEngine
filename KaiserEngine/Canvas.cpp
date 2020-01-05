@@ -222,8 +222,8 @@ setup(const int& screenWidth, const int& screenHeight) const
     shaders[GL_VERTEX_SHADER] = "vertex.shader";
 
     std::vector<GLstring> attributes;
-    attributes.push_back("in_position");
-    attributes.push_back("in_color");
+    attributes.push_back("in_position");    // 0
+    attributes.push_back("in_color");       // 1
 
     std::map<GLstring, GLint> uniforms;
     uniforms["matrix_projection"] = 0;
