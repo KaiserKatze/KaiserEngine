@@ -253,10 +253,13 @@ Canvas::
 prepare() const
 {
     glEnable(GL_DEBUG_OUTPUT);
+    DetectGLError("glEnable");
     glDebugMessageCallback(MessageCallback, nullptr);
+    DetectGLError("glDebugMessageCallback");
 
     // Setup an XNA like background color
     glClearColor(0.4f, 0.6f, 0.9f, 0.0f);
+    DetectGLError("glClearColor");
 
     this->setup();
 }
@@ -266,6 +269,7 @@ Canvas::
 clear() const
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    DetectGLError("glClear");
 }
 
 void
