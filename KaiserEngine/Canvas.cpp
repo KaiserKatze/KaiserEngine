@@ -240,6 +240,7 @@ setup(const int& screenWidth, const int& screenHeight) const
         auto mm_loc = glGetUniformLocation(shaderId, "matrix_model");
         DetectGLError("glGetUniformLocation(shaderId, \"matrix_model\")");
 
+        // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
         glUniformMatrix4dv(mp_loc, 1, GL_FALSE, mp.getData().data());
         DetectGLError("glUniformMatrix4dv");
         glUniformMatrix4dv(mv_loc, 1, GL_FALSE, mv.getData().data());
