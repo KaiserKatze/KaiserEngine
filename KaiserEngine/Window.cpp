@@ -220,6 +220,7 @@ MainWindow(const HINSTANCE& hInstance)
         ShowWindow(true);
 
         canvas = std::make_unique<Canvas>(*this);
+        canvas->prepare();
     }
 }
 
