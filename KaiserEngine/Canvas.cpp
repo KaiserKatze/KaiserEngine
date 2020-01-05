@@ -238,7 +238,7 @@ setupShaders(const int& screenWidth, const int& screenHeight)
 
 void
 Canvas::
-setup(const int& screenWidth, const int& screenHeight) const
+setup(const int& screenWidth, const int& screenHeight)
 {
     static const int trimX = 10;
     static const int trimY = 10;

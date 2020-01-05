@@ -18,7 +18,7 @@ public:
     void setup();
 
     // Setup viewport
-    void setup(const int& width, const int& height) const;
+    void setup(const int& width, const int& height);
 
     // Prepare OpenGL resources
     void prepare() const;
