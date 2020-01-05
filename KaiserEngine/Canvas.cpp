@@ -277,6 +277,17 @@ render() const
     // TODO
     OutputDebugStringA("Rendering ... \r\n");
 
+    // bind textures if any
+
+    // bind VAOs if any
+
+    // bind VBOs if any
+
+    // draw vertices
+
+    // put everything back to default
+    GLProgram::UseProgram();
+
     SwapBuffers(wglGetCurrentDC());
 }
 
