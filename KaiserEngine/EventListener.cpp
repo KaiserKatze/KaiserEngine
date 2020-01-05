@@ -152,8 +152,7 @@ LRESULT
 WindowEventListener::
 OnCreate() const
 {
-    const MainWindow* window = getEventHandler().AsWindow<MainWindow>();
-    if (window)
+    if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
         window->getCanvas()->prepare();
     }
