@@ -79,6 +79,15 @@ GLProgram()
     {
         DetectGLError("glCreateProgram");
         id = pId;
+        {
+            std::stringstream ss;
+            ss << "Generated program ID = " << pId
+                << " "
+                << std::boolalpha
+                << static_cast<bool>(glIsProgram(pId))
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
     }
     else
         throw std::exception("Fail to load shader!");
