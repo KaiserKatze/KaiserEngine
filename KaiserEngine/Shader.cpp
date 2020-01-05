@@ -125,6 +125,12 @@ LinkProgram() const
 {
     glLinkProgram(id);
     DetectGLError("glLinkProgram");
+}
+
+void
+ShaderProgram::
+ValidateProgram() const
+{
     glValidateProgram(id);
     DetectGLError("glValidateProgram");
 }
