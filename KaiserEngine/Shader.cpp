@@ -79,27 +79,36 @@ getID() const
     return id;
 }
 
-void
 ShaderProgram::
-LoadShader(const std::map<GLenum, std::string>& shaders)
+ShaderProgram()
 {
     if (GLuint pId = glCreateProgram())
     {
         DetectGLError("glCreateProgram");
-
-        for (auto itr = shaders.cbegin();
-            itr != shaders.cend();
-            itr++)
-        {
-            const Shader shader(itr->second, itr->first);
-            GLuint sId = shader.getID();
-            glAttachShader(pId, sId);
-            DetectGLError("glAttachShader");
-        }
-
         id = pId;
     }
-    throw std::exception("Fail to load shader!");
+    else
+        throw std::exception("Fail to load shader!");
+}
+
+ShaderProgram::
+~ShaderProgram()
+{
+}
+
+void
+ShaderProgram::
+LoadShader(const std::map<GLenum, std::string>& shaders)
+{
+    for (auto itr = shaders.cbegin();
+        itr != shaders.cend();
+        itr++)
+    {
+        const Shader shader(itr->second, itr->first);
+        GLuint sId = shader.getID();
+        glAttachShader(id, sId);
+        DetectGLError("glAttachShader");
+    }
 }
 
 void
