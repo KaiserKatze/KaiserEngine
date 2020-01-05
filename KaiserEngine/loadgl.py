@@ -31,11 +31,11 @@ def GenerateCpp():
             # cpp
             line = """
     {1} = ({0}) GetAnyGLFuncAddress("{1}");
-    if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
+    if ({1} == nullptr) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
             buffer_cpp.append(line)
 
             # init
-            line = """{0} {1} = ({0}) NULL;
+            line = """{0} {1}{{ nullptr }};
 """.format(gltype, func)
             buffer_init.append(line)
 
