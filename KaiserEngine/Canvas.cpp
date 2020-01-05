@@ -216,35 +216,6 @@ setup(const int& screenWidth, const int& screenHeight) const
 
     glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
     DetectGLError("glViewport");
-
-    // setup shaders
-    std::map<GLenum, GLstring> shaders;
-    shaders[GL_VERTEX_SHADER] = "vertex.shader";
-
-    std::vector<GLstring> attributes;
-    attributes.push_back("in_position");    // 0
-    attributes.push_back("in_color");       // 1
-
-    std::map<GLstring, GLint> uniforms;
-    uniforms["matrix_projection"] = 0;
-    uniforms["matrix_view"] = 0;
-    uniforms["matrix_model"] = 0;
-
-    GLProgram shaderProgram;
-    shaderProgram.Setup(shaders, &attributes, &uniforms);
-
-    // beware the following matrices are instances of MatrixQ<double, 4>
-
-    // make matrices
-    const mat4 mp = MakePerspectiveProjectionMatrix<double>(screenWidth, screenHeight, degrees2radians(60.0), 100.0, 0.1);
-    const mat4 mv = MakeViewMatrix<double>();
-    const mat4 mm = MakeModelMatrix<double>();
-
-    shaderProgram.LoadUniformMatrix(uniforms["matrix_projection"], mp);
-    shaderProgram.LoadUniformMatrix(uniforms["matrix_view"], mv);
-    shaderProgram.LoadUniformMatrix(uniforms["matrix_model"], mm);
-
-    GLProgram::UseProgram();
 }
 
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
