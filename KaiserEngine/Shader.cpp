@@ -10,10 +10,11 @@ const std::string slurp(std::ifstream& ifs)
 }
 
 Shader::
-Shader(const std::string& path, const GLenum& type)
+Shader(GLstring path, const GLenum& type)
 {
-    if (path.empty())
+    if (path == nullptr)
         throw std::invalid_argument("Invalid argument 'path'!");
+
     switch (type)
     {
     case GL_VERTEX_SHADER:
@@ -43,14 +44,6 @@ Shader(const std::string& path, const GLenum& type)
         DetectGLError("glShaderSource");
         glCompileShader(shaderId);
         DetectGLError("glCompileShader");
-        GLint status{ 0 };
-        glGetShaderiv(shaderId, GL_COMPILE_STATUS, &status);
-        DetectGLError("glGetShaderiv");
-        if (status == GL_FALSE)
-        {
-            ErrorExit(L"glCompileShader");
-            return;
-        }
         id = shaderId;
     }
     else
@@ -98,16 +91,23 @@ ShaderProgram::
 
 void
 ShaderProgram::
-LoadShader(const std::map<GLenum, std::string>& shaders)
+AttachShader(const Shader& shader) const
+{
+    GLuint sId = shader.getID();
+    glAttachShader(id, sId);
+    DetectGLError("glAttachShader");
+}
+
+void
+ShaderProgram::
+LoadShader(const std::map<GLenum, GLstring>& shaders)
 {
     for (auto itr = shaders.cbegin();
         itr != shaders.cend();
         itr++)
     {
         const Shader shader(itr->second, itr->first);
-        GLuint sId = shader.getID();
-        glAttachShader(id, sId);
-        DetectGLError("glAttachShader");
+        AttachShader(shader);
     }
 }
 
@@ -146,9 +146,9 @@ GetUniformLocation(GLstring name) const
 
 void
 ShaderProgram::
-Setup(const std::map<GLenum, std::string>& shaders,
-    const std::vector<std::string>& attributes,
-    std::map<std::string, GLint>& uniforms)
+Setup(const std::map<GLenum, GLstring>& shaders,
+    const std::vector<GLstring>& attributes,
+    std::map<GLstring, GLint>& uniforms)
 {
     LoadShader(shaders);
 
@@ -163,6 +163,7 @@ Setup(const std::map<GLenum, std::string>& shaders,
     }
 
     LinkProgram();
+    ValidateProgram();
 
     // get all uniform variable locations
     for (auto itr = uniforms.begin();
