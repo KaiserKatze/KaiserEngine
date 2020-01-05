@@ -9,8 +9,8 @@ const std::string slurp(std::ifstream& ifs)
     return ss.str();
 }
 
-Shader::
-Shader(GLstring path, const GLenum& type)
+GLShader::
+GLShader(GLstring path, const GLenum& type)
 {
     if (path == nullptr)
         throw std::invalid_argument("Invalid argument 'path'!");
@@ -52,21 +52,21 @@ Shader(GLstring path, const GLenum& type)
     }
 }
 
-Shader::
-~Shader()
+GLShader::
+~GLShader()
 {
     if (id) glDeleteShader(id);
 }
 
 const bool
-Shader::
+GLShader::
 isShader() const
 {
     return id != 0 && glIsShader(id);
 }
 
 const GLuint
-Shader::
+GLShader::
 getID() const
 {
     return id;
@@ -92,7 +92,7 @@ ShaderProgram::
 
 void
 ShaderProgram::
-AttachShader(const Shader& shader) const
+AttachShader(const GLShader& shader) const
 {
     GLuint sId = shader.getID();
     glAttachShader(id, sId);
@@ -107,7 +107,7 @@ LoadShader(const std::map<GLenum, GLstring>& shaders)
         itr != shaders.cend();
         itr++)
     {
-        const Shader shader(itr->second, itr->first);
+        const GLShader shader(itr->second, itr->first);
         AttachShader(shader);
     }
 }

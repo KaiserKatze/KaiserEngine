@@ -3,14 +3,14 @@
 #include "stdafx.h"
 #include "Matrix.h"
 
-class Shader
+class GLShader
 {
 private:
     GLuint id{ 0 };
 
 public:
-    Shader(GLstring path, const GLenum& type);
-    ~Shader();
+    GLShader(GLstring path, const GLenum& type);
+    ~GLShader();
     const bool isShader() const;
     const GLuint getID() const;
 };
@@ -24,7 +24,7 @@ public:
     ShaderProgram();
     ~ShaderProgram();
 
-    void AttachShader(const Shader& shader) const;
+    void AttachShader(const GLShader& shader) const;
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
