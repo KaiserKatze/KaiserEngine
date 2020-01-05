@@ -349,3 +349,9 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             uniformLocation = GetUniformLocation(uniformName.c_str());
         }
 }
+
+GLTexture::
+GLTexture()
+{
+    glGenTextures(1, &id);
+}
