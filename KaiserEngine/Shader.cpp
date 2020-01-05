@@ -101,6 +101,15 @@ GLProgram::
 
 void
 GLProgram::
+UseProgram(const GLProgram* program)
+{
+    GLuint pId{ 0 };
+    if (program) pId = program->getID();
+    glUseProgram(pId);
+}
+
+void
+GLProgram::
 AttachShader(const GLShader& shader) const
 {
     GLuint sId = shader.getID();
