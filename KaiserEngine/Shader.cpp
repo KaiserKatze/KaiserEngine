@@ -370,3 +370,52 @@ IsTexture() const
 {
     return id != 0 && glIsTexture(id);
 }
+
+void
+GLTexture::
+ActiveTexture(const GLenum& texture) const
+{
+    // texture: TEXTUREi (where i is
+    //      [0, max(MAX_TEXTURE_COORDS,
+    //      MAX_COMBINED_TEXTURE_IMAGE_UNITS) - 1] )
+    switch (texture)
+    {
+    case (GL_TEXTURE0):
+    case (GL_TEXTURE1):
+    case (GL_TEXTURE2):
+    case (GL_TEXTURE3):
+    case (GL_TEXTURE4):
+    case (GL_TEXTURE5):
+    case (GL_TEXTURE6):
+    case (GL_TEXTURE7):
+    case (GL_TEXTURE8):
+    case (GL_TEXTURE9):
+    case (GL_TEXTURE10):
+    case (GL_TEXTURE11):
+    case (GL_TEXTURE12):
+    case (GL_TEXTURE13):
+    case (GL_TEXTURE14):
+    case (GL_TEXTURE15):
+    case (GL_TEXTURE16):
+    case (GL_TEXTURE17):
+    case (GL_TEXTURE18):
+    case (GL_TEXTURE19):
+    case (GL_TEXTURE20):
+    case (GL_TEXTURE21):
+    case (GL_TEXTURE22):
+    case (GL_TEXTURE23):
+    case (GL_TEXTURE24):
+    case (GL_TEXTURE25):
+    case (GL_TEXTURE26):
+    case (GL_TEXTURE27):
+    case (GL_TEXTURE28):
+    case (GL_TEXTURE29):
+    case (GL_TEXTURE30):
+    case (GL_TEXTURE31):
+        break;
+    default:
+        throw std::invalid_argument("Invalid argument 'texture'!");
+    }
+    glActiveTexture(texture);
+    DetectGLError("glActiveTexture");
+}
