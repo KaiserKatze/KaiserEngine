@@ -72,8 +72,8 @@ getID() const
     return id;
 }
 
-ShaderProgram::
-ShaderProgram()
+GLProgram::
+GLProgram()
 {
     if (GLuint pId = glCreateProgram())
     {
@@ -84,14 +84,14 @@ ShaderProgram()
         throw std::exception("Fail to load shader!");
 }
 
-ShaderProgram::
-~ShaderProgram()
+GLProgram::
+~GLProgram()
 {
     if (id) glDeleteProgram(id);
 }
 
 void
-ShaderProgram::
+GLProgram::
 AttachShader(const GLShader& shader) const
 {
     GLuint sId = shader.getID();
@@ -100,7 +100,7 @@ AttachShader(const GLShader& shader) const
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadShader(const std::map<GLenum, GLstring>& shaders)
 {
     for (auto itr = shaders.cbegin();
@@ -113,7 +113,7 @@ LoadShader(const std::map<GLenum, GLstring>& shaders)
 }
 
 void
-ShaderProgram::
+GLProgram::
 BindAttribute(const GLuint& index, GLstring name) const
 {
     glBindAttribLocation(id, index, name);
@@ -121,7 +121,7 @@ BindAttribute(const GLuint& index, GLstring name) const
 }
 
 void
-ShaderProgram::
+GLProgram::
 LinkProgram() const
 {
     glLinkProgram(id);
@@ -129,7 +129,7 @@ LinkProgram() const
 }
 
 void
-ShaderProgram::
+GLProgram::
 ValidateProgram() const
 {
     glValidateProgram(id);
@@ -137,7 +137,7 @@ ValidateProgram() const
 }
 
 const GLint
-ShaderProgram::
+GLProgram::
 GetUniformLocation(GLstring name) const
 {
     GLint result = glGetUniformLocation(id, name);
@@ -147,7 +147,7 @@ GetUniformLocation(GLstring name) const
 
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix)
 {
     glUniformMatrix2fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -155,7 +155,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& ma
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& matrix)
 {
     glUniformMatrix3fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -163,7 +163,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& ma
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& matrix)
 {
     glUniformMatrix4fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -171,7 +171,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& ma
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& matrix)
 {
     glUniformMatrix2dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -179,7 +179,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& m
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& matrix)
 {
     glUniformMatrix3dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -187,7 +187,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& m
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& matrix)
 {
     glUniformMatrix4dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -195,7 +195,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& m
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& matrix)
 {
     glUniformMatrix2x3fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -203,7 +203,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& matrix)
 {
     glUniformMatrix3x2fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -211,7 +211,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& matrix)
 {
     glUniformMatrix2x4fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -219,7 +219,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& matrix)
 {
     glUniformMatrix4x2fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -227,7 +227,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& matrix)
 {
     glUniformMatrix3x4fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -235,7 +235,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& matrix)
 {
     glUniformMatrix4x3fv(location, 1, GL_FALSE, matrix.getData().data());
@@ -243,7 +243,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& 
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>& matrix)
 {
     glUniformMatrix2x3dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -251,7 +251,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>& matrix)
 {
     glUniformMatrix3x2dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -259,7 +259,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>& matrix)
 {
     glUniformMatrix2x4dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -267,7 +267,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>& matrix)
 {
     glUniformMatrix4x2dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -275,7 +275,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>& matrix)
 {
     glUniformMatrix3x4dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -283,7 +283,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>& matrix)
 {
     glUniformMatrix4x3dv(location, 1, GL_FALSE, matrix.getData().data());
@@ -291,7 +291,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>&
 }
 
 void
-ShaderProgram::
+GLProgram::
 Setup(const std::map<GLenum, GLstring>& shaders,
     const std::vector<GLstring>* attributes,
     std::map<GLstring, GLint>* uniforms)

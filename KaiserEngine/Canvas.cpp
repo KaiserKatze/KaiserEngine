@@ -230,7 +230,7 @@ setup(const int& screenWidth, const int& screenHeight) const
     uniforms["matrix_view"] = 0;
     uniforms["matrix_model"] = 0;
 
-    ShaderProgram shaderProgram;
+    GLProgram shaderProgram;
     shaderProgram.Setup(shaders, &attributes, &uniforms);
 
     // beware the following matrices are instances of MatrixQ<double, 4>

@@ -15,14 +15,14 @@ public:
     const GLuint getID() const;
 };
 
-class ShaderProgram
+class GLProgram
 {
 private:
     GLuint id{ 0 };
 
 public:
-    ShaderProgram();
-    ~ShaderProgram();
+    GLProgram();
+    ~GLProgram();
 
     void AttachShader(const GLShader& shader) const;
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
