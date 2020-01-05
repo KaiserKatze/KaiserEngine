@@ -439,7 +439,7 @@ public:
         return true;
     }
 
-    void ShowWindow(bool show)
+    void ShowWindow(bool show) const
     {
         ::ShowWindow(getWindowHandle(), show ? SW_SHOW : SW_HIDE);
     }
