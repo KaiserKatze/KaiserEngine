@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Canvas.h"
-#include "Matrix.h"
 #include "loadgl.h"
 
 using namespace MatrixMath;
