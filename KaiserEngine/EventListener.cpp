@@ -127,12 +127,14 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
         return OnClose();
     case WM_DESTROY:
         return OnDestroy();
+//#if (defined APP_RESIZABLE) && (APP_RESIZABLE == APP_RESIZABLE_ALWAYS)
     case WM_SIZE:
         return OnResize(LOWORD(lParam), HIWORD(lParam));
         // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-activateapp
         // Sent when a window belonging to a different application than the active window is
         // about to be activated. The message is sent to the application whose window is being
         // activated and to the application whose window is being deactivated.
+//#endif
     case WM_ACTIVATEAPP:
         // Indicates whether the window is being activated or deactivated. This parameter is
         // TRUE if the window is being activated; it is FALSE if the window is being deactivated.
