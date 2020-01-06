@@ -6,7 +6,7 @@ using namespace MatrixMath;
 using mat4 = MatrixQ<double, 4>;
 
 Canvas::
-Canvas(const MainWindow& window)
+Canvas(const MainWindow* window)
     : parent{ window }
 {
 }
@@ -196,7 +196,7 @@ Canvas::
 setup()
 {
     RECT rect = { 0 };
-    GetClientRect(parent.getWindowHandle(), &rect);
+    GetClientRect(parent->getWindowHandle(), &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
     this->setup(screenWidth, screenHeight);
