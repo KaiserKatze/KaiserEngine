@@ -174,7 +174,7 @@ getID() const
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix) const
 {
     glUniformMatrix2fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2fv");
@@ -182,7 +182,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& ma
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& matrix) const
 {
     glUniformMatrix3fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3fv");
@@ -190,7 +190,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& ma
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& matrix) const
 {
     glUniformMatrix4fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4fv");
@@ -198,7 +198,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& ma
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& matrix) const
 {
     glUniformMatrix2dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2dv");
@@ -206,7 +206,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& m
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& matrix) const
 {
     glUniformMatrix3dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3dv");
@@ -214,7 +214,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& m
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& matrix) const
 {
     glUniformMatrix4dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4dv");
@@ -222,7 +222,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& m
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& matrix) const
 {
     glUniformMatrix2x3fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2x3fv");
@@ -230,7 +230,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& matrix) const
 {
     glUniformMatrix3x2fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3x2fv");
@@ -238,7 +238,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& matrix) const
 {
     glUniformMatrix2x4fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2x4fv");
@@ -246,7 +246,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& matrix) const
 {
     glUniformMatrix4x2fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4x2fv");
@@ -254,7 +254,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& matrix) const
 {
     glUniformMatrix3x4fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3x4fv");
@@ -262,7 +262,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& matrix) const
 {
     glUniformMatrix4x3fv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4x3fv");
@@ -270,7 +270,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& 
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>& matrix) const
 {
     glUniformMatrix2x3dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2x3dv");
@@ -278,7 +278,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>&
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>& matrix) const
 {
     glUniformMatrix3x2dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3x2dv");
@@ -286,7 +286,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>&
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>& matrix) const
 {
     glUniformMatrix2x4dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix2x4dv");
@@ -294,7 +294,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>&
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>& matrix) const
 {
     glUniformMatrix4x2dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4x2dv");
@@ -302,7 +302,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>&
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>& matrix) const
 {
     glUniformMatrix3x4dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix3x4dv");
@@ -310,7 +310,7 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>&
 
 void
 GLProgram::
-LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>& matrix)
+LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>& matrix) const
 {
     glUniformMatrix4x3dv(location, 1, GL_FALSE, matrix.getData().data());
     DetectGLError("glUniformMatrix4x3dv");
