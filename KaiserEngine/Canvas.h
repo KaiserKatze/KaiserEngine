@@ -19,10 +19,10 @@ public:
     const MainWindow* getParent() const;
 
     // Setup viewport
-    void setup();
+    void setup() const;
 
     // Setup viewport
-    void setup(const int& width, const int& height);
+    void setup(const int& width, const int& height) const;
 
     // Prepare OpenGL resources
     void prepare();
