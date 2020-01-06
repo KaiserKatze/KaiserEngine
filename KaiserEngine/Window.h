@@ -484,7 +484,7 @@ class MainWindow
     : public BaseWindow<MainWindow>
 {
 private:
-    Canvas* canvas;
+    Canvas* canvas{ nullptr };
 
 public:
     MainWindow(const HINSTANCE& hInstance);
