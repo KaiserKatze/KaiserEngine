@@ -484,13 +484,13 @@ class MainWindow
     : public BaseWindow<MainWindow>
 {
 private:
-    std::unique_ptr<Canvas> canvas;
+    Canvas* canvas;
 
 public:
     MainWindow(const HINSTANCE& hInstance);
     ~MainWindow();
 
-    const std::unique_ptr<Canvas>& getCanvas() const;
+    const Canvas* getCanvas() const;
 };
 
 

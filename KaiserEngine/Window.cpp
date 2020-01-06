@@ -199,6 +199,7 @@ FakeWindow::
 
 MainWindow::
 MainWindow(const HINSTANCE& hInstance)
+    : canvas{ new Canvas() }
 {
     wchar_t szTitle[MAX_LOADSTRING];
     wchar_t szWindowClass[MAX_LOADSTRING];
@@ -221,7 +222,6 @@ MainWindow(const HINSTANCE& hInstance)
         // show window
         ShowWindow(true);
 
-        canvas = std::make_unique<Canvas>();
         canvas->setParent(this);
         canvas->prepare();
     }
@@ -232,7 +232,7 @@ MainWindow::
 {
 }
 
-const std::unique_ptr<Canvas>&
+const Canvas*
 MainWindow::
 getCanvas() const
 {
