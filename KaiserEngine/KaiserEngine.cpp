@@ -63,19 +63,31 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 #endif
 
-    FakeWindow fakeWin(hInstance);
-    MainWindow mainWin(hInstance);
-
-#if APP_FULLSCREEN
-    SetCapture(hWnd);
-#endif
-
     int retCode{ 0 };
-    retCode = StartMessageLoop(hInstance);
+
+    try
+    {
+
+        FakeWindow fakeWin(hInstance);
+        MainWindow mainWin(hInstance);
 
 #if APP_FULLSCREEN
-    ReleaseCapture();
+        SetCapture(hWnd);
 #endif
+
+        retCode = StartMessageLoop(hInstance);
+
+#if APP_FULLSCREEN
+        ReleaseCapture();
+#endif
+
+    }
+    catch (const std::exception& exc)
+    {
+        std::stringstream ss;
+        ss << "!!! EXCEPTION !!! Reason: " << exc.what() << std::endl;
+        OutputDebugStringA(ss.str().c_str());
+    }
 
     return retCode;
 }
