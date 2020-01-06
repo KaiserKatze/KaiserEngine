@@ -124,5 +124,8 @@
     <None Include="vertex.shader">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="fragment.shader">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

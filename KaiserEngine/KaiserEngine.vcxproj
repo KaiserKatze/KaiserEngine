@@ -194,6 +194,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="fragment.shader" />
     <None Include="loadgl.py" />
     <None Include="vertex.shader" />
   </ItemGroup>
