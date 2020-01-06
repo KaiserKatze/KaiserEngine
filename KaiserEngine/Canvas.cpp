@@ -218,6 +218,7 @@ setup(const int& screenWidth, const int& screenHeight)
     // setup shaders
     std::map<GLenum, GLstring> shaders;
     shaders[GL_VERTEX_SHADER] = "vertex.shader";
+    shaders[GL_FRAGMENT_SHADER] = "fragment.shader";
 
     std::vector<GLstring> attributes{
         "in_position",          // 0
