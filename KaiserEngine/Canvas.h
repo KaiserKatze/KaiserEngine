@@ -8,12 +8,15 @@ class MainWindow;
 class Canvas
 {
 private:
-    const MainWindow* parent;
+    MainWindow* parent{ nullptr };
     GLProgram program;
 
 public:
-    Canvas(const MainWindow* window);
+    Canvas();
     ~Canvas();
+
+    void setParent(MainWindow* window);
+    const MainWindow* getParent() const;
 
     // Setup viewport
     void setup();

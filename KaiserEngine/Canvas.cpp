@@ -6,8 +6,7 @@ using namespace MatrixMath;
 using mat4 = MatrixQ<double, 4>;
 
 Canvas::
-Canvas(const MainWindow* window)
-    : parent{ window }
+Canvas()
 {
 }
 
@@ -15,6 +14,20 @@ Canvas::
 ~Canvas()
 {
     this->dispose();
+}
+
+void
+Canvas::
+setParent(MainWindow* window)
+{
+    parent = window;
+}
+
+const MainWindow*
+Canvas::
+getParent() const
+{
+    return parent;
 }
 
 // @see: https://www.scratchapixel.com/
@@ -196,7 +209,7 @@ Canvas::
 setup()
 {
     RECT rect = { 0 };
-    GetClientRect(parent->getWindowHandle(), &rect);
+    GetClientRect(this->getParent()->getWindowHandle(), &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
     this->setup(screenWidth, screenHeight);
