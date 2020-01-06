@@ -186,6 +186,7 @@ FakeWindow(const HINSTANCE& hInstance)
         szWindowClass, szTitle,
         0, 0, 0, 0, 0, 0, SW_HIDE))
     {
+        EnableWindow(getWindowHandle(), false);
         CreateFakeContext(getWindowHandle());
     }
 }
@@ -210,6 +211,7 @@ MainWindow(const HINSTANCE& hInstance)
         CW_USEDEFAULT, CW_USEDEFAULT,
         SW_HIDE))
     {
+        EnableWindow(getWindowHandle(), true);
         CreateTrueContext(getWindowHandle());
         
         // allow user input
