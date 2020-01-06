@@ -230,6 +230,11 @@ MainWindow(const HINSTANCE& hInstance)
 MainWindow::
 ~MainWindow()
 {
+    if (canvas)
+    {
+        delete canvas;
+        canvas = nullptr;
+    }
 }
 
 const Canvas*
