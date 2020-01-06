@@ -27,7 +27,7 @@ public:
     static void UseProgram(const GLProgram* program=nullptr);
 
     void AttachShader(const GLShader& shader) const;
-    void LoadShader(const std::map<GLenum, GLstring>& shaders);
+    void LoadShader(const std::map<GLenum, GLstring>& shaders) const;
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
     void ValidateProgram() const;

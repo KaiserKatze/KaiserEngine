@@ -120,7 +120,7 @@ AttachShader(const GLShader& shader) const
 
 void
 GLProgram::
-LoadShader(const std::map<GLenum, GLstring>& shaders)
+LoadShader(const std::map<GLenum, GLstring>& shaders) const
 {
     for (auto itr = shaders.cbegin();
         itr != shaders.cend();
