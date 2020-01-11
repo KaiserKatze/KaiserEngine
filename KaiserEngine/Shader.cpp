@@ -49,8 +49,7 @@ GLShader(GLstring path, const GLenum& type)
             std::stringstream ss;
             ss << "glShaderSource("
                 << shaderId << ", "
-                << count << ", "
-                << string << ", "
+                << count << ", \"...\", "
                 << length
                 << ")";
             DetectGLError(ss);
