@@ -14,6 +14,7 @@ public:
     ~GLShader();
     const bool isShader() const;
     const GLuint getID() const;
+    const GLenum getType() const;
 };
 
 class GLProgram
