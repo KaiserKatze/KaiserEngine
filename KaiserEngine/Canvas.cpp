@@ -196,7 +196,7 @@ MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei 
     std::stringstream ss;
     ss << std::hex << "GL CALLBACK: "
         << (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "")
-        << "source = 0x" << source
+        << " source = 0x" << source
         << ", type = 0x" << type
         << ", id = 0x" << id
         << ", severity = 0x" << severity
