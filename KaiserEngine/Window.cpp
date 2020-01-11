@@ -201,49 +201,53 @@ MainWindow(const HINSTANCE& hInstance)
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 
-    if (Create(hInstance, nullptr,
+    if (!Create(hInstance, nullptr,
         szWindowClass, szTitle, 0, 0,
         CW_USEDEFAULT, CW_USEDEFAULT,
         CW_USEDEFAULT, CW_USEDEFAULT,
         SW_HIDE))
     {
-        const HWND handle = getWindowHandle();
-        EnableWindow(handle, true);
-        CreateTrueContext(handle);
-        
-        // allow user input
-        EnableWindow(handle, true);
-        // setup event manager
-        Setup(handle);
-        // show window
-        ShowWindow(true);
-        // force the main window in front of all other windows
-        SetForegroundWindow(handle);
-
-        canvas = new Canvas();
-        canvas->setParent(this);
-        canvas->prepare();
-
-        // install timer
-        timerId = SetTimer(hWnd,
-            0, // timer id
-            20, // timeout value, in milliseconds;
-                // this configuration setup fixs frame rate
-                // 1000 MS = 1 FPS
-                // 33 MS = 30.3 FPS
-                // 20 MS = 50 FPS
-                // 16 MS = 62.5 FPS
-            nullptr); // make system post WM_TIMER message
-        // returned timer id should be 1,
-        // if no timer has been created yet
-        if (timerId == 0)
-        {
-            throw std::exception("Fail to create a timer for MainWindow instance!");
-        }
-    }
-    else
-    {
         throw std::exception("Fail to create MainWindow instance!");
+    }
+
+    const HWND handle = getWindowHandle();
+    if (!handle)
+        throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
+
+    if (CreateTrueContext(handle) != 0)
+        throw std::exception("Fail to create true context for OpenGL!");
+
+    // allow user input
+    EnableWindow(handle, true);
+
+    // setup event manager
+    Setup(handle);
+
+    // show window
+    ShowWindow(true);
+
+    // force the main window in front of all other windows
+    SetForegroundWindow(handle);
+
+    canvas = new Canvas();
+    canvas->setParent(this);
+    canvas->prepare();
+
+    // install timer
+    timerId = SetTimer(hWnd,
+        0, // timer id
+        20, // timeout value, in milliseconds;
+            // this configuration setup fixs frame rate
+            // 1000 MS = 1 FPS
+            // 33 MS = 30.3 FPS
+            // 20 MS = 50 FPS
+            // 16 MS = 62.5 FPS
+        nullptr); // make system post WM_TIMER message
+    // returned timer id should be 1,
+    // if no timer has been created yet
+    if (timerId == 0)
+    {
+        throw std::exception("Fail to create a timer for MainWindow instance!");
     }
 }
 
