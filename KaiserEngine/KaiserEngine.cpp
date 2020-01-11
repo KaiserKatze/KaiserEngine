@@ -68,7 +68,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     try
     {
 
-        FakeWindow fakeWin(hInstance);
         MainWindow mainWin(hInstance);
 
 #if APP_FULLSCREEN

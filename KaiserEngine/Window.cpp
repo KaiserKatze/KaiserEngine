@@ -211,6 +211,8 @@ MainWindow(const HINSTANCE& hInstance)
     if (!handle)
         throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
 
+    FakeWindow fakeWin(hInstance);
+
     if (CreateTrueContext(handle) != 0)
         throw std::exception("Fail to create true context for OpenGL!");
 
