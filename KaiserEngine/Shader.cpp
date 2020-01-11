@@ -168,6 +168,8 @@ const GLuint
 GLProgram::
 getID() const
 {
+    if (id == 0)
+        throw std::exception("GLProgram refuses to return 0 as its ID!");
     return id;
 }
 
