@@ -97,7 +97,6 @@ GLProgram()
 {
     if (GLuint pId = glCreateProgram())
     {
-        DetectGLError("glCreateProgram()");
         id = pId;
         {
             std::stringstream ss;
@@ -110,7 +109,10 @@ GLProgram()
         }
     }
     else
+    {
+        DetectGLError("glCreateProgram()");
         throw std::exception("Fail to create program!");
+    }
 }
 
 GLProgram::
