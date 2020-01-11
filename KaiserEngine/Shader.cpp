@@ -166,7 +166,7 @@ UseProgram(const GLProgram* program)
 
 void
 GLProgram::
-AttachShader(const GLShader& shader) const
+AttachShader(const GLShader& shader)
 {
     GLuint pId = getID();
     GLuint sId = shader.getID();
@@ -182,7 +182,7 @@ AttachShader(const GLShader& shader) const
 
 void
 GLProgram::
-LoadShader(const std::map<GLenum, GLstring>& shaders) const
+LoadShader(const std::map<GLenum, GLstring>& shaders)
 {
     for (auto itr = shaders.cbegin();
         itr != shaders.cend();
@@ -479,7 +479,7 @@ void
 GLProgram::
 Setup(const std::map<GLenum, GLstring>& shaders,
     const std::vector<GLstring>* attributes,
-    std::map<GLstring, GLint>* uniforms) const
+    std::map<GLstring, GLint>* uniforms)
 {
     LoadShader(shaders);
 

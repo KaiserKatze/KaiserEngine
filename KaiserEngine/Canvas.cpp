@@ -208,7 +208,7 @@ MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei 
 
 void
 Canvas::
-setup() const
+setup()
 {
     RECT rect = { 0 };
     const MainWindow* parent = this->getParent();
@@ -225,7 +225,7 @@ setup() const
 
 void
 Canvas::
-setup(const int& screenWidth, const int& screenHeight) const
+setup(const int& screenWidth, const int& screenHeight)
 {
     static const int trimX = 10;
     static const int trimY = 10;

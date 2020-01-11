@@ -191,7 +191,8 @@ OnResize(const int& newWidth, const int& newHeight) const
 {
     if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
-        window->getCanvas()->setup(newWidth, newHeight);
+        Canvas* canvas = const_cast<Canvas*>(window->getCanvas());
+        canvas->setup(newWidth, newHeight);
     }
     return 0;
 }
