@@ -99,14 +99,18 @@ void DetectGLError(const char* function)
     GLenum err = glGetError();
 
     std::stringstream ss;
-    ss << "[GL ERROR> IDX:"
-        << function
+
+    if (err == GL_NO_ERROR)
+        ss << "[GL   LOG> ";
+    else
+        ss << "[GL ERROR> ";
+
+    ss << function
         << ' ';
     if (err != GL_NO_ERROR)
     {
         switch (err)
         {
-        case GL_NO_ERROR:
         case GL_INVALID_ENUM:
         case GL_INVALID_VALUE:
         case GL_INVALID_OPERATION:
