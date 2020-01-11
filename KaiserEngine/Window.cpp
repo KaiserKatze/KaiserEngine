@@ -227,6 +227,8 @@ MainWindow(const HINSTANCE& hInstance)
         Setup(handle);
         // show window
         ShowWindow(true);
+        // force the main window in front of all other windows
+        SetForegroundWindow(handle);
 
         canvas = new Canvas();
         canvas->setParent(this);
