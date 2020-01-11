@@ -468,9 +468,9 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             itr != uniforms->end();
             itr++)
         {
-            const std::string& uniformName{ itr->first };
+            GLstring uniformName{ itr->first };
             GLint& uniformLocation{ itr->second };
-            uniformLocation = GetUniformLocation(uniformName.c_str());
+            uniformLocation = GetUniformLocation(uniformName);
         }
 }
 
