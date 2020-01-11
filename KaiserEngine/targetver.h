@@ -24,3 +24,8 @@
 // Modify the following two macros to utilize other versions of OpenGL
 #define APP_OPENGL_MAJOR_VERSION        4
 #define APP_OPENGL_MINOR_VERSION        6
+
+#define APP_OPENGL_DEBUG_NONE           0
+#define APP_OPENGL_DEBUG_MINIMAL        1
+#define APP_OPENGL_DEBUG_ALL            2
+#define APP_OPENGL_DEBUG_SEVERITY       APP_OPENGL_DEBUG_MINIMAL
