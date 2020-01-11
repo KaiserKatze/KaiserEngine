@@ -90,9 +90,6 @@ static int CreateTrueContext(const HWND& hWnd)
     //===========================================
     // Create context
 
-    if (wglGetCurrentDC())
-        return -1;
-
     HDC hDC = GetDC(hWnd);
     if (hDC == nullptr) return -1;
     wglMakeCurrent(hDC, nullptr);
