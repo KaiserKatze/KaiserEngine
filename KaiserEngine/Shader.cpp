@@ -96,8 +96,8 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
-    const GLuint pId = getID();
-    if (pId) glDeleteProgram(pId);
+    if (id) glDeleteProgram(id);
+    id = 0;
 }
 
 void
