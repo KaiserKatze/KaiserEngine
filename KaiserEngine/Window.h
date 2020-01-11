@@ -85,7 +85,7 @@ private:
         // @see: https://docs.microsoft.com/en-us/windows/win32/winmsg/window-styles
         DWORD winStyle;
         winStyle = WS_OVERLAPPEDWINDOW;
-        winStyle ^= WS_THICKFRAME;
+        winStyle ^= WS_THICKFRAME; // WS_THICKFRAME grants that the window has a sizing border
         winStyle |= (WS_CLIPCHILDREN | WS_CLIPSIBLINGS);
         return winStyle;
     }
