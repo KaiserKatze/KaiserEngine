@@ -219,8 +219,5 @@ OnTimer() const
     {
         window->getCanvas()->render();
     }
-#ifdef _DEBUG
-    std::exit(0); // TEST
-#endif
     return 0;
 }
