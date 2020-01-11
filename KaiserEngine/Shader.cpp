@@ -62,6 +62,7 @@ GLShader(GLstring path, const GLenum& type)
                 << ")";
             DetectGLError(ss);
         }
+        tp = type;
         id = shaderId;
     }
     else
