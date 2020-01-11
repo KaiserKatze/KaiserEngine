@@ -90,6 +90,7 @@ private:
         return winStyle;
     }
 
+    // Create HWND, aka window handle
     bool InitWindowInstance(HINSTANCE hInstance,
         HWND parent,
         LPCWSTR lpClass, LPCWSTR lpTitle,
@@ -131,6 +132,7 @@ private:
 
         // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
         ::ShowWindow(hWnd, nCmdShow);
+        // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-updatewindow
         ::UpdateWindow(hWnd);
 
         isWindowActivated = true;
