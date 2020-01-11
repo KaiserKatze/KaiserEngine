@@ -56,6 +56,7 @@ GLShader::
 ~GLShader()
 {
     if (id) glDeleteShader(id);
+    id = 0;
 }
 
 const bool
