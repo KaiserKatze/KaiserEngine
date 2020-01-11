@@ -113,6 +113,7 @@ static int CreateTrueContext(const HWND& hWnd)
     //const FLOAT pfAttribFList[] = { 0 };
     int pixelFormat{ 0 };
     UINT numFormats{ 0 };
+    // @see: https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_pixel_format.txt
     int format = wglChoosePixelFormatARB(hDC, attribList_pf.data(), nullptr, 1, &pixelFormat, &numFormats);
     if (format == 0)
     {
