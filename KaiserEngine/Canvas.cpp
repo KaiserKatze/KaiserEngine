@@ -209,7 +209,10 @@ Canvas::
 setup() const
 {
     RECT rect = { 0 };
-    GetClientRect(this->getParent()->getWindowHandle(), &rect);
+    const MainWindow* parent = this->getParent();
+    if (parent == nullptr)
+        throw std::exception("NullPointerException: parent(const MainWindow*) is nullptr!");
+    GetClientRect(parent->getWindowHandle(), &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
     this->setup(screenWidth, screenHeight);
