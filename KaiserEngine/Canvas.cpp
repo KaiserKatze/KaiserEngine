@@ -212,7 +212,10 @@ setup() const
     const MainWindow* parent = this->getParent();
     if (parent == nullptr)
         throw std::exception("NullPointerException: parent(const MainWindow*) is nullptr!");
-    GetClientRect(parent->getWindowHandle(), &rect);
+    HWND hWnd = parent->getWindowHandle();
+    if (hWnd == nullptr)
+        throw std::exception("NullPointerException: hWnd(HWND) is nullptr!");
+    GetClientRect(hWnd, &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
     this->setup(screenWidth, screenHeight);
