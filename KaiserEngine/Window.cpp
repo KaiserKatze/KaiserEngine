@@ -102,7 +102,6 @@ static int CreateTrueContext(const HWND& hWnd)
     AttributeListFactory pff;
     pff.put(WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
     pff.put(WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
-#if 0
     pff.put(WGL_TRANSPARENT_ARB, GL_TRUE);
     pff.put(WGL_DOUBLE_BUFFER_ARB, GL_FALSE); // Nvidia driver
     pff.put(WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB);
@@ -111,7 +110,6 @@ static int CreateTrueContext(const HWND& hWnd)
     pff.put(WGL_DEPTH_BITS_ARB, 24);
     pff.put(WGL_STENCIL_BITS_ARB, 8);
     //pff.put(WGL_SAMPLE_BUFFERS_ARB, 1);
-#endif
     const std::vector<int> attribList_pf = pff.make();
     //const FLOAT pfAttribFList[] = { 0 };
     int pixelFormat{ 0 };
