@@ -127,7 +127,17 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
-    if (id) glDeleteProgram(id);
+    if (id)
+    {
+        glDeleteProgram(id);
+
+        {
+            std::stringstream ss;
+            ss << "Deleted program ID = " << id
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+    }
     id = 0;
 }
 
