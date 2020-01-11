@@ -151,10 +151,10 @@ static int CreateTrueContext(const HWND& hWnd)
         ErrorExit(L"wglCreateContextAttribsARB");
         return -1;
     }
-
-    if (!wglMakeCurrent(hDC, hRC))
+    
+    if (!wglMakeContextCurrentARB(hDC, hDC, hRC))
     {
-        ErrorExit(L"wglMakeCurrent");
+        ErrorExit(L"wglMakeContextCurrentARB");
         return -1;
     }
 
