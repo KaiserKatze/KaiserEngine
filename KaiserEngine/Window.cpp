@@ -190,6 +190,10 @@ FakeWindow(const HINSTANCE& hInstance)
         EnableWindow(handle, false);
         CreateFakeContext(handle);
     }
+    else
+    {
+        throw std::exception("Fail to create FakeWindow instance!");
+    }
 }
 
 FakeWindow::
@@ -226,6 +230,10 @@ MainWindow(const HINSTANCE& hInstance)
 
         canvas->setParent(this);
         canvas->prepare();
+    }
+    else
+    {
+        throw std::exception("Fail to create MainWindow instance!");
     }
 }
 
