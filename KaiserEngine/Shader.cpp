@@ -127,7 +127,13 @@ UseProgram(const GLProgram* program)
 {
     GLuint pId{ 0 };
     if (program) pId = program->getID();
-    glUseProgram(pId); // need not to detect gl error
+    glUseProgram(pId); // need not to detect gl error, if pId == 0
+    if (pId != 0)
+    {
+        std::stringstream ss;
+        ss << "glUseProgram(" << pId << ")";
+        DetectGLError(ss);
+    }
 }
 
 void
