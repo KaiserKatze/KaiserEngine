@@ -23,7 +23,7 @@ static int CreateFakeContext(const HWND& hWnd)
     //  * 32-bit RGBA color buffer
     //  * 24-bit depth color buffer
     //  * 8-bit stencil
-    PIXELFORMATDESCRIPTOR pfd =
+    const PIXELFORMATDESCRIPTOR pfd =
     {
         sizeof(PIXELFORMATDESCRIPTOR),
         1,
