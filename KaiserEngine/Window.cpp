@@ -92,7 +92,6 @@ static int CreateTrueContext(const HWND& hWnd)
 
     HDC hDC = GetDC(hWnd);
     if (hDC == nullptr) return -1;
-    wglMakeCurrent(hDC, nullptr);
 
     AttributeListFactory pff;
     pff.put(WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
