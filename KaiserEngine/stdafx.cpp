@@ -54,6 +54,13 @@ static HMODULE module = (HMODULE)NULL;
 void * GetAnyGLFuncAddress(const char * name)
 {
     void * p = (void *)wglGetProcAddress(name);
+#ifdef _DEBUG
+    {
+        std::stringstream ss;
+        ss << "OPENGL: " << name << " = " << p << std::endl;
+        OutputDebugStringA(ss.str().c_str());
+    }
+#endif
     if (p == (void *)0
         || (p == (void *)0x1)
         || (p == (void *)0x2)
