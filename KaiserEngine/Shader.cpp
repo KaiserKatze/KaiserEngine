@@ -73,7 +73,17 @@ GLShader(GLstring path, const GLenum& type)
 GLShader::
 ~GLShader()
 {
-    if (id) glDeleteShader(id);
+    if (id)
+    {
+        glDeleteShader(id);
+
+        {
+            std::stringstream ss;
+            ss << "Deleted shader ID = " << id
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+    }
     id = 0;
 }
 
