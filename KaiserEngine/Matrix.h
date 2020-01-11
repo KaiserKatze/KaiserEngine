@@ -72,6 +72,9 @@ namespace MatrixMath
         {
             std::array<_Ty, Height * Width> result;
             std::copy(std::begin(data), std::end(data), std::begin(result));
+            {
+                OutputDebugStringA(this->toString().c_str()); // prints matrix
+            }
             return result;
         }
 
