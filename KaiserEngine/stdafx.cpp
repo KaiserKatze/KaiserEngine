@@ -104,11 +104,21 @@ void DetectGLError(const char* function)
         << ' ';
     if (err != GL_NO_ERROR)
     {
-        err &= 0xf;
-        if (err < sizeof(codelist) / sizeof(LPCSTR))
-            ss << codelist[err];
-        else
+        switch (err)
+        {
+        case GL_NO_ERROR:
+        case GL_INVALID_ENUM:
+        case GL_INVALID_VALUE:
+        case GL_INVALID_OPERATION:
+        case GL_STACK_OVERFLOW:
+        case GL_STACK_UNDERFLOW:
+        case GL_OUT_OF_MEMORY:
+            ss << codelist[err & 0xf];
+            break;
+        default:
             ss << "GL_UNKNOWN_ERROR";
+            break;
+        }
     }
     else
         ss << "GL_NO_ERROR";
