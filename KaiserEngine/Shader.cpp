@@ -29,6 +29,11 @@ GLShader(GLstring path, const GLenum& type)
     {
         {
             std::stringstream ss;
+            ss << "glCreateShader(" << type << ")";
+            DetectGLError(ss);
+        }
+        {
+            std::stringstream ss;
             ss << "Generated shader ID = " << shaderId
                 << " "
                 << std::boolalpha
@@ -36,14 +41,28 @@ GLShader(GLstring path, const GLenum& type)
                 << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
-        DetectGLError("glCreateShader");
         const GLsizei count = 1;
         const GLchar* string = text.c_str();
         const GLint length = text.length();
         glShaderSource(shaderId, count, &string, &length);
-        DetectGLError("glShaderSource");
+        {
+            std::stringstream ss;
+            ss << "glShaderSource("
+                << shaderId << ", "
+                << count << ", "
+                << string << ", "
+                << length
+                << ")";
+            DetectGLError(ss);
+        }
         glCompileShader(shaderId);
-        DetectGLError("glCompileShader");
+        {
+            std::stringstream ss;
+            ss << "glCompileShader("
+                << shaderId
+                << ")";
+            DetectGLError(ss);
+        }
         id = shaderId;
     }
     else
@@ -522,7 +541,13 @@ ActiveTexture(const GLenum& texture) const
         throw std::invalid_argument("Invalid argument 'texture'!");
     }
     glActiveTexture(texture);
-    DetectGLError("glActiveTexture");
+    {
+        std::stringstream ss;
+        ss << "glActiveTexture("
+            << texture
+            << ")";
+        DetectGLError(ss);
+    }
 }
 
 void
