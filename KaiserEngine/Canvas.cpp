@@ -266,9 +266,12 @@ setup(const int& screenWidth, const int& screenHeight) const
     // beware the following matrices are instances of MatrixQ<double, 4>
 
     // make matrices
+#pragma warning(push)
+#pragma warning(disable: 4244) // suppress the warning about the following implicit conversion from int to _Ty(float)
     const mat4 mp = MakePerspectiveProjectionMatrix<float>(screenWidth, screenHeight, degrees2radians(60.0f), 100.0f, 0.1f);
     const mat4 mv = MakeViewMatrix<float>();
     const mat4 mm = MakeModelMatrix<float>();
+#pragma warning(pop)
 
     GLProgram::UseProgram(&program);
 
