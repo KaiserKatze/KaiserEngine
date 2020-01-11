@@ -113,8 +113,9 @@ void
 GLProgram::
 AttachShader(const GLShader& shader) const
 {
+    GLuint pId = getID();
     GLuint sId = shader.getID();
-    glAttachShader(getID(), sId);
+    glAttachShader(pId, sId);
     DetectGLError("glAttachShader");
 }
 
@@ -135,7 +136,8 @@ void
 GLProgram::
 BindAttribute(const GLuint& index, GLstring name) const
 {
-    glBindAttribLocation(getID(), index, name);
+    const GLuint pId = getID();
+    glBindAttribLocation(pId, index, name);
     DetectGLError("glBindAttribLocation");
 }
 
@@ -143,7 +145,8 @@ void
 GLProgram::
 LinkProgram() const
 {
-    glLinkProgram(getID());
+    const GLuint pId = getID();
+    glLinkProgram(pId);
     DetectGLError("glLinkProgram");
 }
 
@@ -151,7 +154,8 @@ void
 GLProgram::
 ValidateProgram() const
 {
-    glValidateProgram(getID());
+    const GLuint pId = getID();
+    glValidateProgram(pId);
     DetectGLError("glValidateProgram");
 }
 
@@ -159,7 +163,8 @@ const GLint
 GLProgram::
 GetUniformLocation(GLstring name) const
 {
-    GLint result = glGetUniformLocation(getID(), name);
+    const GLuint pId = getID();
+    GLint result = glGetUniformLocation(pId, name);
     DetectGLError("glGetUniformLocation");
     return result;
 }
