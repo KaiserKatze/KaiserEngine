@@ -138,14 +138,15 @@ static int CreateTrueContext(const HWND& hWnd)
         return -1;
     }
 
+    // @see: https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_create_context.txt
     const int attribList_context[] = {
         WGL_CONTEXT_MAJOR_VERSION_ARB, APP_OPENGL_MAJOR_VERSION, // opengl major version
         WGL_CONTEXT_MINOR_VERSION_ARB, APP_OPENGL_MINOR_VERSION, // opengl minor version
         WGL_CONTEXT_PROFILE_MASK_ARB, (WGL_CONTEXT_CORE_PROFILE_BIT_ARB), // opengl profile
-        WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB), // debug context
+        WGL_CONTEXT_FLAGS_ARB, (WGL_CONTEXT_DEBUG_BIT_ARB // debug context
+                                | WGL_CONTEXT_FORWARD_COMPATIBLE_BIT_ARB),
         0, // End
     };
-
     HGLRC hRC = wglCreateContextAttribsARB(hDC, nullptr, attribList_context);
     if (hRC == nullptr)
     {
