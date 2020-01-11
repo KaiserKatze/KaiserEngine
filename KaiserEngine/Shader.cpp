@@ -10,6 +10,11 @@ const std::string slurp(std::ifstream& ifs)
 }
 
 GLShader::
+GLShader()
+{
+}
+
+GLShader::
 GLShader(GLstring path, const GLenum& type)
 {
     if (path == nullptr)
