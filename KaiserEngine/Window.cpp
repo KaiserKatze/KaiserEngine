@@ -102,11 +102,10 @@ static int CreateTrueContext(const HWND& hWnd)
     AttributeListFactory pff;
     pff.put(WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
     pff.put(WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
-    pff.put(WGL_TRANSPARENT_ARB, GL_TRUE);
-    pff.put(WGL_DOUBLE_BUFFER_ARB, GL_FALSE); // Nvidia driver
+    pff.put(WGL_DOUBLE_BUFFER_ARB, GL_TRUE);
+    pff.put(WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB);
     pff.put(WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB);
     pff.put(WGL_COLOR_BITS_ARB, 32);
-    pff.put(WGL_ALPHA_BITS_ARB, 8);
     pff.put(WGL_DEPTH_BITS_ARB, 24);
     pff.put(WGL_STENCIL_BITS_ARB, 8);
     //pff.put(WGL_SAMPLE_BUFFERS_ARB, 1);
