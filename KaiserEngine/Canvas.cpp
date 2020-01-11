@@ -314,7 +314,7 @@ render() const
     this->clear();
 
     // TODO
-    OutputDebugStringA("Rendering ... \r\n");
+    //OutputDebugStringA("Rendering ... \r\n");
 
     // bind textures if any
 
