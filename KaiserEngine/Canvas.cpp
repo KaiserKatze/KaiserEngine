@@ -3,7 +3,7 @@
 #include "loadgl.h"
 
 using namespace MatrixMath;
-using mat4 = MatrixQ<double, 4>;
+using mat4 = MatrixQ<float, 4>;
 
 Canvas::
 Canvas()
@@ -266,9 +266,9 @@ setup(const int& screenWidth, const int& screenHeight) const
     // beware the following matrices are instances of MatrixQ<double, 4>
 
     // make matrices
-    const mat4 mp = MakePerspectiveProjectionMatrix<double>(screenWidth, screenHeight, degrees2radians(60.0), 100.0, 0.1);
-    const mat4 mv = MakeViewMatrix<double>();
-    const mat4 mm = MakeModelMatrix<double>();
+    const mat4 mp = MakePerspectiveProjectionMatrix<float>(screenWidth, screenHeight, degrees2radians(60.0f), 100.0f, 0.1f);
+    const mat4 mv = MakeViewMatrix<float>();
+    const mat4 mm = MakeModelMatrix<float>();
 
     GLProgram::UseProgram(&program);
 
