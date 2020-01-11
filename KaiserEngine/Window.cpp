@@ -189,6 +189,7 @@ FakeWindow(const HINSTANCE& hInstance)
         const HWND handle = getWindowHandle();
         EnableWindow(handle, false);
         CreateFakeContext(handle);
+        DestroyWindow(handle);
     }
     else
     {
