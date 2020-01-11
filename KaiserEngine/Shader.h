@@ -20,6 +20,7 @@ class GLProgram
 {
 private:
     GLuint id{ 0 };
+    std::map<GLenum, GLShader> shaders;
 
 public:
     GLProgram();
