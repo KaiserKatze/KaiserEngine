@@ -77,7 +77,7 @@ GLProgram()
 {
     if (GLuint pId = glCreateProgram())
     {
-        DetectGLError("glCreateProgram");
+        DetectGLError("glCreateProgram()");
         id = pId;
         {
             std::stringstream ss;
@@ -106,7 +106,7 @@ UseProgram(const GLProgram* program)
 {
     GLuint pId{ 0 };
     if (program) pId = program->getID();
-    glUseProgram(pId);
+    glUseProgram(pId); // need not to detect gl error
 }
 
 void
@@ -116,7 +116,13 @@ AttachShader(const GLShader& shader) const
     GLuint pId = getID();
     GLuint sId = shader.getID();
     glAttachShader(pId, sId);
-    DetectGLError("glAttachShader");
+    {
+        std::stringstream ss;
+        ss << "glAttachShader("
+            << pId << ", "
+            << sId << ")";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -138,7 +144,14 @@ BindAttribute(const GLuint& index, GLstring name) const
 {
     const GLuint pId = getID();
     glBindAttribLocation(pId, index, name);
-    DetectGLError("glBindAttribLocation");
+    {
+        std::stringstream ss;
+        ss << "glBindAttribLocation("
+            << pId << ", "
+            << index << ", "
+            << name << ")";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -147,7 +160,11 @@ LinkProgram() const
 {
     const GLuint pId = getID();
     glLinkProgram(pId);
-    DetectGLError("glLinkProgram");
+    {
+        std::stringstream ss;
+        ss << "glLinkProgram(" << pId << ")";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -156,7 +173,11 @@ ValidateProgram() const
 {
     const GLuint pId = getID();
     glValidateProgram(pId);
-    DetectGLError("glValidateProgram");
+    {
+        std::stringstream ss;
+        ss << "glValidateProgram(" << pId << ")";
+        DetectGLError(ss);
+    }
 }
 
 const GLint
@@ -165,7 +186,11 @@ GetUniformLocation(GLstring name) const
 {
     const GLuint pId = getID();
     GLint result = glGetUniformLocation(pId, name);
-    DetectGLError("glGetUniformLocation");
+    {
+        std::stringstream ss;
+        ss << "glGetUniformLocation(" << pId << ", " << name << ")";
+        DetectGLError(ss);
+    }
     return result;
 }
 
@@ -184,7 +209,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix) const
 {
     glUniformMatrix2fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -192,7 +221,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 3>& matrix) const
 {
     glUniformMatrix3fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -200,7 +233,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 4>& matrix) const
 {
     glUniformMatrix4fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -208,7 +245,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 2>& matrix) const
 {
     glUniformMatrix2dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -216,7 +257,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 3>& matrix) const
 {
     glUniformMatrix3dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -224,7 +269,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<double, 4>& matrix) const
 {
     glUniformMatrix4dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -232,7 +281,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 3>& matrix) const
 {
     glUniformMatrix2x3fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2x3fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2x3fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -240,7 +293,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 2>& matrix) const
 {
     glUniformMatrix3x2fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3x2fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3x2fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -248,7 +305,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 2, 4>& matrix) const
 {
     glUniformMatrix2x4fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2x4fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2x4fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -256,7 +317,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 2>& matrix) const
 {
     glUniformMatrix4x2fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4x2fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4x2fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -264,7 +329,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 3, 4>& matrix) const
 {
     glUniformMatrix3x4fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3x4fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3x4fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -272,7 +341,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& matrix) const
 {
     glUniformMatrix4x3fv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4x3fv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4x3fv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -280,7 +353,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 3>& matrix) const
 {
     glUniformMatrix2x3dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2x3dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2x3dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -288,7 +365,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 2>& matrix) const
 {
     glUniformMatrix3x2dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3x2dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3x2dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -296,7 +377,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 2, 4>& matrix) const
 {
     glUniformMatrix2x4dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix2x4dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix2x4dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -304,7 +389,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 2>& matrix) const
 {
     glUniformMatrix4x2dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4x2dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4x2dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -312,7 +401,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 3, 4>& matrix) const
 {
     glUniformMatrix3x4dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix3x4dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix3x4dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
@@ -320,7 +413,11 @@ GLProgram::
 LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<double, 4, 3>& matrix) const
 {
     glUniformMatrix4x3dv(location, 1, GL_FALSE, matrix.getData().data());
-    DetectGLError("glUniformMatrix4x3dv");
+    {
+        std::stringstream ss;
+        ss << "glUniformMatrix4x3dv(" << location << ", 1, GL_FALSE, {})";
+        DetectGLError(ss);
+    }
 }
 
 void
