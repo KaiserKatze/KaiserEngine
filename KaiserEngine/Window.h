@@ -32,7 +32,7 @@ private:
     // used in `RegisterWindowClass()`
     HBRUSH MakeBackgroundColor()
     {
-        return CreateSolidBrush(RGB(0, 0, 0));
+        return CreateSolidBrush(RGB(0, 0, 0)); // Produce black color
     }
 
     bool RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
