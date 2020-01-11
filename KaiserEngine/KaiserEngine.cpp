@@ -87,6 +87,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         std::stringstream ss;
         ss << "!!! EXCEPTION !!! Reason: " << exc.what() << std::endl;
         OutputDebugStringA(ss.str().c_str());
+        return -1;
     }
 
     return retCode;
