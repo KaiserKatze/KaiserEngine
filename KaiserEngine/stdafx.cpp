@@ -96,14 +96,25 @@ static LPCSTR const codelist[] = {
 
 void DetectGLError(const char* function)
 {
+#if (APP_OPENGL_DEBUG_SEVERITY != APP_OPENGL_DEBUG_NONE)
     GLenum err = glGetError();
 
     std::stringstream ss;
 
+#if (APP_OPENGL_DEBUG_SEVERITY == APP_OPENGL_DEBUG_ALL)
     if (err == GL_NO_ERROR)
+    {
         ss << "[GL   LOG> ";
+    }
     else
+    {
         ss << "[GL ERROR> ";
+    }
+#elif (APP_OPENGL_DEBUG_SEVERITY == APP_OPENGL_DEBUG_MINIMAL)
+    if (err == GL_NO_ERROR)
+        return;
+    ss << "[GL ERROR> ";
+#endif
 
     ss << function
         << ' ';
@@ -131,6 +142,7 @@ void DetectGLError(const char* function)
         << std::endl;
 
     OutputDebugStringA(ss.str().c_str());
+#endif
 }
 
 void DetectGLError(const std::stringstream& ss)
