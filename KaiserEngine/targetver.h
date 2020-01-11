@@ -20,3 +20,7 @@
 
 #   define APP_RESIZABLE                APP_RESIZABLE_NEVER
 #endif
+
+// Modify the following two macros to utilize other versions of OpenGL
+#define APP_OPENGL_MAJOR_VERSION        4
+#define APP_OPENGL_MINOR_VERSION        6
