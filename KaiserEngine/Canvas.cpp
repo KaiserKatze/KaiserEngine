@@ -327,7 +327,8 @@ render() const
     // put everything back to default
     GLProgram::UseProgram();
 
-    SwapBuffers(wglGetCurrentDC());
+    HDC hDC = wglGetCurrentDC();
+    SwapBuffers(hDC);
 }
 
 void
