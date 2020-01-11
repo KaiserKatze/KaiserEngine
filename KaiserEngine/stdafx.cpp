@@ -38,10 +38,14 @@ void ErrorExit(LPTSTR lpszFunction)
 
     lpDisplayBuf = (LPVOID)LocalAlloc(LMEM_ZEROINIT,
         (lstrlen((LPCTSTR)lpMsgBuf) + lstrlen((LPCTSTR)lpszFunction) + 40) * sizeof(TCHAR));
+#pragma warning(push)
+#pragma warning(disable: 6067)
+#pragma warning(disable: 28183)
     StringCchPrintf((LPTSTR)lpDisplayBuf,
         LocalSize(lpDisplayBuf) / sizeof(TCHAR),
         TEXT("%s failed with error 0x%X: %s"),
         lpszFunction, dw, lpMsgBuf);
+#pragma warning(pop)
     MessageBox(NULL, (LPCTSTR)lpDisplayBuf, TEXT("Error"), MB_OK);
 
     LocalFree(lpMsgBuf);
@@ -69,7 +73,10 @@ void * GetAnyGLFuncAddress(const char * name)
     {
         if (!module)
             module = LoadLibraryA("opengl32.dll");
+#pragma warning(push)
+#pragma warning(disable: 6387)
         p = (void *)GetProcAddress(module, name);
+#pragma warning(pop)
     }
 
     return p;
