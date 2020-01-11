@@ -204,7 +204,6 @@ FakeWindow::
 
 MainWindow::
 MainWindow(const HINSTANCE& hInstance)
-    : canvas{ new Canvas() }
 {
     wchar_t szTitle[MAX_LOADSTRING];
     wchar_t szWindowClass[MAX_LOADSTRING];
@@ -228,6 +227,7 @@ MainWindow(const HINSTANCE& hInstance)
         // show window
         ShowWindow(true);
 
+        canvas = new Canvas();
         canvas->setParent(this);
         canvas->prepare();
     }
