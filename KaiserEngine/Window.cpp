@@ -43,7 +43,7 @@ static int CreateFakeContext(const HWND& hWnd)
         0, 0, 0
     };
 
-    int format = ChoosePixelFormat(hDC, &pfd);
+    const int format = ChoosePixelFormat(hDC, &pfd);
     if (format == 0)
     {
         // could not find a pixel format that matches the description,
