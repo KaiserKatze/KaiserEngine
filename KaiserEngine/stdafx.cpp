@@ -118,3 +118,8 @@ void DetectGLError(const char* function)
 
     OutputDebugString(ss.str().c_str());
 }
+
+void DetectGLError(const std::stringstream& ss)
+{
+    DetectGLError(ss.str().c_str());
+}
