@@ -172,19 +172,19 @@ FakeWindow(const HINSTANCE& hInstance)
     LoadStringW(hInstance, IDC_KAISERENGINE_OPENLOADER, szWindowClass, MAX_LOADSTRING);
     LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
 
-    if (Create(hInstance, HWND_MESSAGE,
-        szWindowClass, szTitle,
-        0, 0, 0, 0, 0, 0, SW_HIDE))
-    {
-        const HWND handle = getWindowHandle();
-        EnableWindow(handle, false);
-        CreateFakeContext(handle);
-        DestroyWindow(handle);
-    }
-    else
-    {
-        throw std::exception("Fail to create FakeWindow instance!");
-    }
+    std::exception fail_to_create("Fail to create FakeWindow instance!");
+
+    if (!Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE))
+        throw fail_to_create;
+    const HWND handle = getWindowHandle();
+    if (!handle)
+        throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
+    // disable user input for fake window
+    EnableWindow(handle, false);
+    if (CreateFakeContext(handle) != 0)
+        throw fail_to_create;
+    // destroy fake window after initializing opengl
+    DestroyWindow(handle);
 }
 
 FakeWindow::
