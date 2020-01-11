@@ -160,19 +160,6 @@ static int CreateTrueContext(const HWND& hWnd)
         return -1;
     }
 
-    // install timer
-    SetTimer(hWnd,
-        0, // timer id
-        20, // timeout value, in milliseconds;
-            // this configuration setup fixs frame rate
-            // 1000 MS = 1 FPS
-            // 33 MS = 30.3 FPS
-            // 20 MS = 50 FPS
-            // 16 MS = 62.5 FPS
-        nullptr); // make system post WM_TIMER message
-    // returned timer id should be 1,
-    // if no timer has been created yet
-
     return 0;
 }
 
@@ -236,6 +223,23 @@ MainWindow(const HINSTANCE& hInstance)
         canvas = new Canvas();
         canvas->setParent(this);
         canvas->prepare();
+
+        // install timer
+        timerId = SetTimer(hWnd,
+            0, // timer id
+            20, // timeout value, in milliseconds;
+                // this configuration setup fixs frame rate
+                // 1000 MS = 1 FPS
+                // 33 MS = 30.3 FPS
+                // 20 MS = 50 FPS
+                // 16 MS = 62.5 FPS
+            nullptr); // make system post WM_TIMER message
+        // returned timer id should be 1,
+        // if no timer has been created yet
+        if (timerId == 0)
+        {
+            throw std::exception("Fail to create a timer for MainWindow instance!");
+        }
     }
     else
     {
@@ -250,6 +254,18 @@ MainWindow::
     {
         delete canvas;
         canvas = nullptr;
+    }
+    const HWND handle = getWindowHandle();
+    if (handle)
+    {
+        if (timerId)
+        {
+            KillTimer(handle, timerId);
+            timerId = 0;
+        }
+        DestroyWindow(handle);
+        setWindowHandle(nullptr);
+        PostQuitMessage(0);
     }
 }
 

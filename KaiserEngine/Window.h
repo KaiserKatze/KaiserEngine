@@ -487,6 +487,7 @@ class MainWindow
 {
 private:
     Canvas* canvas{ nullptr };
+    UINT_PTR timerId{ 0 };
 
 public:
     MainWindow(const HINSTANCE& hInstance);
