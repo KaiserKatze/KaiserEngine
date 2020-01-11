@@ -231,8 +231,17 @@ setup(const int& screenWidth, const int& screenHeight) const
     if (screenWidth <= 0) throw std::exception("Invalid screen width!");
     if (screenHeight <= 0) throw std::exception("Invalid screen height!");
 
-    glViewport(trimX, trimY, screenWidth - 2 * trimX, screenHeight - 2 * trimY);
-    DetectGLError("glViewport");
+    const GLsizei width{ screenWidth - 2 * trimX };
+    const GLsizei height{ screenHeight - 2 * trimY };
+    glViewport(trimX, trimY, width, height);
+    {
+        std::stringstream ss;
+        ss << "glViewport(" << trimX << ", "
+            << trimY << ", "
+            << width << ", "
+            << height << ")";
+        DetectGLError(ss.str().c_str());
+    }
 
     // setup shaders
     std::map<GLenum, GLstring> shaders;
