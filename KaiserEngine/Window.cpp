@@ -166,7 +166,9 @@ static int CreateTrueContext(const HWND& hWnd)
         20, // timeout value, in milliseconds;
             // this configuration setup fixs frame rate
             // 1000 MS = 1 FPS
+            // 33 MS = 30.3 FPS
             // 20 MS = 50 FPS
+            // 16 MS = 62.5 FPS
         nullptr); // make system post WM_TIMER message
     // returned timer id should be 1,
     // if no timer has been created yet
