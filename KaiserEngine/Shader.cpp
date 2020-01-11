@@ -102,6 +102,13 @@ getID() const
     return id;
 }
 
+const GLenum
+GLShader::
+getType() const
+{
+    return tp;
+}
+
 GLProgram::
 GLProgram()
 {
