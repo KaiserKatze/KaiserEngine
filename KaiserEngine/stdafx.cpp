@@ -98,7 +98,7 @@ void DetectGLError(const char* function)
 {
     GLenum err = glGetError();
 
-    std::wstringstream ss;
+    std::stringstream ss;
     ss << "[GL ERROR> IDX:"
         << function
         << ' ';
@@ -116,7 +116,7 @@ void DetectGLError(const char* function)
         << "0x" << std::hex << err << std::dec
         << std::endl;
 
-    OutputDebugString(ss.str().c_str());
+    OutputDebugStringA(ss.str().c_str());
 }
 
 void DetectGLError(const std::stringstream& ss)
