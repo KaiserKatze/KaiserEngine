@@ -140,6 +140,16 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
+    for (auto itr = shaders.begin();
+        itr != shaders.end();
+        itr++)
+    {
+        GLShader* shader = itr->second;
+        if (shader)
+            delete shader;
+    }
+    shaders.clear();
+
     if (id)
     {
         glDeleteProgram(id);
@@ -171,10 +181,10 @@ UseProgram(const GLProgram* program)
 
 void
 GLProgram::
-AttachShader(const GLShader& shader)
+AttachShader(GLShader* shader)
 {
     GLuint pId = getID();
-    GLuint sId = shader.getID();
+    GLuint sId = shader->getID();
     glAttachShader(pId, sId);
     {
         std::stringstream ss;
@@ -183,6 +193,7 @@ AttachShader(const GLShader& shader)
             << sId << ")";
         DetectGLError(ss);
     }
+    shaders[shader->getType()] = shader;
 }
 
 void
@@ -193,7 +204,7 @@ LoadShader(const std::map<GLenum, GLstring>& shaders)
         itr != shaders.cend();
         itr++)
     {
-        const GLShader shader(itr->second, itr->first);
+        GLShader* shader = new GLShader(itr->second, itr->first);
         AttachShader(shader);
     }
 }

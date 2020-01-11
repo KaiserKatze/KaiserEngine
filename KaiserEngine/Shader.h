@@ -22,7 +22,7 @@ class GLProgram
 {
 private:
     GLuint id{ 0 };
-    std::map<GLenum, GLShader> shaders;
+    std::map<GLenum, GLShader*> shaders;
 
 public:
     GLProgram();
@@ -30,7 +30,7 @@ public:
 
     static void UseProgram(const GLProgram* program=nullptr);
 
-    void AttachShader(const GLShader& shader);
+    void AttachShader(GLShader* shader);
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
