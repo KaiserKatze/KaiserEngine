@@ -17,7 +17,6 @@ static int CreateFakeContext(const HWND& hWnd)
 
     HDC hDC = GetDC(hWnd);
     if (hDC == nullptr) return -1;
-    wglMakeCurrent(hDC, nullptr);
 
     // @see: https://www.khronos.org/opengl/wiki/Creating_an_OpenGL_Context_(WGL)
     // Good pixel format to choose for the dummy context
