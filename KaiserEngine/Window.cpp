@@ -212,13 +212,14 @@ MainWindow(const HINSTANCE& hInstance)
         CW_USEDEFAULT, CW_USEDEFAULT,
         SW_HIDE))
     {
-        EnableWindow(getWindowHandle(), true);
-        CreateTrueContext(getWindowHandle());
+        const HWND handle = getWindowHandle();
+        EnableWindow(handle, true);
+        CreateTrueContext(handle);
         
         // allow user input
-        EnableWindow(getWindowHandle(), true);
+        EnableWindow(handle, true);
         // setup event manager
-        Setup(getWindowHandle());
+        Setup(handle);
         // show window
         ShowWindow(true);
 
