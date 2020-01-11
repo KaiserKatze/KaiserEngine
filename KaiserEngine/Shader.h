@@ -6,6 +6,7 @@
 class GLShader
 {
 private:
+    GLenum tp{ 0 };
     GLuint id{ 0 };
 
 public:
