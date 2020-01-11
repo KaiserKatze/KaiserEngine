@@ -270,6 +270,8 @@ setup(const int& screenWidth, const int& screenHeight) const
     const mat4 mv = MakeViewMatrix<double>();
     const mat4 mm = MakeModelMatrix<double>();
 
+    GLProgram::UseProgram(&program);
+
     program.LoadUniformMatrix(uniforms["matrix_projection"], mp);
     program.LoadUniformMatrix(uniforms["matrix_view"], mv);
     program.LoadUniformMatrix(uniforms["matrix_model"], mm);
