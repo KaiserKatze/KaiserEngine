@@ -186,8 +186,9 @@ FakeWindow(const HINSTANCE& hInstance)
         szWindowClass, szTitle,
         0, 0, 0, 0, 0, 0, SW_HIDE))
     {
-        EnableWindow(getWindowHandle(), false);
-        CreateFakeContext(getWindowHandle());
+        const HWND handle = getWindowHandle();
+        EnableWindow(handle, false);
+        CreateFakeContext(handle);
     }
 }
 
