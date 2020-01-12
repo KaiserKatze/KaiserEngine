@@ -114,6 +114,7 @@ private:
             this); // additional application data
 
 #ifdef _DEBUG
+        // Set window title
         {
             std::wstringstream wss;
             wss << lpTitle
