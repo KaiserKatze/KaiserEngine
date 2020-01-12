@@ -109,8 +109,7 @@ static int CreateTrueContext(HWND hWnd)
     int pixelFormat{ 0 };
     UINT numFormats{ 0 };
     // @see: https://www.khronos.org/registry/OpenGL/extensions/ARB/WGL_ARB_pixel_format.txt
-    int format = wglChoosePixelFormatARB(hDC, attribList_pf.data(), nullptr, 1, &pixelFormat, &numFormats);
-    if (format == 0)
+    if (!wglChoosePixelFormatARB(hDC, attribList_pf.data(), nullptr, 1, &pixelFormat, &numFormats))
     {
         ErrorExit(L"wglChoosePixelFormatARB");
         return -1;
@@ -125,7 +124,7 @@ static int CreateTrueContext(HWND hWnd)
     }
 
     // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-setpixelformat
-    if (!SetPixelFormat(hDC, format, &pfd))
+    if (!SetPixelFormat(hDC, pixelFormat, &pfd))
     {
         ErrorExit(L"CreateTrueContext -> SetPixelFormat");
         return -1;
