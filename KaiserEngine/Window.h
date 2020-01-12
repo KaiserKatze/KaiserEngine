@@ -175,23 +175,6 @@ protected:
         }
     }
 
-#ifdef _DEBUG
-    void UpdateWindowTitle()
-    {
-        // change window title name
-        GLint iMajorVersion, iMinorVersion;
-        glGetIntegerv(GL_MAJOR_VERSION, &iMajorVersion);
-        glGetIntegerv(GL_MINOR_VERSION, &iMinorVersion);
-
-        std::wstringstream sNewTitle;
-        sNewTitle << szTitle;
-        sNewTitle << " (OpenGL version: ";
-        sNewTitle << iMajorVersion << '.' << iMinorVersion;
-        sNewTitle << ")";
-        SetWindowTextW(hWnd, sNewTitle.str().c_str());
-    }
-#endif
-
     bool Create(
         HINSTANCE hInstance,
         HWND parent,
