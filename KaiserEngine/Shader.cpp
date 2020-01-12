@@ -177,6 +177,10 @@ UseProgram(const GLProgram* program)
         ss << "glUseProgram(" << pId << ")";
         DetectGLError(ss);
     }
+    else
+    {
+        glGetError(); // suppress possible error
+    }
 }
 
 void
