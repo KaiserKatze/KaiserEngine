@@ -7,7 +7,7 @@
 
 constexpr size_t MAX_LOADSTRING = 127;
 
-static int CreateFakeContext(const HWND& hWnd)
+static int CreateFakeContext(HWND hWnd)
 {
     //===========================================
     // Create context
@@ -85,7 +85,7 @@ static int CreateFakeContext(const HWND& hWnd)
     return 0;
 }
 
-static int CreateTrueContext(const HWND& hWnd)
+static int CreateTrueContext(HWND hWnd)
 {
     //===========================================
     // Create context
