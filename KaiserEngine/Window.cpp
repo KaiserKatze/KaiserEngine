@@ -177,7 +177,8 @@ FakeWindow(const HINSTANCE& hInstance)
 
     std::exception fail_to_create("Fail to create FakeWindow instance!");
 
-    if (!Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle, 0, 0, 0, 0, 0, 0, SW_HIDE))
+    if (!Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle,
+        0, 0, DefWindowProc, 0, 0, 0, 0, SW_HIDE))
         throw fail_to_create;
     const HWND handle = getWindowHandle();
     if (!handle)
@@ -204,8 +205,36 @@ MainWindow(const HINSTANCE& hInstance)
     LoadStringW(hInstance, IDC_KAISERENGINE, szWindowClass, MAX_LOADSTRING);
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
 
+    WNDPROC mainWindowProcedure = [](HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam) -> LRESULT
+    {
+        MainWindow* pThis{ nullptr };
+
+        if (message == WM_NCCREATE)
+        {
+            CREATESTRUCT* pCreate = reinterpret_cast<CREATESTRUCT*>(lParam);
+            pThis = reinterpret_cast<MainWindow*>(pCreate->lpCreateParams);
+            SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
+
+            pThis->setWindowHandle(hwnd);
+        }
+        else
+        {
+            pThis = reinterpret_cast<MainWindow*>(GetWindowLongPtr(hwnd, GWLP_USERDATA));
+        }
+
+        if (pThis)
+        {
+            return pThis->HandleMessage(message, wParam, lParam);
+        }
+        else
+        {
+            return DefWindowProc(hwnd, message, wParam, lParam);
+        }
+    };
+
     if (!Create(hInstance, nullptr,
         szWindowClass, szTitle, 0, 0,
+        mainWindowProcedure,
         CW_USEDEFAULT, CW_USEDEFAULT,
         CW_USEDEFAULT, CW_USEDEFAULT,
         SW_HIDE))

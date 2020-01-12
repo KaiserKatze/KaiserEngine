@@ -3,7 +3,6 @@
 #include "EventManager.h"
 #include "Canvas.h"
 
-template <typename WindowType>
 class AbstractWindow
 {
 private:
@@ -149,32 +148,6 @@ protected:
 
     virtual LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 
-    static LRESULT CALLBACK WindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
-    {
-        WindowType *pThis = NULL;
-
-        if (message == WM_NCCREATE)
-        {
-            CREATESTRUCT* pCreate = (CREATESTRUCT*)lParam;
-            pThis = (WindowType*)pCreate->lpCreateParams;
-            SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)pThis);
-
-            pThis->hWnd = hwnd;
-        }
-        else
-        {
-            pThis = (WindowType*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-        }
-        if (pThis)
-        {
-            return pThis->HandleMessage(message, wParam, lParam);
-        }
-        else
-        {
-            return DefWindowProc(hwnd, message, wParam, lParam);
-        }
-    }
-
     bool Create(
         HINSTANCE hInstance,
         HWND parent,
@@ -182,6 +155,7 @@ protected:
         LPCWSTR lpTitle,
         DWORD dwStyle = 0,
         DWORD dwExStyle = 0,
+        WNDPROC wndproc = DefWindowProc,
         int x = CW_USEDEFAULT,
         int y = CW_USEDEFAULT,
         int w = CW_USEDEFAULT,
@@ -207,7 +181,7 @@ protected:
 
         bool result;
 
-        if (RegisterWindowClass(hInstance, WindowType::WindowProc, lpClass)
+        if (RegisterWindowClass(hInstance, wndproc, lpClass)
             && InitWindowInstance(hInstance, parent, lpClass, lpTitle, x, y, w, h, nCmdShow))
         {
             SetFocus(hWnd);
@@ -430,14 +404,13 @@ public:
     }
 };
 
-template <typename WindowType>
 class BaseWindow
-    : public AbstractWindow<WindowType>
+    : public AbstractWindow
     , public EventManager
 {
 protected:
     BaseWindow()
-        : AbstractWindow<WindowType>()
+        : AbstractWindow()
         , EventManager()
     {
     }
@@ -455,7 +428,7 @@ public:
 };
 
 class FakeWindow
-    : public BaseWindow<FakeWindow>
+    : public BaseWindow
 {
 public:
     FakeWindow(const HINSTANCE& hInstance);
@@ -466,7 +439,7 @@ public:
 class Canvas;
 
 class MainWindow
-    : public BaseWindow<MainWindow>
+    : public BaseWindow
 {
 private:
     Canvas* canvas{ nullptr };
