@@ -427,14 +427,6 @@ public:
     }
 };
 
-class FakeWindow
-    : public BaseWindow
-{
-public:
-    FakeWindow(const HINSTANCE& hInstance);
-    ~FakeWindow();
-};
-
 
 class Canvas;
 

@@ -167,6 +167,14 @@ static int CreateTrueContext(const HWND& hWnd)
 }
 
 
+class FakeWindow
+    : public BaseWindow
+{
+public:
+    FakeWindow(const HINSTANCE& hInstance);
+    ~FakeWindow();
+};
+
 FakeWindow::
 FakeWindow(const HINSTANCE& hInstance)
 {
