@@ -81,6 +81,7 @@ static int CreateFakeContext(HWND hWnd)
     wglDeleteContext(hRC);
     wglMakeCurrent(nullptr, nullptr);
     ReleaseDC(hWnd, hDC);
+    DestroyWindow(hWnd);
 
     return 0;
 }
