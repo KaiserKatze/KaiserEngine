@@ -14,12 +14,12 @@ Canvas(const AbstractWindow& window)
 Canvas::
 ~Canvas()
 {
-    this->dispose();
+    this->Dispose();
 }
 
 const AbstractWindow&
 Canvas::
-getParent() const
+GetParent() const
 {
     return parent;
 }
@@ -202,22 +202,22 @@ MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei 
 
 void
 Canvas::
-setup()
+Setup()
 {
     RECT rect = { 0 };
-    const AbstractWindow& parent = this->getParent();
+    const AbstractWindow& parent = this->GetParent();
     HWND hWnd = parent.GetWindowHandle();
     if (hWnd == nullptr)
         throw std::exception("NullPointerException: hWnd(HWND) is nullptr!");
     GetClientRect(hWnd, &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
-    this->setup(screenWidth, screenHeight);
+    this->Setup(screenWidth, screenHeight);
 }
 
 void
 Canvas::
-setup(const int& screenWidth, const int& screenHeight)
+Setup(const int& screenWidth, const int& screenHeight)
 {
     static const int trimX = 10;
     static const int trimY = 10;
@@ -277,7 +277,7 @@ setup(const int& screenWidth, const int& screenHeight)
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
-prepare()
+Prepare()
 {
     glEnable(GL_DEBUG_OUTPUT);
     DetectGLError("glEnable");
@@ -288,12 +288,12 @@ prepare()
     glClearColor(0.4f, 0.6f, 0.9f, 0.0f);
     DetectGLError("glClearColor");
 
-    this->setup();
+    this->Setup();
 }
 
 void
 Canvas::
-clear() const
+Clear() const
 {
     glClear(GL_COLOR_BUFFER_BIT
         | GL_DEPTH_BUFFER_BIT);
@@ -302,9 +302,9 @@ clear() const
 
 void
 Canvas::
-render() const
+Render() const
 {
-    this->clear();
+    this->Clear();
 
     // TODO
     //OutputDebugStringA("Rendering ... \r\n");
@@ -326,7 +326,7 @@ render() const
 
 void
 Canvas::
-dispose()
+Dispose()
 {
 
 }

@@ -13,24 +13,24 @@ public:
     Canvas(const AbstractWindow& window);
     ~Canvas();
 
-    const AbstractWindow& getParent() const;
+    const AbstractWindow& GetParent() const;
 
     // Setup viewport
-    void setup();
+    void Setup();
 
     // Setup viewport
-    void setup(const int& width, const int& height);
+    void Setup(const int& width, const int& height);
 
     // Prepare OpenGL resources
-    void prepare();
+    void Prepare();
 
     // Clear canvas
-    void clear() const;
+    void Clear() const;
 
     // Render canvas
-    void render() const;
+    void Render() const;
 
     // Dispose OpenGL resources
-    void dispose();
+    void Dispose();
 };
 

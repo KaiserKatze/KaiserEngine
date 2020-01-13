@@ -273,7 +273,7 @@ MainWindow(const HINSTANCE& hInstance)
     SetForegroundWindow(handle);
 
     canvas = new Canvas(*this);
-    canvas->prepare();
+    canvas->Prepare();
 
     // install timer
     timerId = SetTimer(handle,
