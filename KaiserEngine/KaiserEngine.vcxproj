@@ -150,6 +150,7 @@
     <Text Include="loadgl.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttributeList.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AttributeList.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />
