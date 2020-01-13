@@ -212,42 +212,42 @@ AbstractWindow::
 
 HWND
 AbstractWindow::
-getWindowHandle() const
+GetWindowHandle() const
 {
     return hWnd;
 }
 
 void
 AbstractWindow::
-setWindowHandle(HWND windowHandle)
+SetWindowHandle(HWND windowHandle)
 {
     hWnd = windowHandle;
 }
 
 HDC
 AbstractWindow::
-getDeviceContext() const
+GetDeviceContext() const
 {
     return hdc;
 }
 
 void
 AbstractWindow::
-setDeviceContext(HDC handle)
+SetDeviceContext(HDC handle)
 {
     hdc = handle;
 }
 
 HGLRC
 AbstractWindow::
-getRenderContext() const
+GetRenderContext() const
 {
     return hglrc;
 }
 
 void
 AbstractWindow::
-setRenderContext(HGLRC handle)
+SetRenderContext(HGLRC handle)
 {
     hglrc = handle;
 }
@@ -383,5 +383,5 @@ void
 AbstractWindow::
 Show(bool show) const
 {
-    ::ShowWindow(getWindowHandle(), show ? SW_SHOW : SW_HIDE);
+    ::ShowWindow(GetWindowHandle(), show ? SW_SHOW : SW_HIDE);
 }

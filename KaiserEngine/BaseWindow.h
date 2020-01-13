@@ -22,6 +22,6 @@ public:
     LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) override
     {
         // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
-        return TraverseList(getWindowHandle(), message, wParam, lParam);
+        return TraverseList(GetWindowHandle(), message, wParam, lParam);
     }
 };

@@ -33,12 +33,12 @@ protected:
 
 public:
 
-    HWND getWindowHandle() const;
-    void setWindowHandle(HWND windowHandle);
-    HDC getDeviceContext() const;
-    void setDeviceContext(HDC deviceContext);
-    HGLRC getRenderContext() const;
-    void setRenderContext(HGLRC renderContext);
+    HWND GetWindowHandle() const;
+    void SetWindowHandle(HWND windowHandle);
+    HDC GetDeviceContext() const;
+    void SetDeviceContext(HDC deviceContext);
+    HGLRC GetRenderContext() const;
+    void SetRenderContext(HGLRC renderContext);
 #if (defined _DEBUG) || ((APP_FULLSCREEN != APP_FULLSCREEN_ALWAYS) && (APP_FULLSCREEN != APP_FULLSCREEN_NEVER))
     bool SetFullscreen(bool isFullscreen);
 #endif

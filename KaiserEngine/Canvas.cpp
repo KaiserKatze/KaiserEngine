@@ -214,7 +214,7 @@ setup()
     const MainWindow* parent = this->getParent();
     if (parent == nullptr)
         throw std::exception("NullPointerException: parent(const MainWindow*) is nullptr!");
-    HWND hWnd = parent->getWindowHandle();
+    HWND hWnd = parent->GetWindowHandle();
     if (hWnd == nullptr)
         throw std::exception("NullPointerException: hWnd(HWND) is nullptr!");
     GetClientRect(hWnd, &rect);

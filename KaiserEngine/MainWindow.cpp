@@ -189,7 +189,7 @@ FakeWindow(const HINSTANCE& hInstance)
     if (!Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle,
         0, 0, DefWindowProc, 0, 0, 0, 0, SW_HIDE))
         throw fail_to_create;
-    const HWND handle = getWindowHandle();
+    const HWND handle = GetWindowHandle();
     if (!handle)
         throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
     // disable user input for fake window
@@ -224,7 +224,7 @@ MainWindow(const HINSTANCE& hInstance)
             pThis = reinterpret_cast<MainWindow*>(pCreate->lpCreateParams);
             SetWindowLongPtr(hwnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pThis));
 
-            pThis->setWindowHandle(hwnd);
+            pThis->SetWindowHandle(hwnd);
         }
         else
         {
@@ -251,7 +251,7 @@ MainWindow(const HINSTANCE& hInstance)
         throw std::exception("Fail to create MainWindow instance!");
     }
 
-    const HWND handle = getWindowHandle();
+    const HWND handle = GetWindowHandle();
     if (!handle)
         throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
 
@@ -302,7 +302,7 @@ MainWindow::
         delete canvas;
         canvas = nullptr;
     }
-    const HWND handle = getWindowHandle();
+    const HWND handle = GetWindowHandle();
     if (handle)
     {
         if (timerId)
@@ -311,7 +311,7 @@ MainWindow::
             timerId = 0;
         }
         DestroyWindow(handle);
-        setWindowHandle(nullptr);
+        SetWindowHandle(nullptr);
         PostQuitMessage(0);
     }
 }
