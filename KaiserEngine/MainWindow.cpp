@@ -2,6 +2,7 @@
 #include "resource.h"
 #include "loadgl.h"
 #include "MainWindow.h"
+#include "AttributeList.h"
 
 // @see: https://github.com/LWJGL/lwjgl/blob/master/src/native/windows/opengles/context.c
 
