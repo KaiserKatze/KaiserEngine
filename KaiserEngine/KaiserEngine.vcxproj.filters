@@ -34,9 +34,9 @@
     <Filter Include="Source Files\Video">
       <UniqueIdentifier>{122143d5-f1b2-40e6-9259-1b82391df3a8}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="loadgl.txt" />
+    <Filter Include="Pre-compile Scripts">
+      <UniqueIdentifier>{3c44de46-419b-44be-b414-20976e4fcf2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -143,7 +143,6 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="loadgl.py" />
     <None Include="vertex.shader">
       <Filter>Shader Files</Filter>
     </None>
@@ -151,5 +150,13 @@
       <Filter>Shader Files</Filter>
     </None>
     <None Include="README.md" />
+    <None Include="loadgl.py">
+      <Filter>Pre-compile Scripts</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="loadgl.txt">
+      <Filter>Pre-compile Scripts</Filter>
+    </Text>
   </ItemGroup>
 </Project>
