@@ -95,7 +95,7 @@ static int CreateTrueContext(HWND hWnd)
     HDC hDC = GetDC(hWnd);
     if (hDC == nullptr) return -1;
 
-    AttributeListFactory pff;
+    AttributeList pff;
     pff.put(WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
     pff.put(WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
     pff.put(WGL_DOUBLE_BUFFER_ARB, GL_TRUE);

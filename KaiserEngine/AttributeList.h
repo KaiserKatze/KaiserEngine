@@ -1,10 +1,10 @@
 #pragma once
 
-class AttributeListFactory
+class AttributeList
 {
 public:
-    AttributeListFactory();
-    ~AttributeListFactory();
+    AttributeList();
+    ~AttributeList();
     void put(const int& key, const int& val);
     void clear();
     size_t size() const;

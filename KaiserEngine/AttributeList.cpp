@@ -1,39 +1,39 @@
 #include "stdafx.h"
 #include "AttributeList.h"
 
-AttributeListFactory::
-AttributeListFactory()
+AttributeList::
+AttributeList()
 {
 }
 
-AttributeListFactory::
-~AttributeListFactory()
+AttributeList::
+~AttributeList()
 {
 }
 
 void
-AttributeListFactory::
+AttributeList::
 put(const int& key, const int& val)
 {
     entries[key] = val;
 }
 
 void
-AttributeListFactory::
+AttributeList::
 clear()
 {
     entries.clear();
 }
 
 size_t
-AttributeListFactory::
+AttributeList::
 size() const
 {
     return entries.size() * 2 + 1;
 }
 
 const std::vector<int>
-AttributeListFactory::
+AttributeList::
 make()
 {
     std::vector<int> attribVector;
