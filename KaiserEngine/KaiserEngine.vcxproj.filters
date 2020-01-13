@@ -93,6 +93,9 @@
     <ClInclude Include="AttributeList.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
+    <ClInclude Include="BaseWindow.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="AttributeList.cpp">
       <Filter>Source Files\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseWindow.cpp">
+      <Filter>Source Files\Window</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

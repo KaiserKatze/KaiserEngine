@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttributeList.h" />
+    <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />

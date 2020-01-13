@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Canvas.h"
-#include "Window.h"
+#include "BaseWindow.h"
 
 class Canvas;
 

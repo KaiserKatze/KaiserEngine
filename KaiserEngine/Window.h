@@ -1,7 +1,5 @@
 #pragma once
 
-#include "EventManager.h"
-
 class AbstractWindow
 {
 private:
@@ -399,28 +397,5 @@ public:
     void ShowWindow(bool show) const
     {
         ::ShowWindow(getWindowHandle(), show ? SW_SHOW : SW_HIDE);
-    }
-};
-
-class BaseWindow
-    : public AbstractWindow
-    , public EventManager
-{
-protected:
-    BaseWindow()
-        : AbstractWindow()
-        , EventManager()
-    {
-    }
-
-    virtual ~BaseWindow()
-    {
-    }
-
-public:
-    LRESULT CALLBACK HandleMessage(UINT message, WPARAM wParam, LPARAM lParam) override
-    {
-        // @see: https://docs.microsoft.com/zh-cn/windows/win32/winmsg/about-messages-and-message-queues
-        return TraverseList(getWindowHandle(), message, wParam, lParam);
     }
 };
