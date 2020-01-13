@@ -16,6 +16,9 @@
     <Filter Include="Shader Files">
       <UniqueIdentifier>{b9e1383b-6ac5-4131-a06d-ef7dd9cbd548}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{e2115578-5307-49c4-b1ff-76e982eea6df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="loadgl.txt" />
