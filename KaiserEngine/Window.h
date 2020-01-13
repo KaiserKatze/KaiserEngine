@@ -1,7 +1,6 @@
 #pragma once
 
 #include "EventManager.h"
-#include "Canvas.h"
 
 class AbstractWindow
 {
@@ -426,22 +425,6 @@ public:
     }
 };
 
-
-class Canvas;
-
-class MainWindow
-    : public BaseWindow
-{
-private:
-    Canvas* canvas{ nullptr };
-    UINT_PTR timerId{ 0 };
-
-public:
-    MainWindow(const HINSTANCE& hInstance);
-    ~MainWindow();
-
-    const Canvas* getCanvas() const;
-};
 
 
 class AttributeListFactory

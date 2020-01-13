@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Window.h"
+#include "MainWindow.h"
 #include "Shader.h"
 
 class MainWindow;

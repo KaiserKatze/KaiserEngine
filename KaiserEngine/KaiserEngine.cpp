@@ -7,7 +7,7 @@
 #include "UserInput.h"
 #include "Event.h"
 #include "EventManager.h"
-#include "Window.h"
+#include "MainWindow.h"
 
 #define MAX_LOADSTRING 100
 
