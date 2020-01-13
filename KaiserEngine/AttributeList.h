@@ -5,10 +5,9 @@ class AttributeList
 public:
     AttributeList();
     ~AttributeList();
-    void put(const int& key, const int& val);
-    void clear();
-    size_t size() const;
-    const std::vector<int> make();
+    void Put(const int& key, const int& val);
+    void Clear();
+    const std::vector<int> Make();
 private:
     std::map<int, int> entries;
 };

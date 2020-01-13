@@ -13,28 +13,21 @@ AttributeList::
 
 void
 AttributeList::
-put(const int& key, const int& val)
+Put(const int& key, const int& val)
 {
     entries[key] = val;
 }
 
 void
 AttributeList::
-clear()
+Clear()
 {
     entries.clear();
 }
 
-size_t
-AttributeList::
-size() const
-{
-    return entries.size() * 2 + 1;
-}
-
 const std::vector<int>
 AttributeList::
-make()
+Make()
 {
     std::vector<int> attribVector;
 
