@@ -6,7 +6,8 @@ using namespace MatrixMath;
 using mat4 = MatrixQ<float, 4>;
 
 Canvas::
-Canvas()
+Canvas(const AbstractWindow& window)
+    : parent{ window }
 {
 }
 
@@ -16,14 +17,7 @@ Canvas::
     this->dispose();
 }
 
-void
-Canvas::
-setParent(MainWindow* window)
-{
-    parent = window;
-}
-
-const MainWindow*
+const AbstractWindow&
 Canvas::
 getParent() const
 {
@@ -211,10 +205,8 @@ Canvas::
 setup()
 {
     RECT rect = { 0 };
-    const MainWindow* parent = this->getParent();
-    if (parent == nullptr)
-        throw std::exception("NullPointerException: parent(const MainWindow*) is nullptr!");
-    HWND hWnd = parent->GetWindowHandle();
+    const AbstractWindow& parent = this->getParent();
+    HWND hWnd = parent.GetWindowHandle();
     if (hWnd == nullptr)
         throw std::exception("NullPointerException: hWnd(HWND) is nullptr!");
     GetClientRect(hWnd, &rect);

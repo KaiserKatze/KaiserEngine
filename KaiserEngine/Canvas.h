@@ -1,23 +1,19 @@
 #pragma once
 
 #include "AbstractWindow.h"
-#include "MainWindow.h"
 #include "Shader.h"
-
-class MainWindow;
 
 class Canvas
 {
 private:
-    MainWindow* parent{ nullptr };
+    const AbstractWindow& parent;
     GLProgram program;
 
 public:
-    Canvas();
+    Canvas(const AbstractWindow& window);
     ~Canvas();
 
-    void setParent(MainWindow* window);
-    const MainWindow* getParent() const;
+    const AbstractWindow& getParent() const;
 
     // Setup viewport
     void setup();

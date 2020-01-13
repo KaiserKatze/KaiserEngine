@@ -272,8 +272,7 @@ MainWindow(const HINSTANCE& hInstance)
     // force the main window in front of all other windows
     SetForegroundWindow(handle);
 
-    canvas = new Canvas();
-    canvas->setParent(this);
+    canvas = new Canvas(*this);
     canvas->prepare();
 
     // install timer
