@@ -267,7 +267,7 @@ MainWindow(const HINSTANCE& hInstance)
     Setup(handle);
 
     // show window
-    ShowWindow(true);
+    Show(true);
 
     // force the main window in front of all other windows
     SetForegroundWindow(handle);
@@ -277,7 +277,7 @@ MainWindow(const HINSTANCE& hInstance)
     canvas->prepare();
 
     // install timer
-    timerId = SetTimer(hWnd,
+    timerId = SetTimer(handle,
         0, // timer id
         20, // timeout value, in milliseconds;
             // this configuration setup fixs frame rate
