@@ -60,9 +60,6 @@
     <ClInclude Include="Matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>Header Files\Window</Filter>
-    </ClInclude>
     <ClInclude Include="MainWindow.h">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
     <ClInclude Include="BaseWindow.h">
       <Filter>Header Files\Window</Filter>
     </ClInclude>
+    <ClInclude Include="AbstractWindow.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -106,9 +106,6 @@
     </ClCompile>
     <ClCompile Include="UserInput.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>Source Files\Window</Filter>
     </ClCompile>
     <ClCompile Include="MainWindow.cpp">
       <Filter>Source Files\Window</Filter>
@@ -138,6 +135,9 @@
       <Filter>Source Files\Video</Filter>
     </ClCompile>
     <ClCompile Include="BaseWindow.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="AbstractWindow.cpp">
       <Filter>Source Files\Window</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Window.h"
+#include "AbstractWindow.h"
 #include "EventManager.h"
 
 class BaseWindow
