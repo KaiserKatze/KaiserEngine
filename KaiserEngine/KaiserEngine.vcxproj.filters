@@ -81,9 +81,6 @@
     <ClInclude Include="Canvas.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files\Video</Filter>
-    </ClInclude>
     <ClInclude Include="AttributeList.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
@@ -100,6 +97,9 @@
       <Filter>Header Files\Video</Filter>
     </ClInclude>
     <ClInclude Include="GLTexture.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="GLShader.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,9 +134,6 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Source Files\Video</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files\Video</Filter>
-    </ClCompile>
     <ClCompile Include="AttributeList.cpp">
       <Filter>Source Files\Video</Filter>
     </ClCompile>
@@ -150,6 +147,9 @@
       <Filter>Source Files\Video</Filter>
     </ClCompile>
     <ClCompile Include="GLTexture.cpp">
+      <Filter>Source Files\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="GLShader.cpp">
       <Filter>Source Files\Video</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Shader.h"
+#include "GLShader.h"
 #include "loadgl.h"
 
 const std::string slurp(std::ifstream& ifs)

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Shader.h"
+#include "GLShader.h"
 #include "Matrix.h"
 
 class GLProgram

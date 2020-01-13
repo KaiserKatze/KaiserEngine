@@ -1,7 +1,7 @@
 #pragma once
 
 #include "AbstractWindow.h"
-#include "Shader.h"
+#include "GLShader.h"
 #include "GLProgram.h"
 
 class Canvas

@@ -159,6 +159,7 @@
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="GLProgram.h" />
+    <ClInclude Include="GLShader.h" />
     <ClInclude Include="GLTexture.h" />
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
@@ -167,7 +168,6 @@
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Shader.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UserInput.h" />
@@ -182,11 +182,11 @@
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="GLProgram.cpp" />
+    <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
     <ClCompile Include="loadgl.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
