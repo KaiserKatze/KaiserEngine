@@ -159,6 +159,7 @@
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
     <ClInclude Include="loadgl.h" />
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shader.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
     <ClCompile Include="loadgl.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
