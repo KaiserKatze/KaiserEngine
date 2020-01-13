@@ -13,7 +13,7 @@ private:
     UINT_PTR timerId{ 0 };
 
 public:
-    MainWindow(const HINSTANCE& hInstance);
+    MainWindow(HINSTANCE hInstance);
     ~MainWindow();
 
     const Canvas* getCanvas() const;

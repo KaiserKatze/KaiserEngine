@@ -172,12 +172,12 @@ class FakeWindow
     : public BaseWindow
 {
 public:
-    FakeWindow(const HINSTANCE& hInstance);
+    FakeWindow(HINSTANCE hInstance);
     ~FakeWindow();
 };
 
 FakeWindow::
-FakeWindow(const HINSTANCE& hInstance)
+FakeWindow(HINSTANCE hInstance)
 {
     wchar_t szWindowClass[MAX_LOADSTRING];
     wchar_t szTitle[MAX_LOADSTRING];
@@ -207,7 +207,7 @@ FakeWindow::
 
 
 MainWindow::
-MainWindow(const HINSTANCE& hInstance)
+MainWindow(HINSTANCE hInstance)
 {
     wchar_t szTitle[MAX_LOADSTRING];
     wchar_t szWindowClass[MAX_LOADSTRING];
