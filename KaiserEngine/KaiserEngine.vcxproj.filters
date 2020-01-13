@@ -99,6 +99,9 @@
     <ClInclude Include="GLProgram.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
+    <ClInclude Include="GLTexture.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -144,6 +147,9 @@
       <Filter>Source Files\Window</Filter>
     </ClCompile>
     <ClCompile Include="GLProgram.cpp">
+      <Filter>Source Files\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="GLTexture.cpp">
       <Filter>Source Files\Video</Filter>
     </ClCompile>
   </ItemGroup>
