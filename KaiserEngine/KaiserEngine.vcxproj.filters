@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Window">
       <UniqueIdentifier>{6b54f3c2-1804-4d4f-bddb-10cf1b844f62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Event">
+      <UniqueIdentifier>{e8043251-f2bf-445c-be8e-e7358356eca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Event">
+      <UniqueIdentifier>{4d5801c6-420b-4eb0-b0bd-cdac65d3a13c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="loadgl.txt" />
