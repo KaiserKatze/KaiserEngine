@@ -3,8 +3,6 @@
 #include "Canvas.h"
 #include "BaseWindow.h"
 
-class Canvas;
-
 class MainWindow
     : public BaseWindow
 {
