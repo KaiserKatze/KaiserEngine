@@ -7,12 +7,12 @@ class MainWindow
     : public BaseWindow
 {
 private:
-    Canvas* canvas{ nullptr };
+    Canvas& canvas;
     UINT_PTR timerId{ 0 };
 
 public:
     MainWindow(HINSTANCE hInstance);
     ~MainWindow();
 
-    const Canvas* getCanvas() const;
+    Canvas& getCanvas() const;
 };

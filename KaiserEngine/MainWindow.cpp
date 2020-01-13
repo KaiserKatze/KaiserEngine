@@ -208,6 +208,7 @@ FakeWindow::
 
 MainWindow::
 MainWindow(HINSTANCE hInstance)
+    : canvas{ Canvas(*this) }
 {
     wchar_t szTitle[MAX_LOADSTRING];
     wchar_t szWindowClass[MAX_LOADSTRING];
@@ -272,8 +273,7 @@ MainWindow(HINSTANCE hInstance)
     // force the main window in front of all other windows
     SetForegroundWindow(handle);
 
-    canvas = new Canvas(*this);
-    canvas->Prepare();
+    canvas.Prepare();
 
     // install timer
     timerId = SetTimer(handle,
@@ -296,11 +296,6 @@ MainWindow(HINSTANCE hInstance)
 MainWindow::
 ~MainWindow()
 {
-    if (canvas)
-    {
-        delete canvas;
-        canvas = nullptr;
-    }
     const HWND handle = GetWindowHandle();
     if (handle)
     {
@@ -315,7 +310,7 @@ MainWindow::
     }
 }
 
-const Canvas*
+Canvas&
 MainWindow::
 getCanvas() const
 {

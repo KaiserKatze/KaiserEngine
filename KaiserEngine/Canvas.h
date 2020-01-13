@@ -7,7 +7,7 @@ class Canvas
 {
 private:
     const AbstractWindow& parent;
-    GLProgram program;
+    std::map<GLstring, GLProgram> programs;
 
 public:
     Canvas(const AbstractWindow& window);

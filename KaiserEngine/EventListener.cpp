@@ -191,8 +191,8 @@ OnResize(const int& newWidth, const int& newHeight) const
 {
     if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
-        Canvas* canvas = const_cast<Canvas*>(window->getCanvas());
-        canvas->Setup(newWidth, newHeight);
+        Canvas& canvas = window->getCanvas();
+        canvas.Setup(newWidth, newHeight);
     }
     return 0;
 }
@@ -218,7 +218,7 @@ OnTimer() const
     //OutputDebugStringA("On drawing OpenGL ...\r\n");
     if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
-        window->getCanvas()->Render();
+        window->getCanvas().Render();
     }
     return 0;
 }

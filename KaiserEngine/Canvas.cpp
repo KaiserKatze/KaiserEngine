@@ -237,41 +237,47 @@ Setup(const int& screenWidth, const int& screenHeight)
         DetectGLError(ss.str().c_str());
     }
 
-    // setup shaders
-    std::map<GLenum, GLstring> shaders;
-    shaders[GL_VERTEX_SHADER] = "vertex.shader";
-    shaders[GL_FRAGMENT_SHADER] = "fragment.shader";
+    if (programs.find("default") != programs.end()) // no program is named as default
+    {
+        // setup shaders
+        std::map<GLenum, GLstring> shaders;
+        shaders[GL_VERTEX_SHADER] = "vertex.shader";
+        shaders[GL_FRAGMENT_SHADER] = "fragment.shader";
 
-    std::vector<GLstring> attributes{
-        "in_position",          // 0
-        "in_color",             // 1
-        "in_texture_coord",     // 2
-    };
+        std::vector<GLstring> attributes{
+            "in_position",          // 0
+            "in_color",             // 1
+            "in_texture_coord",     // 2
+        };
 
-    std::map<GLstring, GLint> uniforms;
-    uniforms["matrix_projection"] = 0;
-    uniforms["matrix_view"] = 0;
-    uniforms["matrix_model"] = 0;
+        std::map<GLstring, GLint> uniforms;
+        uniforms["matrix_projection"] = 0;
+        uniforms["matrix_view"] = 0;
+        uniforms["matrix_model"] = 0;
 
-    program.Setup(shaders, &attributes, &uniforms);
 
-    // beware the following matrices are instances of MatrixQ<double, 4>
+        GLProgram program;
+        programs["default"] = program;
+        program.Setup(shaders, &attributes, &uniforms);
 
-    // make matrices
+        // beware the following matrices are instances of MatrixQ<double, 4>
+
+        // make matrices
 #pragma warning(push)
 #pragma warning(disable: 4244) // suppress the warning about the following implicit conversion from int to _Ty(float)
-    const mat4 mp = MakePerspectiveProjectionMatrix<float>(screenWidth, screenHeight, degrees2radians(60.0f), 100.0f, 0.1f);
-    const mat4 mv = MakeViewMatrix<float>();
-    const mat4 mm = MakeModelMatrix<float>();
+        const mat4 mp = MakePerspectiveProjectionMatrix<float>(screenWidth, screenHeight, degrees2radians(60.0f), 100.0f, 0.1f);
+        const mat4 mv = MakeViewMatrix<float>();
+        const mat4 mm = MakeModelMatrix<float>();
 #pragma warning(pop)
 
-    GLProgram::UseProgram(&program);
+        GLProgram::UseProgram(&program);
 
-    program.LoadUniformMatrix(uniforms["matrix_projection"], mp);
-    program.LoadUniformMatrix(uniforms["matrix_view"], mv);
-    program.LoadUniformMatrix(uniforms["matrix_model"], mm);
+        program.LoadUniformMatrix(uniforms["matrix_projection"], mp);
+        program.LoadUniformMatrix(uniforms["matrix_view"], mv);
+        program.LoadUniformMatrix(uniforms["matrix_model"], mm);
 
-    GLProgram::UseProgram();
+        GLProgram::UseProgram();
+    }
 }
 
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
