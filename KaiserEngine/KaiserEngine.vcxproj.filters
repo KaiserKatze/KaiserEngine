@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Window">
       <UniqueIdentifier>{e2115578-5307-49c4-b1ff-76e982eea6df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{6b54f3c2-1804-4d4f-bddb-10cf1b844f62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="loadgl.txt" />
