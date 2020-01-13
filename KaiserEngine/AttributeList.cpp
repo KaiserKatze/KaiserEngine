@@ -27,7 +27,7 @@ Clear()
 
 const std::vector<int>
 AttributeList::
-Make()
+Make() const
 {
     std::vector<int> attribVector;
 
