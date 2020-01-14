@@ -3,9 +3,9 @@
 class AbstractWindow
 {
 private:
-    HWND hWnd;
-    HDC hdc;
-    HGLRC hglrc;
+    HWND hWnd{ nullptr };
+    HDC hdc{ nullptr };
+    HGLRC hglrc{ nullptr };
 
     std::atomic_bool isFullscreen;
     std::atomic_bool isResizable;
