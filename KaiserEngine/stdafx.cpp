@@ -156,3 +156,8 @@ void DetectGLError(const std::stringstream& ss)
 {
     DetectGLError(ss.str().c_str());
 }
+
+void SuppressGLError()
+{
+    GLenum err = glGetError();
+}

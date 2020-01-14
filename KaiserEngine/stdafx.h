@@ -59,3 +59,4 @@ void * GetAnyGLFuncAddress(const char * name);
 void CleanDll();
 void DetectGLError(const char*);
 void DetectGLError(const std::stringstream&);
+void SuppressGLError();
