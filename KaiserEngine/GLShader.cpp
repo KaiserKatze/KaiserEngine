@@ -2,7 +2,9 @@
 #include "GLShader.h"
 #include "loadgl.h"
 
-const std::string slurp(std::ifstream& ifs)
+static
+const std::string
+slurp(std::ifstream& ifs)
 {
     std::stringstream ss;
     ss << ifs.rdbuf();
