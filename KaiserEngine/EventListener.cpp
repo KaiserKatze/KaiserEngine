@@ -218,7 +218,8 @@ OnTimer() const
     //OutputDebugStringA("On drawing OpenGL ...\r\n");
     if (const MainWindow* window = getEventHandler().AsWindow<MainWindow>())
     {
-        window->getCanvas().Render();
+        Canvas& canvas = window->getCanvas();
+        canvas.Render();
     }
     return 0;
 }
