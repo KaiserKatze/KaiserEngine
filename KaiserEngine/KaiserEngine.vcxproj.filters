@@ -105,6 +105,12 @@
     <ClInclude Include="UserInput.h">
       <Filter>Header Files\Event</Filter>
     </ClInclude>
+    <ClInclude Include="GLBuffer.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
+    <ClInclude Include="GLVertexArray.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -154,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="UserInput.cpp">
       <Filter>Source Files\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="GLBuffer.cpp">
+      <Filter>Source Files\Video</Filter>
+    </ClCompile>
+    <ClCompile Include="GLVertexArray.cpp">
+      <Filter>Source Files\Video</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

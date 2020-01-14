@@ -159,6 +159,8 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GLVertexArray.h" />
+    <ClInclude Include="GLBuffer.h" />
     <ClInclude Include="GLProgram.h" />
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="GLTexture.h" />
@@ -182,6 +184,8 @@
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GLVertexArray.cpp" />
+    <ClCompile Include="GLBuffer.cpp" />
     <ClCompile Include="GLProgram.cpp" />
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="GLTexture.cpp" />
