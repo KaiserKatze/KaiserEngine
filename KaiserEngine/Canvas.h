@@ -26,10 +26,10 @@ public:
     void Prepare();
 
     // Clear canvas
-    void Clear() const;
+    void Clear();
 
     // Render canvas
-    void Render() const;
+    void Render();
 
     // Dispose OpenGL resources
     void Dispose();
