@@ -24,7 +24,7 @@ class KeyboardEventListener
 {
 public:
     KeyboardEventListener(const EventHandler& hdlr, const HWND& hWnd);
-    ~KeyboardEventListener();
+    virtual ~KeyboardEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 };
 
