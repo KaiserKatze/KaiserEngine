@@ -1,6 +1,20 @@
 #include "stdafx.h"
 #include "Canvas.h"
 #include "loadgl.h"
+#include "EventListener.h"
+#include "MainWindow.h"
+
+class CanvasEventListener final
+    : public WindowEventListener
+{
+private:
+    const Canvas& canvas;
+public:
+    CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, const HWND& hWnd);
+    ~CanvasEventListener();
+    LRESULT OnResize(const int& newWidth, const int& newHeight) const override;
+    LRESULT OnTimer() const override;
+};
 
 using namespace MatrixMath;
 using mat4 = MatrixQ<float, 4>;
@@ -9,6 +23,14 @@ Canvas::
 Canvas(const AbstractWindow& window)
     : parent{ window }
 {
+    if (const MainWindow* mainWin = dynamic_cast<const MainWindow*>(&window))
+    {
+        EventManager* manager = const_cast<EventManager*>(static_cast<const EventManager*>(mainWin));
+        EventHandler* handler = static_cast<EventHandler*>(manager);
+        LPEventListener& listeners = handler->GetListeners();
+        HWND hWnd = window.GetWindowHandle();
+        listeners.push_back(std::make_unique<CanvasEventListener>(*this, *manager, hWnd));
+    }
 }
 
 Canvas::
@@ -334,5 +356,34 @@ void
 Canvas::
 Dispose()
 {
+}
 
+// CanvasEventListener
+
+CanvasEventListener::
+CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, const HWND& hWnd)
+    : WindowEventListener(hdlr, hWnd)
+    , canvas{ canvas }
+{
+}
+
+CanvasEventListener::
+~CanvasEventListener()
+{
+}
+
+LRESULT
+CanvasEventListener::
+OnResize(const int& newWidth, const int& newHeight) const
+{
+    const_cast<Canvas&>(this->canvas).Setup(newWidth, newHeight);
+    return 0;
+}
+
+LRESULT
+CanvasEventListener::
+OnTimer() const
+{
+    const_cast<Canvas&>(this->canvas).Render();
+    return 0;
 }
