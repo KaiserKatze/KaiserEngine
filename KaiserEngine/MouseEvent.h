@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Event.h"
 
-enum MouseButton
+enum class MouseButton : int
 {
     UnknownButton = 0,
     LeftButton = 1,
