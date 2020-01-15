@@ -356,6 +356,16 @@ void
 Canvas::
 Dispose()
 {
+    for (auto itr = vaos.begin();
+        itr != vaos.end();
+        itr++)
+    {
+        GLVertexArray& vao = itr->second;
+        vao.Destroy();
+    }
+    this->vaos.clear();
+
+    SuppressGLError();
 }
 
 // CanvasEventListener

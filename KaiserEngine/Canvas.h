@@ -3,12 +3,14 @@
 #include "AbstractWindow.h"
 #include "GLShader.h"
 #include "GLProgram.h"
+#include "GLVertexArray.h"
 
 class Canvas
 {
 private:
     const AbstractWindow& parent;
     std::map<GLstring, GLProgram> programs;
+    std::map<GLstring, GLVertexArray> vaos;
 
 public:
     Canvas(const AbstractWindow& window);
