@@ -33,7 +33,7 @@ class MouseEventListener
 {
 public:
     MouseEventListener(const EventHandler& hdlr, const HWND& hWnd);
-    ~MouseEventListener();
+    virtual ~MouseEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 protected:
     LRESULT OnClick(const MouseEvent) const;
