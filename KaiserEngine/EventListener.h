@@ -47,11 +47,11 @@ public:
     virtual ~WindowEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 protected:
-    LRESULT OnCreate() const;
-    LRESULT OnClose() const;
-    LRESULT OnDestroy() const;
-    LRESULT OnResize(const int& newWidth, const int& newHeight) const;
-    LRESULT OnActivate(bool state) const;
-    LRESULT OnPaint() const;
-    LRESULT OnTimer() const;
+    virtual LRESULT OnCreate() const;
+    virtual LRESULT OnClose() const;
+    virtual LRESULT OnDestroy() const;
+    virtual LRESULT OnResize(const int& newWidth, const int& newHeight) const;
+    virtual LRESULT OnActivate(bool state) const;
+    virtual LRESULT OnPaint() const;
+    virtual LRESULT OnTimer() const;
 };
