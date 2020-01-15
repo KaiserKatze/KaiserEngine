@@ -44,7 +44,7 @@ class WindowEventListener
 {
 public:
     WindowEventListener(const EventHandler& hdlr, const HWND& hWnd);
-    ~WindowEventListener();
+    virtual ~WindowEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 protected:
     LRESULT OnCreate() const;
