@@ -167,6 +167,7 @@
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
+    <ClInclude Include="KeyboardEvent.h" />
     <ClInclude Include="loadgl.h" />
     <ClInclude Include="MainWindow.h" />
     <ClInclude Include="Matrix.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="GLTexture.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
+    <ClCompile Include="KeyboardEvent.cpp" />
     <ClCompile Include="loadgl.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="MouseEvent.cpp" />
