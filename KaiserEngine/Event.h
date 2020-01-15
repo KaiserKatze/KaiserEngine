@@ -4,6 +4,9 @@
 
 class Event
 {
+public:
+    Event();
+    virtual ~Event();
 };
 
 // Forward declaration
