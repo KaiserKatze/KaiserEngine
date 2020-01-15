@@ -35,5 +35,8 @@ public:
 
     // Dispose OpenGL resources
     void Dispose();
+
+    bool AddVertexArray(GLstring name, const GLVertexArray& array);
+    GLVertexArray& GetVertexArray(GLstring name);
 };
 

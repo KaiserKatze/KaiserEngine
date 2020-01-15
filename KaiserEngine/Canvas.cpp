@@ -368,6 +368,24 @@ Dispose()
     SuppressGLError();
 }
 
+bool
+Canvas::
+AddVertexArray(GLstring name, const GLVertexArray& array)
+{
+    if (this->vaos.find(name) != this->vaos.end())
+        return false;
+
+    this->vaos[name] = array;
+    return true;
+}
+
+GLVertexArray&
+Canvas::
+GetVertexArray(GLstring name)
+{
+    return this->vaos.at(name);
+}
+
 // CanvasEventListener
 
 CanvasEventListener::
