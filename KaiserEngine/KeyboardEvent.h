@@ -59,5 +59,7 @@ private:
         // <Alternative>
         const bool kslalt;      // Left
         const bool ksralt;      // Right
+        // <NumLock>
+        const bool ksnumlock;
     };
 };
