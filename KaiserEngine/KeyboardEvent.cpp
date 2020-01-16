@@ -34,6 +34,13 @@ KeyboardEvent::
 }
 
 
+int
+KeyboardEvent::
+GetKeyLocation() const
+{
+    return vk;
+}
+
 bool
 KeyboardEvent::
 IsCtrlKeyDown() const
