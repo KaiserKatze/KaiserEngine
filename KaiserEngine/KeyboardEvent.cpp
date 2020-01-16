@@ -33,6 +33,28 @@ KeyboardEvent::
 {
 }
 
+
+bool
+KeyboardEvent::
+IsCtrlKeyDown() const
+{
+    return kslctrl || ksrctrl;
+}
+
+bool
+KeyboardEvent::
+isShiftKeyDown() const
+{
+    return kslshift || ksrshift;
+}
+
+bool
+KeyboardEvent::
+IsAltKeyDown() const
+{
+    return kslalt || ksralt;
+}
+
 bool
 KeyboardEvent::
 isKeyDown() const
