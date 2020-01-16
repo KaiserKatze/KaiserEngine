@@ -32,3 +32,17 @@ KeyboardEvent::
 ~KeyboardEvent()
 {
 }
+
+bool
+KeyboardEvent::
+isKeyDown() const
+{
+    return (this->ts & 1) == 0;
+}
+
+bool
+KeyboardEvent::
+isKeyUp() const
+{
+    return !(this->isKeyDown());
+}
