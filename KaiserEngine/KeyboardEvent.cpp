@@ -36,6 +36,32 @@ KeyboardEvent::
 
 int
 KeyboardEvent::
+GetKeyCode() const
+{
+    int code{ vk };
+
+    if (VK_NUMPAD0 <= vk && vk <= VK_NUMPAD9)
+    {
+        code = vk - VK_NUMPAD0 + 0x30;
+    }
+    else if (vk == VK_LCONTROL || vk == VK_RCONTROL)
+    {
+        code = VK_CONTROL;
+    }
+    else if (vk == VK_LSHIFT || vk == VK_RSHIFT)
+    {
+        code = VK_SHIFT;
+    }
+    else if (vk == VK_LMENU || vk == VK_RMENU)
+    {
+        code = VK_MENU;
+    }
+
+    return code;
+}
+
+int
+KeyboardEvent::
 GetKeyLocation() const
 {
     return vk;
