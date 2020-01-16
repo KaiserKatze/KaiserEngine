@@ -25,6 +25,7 @@ KeyboardEvent(UINT message, WPARAM wParam, LPARAM lParam)
     , ksrshift{ ::IsKeyActive(VK_RSHIFT) }
     , kslalt{ ::IsKeyActive(VK_LMENU) }
     , ksralt{ ::IsKeyActive(VK_RMENU) }
+    , ksnumlock{ ::IsKeyActive(VK_NUMLOCK) }
 {
 }
 
