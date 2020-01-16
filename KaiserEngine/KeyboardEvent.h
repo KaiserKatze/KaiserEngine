@@ -9,6 +9,7 @@ class KeyboardEvent
 public:
     KeyboardEvent(UINT message, WPARAM wParam, LPARAM lParam);
     virtual ~KeyboardEvent();
+    int GetKeyCode() const;
     int GetKeyLocation() const;
     bool IsCtrlKeyDown() const;
     bool isShiftKeyDown() const;
