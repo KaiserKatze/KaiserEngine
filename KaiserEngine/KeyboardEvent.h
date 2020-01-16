@@ -9,6 +9,9 @@ class KeyboardEvent
 public:
     KeyboardEvent(UINT message, WPARAM wParam, LPARAM lParam);
     virtual ~KeyboardEvent();
+    bool IsCtrlKeyDown() const;
+    bool isShiftKeyDown() const;
+    bool IsAltKeyDown() const;
     bool isKeyDown() const;
     bool isKeyUp() const;
 private:
