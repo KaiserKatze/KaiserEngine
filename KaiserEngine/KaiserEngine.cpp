@@ -60,7 +60,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     int retCode{ 0 };
 
+#if !defined _DEBUG
     try
+#endif
     {
 
         MainWindow mainWin(hInstance);
@@ -76,6 +78,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #endif
 
     }
+#if !defined _DEBUG
     catch (const std::exception& exc)
     {
         std::stringstream ss;
@@ -83,6 +86,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         OutputDebugStringA(ss.str().c_str());
         return -1;
     }
+#endif
 
     return retCode;
 }
