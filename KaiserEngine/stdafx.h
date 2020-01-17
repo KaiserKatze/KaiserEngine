@@ -18,9 +18,8 @@
 #include <windowsx.h>
 
 // C RunTime Header Files
-#include <stdlib.h>
-#include <malloc.h>
-#include <memory.h>
+#include <cstdlib>
+#include <cstring>
 #include <tchar.h>
 #include <strsafe.h>
 
