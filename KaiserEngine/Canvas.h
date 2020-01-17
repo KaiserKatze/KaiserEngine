@@ -39,5 +39,7 @@ public:
 
     // Dispose OpenGL resources
     void Dispose();
+
+    GLVertexArray& CreateVertexArray(GLstring name);
 };
 
