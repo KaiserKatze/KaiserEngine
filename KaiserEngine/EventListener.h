@@ -7,23 +7,23 @@
 class EventListener
 {
 public:
-    EventListener(const EventHandler& eventHandler, const HWND& windowHandle);
+    EventListener(const EventHandler& eventHandler, HWND windowHandle);
     EventListener(const EventListener&) = delete;
     virtual ~EventListener();
     virtual LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const = 0;
 protected:
     const EventHandler& getEventHandler() const;
-    const HWND& getWindowHandle() const;
+    HWND getWindowHandle() const;
 private:
     const EventHandler& hdlr;
-    const HWND& hWnd;
+    HWND hWnd;
 };
 
 class KeyboardEventListener
     : public EventListener
 {
 public:
-    KeyboardEventListener(const EventHandler& hdlr, const HWND& hWnd);
+    KeyboardEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~KeyboardEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 };
@@ -32,7 +32,7 @@ class MouseEventListener
     : public EventListener
 {
 public:
-    MouseEventListener(const EventHandler& hdlr, const HWND& hWnd);
+    MouseEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~MouseEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 protected:
@@ -43,7 +43,7 @@ class WindowEventListener
     : public EventListener
 {
 public:
-    WindowEventListener(const EventHandler& hdlr, const HWND& hWnd);
+    WindowEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~WindowEventListener();
     LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
 protected:

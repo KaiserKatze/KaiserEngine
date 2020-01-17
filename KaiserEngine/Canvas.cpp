@@ -10,7 +10,7 @@ class CanvasEventListener final
 private:
     const Canvas& canvas;
 public:
-    CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, const HWND& hWnd);
+    CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, HWND hWnd);
     ~CanvasEventListener();
     LRESULT OnResize(const int& newWidth, const int& newHeight) const override;
     LRESULT OnTimer() const override;
@@ -389,7 +389,7 @@ GetVertexArray(GLstring name)
 // CanvasEventListener
 
 CanvasEventListener::
-CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, const HWND& hWnd)
+CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, HWND hWnd)
     : WindowEventListener(hdlr, hWnd)
     , canvas{ canvas }
 {

@@ -15,7 +15,7 @@ EventManager::
 
 void
 EventManager::
-Setup(const HWND& hWnd)
+Setup(HWND hWnd)
 {
     if (hWnd)
     {

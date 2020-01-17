@@ -10,7 +10,7 @@ class EventManager
 public:
     EventManager();
     virtual ~EventManager();
-    void Setup(const HWND& hWnd);
+    void Setup(HWND hWnd);
     void Dispose();
 };
 
