@@ -26,6 +26,8 @@ public:
     void Unbind();
     void Destroy();
 
+    GLBuffer& CreateBuffer(GLstring name);
+
     bool operator==(const GLVertexArray& other) const;
     bool operator!=(const GLVertexArray& other) const;
 };
