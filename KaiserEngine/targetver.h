@@ -35,3 +35,8 @@
 #elif (defined _WIN32)
 #   pragma message("Message: The compilation target is 32-bit ARM or x86.")
 #endif
+#if (_MSVC_LANG == 201402L)
+#   pragma message("Message: The C++ language standard targeted by the compiler is: C++14!")
+#elif (_MSVC_LANG == 201703L)
+#   pragma message("Message: The C++ language standard targeted by the compiler is: C++17!")
+#endif
