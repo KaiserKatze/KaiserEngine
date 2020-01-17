@@ -107,6 +107,14 @@ GetBuffer(GLstring name)
     return this->buffers.at(name);
 }
 
+GLBuffer&
+GLVertexArray::
+CreateBuffer(GLstring name)
+{
+    this->AddBuffer(name, GLBuffer());
+    return this->GetBuffer(name);
+}
+
 bool
 GLVertexArray::
 operator==(const GLVertexArray& other) const
