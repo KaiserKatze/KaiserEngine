@@ -385,6 +385,14 @@ GetVertexArray(GLstring name)
     return this->vaos.at(name);
 }
 
+GLVertexArray&
+Canvas::
+CreateVertexArray(GLstring name)
+{
+    this->AddVertexArray(name, GLVertexArray());
+    return this->GetVertexArray(name);
+}
+
 // CanvasEventListener
 
 CanvasEventListener::
