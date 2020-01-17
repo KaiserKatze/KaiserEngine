@@ -41,7 +41,7 @@ KeyboardEventListener::
 
 LRESULT
 KeyboardEventListener::
-Handle(UINT message, WPARAM wParam, LPARAM lParam) const
+Handle(UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -75,7 +75,7 @@ MouseEventListener::
 
 LRESULT
 MouseEventListener::
-Handle(UINT message, WPARAM wParam, LPARAM lParam) const
+Handle(UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -100,7 +100,7 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
 
 LRESULT
 MouseEventListener::
-OnClick(const MouseEvent) const
+OnClick(const MouseEvent)
 {
     return 0;
 }
@@ -117,7 +117,7 @@ WindowEventListener::
 
 LRESULT
 WindowEventListener::
-Handle(UINT message, WPARAM wParam, LPARAM lParam) const
+Handle(UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
@@ -152,14 +152,14 @@ Handle(UINT message, WPARAM wParam, LPARAM lParam) const
 
 LRESULT
 WindowEventListener::
-OnCreate() const
+OnCreate()
 {
     return 0;
 }
 
 LRESULT
 WindowEventListener::
-OnClose() const
+OnClose()
 {
     const HDC hDC = wglGetCurrentDC();
     const HGLRC hRC = wglGetCurrentContext();
@@ -176,7 +176,7 @@ OnClose() const
 
 LRESULT
 WindowEventListener::
-OnDestroy() const
+OnDestroy()
 {
     // clean up opengl functions
     CleanDll();
@@ -187,28 +187,28 @@ OnDestroy() const
 
 LRESULT
 WindowEventListener::
-OnResize(const int& newWidth, const int& newHeight) const
+OnResize(const int& newWidth, const int& newHeight)
 {
     return 0;
 }
 
 LRESULT
 WindowEventListener::
-OnActivate(bool state) const
+OnActivate(bool state)
 {
     return 0;
 }
 
 LRESULT
 WindowEventListener::
-OnPaint() const
+OnPaint()
 {
     return 0;
 }
 
 LRESULT
 WindowEventListener::
-OnTimer() const
+OnTimer()
 {
     return 0;
 }

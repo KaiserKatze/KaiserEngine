@@ -8,12 +8,12 @@ class CanvasEventListener final
     : public WindowEventListener
 {
 private:
-    const Canvas& canvas;
+    Canvas& canvas;
 public:
-    CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, HWND hWnd);
+    CanvasEventListener(Canvas& canvas, const EventHandler& hdlr, HWND hWnd);
     ~CanvasEventListener();
-    LRESULT OnResize(const int& newWidth, const int& newHeight) const override;
-    LRESULT OnTimer() const override;
+    LRESULT OnResize(const int& newWidth, const int& newHeight) override;
+    LRESULT OnTimer() override;
 };
 
 using namespace MatrixMath;
@@ -389,7 +389,7 @@ GetVertexArray(GLstring name)
 // CanvasEventListener
 
 CanvasEventListener::
-CanvasEventListener(const Canvas& canvas, const EventHandler& hdlr, HWND hWnd)
+CanvasEventListener(Canvas& canvas, const EventHandler& hdlr, HWND hWnd)
     : WindowEventListener(hdlr, hWnd)
     , canvas{ canvas }
 {
@@ -402,16 +402,16 @@ CanvasEventListener::
 
 LRESULT
 CanvasEventListener::
-OnResize(const int& newWidth, const int& newHeight) const
+OnResize(const int& newWidth, const int& newHeight)
 {
-    const_cast<Canvas&>(this->canvas).Setup(newWidth, newHeight);
+    this->canvas.Setup(newWidth, newHeight);
     return 0;
 }
 
 LRESULT
 CanvasEventListener::
-OnTimer() const
+OnTimer()
 {
-    const_cast<Canvas&>(this->canvas).Render();
+    this->canvas.Render();
     return 0;
 }

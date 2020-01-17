@@ -10,7 +10,7 @@ public:
     EventListener(const EventHandler& eventHandler, HWND windowHandle);
     EventListener(const EventListener&) = delete;
     virtual ~EventListener();
-    virtual LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const = 0;
+    virtual LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) = 0;
 protected:
     const EventHandler& getEventHandler() const;
     HWND getWindowHandle() const;
@@ -25,7 +25,7 @@ class KeyboardEventListener
 public:
     KeyboardEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~KeyboardEventListener();
-    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
+    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam);
 };
 
 class MouseEventListener
@@ -34,9 +34,9 @@ class MouseEventListener
 public:
     MouseEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~MouseEventListener();
-    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
+    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam);
 protected:
-    LRESULT OnClick(const MouseEvent) const;
+    LRESULT OnClick(const MouseEvent);
 };
 
 class WindowEventListener
@@ -45,13 +45,13 @@ class WindowEventListener
 public:
     WindowEventListener(const EventHandler& hdlr, HWND hWnd);
     virtual ~WindowEventListener();
-    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam) const;
+    LRESULT Handle(UINT message, WPARAM wParam, LPARAM lParam);
 protected:
-    virtual LRESULT OnCreate() const;
-    virtual LRESULT OnClose() const;
-    virtual LRESULT OnDestroy() const;
-    virtual LRESULT OnResize(const int& newWidth, const int& newHeight) const;
-    virtual LRESULT OnActivate(bool state) const;
-    virtual LRESULT OnPaint() const;
-    virtual LRESULT OnTimer() const;
+    virtual LRESULT OnCreate();
+    virtual LRESULT OnClose();
+    virtual LRESULT OnDestroy();
+    virtual LRESULT OnResize(const int& newWidth, const int& newHeight);
+    virtual LRESULT OnActivate(bool state);
+    virtual LRESULT OnPaint();
+    virtual LRESULT OnTimer();
 };
