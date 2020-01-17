@@ -316,6 +316,39 @@ Prepare()
     DetectGLError("glClearColor");
 
     this->Setup();
+    // prepare opengl objects
+
+    GLVertexArray& vao{ this->CreateVertexArray("quad") };
+    vao.Create();
+    vao.Bind();
+
+    GLBuffer& vbo{ vao.CreateBuffer("vertex") };
+    vbo.Create();
+    vbo.SetTarget(GL_ARRAY_BUFFER);
+    vbo.SetUsage(GL_STATIC_DRAW);
+    vbo.Bind();
+    float vertices[] =
+    {
+        // Left bottom triangle
+        -.5f, .5f, .0f,
+        -.5f, -.5f, .0f,
+        .5f, -.5f, .0f,
+        // Right top triangle
+        .5f, -.5f, .0f,
+        .5f, .5f, .0f,
+        -.5f, .5f, .0f,
+    };
+    vbo.SetData(sizeof(vertices), vertices);
+    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+    {
+        std::stringstream ss;
+        ss << "glVertexAttribPointer(...)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    vbo.Unbind();
+
+    vao.Unbind();
 }
 
 void
@@ -341,11 +374,29 @@ Render()
     // bind VAOs if any
 
     // bind VBOs if any
+    GLVertexArray& vao{ this->GetVertexArray("quad") };
+    vao.Bind();
+    glEnableVertexAttribArray(0);
+    {
+        std::stringstream ss;
+        ss << "glEnableVertexAttribArray(0)"
+            << std::endl;
+        DetectGLError(ss);
+    }
 
     // draw vertices
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+    {
+        std::stringstream ss;
+        ss << "glDrawArrays(GL_TRIANGLES, 0, 6)"
+            << std::endl;
+        DetectGLError(ss);
+    }
 
     // put everything back to default
-    GLProgram::UseProgram();
+    glDisableVertexAttribArray(0);
+    SuppressGLError();
+    vao.Unbind();
 
     HDC hDC = wglGetCurrentDC();
     SwapBuffers(hDC);
@@ -355,11 +406,14 @@ void
 Canvas::
 Dispose()
 {
+    glDisableVertexAttribArray(0);
+    SuppressGLError();
+
     for (auto itr = vaos.begin();
         itr != vaos.end();
         itr++)
     {
-        GLVertexArray& vao = itr->second;
+        GLVertexArray& vao{ itr->second };
         vao.Destroy();
     }
     this->vaos.clear();
