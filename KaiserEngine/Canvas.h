@@ -12,6 +12,10 @@ private:
     std::map<GLstring, GLProgram> programs;
     std::map<GLstring, GLVertexArray> vaos;
 
+protected:
+    bool AddVertexArray(GLstring name, const GLVertexArray& array);
+    GLVertexArray& GetVertexArray(GLstring name);
+
 public:
     Canvas(const AbstractWindow& window);
     ~Canvas();
@@ -35,8 +39,5 @@ public:
 
     // Dispose OpenGL resources
     void Dispose();
-
-    bool AddVertexArray(GLstring name, const GLVertexArray& array);
-    GLVertexArray& GetVertexArray(GLstring name);
 };
 
