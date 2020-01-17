@@ -36,7 +36,6 @@ Canvas(const AbstractWindow& window)
 Canvas::
 ~Canvas()
 {
-    this->Dispose();
 }
 
 const AbstractWindow&
