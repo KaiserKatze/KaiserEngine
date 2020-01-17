@@ -164,6 +164,7 @@
     <ClInclude Include="GLProgram.h" />
     <ClInclude Include="GLShader.h" />
     <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
@@ -191,6 +192,7 @@
     <ClCompile Include="GLProgram.cpp" />
     <ClCompile Include="GLShader.cpp" />
     <ClCompile Include="GLTexture.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
     <ClCompile Include="KeyboardEvent.cpp" />
     <ClCompile Include="loadgl.cpp" />
