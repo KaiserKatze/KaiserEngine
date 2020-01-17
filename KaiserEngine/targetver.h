@@ -29,3 +29,9 @@
 #define APP_OPENGL_DEBUG_MINIMAL        1
 #define APP_OPENGL_DEBUG_ALL            2
 #define APP_OPENGL_DEBUG_SEVERITY       APP_OPENGL_DEBUG_MINIMAL
+
+#if (defined _WIN64)
+#   pragma message("Message: The compilation target is 64-bit ARM or x64.")
+#elif (defined _WIN32)
+#   pragma message("Message: The compilation target is 32-bit ARM or x86.")
+#endif
