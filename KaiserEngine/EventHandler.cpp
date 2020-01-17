@@ -19,7 +19,8 @@ TraverseList(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         itr != listeners.end();
         itr++)
     {
-        itr->get()->Handle(message, wParam, lParam);
+        EventListener* listener = itr->get();
+        listener->Handle(message, wParam, lParam);
     }
     return DefWindowProc(hWnd, message, wParam, lParam);
 }
