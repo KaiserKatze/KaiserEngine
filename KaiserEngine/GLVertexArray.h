@@ -23,7 +23,7 @@ public:
     void Destroy();
 
     bool AddBuffer(GLstring name, const GLBuffer& buffer);
-    const GLBuffer& GetBuffer(GLstring name) const;
+    GLBuffer& GetBuffer(GLstring name);
 
     bool operator==(const GLVertexArray& other) const;
     bool operator!=(const GLVertexArray& other) const;

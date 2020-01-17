@@ -100,9 +100,9 @@ AddBuffer(GLstring name, const GLBuffer& buffer)
     return true;
 }
 
-const GLBuffer&
+GLBuffer&
 GLVertexArray::
-GetBuffer(GLstring name) const
+GetBuffer(GLstring name)
 {
     return this->buffers.at(name);
 }
