@@ -70,6 +70,24 @@ static int CreateFakeContext(HWND hWnd)
         return -1;
     }
 
+#if (defined _DEBUG) && (defined _WIN32)
+    {
+        char* extensions = const_cast<char*>(reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS)));
+        std::stringstream ss;
+        const char* demiliter{ " " };
+        char* token{ nullptr };
+        char* context{ nullptr };
+        ss << "Available extensions:" << std::endl;
+        token = strtok_s(extensions, demiliter, &context);
+        while (token != nullptr)
+        {
+            ss << " - " << token << std::endl;
+            token = strtok_s(nullptr, demiliter, &context);
+        }
+        OutputDebugStringA(ss.str().c_str());
+    }
+#endif
+
     //===========================================
     // Get WGL Extensions
 
