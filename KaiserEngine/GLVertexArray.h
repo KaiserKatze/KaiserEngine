@@ -12,7 +12,6 @@ private:
 
 protected:
     bool AddBuffer(GLstring name, const GLBuffer& buffer);
-    GLBuffer& GetBuffer(GLstring name);
 
 public:
     GLVertexArray();
@@ -26,6 +25,7 @@ public:
     void Unbind();
     void Destroy();
 
+    GLBuffer& GetBuffer(GLstring name);
     GLBuffer& CreateBuffer(GLstring name);
 
     bool operator==(const GLVertexArray& other) const;
