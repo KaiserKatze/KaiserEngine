@@ -312,7 +312,7 @@ MainWindow::
 
 Canvas&
 MainWindow::
-getCanvas() const
+getCanvas()
 {
     return canvas;
 }
