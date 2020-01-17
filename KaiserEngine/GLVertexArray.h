@@ -10,6 +10,10 @@ private:
     GLuint id{ 0 };
     std::map<GLstring, GLBuffer> buffers;
 
+protected:
+    bool AddBuffer(GLstring name, const GLBuffer& buffer);
+    GLBuffer& GetBuffer(GLstring name);
+
 public:
     GLVertexArray();
     GLVertexArray(const GLVertexArray& other);
@@ -21,9 +25,6 @@ public:
     void Bind();
     void Unbind();
     void Destroy();
-
-    bool AddBuffer(GLstring name, const GLBuffer& buffer);
-    GLBuffer& GetBuffer(GLstring name);
 
     bool operator==(const GLVertexArray& other) const;
     bool operator!=(const GLVertexArray& other) const;
