@@ -2,6 +2,19 @@
 
 #include <string>
 
+struct PixelBGR
+{
+    unsigned char b;    // blue
+    unsigned char g;    // green
+    unsigned char r;    // red
+};
+
+struct PixelBGRA
+    : PixelBGR
+{
+    unsigned char a;    // alpha
+};
+
 class Image
 {
 protected:
