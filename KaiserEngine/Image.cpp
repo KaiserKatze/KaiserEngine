@@ -47,3 +47,29 @@ SetHeight(const int& height)
 {
     this->height = height;
 }
+
+void
+FileImage::
+Open(const std::string& path)
+{
+    std::vector<char> buffer;
+    std::ifstream file{ path };
+    if (!file)
+        throw std::runtime_error("Fail to open the image file!");
+    file.seekg(0, std::ios::end);
+    std::streampos length = file.tellg();
+    file.seekg(0, std::ios::beg);
+    buffer.resize(length);
+    file.read(buffer.data(), length);
+
+    PBITMAPFILEHEADER pFileHeader{
+        reinterpret_cast<PBITMAPFILEHEADER>(buffer.data())
+    };
+    PBITMAPINFOHEADER pInfoHeader{
+        reinterpret_cast<PBITMAPINFOHEADER>(buffer.data()
+            + sizeof(BITMAPFILEHEADER))
+    };
+
+    this->SetWidth(pInfoHeader->biWidth);
+    this->SetHeight(pInfoHeader->biHeight);
+}
