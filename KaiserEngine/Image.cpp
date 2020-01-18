@@ -74,6 +74,11 @@ Open(const std::string& path)
 
     this->SetWidth(pInfoHeader->biWidth);
     this->SetHeight(pInfoHeader->biHeight);
+
+    if (pInfoHeader->biCompression != 0)
+    {
+        throw std::runtime_error("Decompression of BMP image is unsupported yet!");
+    }
 }
 
 Image
