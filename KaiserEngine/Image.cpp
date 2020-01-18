@@ -24,3 +24,12 @@ GetHeight() const
 {
     return height;
 }
+
+class FileImage final
+    : public Image
+{
+public:
+    void SetWidth(const int& width);
+    void SetHeight(const int& height);
+    void Open(const std::string& path);
+};
