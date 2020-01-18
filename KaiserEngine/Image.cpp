@@ -10,3 +10,17 @@ Image::
 ~Image()
 {
 }
+
+int
+Image::
+GetWidth() const
+{
+    return width;
+}
+
+int
+Image::
+GetHeight() const
+{
+    return height;
+}
