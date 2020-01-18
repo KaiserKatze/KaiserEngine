@@ -12,6 +12,6 @@ public:
     Image();
     virtual ~Image();
 
-    int GetWidth() const;
-    int GetHeight() const;
+    virtual int GetWidth() const;
+    virtual int GetHeight() const;
 };
