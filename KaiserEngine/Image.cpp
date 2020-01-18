@@ -79,6 +79,13 @@ Open(const std::string& path)
     {
         throw std::runtime_error("Decompression of BMP image is unsupported yet!");
     }
+
+    // Color table is unsupported yet
+    if (pInfoHeader->biBitCount != 24
+        && pInfoHeader->biBitCount != 32)
+    {
+        throw std::runtime_error("Unsupported bit count!");
+    }
 }
 
 Image
