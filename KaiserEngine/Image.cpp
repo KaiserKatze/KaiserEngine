@@ -72,8 +72,8 @@ Open(const std::string& path)
             + sizeof(BITMAPFILEHEADER))
     };
 
-    this->SetWidth(pInfoHeader->biWidth);
-    this->SetHeight(pInfoHeader->biHeight);
+    this->SetWidth(std::abs(pInfoHeader->biWidth));
+    this->SetHeight(std::abs(pInfoHeader->biHeight));
 
     if (pInfoHeader->biCompression != 0)
     {
