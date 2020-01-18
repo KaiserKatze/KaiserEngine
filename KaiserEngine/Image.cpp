@@ -73,3 +73,12 @@ Open(const std::string& path)
     this->SetWidth(pInfoHeader->biWidth);
     this->SetHeight(pInfoHeader->biHeight);
 }
+
+Image
+Image::
+FromFile(const std::string& path)
+{
+    FileImage image;
+    image.Open(path);
+    return image;
+}
