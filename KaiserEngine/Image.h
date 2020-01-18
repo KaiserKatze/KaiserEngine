@@ -12,6 +12,8 @@ public:
     Image();
     virtual ~Image();
 
+    // The width of the image, in pixels
     virtual int GetWidth() const;
+    // The height of the image, in pixels
     virtual int GetHeight() const;
 };
