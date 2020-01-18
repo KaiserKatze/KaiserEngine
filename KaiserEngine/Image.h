@@ -20,6 +20,7 @@ class Image
 protected:
     int width{ 0 };
     int height{ 0 };
+    std::vector<unsigned char> pixels;
 
 public:
     Image();
