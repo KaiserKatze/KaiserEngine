@@ -33,3 +33,17 @@ public:
     void SetHeight(const int& height);
     void Open(const std::string& path);
 };
+
+void
+FileImage::
+SetWidth(const int& width)
+{
+    this->width = width;
+}
+
+void
+FileImage::
+SetHeight(const int& height)
+{
+    this->height = height;
+}
