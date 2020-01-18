@@ -62,9 +62,11 @@ Open(const std::string& path)
     buffer.resize(length);
     file.read(buffer.data(), length);
 
+    // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
     PBITMAPFILEHEADER pFileHeader{
         reinterpret_cast<PBITMAPFILEHEADER>(buffer.data())
     };
+    // @see: https://docs.microsoft.com/en-us/previous-versions//dd183376(v=vs.85)?redirectedfrom=MSDN
     PBITMAPINFOHEADER pInfoHeader{
         reinterpret_cast<PBITMAPINFOHEADER>(buffer.data()
             + sizeof(BITMAPFILEHEADER))
