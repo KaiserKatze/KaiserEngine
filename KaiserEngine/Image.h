@@ -4,9 +4,9 @@
 
 class Image
 {
-private:
-    int width;
-    int height;
+protected:
+    int width{ 0 };
+    int height{ 0 };
 
 public:
     Image();
