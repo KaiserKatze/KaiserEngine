@@ -16,4 +16,6 @@ public:
     virtual int GetWidth() const;
     // The height of the image, in pixels
     virtual int GetHeight() const;
+
+    static Image FromFile(const std::string& path);
 };
