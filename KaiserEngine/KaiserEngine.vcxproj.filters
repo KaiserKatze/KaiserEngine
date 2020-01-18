@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Math">
       <UniqueIdentifier>{2419c1ce-ee1f-4b08-b302-a901ab7ce91e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Image">
+      <UniqueIdentifier>{b834aedb-9c3e-4691-9ac6-88df37efba91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Image">
+      <UniqueIdentifier>{418c1150-4ada-4d5f-b8e2-d4731e605cd3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -118,7 +124,7 @@
       <Filter>Header Files\Event</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
-      <Filter>Header Files\Video</Filter>
+      <Filter>Header Files\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -183,7 +189,7 @@
       <Filter>Source Files\Event</Filter>
     </ClCompile>
     <ClCompile Include="Image.cpp">
-      <Filter>Source Files\Video</Filter>
+      <Filter>Source Files\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
