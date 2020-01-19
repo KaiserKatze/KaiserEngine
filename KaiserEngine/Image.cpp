@@ -82,6 +82,30 @@ Open(const std::string& path)
     PBITMAPINFOHEADER pInfoHeader{
         reinterpret_cast<PBITMAPINFOHEADER>(cpInfo)
     };
+#ifdef _DEBUG
+    {
+        std::stringstream ss;
+        ss << "InfoHeader::biSize = "
+            << pInfoHeader->biSize
+            << "; Should use ";
+        switch (pInfoHeader->biSize)
+        {
+            case sizeof(BITMAPINFOHEADER) :
+                ss << "BITMAPINFOHEADER" << std::endl;
+                break;
+            case sizeof(BITMAPV4HEADER) :
+                ss << "BITMAPV4HEADER" << std::endl;
+                break;
+            case sizeof(BITMAPV5HEADER) :
+                ss << "BITMAPV5HEADER" << std::endl;
+                break;
+            default:
+                ss << "BITMAPCOREHEADER" << std::endl;
+                break;
+        }
+        OutputDebugStringA(ss.str().c_str());
+    }
+#endif
 
     if (strncmp(reinterpret_cast<char*>(&pFileHeader->bfType), "BM", 2) != 0)
     {
