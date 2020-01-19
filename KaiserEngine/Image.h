@@ -21,5 +21,5 @@ public:
     // The pixels, possibly in BGR or BGRA
     virtual const std::vector<RGBQUAD>& GetPixels() const;
 
-    static Image FromFile(const std::string& path);
+    static Image FromFile(const std::wstring& path);
 };
