@@ -160,6 +160,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                                     if (SUCCEEDED(pShellItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath)))
                                     {
                                         MessageBox(NULL, pszFilePath, L"File Path", MB_OK);
+                                        try
+                                        {
+                                            Image image{ Image::FromFile(pszFilePath) };
+                                        }
+                                        catch (const std::exception & exc)
+                                        {
+                                            OutputDebugStringA(exc.what());
+                                        }
                                         CoTaskMemFree(pszFilePath);
                                     }
                                     pShellItem->Release();
