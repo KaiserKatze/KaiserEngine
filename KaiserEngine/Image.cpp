@@ -25,6 +25,13 @@ GetHeight() const
     return height;
 }
 
+const std::vector<unsigned char>&
+Image::
+GetPixels() const
+{
+    return pixels;
+}
+
 class FileImage final
     : public Image
 {
