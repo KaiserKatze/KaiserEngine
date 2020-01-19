@@ -25,7 +25,7 @@ GetHeight() const
     return height;
 }
 
-const std::vector<unsigned char>&
+const std::vector<RGBQUAD>&
 Image::
 GetPixels() const
 {
