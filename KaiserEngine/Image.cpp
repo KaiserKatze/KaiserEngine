@@ -82,6 +82,11 @@ Open(const std::string& path)
             + sizeof(BITMAPFILEHEADER))
     };
 
+    if (strncmp(reinterpret_cast<char*>(&pFileHeader->bfType), "BM", 2) != 0)
+    {
+        throw std::runtime_error("Invalid file format: this is not a BMP file, or an unsupported OS/2 BMP file!");
+    }
+
     this->SetWidth(std::abs(pInfoHeader->biWidth));
     this->SetHeight(std::abs(pInfoHeader->biHeight));
 
