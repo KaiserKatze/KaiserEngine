@@ -3,6 +3,7 @@
 
 #include "framework.h"
 #include "ImageViewer.h"
+#include "../KaiserEngine/Image.h"
 
 #define MAX_LOADSTRING 100
 
