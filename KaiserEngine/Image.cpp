@@ -113,7 +113,32 @@ Open(const std::string& path)
                 ss << "BITMAPCOREHEADER" << std::endl;
                 break;
         }
-        ss << "InfoHeader::biClrUsed = "
+        ss
+            << "InfoHeader::biWidth = "
+            << pInfoHeader->biWidth
+            << std::endl
+            << "InfoHeader::biHeight = "
+            << pInfoHeader->biHeight
+            << std::endl
+            << "InfoHeader::biPlanes = "
+            << pInfoHeader->biPlanes
+            << std::endl
+            << "InfoHeader::biBitCount = "
+            << pInfoHeader->biBitCount
+            << std::endl
+            << "InfoHeader::biCompression = "
+            << pInfoHeader->biCompression
+            << std::endl
+            << "InfoHeader::biSizeImage = "
+            << pInfoHeader->biSizeImage
+            << std::endl
+            << "InfoHeader::biXPelsPerMeter = "
+            << pInfoHeader->biXPelsPerMeter
+            << std::endl
+            << "InfoHeader::biYPelsPerMeter = "
+            << pInfoHeader->biYPelsPerMeter
+            << std::endl
+            << "InfoHeader::biClrUsed = "
             << pInfoHeader->biClrUsed
             << std::endl
             << "InfoHeader::biClrImportant = "
