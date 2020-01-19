@@ -84,6 +84,13 @@ Open(const std::wstring& path)
     };
 #ifdef _DEBUG
     {
+        std::wstringstream wss;
+        wss
+            << "FilePath = "
+            << path
+            << std::endl;
+        OutputDebugStringW(wss.str().c_str());
+
         std::stringstream ss;
         ss
             << "FileSize = "
