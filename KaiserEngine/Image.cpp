@@ -66,7 +66,10 @@ Open(const std::string& path)
     file.seekg(0, std::ios::end);
     std::streampos length = file.tellg();
     file.seekg(0, std::ios::beg);
+#pragma warning(push)
+#pragma warning(disable: 4244)
     buffer.resize(length);
+#pragma warning(pop)
     file.read(buffer.data(), length);
 
     // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
