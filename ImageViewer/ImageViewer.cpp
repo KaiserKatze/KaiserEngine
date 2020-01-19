@@ -159,7 +159,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                                     PWSTR pszFilePath{ nullptr };
                                     if (SUCCEEDED(pShellItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath)))
                                     {
-                                        MessageBox(NULL, pszFilePath, L"File Path", MB_OK);
+                                        MessageBox(hWnd, pszFilePath, L"File Path", MB_OK);
                                         try
                                         {
                                             Image image{ Image::FromFile(pszFilePath) };
