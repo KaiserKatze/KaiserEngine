@@ -13,5 +13,6 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
+#include <ShObjIdl_core.h>
 
 #include <sstream>
