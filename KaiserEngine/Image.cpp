@@ -72,9 +72,10 @@ Open(const std::string& path)
 #pragma warning(pop)
     file.read(buffer.data(), length);
 
+    char* cpData = buffer.data();
     // @see: https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapfileheader
     PBITMAPFILEHEADER pFileHeader{
-        reinterpret_cast<PBITMAPFILEHEADER>(buffer.data())
+        reinterpret_cast<PBITMAPFILEHEADER>(cpData)
     };
     // @see: https://docs.microsoft.com/en-us/previous-versions//dd183376(v=vs.85)?redirectedfrom=MSDN
     PBITMAPINFOHEADER pInfoHeader{
