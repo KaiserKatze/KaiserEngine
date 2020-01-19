@@ -112,8 +112,10 @@ Open(const std::string& path)
         throw std::runtime_error("Invalid file format: this is not a BMP file, or an unsupported OS/2 BMP file!");
     }
 
-    this->SetWidth(std::abs(pInfoHeader->biWidth));
-    this->SetHeight(std::abs(pInfoHeader->biHeight));
+    const int width{ std::abs(pInfoHeader->biWidth) };
+    const int height{ std::abs(pInfoHeader->biHeight) };
+    this->SetWidth(width);
+    this->SetHeight(height);
 
     if (pInfoHeader->biCompression != 0)
     {
