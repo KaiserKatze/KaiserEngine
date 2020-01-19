@@ -38,7 +38,7 @@ class FileImage final
 public:
     void SetWidth(const int& width);
     void SetHeight(const int& height);
-    void Open(const std::string& path);
+    void Open(const std::wstring& path);
 };
 
 void
@@ -57,7 +57,7 @@ SetHeight(const int& height)
 
 void
 FileImage::
-Open(const std::string& path)
+Open(const std::wstring& path)
 {
     std::vector<char> buffer;
     std::ifstream file{ path };
@@ -187,7 +187,7 @@ Open(const std::string& path)
 
 Image
 Image::
-FromFile(const std::string& path)
+FromFile(const std::wstring& path)
 {
     FileImage image;
     image.Open(path);
