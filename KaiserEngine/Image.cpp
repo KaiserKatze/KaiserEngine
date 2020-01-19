@@ -86,6 +86,9 @@ Open(const std::string& path)
     {
         std::stringstream ss;
         ss
+            << "FileSize = "
+            << length
+            << std::endl
             << "FileHeader::bfSize = "
             << pFileHeader->bfSize
             << std::endl
