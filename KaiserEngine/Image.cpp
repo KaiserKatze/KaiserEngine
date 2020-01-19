@@ -77,10 +77,10 @@ Open(const std::string& path)
     PBITMAPFILEHEADER pFileHeader{
         reinterpret_cast<PBITMAPFILEHEADER>(cpData)
     };
+    char* cpInfo = cpData + sizeof(BITMAPFILEHEADER);
     // @see: https://docs.microsoft.com/en-us/previous-versions//dd183376(v=vs.85)?redirectedfrom=MSDN
     PBITMAPINFOHEADER pInfoHeader{
-        reinterpret_cast<PBITMAPINFOHEADER>(buffer.data()
-            + sizeof(BITMAPFILEHEADER))
+        reinterpret_cast<PBITMAPINFOHEADER>(cpInfo)
     };
 
     if (strncmp(reinterpret_cast<char*>(&pFileHeader->bfType), "BM", 2) != 0)
