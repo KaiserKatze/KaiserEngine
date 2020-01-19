@@ -137,6 +137,38 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             case IDM_EXIT:
                 DestroyWindow(hWnd);
                 break;
+            case ID_FILE_OPEN:
+                // @see: https://docs.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box
+                {
+                    if (SUCCEEDED(CoInitializeEx(nullptr,
+                        COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE)))
+                    {
+                        IFileOpenDialog* pFileOpenDialog{ nullptr };
+                        if (SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog,
+                            nullptr,
+                            CLSCTX_ALL,
+                            IID_IFileOpenDialog,
+                            reinterpret_cast<void**>(&pFileOpenDialog))))
+                        {
+                            if (SUCCEEDED(pFileOpenDialog->Show(hWnd)))
+                            {
+                                IShellItem* pShellItem{ nullptr };
+                                if (SUCCEEDED(pFileOpenDialog->GetResult(&pShellItem)))
+                                {
+                                    PWSTR pszFilePath{ nullptr };
+                                    if (SUCCEEDED(pShellItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath)))
+                                    {
+                                        MessageBox(NULL, pszFilePath, L"File Path", MB_OK);
+                                        CoTaskMemFree(pszFilePath);
+                                    }
+                                    pShellItem->Release();
+                                }
+                            }
+                            pFileOpenDialog->Release();
+                        }
+                    }
+                }
+                break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
