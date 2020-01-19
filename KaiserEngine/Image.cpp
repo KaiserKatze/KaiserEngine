@@ -85,7 +85,14 @@ Open(const std::string& path)
 #ifdef _DEBUG
     {
         std::stringstream ss;
-        ss << "InfoHeader::biSize = "
+        ss
+            << "FileHeader::bfSize = "
+            << pFileHeader->bfSize
+            << std::endl
+            << "FileHeader::bfOffBits = "
+            << pFileHeader->bfOffBits
+            << std::endl
+            << "InfoHeader::biSize = "
             << pInfoHeader->biSize
             << "; Should use ";
         switch (pInfoHeader->biSize)
@@ -103,6 +110,12 @@ Open(const std::string& path)
                 ss << "BITMAPCOREHEADER" << std::endl;
                 break;
         }
+        ss << "InfoHeader::biClrUsed = "
+            << pInfoHeader->biClrUsed
+            << std::endl
+            << "InfoHeader::biClrImportant = "
+            << pInfoHeader->biClrImportant
+            << std::endl;
         OutputDebugStringA(ss.str().c_str());
     }
 #endif
