@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 struct PixelBGR
 {
@@ -30,6 +31,8 @@ public:
     virtual int GetWidth() const;
     // The height of the image, in pixels
     virtual int GetHeight() const;
+    // The pixels, possibly in BGR or BGRA
+    virtual const std::vector<unsigned char>& GetPixels() const;
 
     static Image FromFile(const std::string& path);
 };
