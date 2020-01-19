@@ -90,6 +90,7 @@ Open(const std::string& path)
         throw std::runtime_error("Decompression of BMP image is unsupported yet!");
     }
 
+    this->pixels.clear();
     switch (pInfoHeader->biBitCount)
     {
     case 24:
