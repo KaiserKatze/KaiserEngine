@@ -146,6 +146,8 @@ Open(const std::string& path)
         // Color table is unsupported yet
         throw std::runtime_error("Unsupported bit count!");
     }
+
+    char* cpBitmap = cpData + pFileHeader->bfOffBits;
 }
 
 Image
