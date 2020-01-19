@@ -19,7 +19,7 @@ public:
     // The height of the image, in pixels
     virtual int GetHeight() const;
     // The pixels, possibly in BGR or BGRA
-    virtual const std::vector<unsigned char>& GetPixels() const;
+    virtual const std::vector<RGBQUAD>& GetPixels() const;
 
     static Image FromFile(const std::string& path);
 };
