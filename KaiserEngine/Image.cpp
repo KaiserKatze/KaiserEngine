@@ -176,6 +176,13 @@ Open(const std::string& path)
     }
 
     char* cpBitmap = cpData + pFileHeader->bfOffBits;
+    const DWORD bitmapSize{ pInfoHeader->biSizeImage };
+    this->pixels.resize(bitmapSize);
+    std::copy(
+        reinterpret_cast<RGBQUAD*>(cpBitmap),
+        reinterpret_cast<RGBQUAD*>(cpBitmap + bitmapSize),
+        std::begin(this->pixels)
+    );
 }
 
 Image
