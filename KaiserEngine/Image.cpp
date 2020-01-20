@@ -171,7 +171,8 @@ Open(const std::wstring& path)
     }
 
     this->pixels.clear();
-    switch (pInfoHeader->biBitCount)
+    const int biCount = this->bitCount = pInfoHeader->biBitCount;
+    switch (biCount)
     {
     case 24:
         break;
