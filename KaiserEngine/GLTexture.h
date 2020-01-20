@@ -18,5 +18,5 @@ public:
     void ActiveTexture(const GLenum& texture) const;
     void Bind() const;
     void Unbind();
-    void SetImage(const Image& image);
+    void SetImage(const Image& image, const GLenum& target, const GLint& level, const GLint& internalFormat, const GLenum& format, const GLenum& type);
 };
