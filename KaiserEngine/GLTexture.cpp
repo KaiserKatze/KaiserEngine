@@ -80,7 +80,7 @@ ActiveTexture(const GLenum& texture) const
 
 void
 GLTexture::
-BindTexture(const GLenum& target) const
+Bind(const GLenum& target) const
 {
     switch (target)
     {
