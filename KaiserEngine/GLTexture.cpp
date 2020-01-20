@@ -143,14 +143,6 @@ SetImage(const Image& image,
     const GLenum& format,
     const GLenum& type)
 {
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    {
-        std::stringstream ss;
-        ss << "glPixelStorei(GL_UNPACK_ALIGNMENT, 1)"
-            << std::endl;
-        DetectGLError(ss);
-    }
-
     // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTexImage2D.xhtml
 
     switch (target)
