@@ -112,7 +112,7 @@ ActiveTexture(const GLenum& texture) const
 
 void
 GLTexture::
-Bind() const
+Bind()
 {
     glBindTexture(this->target, this->id);
     {
