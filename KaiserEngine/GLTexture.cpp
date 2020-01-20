@@ -136,6 +136,54 @@ Unbind()
 
 void
 GLTexture::
+SetPixelStorage(const GLenum& pname, const GLint& param)
+{
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glPixelStore.xhtml
+
+    switch (pname)
+    {
+    case GL_PACK_SWAP_BYTES:
+    case GL_PACK_LSB_FIRST:
+    case GL_PACK_ROW_LENGTH:
+    case GL_PACK_IMAGE_HEIGHT:
+    case GL_PACK_SKIP_PIXELS:
+    case GL_PACK_SKIP_ROWS:
+    case GL_PACK_SKIP_IMAGES:
+    case GL_PACK_ALIGNMENT:
+    case GL_UNPACK_SWAP_BYTES:
+    case GL_UNPACK_LSB_FIRST:
+    case GL_UNPACK_ROW_LENGTH:
+    case GL_UNPACK_IMAGE_HEIGHT:
+    case GL_UNPACK_SKIP_PIXELS:
+    case GL_UNPACK_SKIP_ROWS:
+    case GL_UNPACK_SKIP_IMAGES:
+    case GL_UNPACK_ALIGNMENT:
+        break;
+    default:
+        {
+            std::stringstream ss;
+            ss << "Invalid pname: 0x"
+                << std::hex
+                << pname
+                << "!";
+            throw std::runtime_error(ss.str());
+        }
+    } /* switch (pname) */
+
+    glPixelStorei(pname, param);
+    {
+        std::stringstream ss;
+        ss << "glPixelStorei("
+            << pname << ", "
+            << param << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
+
+}
+
+void
+GLTexture::
 SetImage(const Image& image,
     const GLenum& target,
     const GLint& level,
