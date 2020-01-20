@@ -16,6 +16,13 @@ GLTexture::
     id = 0;
 }
 
+void
+GLTexture::
+SetTarget(const GLenum& target)
+{
+    this->target = target;
+}
+
 const bool
 GLTexture::
 IsTexture() const
