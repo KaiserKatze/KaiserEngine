@@ -25,6 +25,13 @@ GetHeight() const
     return height;
 }
 
+int
+Image::
+GetBitCount() const
+{
+    return bitCount;
+}
+
 const std::vector<RGBQUAD>&
 Image::
 GetPixels() const
