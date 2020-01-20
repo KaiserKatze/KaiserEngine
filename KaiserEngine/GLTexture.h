@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Image.h"
+
 class GLTexture
 {
 private:
@@ -11,4 +13,5 @@ public:
     const bool IsTexture() const;
     void ActiveTexture(const GLenum& texture) const;
     void BindTexture(const GLenum& target) const;
+    void SetImage(const Image& image);
 };
