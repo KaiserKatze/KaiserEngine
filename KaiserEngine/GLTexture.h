@@ -17,5 +17,6 @@ public:
     const bool IsTexture() const;
     void ActiveTexture(const GLenum& texture) const;
     void Bind() const;
+    void Unbind();
     void SetImage(const Image& image);
 };
