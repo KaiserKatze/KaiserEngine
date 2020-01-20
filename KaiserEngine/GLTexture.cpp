@@ -23,6 +23,13 @@ SetTarget(const GLenum& target)
     this->target = target;
 }
 
+const GLenum&
+GLTexture::
+GetTarget() const
+{
+    return this->target;
+}
+
 const bool
 GLTexture::
 IsTexture() const
