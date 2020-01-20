@@ -99,4 +99,15 @@ Bind(const GLenum& target) const
     default:
         throw std::invalid_argument("Invalid argument 'target'!");
     }
+
+    glBindTexture(target, this->id);
+    {
+        std::stringstream ss;
+        ss << "glBindTexture("
+            << target << ", "
+            << this->id
+            << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
 }
