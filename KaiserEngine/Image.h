@@ -8,6 +8,7 @@ class Image
 protected:
     int width{ 0 };
     int height{ 0 };
+    int bitCount{ 0 };
     std::vector<RGBQUAD> pixels;
 
 public:
