@@ -125,3 +125,11 @@ Bind() const
         DetectGLError(ss);
     }
 }
+
+void
+GLTexture::
+Unbind()
+{
+    glBindTexture(this->target, 0);
+    SuppressGLError();
+}
