@@ -5,7 +5,6 @@
 GLTexture::
 GLTexture()
 {
-    glGenTextures(1, &id);
 }
 
 GLTexture::
@@ -108,6 +107,21 @@ ActiveTexture(const GLenum& texture) const
             << ")";
         DetectGLError(ss);
     }
+}
+
+void
+GLTexture::
+Create()
+{
+    GLuint textureId{ 0 };
+    glGenTextures(1, &textureId);
+    {
+        std::stringstream ss;
+        ss << "glGenTextures(1, &id)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    this->id = textureId;
 }
 
 void
