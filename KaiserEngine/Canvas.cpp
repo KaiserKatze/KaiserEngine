@@ -399,6 +399,37 @@ SetVertexAttribPointer(
     }
 }
 
+template <>
+void
+VertexData<float>::
+SetVertexAttribPointer()
+{
+    const GLenum type{ GL_FLOAT };
+    const GLboolean normalized{ GL_FALSE };
+    const GLsizei stride{ sizeof(VertexData<float>) };
+
+    const static int PositionByteCount  = VertexData::PositionElementCount  * sizeof(VertexData::DataType);
+    const static int ColorByteCount     = VertexData::ColorElementCount     * sizeof(VertexData::DataType);
+    const static int TextureByteCount   = VertexData::TextureElementCount   * sizeof(VertexData::DataType);
+
+    const static int PositionByteOffset = 0;
+    const static int ColorByteOffset    = PositionByteOffset + PositionByteCount;
+    const static int TextureByteOffset  = ColorByteOffset + ColorByteCount;
+
+    ::SetVertexAttribPointer(0,
+        VertexData<float>::PositionElementCount,
+        type, normalized, stride,
+        PositionByteOffset);
+    ::SetVertexAttribPointer(1,
+        VertexData<float>::ColorElementCount,
+        type, normalized, stride,
+        reinterpret_cast<void*>(ColorByteOffset));
+    ::SetVertexAttribPointer(2,
+        VertexData<float>::TextureElementCount,
+        type, normalized, stride,
+        reinterpret_cast<void*>(TextureByteOffset));
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
