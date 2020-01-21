@@ -374,14 +374,10 @@ Prepare()
     vbo.Bind();
     float vertices[] =
     {
-        // Left bottom triangle
         -.5f, .5f, .0f,
         -.5f, -.5f, .0f,
         .5f, -.5f, .0f,
-        // Right top triangle
-        .5f, -.5f, .0f,
         .5f, .5f, .0f,
-        -.5f, .5f, .0f,
     };
     vbo.SetData(sizeof(vertices), vertices);
     glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
@@ -394,6 +390,19 @@ Prepare()
     vbo.Unbind();
 
     vao.Unbind();
+
+    char indices[] =
+    {
+        0, 1, 2,
+        2, 3, 0,
+    };
+    GLBuffer& vboi{ vao.CreateBuffer("index") };
+    vboi.Create();
+    vboi.SetTarget(GL_ELEMENT_ARRAY_BUFFER);
+    vboi.SetUsage(GL_STATIC_DRAW);
+    vboi.Bind();
+    vboi.SetData(sizeof(indices), indices);
+    vboi.Unbind();
 }
 
 void
@@ -429,14 +438,21 @@ Render()
         DetectGLError(ss);
     }
 
+    GLBuffer& vboi{ vao.GetBuffer("index") };
+    vboi.Bind();
+
     // draw vertices
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    glDrawElements(GL_TRIANGLES, vboi.GetCount(), GL_UNSIGNED_BYTE, 0);
     {
         std::stringstream ss;
-        ss << "glDrawArrays(GL_TRIANGLES, 0, 6)"
+        ss << "glDrawElements(GL_TRIANGLES, "
+            << vboi.GetCount()
+            << ", GL_UNSIGNED_BYTE, 0)"
             << std::endl;
         DetectGLError(ss);
     }
+
+    vboi.Unbind();
 
     // put everything back to default
     glDisableVertexAttribArray(0);
