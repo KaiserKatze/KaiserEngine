@@ -454,3 +454,18 @@ GenerateMipmap()
         DetectGLError(ss);
     }
 }
+
+void
+GLTexture::
+GenerateMipmap(const GLenum& target)
+{
+    glGenerateMipmap(target);
+    {
+        std::stringstream ss;
+        ss << "glGenerateMipmap("
+            << target
+            << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
+}
