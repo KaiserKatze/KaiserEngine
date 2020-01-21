@@ -301,6 +301,23 @@ Setup(const int& screenWidth, const int& screenHeight)
     }
 }
 
+template <typename _Ty>
+struct VertexData final
+{
+    _Ty x;      // positions
+    _Ty y;
+    _Ty z;
+    _Ty r;      // colors
+    _Ty g;
+    _Ty b;
+    _Ty a;
+    _Ty u;      // texture coordinates
+    _Ty v;
+
+    VertexData();
+    ~VertexData() {}
+};
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
