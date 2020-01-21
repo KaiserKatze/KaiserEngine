@@ -319,6 +319,10 @@ struct VertexData final
     VertexData();
     VertexData(const std::initializer_list<_Ty>& initializerList);
     ~VertexData() {}
+
+    const static int PositionElementCount = 4;      /* x, y, z, w */
+    const static int ColorElementCount = 4;         /* r, g, b, a */
+    const static int TextureElementCount = 2;       /* u, v */
 };
 
 template <typename _Ty>
