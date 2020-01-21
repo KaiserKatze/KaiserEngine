@@ -55,6 +55,13 @@ GetUsage() const noexcept
     return usage;
 }
 
+const GLsizei&
+GLBuffer::
+GetCount() const noexcept
+{
+    return count;
+}
+
 void
 GLBuffer::
 Create()
