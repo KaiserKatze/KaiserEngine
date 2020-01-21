@@ -55,6 +55,8 @@ void
 GLTexture::
 ActiveTexture(const GLenum& texture) const
 {
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glActiveTexture.xhtml
+
     // texture: TEXTUREi (where i is
     //      [0, max(MAX_TEXTURE_COORDS,
     //      MAX_COMBINED_TEXTURE_IMAGE_UNITS) - 1] )
@@ -96,6 +98,7 @@ ActiveTexture(const GLenum& texture) const
     default:
         throw std::invalid_argument("Invalid argument 'texture'!");
     }
+
     glActiveTexture(texture);
     {
         std::stringstream ss;
