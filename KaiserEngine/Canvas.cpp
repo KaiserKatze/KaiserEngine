@@ -365,6 +365,14 @@ VertexData(const std::initializer_list<_Ty>& initializerList)
     std::copy(initializerList.begin(), initializerList.end(), dataBegin);
 }
 
+template <typename _Ty>
+void
+VertexData<_Ty>::
+SetVertexAttribPointer()
+{
+    throw std::runtime_error("Unsupported <typename _Ty>!");
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
