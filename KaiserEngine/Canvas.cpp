@@ -324,7 +324,7 @@ struct VertexData final
 template <typename _Ty>
 VertexData<_Ty>::
 VertexData()
-    : x{ 0 }, y{ 0 }, z{ 0 }
+    : x{ 0 }, y{ 0 }, z{ 0 }, w{ 0 }
     , r{ 0 }, g{ 0 }, b{ 0 }, a{ 0 }
     , u{ 0 }, v{ 0 }
 {
@@ -333,7 +333,7 @@ VertexData()
 template<>
 VertexData<float>::
 VertexData()
-    : x{ 0.0f }, y{ 0.0f }, z{ 0.0f }
+    : x{ 0.0f }, y{ 0.0f }, z{ 0.0f }, w{ 0.0f }
     , r{ 0.0f }, g{ 0.0f }, b{ 0.0f }, a{ 0.0f }
     , u{ 0.0f }, v{ 0.0f }
 {
