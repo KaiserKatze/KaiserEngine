@@ -439,3 +439,18 @@ SetImage(const Image& image,
         DetectGLError(ss);
     }
 }
+
+void
+GLTexture::
+GenerateMipmap()
+{
+    glGenerateTextureMipmap(this->id);
+    {
+        std::stringstream ss;
+        ss << "glGenerateTextureMipmap("
+            << this->id
+            << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
+}
