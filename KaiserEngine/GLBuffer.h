@@ -16,6 +16,7 @@ private:
     GLuint id{ 0 };
     GLenum target{ 0 };
     GLenum usage{ 0 };
+    GLsizei count{ 0 };
     bool isBound{ false };
     bool isFilled{ false };
 
