@@ -110,7 +110,7 @@ void
 GLTexture::
 Create()
 {
-    GLuint textureId{ 0 };
+    GLuint& textureId{ this->id };
     glGenTextures(1, &textureId);
     {
         std::stringstream ss;
@@ -118,7 +118,6 @@ Create()
             << std::endl;
         DetectGLError(ss);
     }
-    this->id = textureId;
 }
 
 void
