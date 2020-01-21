@@ -3,6 +3,7 @@
 #include "loadgl.h"
 #include "EventListener.h"
 #include "MainWindow.h"
+#include "GLTexture.h"
 
 class CanvasEventListener final
     : public WindowEventListener
