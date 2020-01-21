@@ -10,9 +10,6 @@ GLTexture()
 GLTexture::
 ~GLTexture()
 {
-    if (id == 0) return;
-    glDeleteTextures(1, &id);
-    id = 0;
 }
 
 void
@@ -146,6 +143,21 @@ Unbind()
 {
     glBindTexture(this->target, 0);
     SuppressGLError();
+}
+
+void
+GLTexture::
+Destroy()
+{
+    if (this->id == 0) return;
+    glDeleteTextures(1, &id);
+    {
+        std::stringstream ss;
+        ss << "glDeleteTextures(1, &id)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    this->id = 0;
 }
 
 void
