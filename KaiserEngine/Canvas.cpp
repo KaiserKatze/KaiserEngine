@@ -318,6 +318,15 @@ struct VertexData final
     ~VertexData() {}
 };
 
+template <typename _Ty>
+VertexData<_Ty>::
+VertexData()
+    : x{ 0 }, y{ 0 }, z{ 0 }
+    , r{ 0 }, g{ 0 }, b{ 0 }, a{ 0 }
+    , u{ 0 }, v{ 0 }
+{
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
