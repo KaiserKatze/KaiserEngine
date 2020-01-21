@@ -16,6 +16,7 @@ public:
     const GLenum& GetTarget() const;
     const bool IsTexture() const;
     void ActiveTexture(const GLenum& texture) const;
+    void Create();
     void Bind();
     void Unbind();
 
