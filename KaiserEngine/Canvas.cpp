@@ -373,6 +373,32 @@ SetVertexAttribPointer()
     throw std::runtime_error("Unsupported <typename _Ty>!");
 }
 
+static
+void
+SetVertexAttribPointer(
+    const GLuint& index,
+    const GLint& size,
+    const GLenum& type,
+    const GLboolean& normalized,
+    const GLsizei& stride,
+    const void* pointer)
+{
+    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+    {
+        std::stringstream ss;
+        ss << "glVertexAttribPointer("
+            << index << ", "
+            << size << ", "
+            << std::hex << type << std::dec << ", "
+            << std::boolalpha << normalized << std::noboolalpha << ", "
+            << stride << ", "
+            << pointer
+            << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
