@@ -334,6 +334,8 @@ struct VertexData final
     const static int PositionElementCount = 4;      /* x, y, z, w */
     const static int ColorElementCount = 4;         /* r, g, b, a */
     const static int TextureElementCount = 2;       /* u, v */
+
+    static void SetVertexAttribPointer();
 };
 
 template <typename _Ty>
