@@ -444,6 +444,8 @@ void
 GLTexture::
 GenerateMipmap()
 {
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenerateMipmap.xhtml
+
     glGenerateTextureMipmap(this->id);
     {
         std::stringstream ss;
@@ -459,6 +461,8 @@ void
 GLTexture::
 GenerateMipmap(const GLenum& target)
 {
+    // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glGenerateMipmap.xhtml
+
     glGenerateMipmap(target);
     {
         std::stringstream ss;
