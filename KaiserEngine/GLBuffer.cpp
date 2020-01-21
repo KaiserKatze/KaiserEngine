@@ -134,6 +134,8 @@ SetData(const GLsizeiptr& size, const void* data)
     if (!this->isBound)
         throw std::runtime_error("This buffer is not bound yet!");
 
+    this->count = size;
+
     glBufferData(this->target, size, data, this->usage);
     {
         std::stringstream ss;
