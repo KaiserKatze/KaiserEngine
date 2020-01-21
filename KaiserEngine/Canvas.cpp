@@ -325,6 +325,8 @@ struct VertexData final
         _Ty v;
     };
 
+    using DataType = _Ty;
+
     VertexData();
     VertexData(const std::initializer_list<_Ty>& initializerList);
     ~VertexData() {}
