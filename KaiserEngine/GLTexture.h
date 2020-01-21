@@ -19,6 +19,7 @@ public:
     void Create();
     void Bind();
     void Unbind();
+    void Destroy();
 
     void SetPixelStorage(const GLenum& pname, const GLint& param);
     void SetImage(const Image& image, const GLenum& target, const GLint& level, const GLint& internalFormat, const GLenum& format, const GLenum& type);
