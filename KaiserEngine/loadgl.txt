@@ -56,3 +56,6 @@ glActiveTexture
 glBindTextures
 glBindTextureUnit
 glCreateTextures
+
+glGenerateMipmap
+glGenerateTextureMipmap
