@@ -337,6 +337,15 @@ VertexData()
 {
 }
 
+template <typename _Ty>
+VertexData<_Ty>::
+VertexData(const std::initializer_list<_Ty>& initializerList)
+    : VertexData()
+{
+    _Ty* dataBegin = &(this->x);
+    std::copy(initializerList.begin(), initializerList.end(), dataBegin);
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
