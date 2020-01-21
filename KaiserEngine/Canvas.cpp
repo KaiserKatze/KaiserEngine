@@ -308,6 +308,7 @@ struct VertexData final
     _Ty x;      // positions
     _Ty y;
     _Ty z;
+    _Ty w;
     _Ty r;      // colors
     _Ty g;
     _Ty b;
