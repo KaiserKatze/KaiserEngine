@@ -30,6 +30,7 @@ public:
     const GLenum& GetTarget() const noexcept;
     void SetUsage(const GLenum& usage) noexcept;
     const GLenum& GetUsage() const noexcept;
+    const GLsizei& GetCount() const noexcept;
 
     void Create();
     void Bind();
