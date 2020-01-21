@@ -305,16 +305,25 @@ Setup(const int& screenWidth, const int& screenHeight)
 template <typename _Ty>
 struct VertexData final
 {
-    _Ty x;      // positions
-    _Ty y;
-    _Ty z;
-    _Ty w;
-    _Ty r;      // colors
-    _Ty g;
-    _Ty b;
-    _Ty a;
-    _Ty u;      // texture coordinates
-    _Ty v;
+    struct      // positions
+    {
+        _Ty x;
+        _Ty y;
+        _Ty z;
+        _Ty w;
+    };
+    struct      // colors
+    {
+        _Ty r;
+        _Ty g;
+        _Ty b;
+        _Ty a;
+    };
+    struct      // texture coordinates
+    {
+        _Ty u;
+        _Ty v;
+    };
 
     VertexData();
     VertexData(const std::initializer_list<_Ty>& initializerList);
