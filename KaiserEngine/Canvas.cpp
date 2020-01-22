@@ -624,6 +624,13 @@ CreateProgram(GLstring name)
     return this->programs[name] = GLProgram();
 }
 
+GLTexture&
+Canvas::
+CreateTexture(GLstring name)
+{
+    return this->texs[name] = GLTexture();
+}
+
 // CanvasEventListener
 
 CanvasEventListener::
