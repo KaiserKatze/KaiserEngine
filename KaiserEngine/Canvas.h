@@ -4,6 +4,7 @@
 #include "GLShader.h"
 #include "GLProgram.h"
 #include "GLVertexArray.h"
+#include "GLTexture.h"
 
 class Canvas
 {
