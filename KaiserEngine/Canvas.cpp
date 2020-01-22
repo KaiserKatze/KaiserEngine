@@ -335,6 +335,7 @@ struct VertexData final
     const static int TextureElementCount = 2;       /* u, v */
 
     static void SetVertexAttribPointer();
+    static void EnableVertexAttribArray();
 };
 
 template <typename _Ty>
