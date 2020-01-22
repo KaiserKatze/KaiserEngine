@@ -581,6 +581,11 @@ Prepare()
     vboi.Bind();
     vboi.SetData(sizeof(indices), indices);
     vboi.Unbind();
+
+    // Setup textures
+    auto path = L"test.bmp";
+    GLTexture& texture{ this->CreateTexture("default") };
+    LoadTexture(texture, path);
 }
 
 void
