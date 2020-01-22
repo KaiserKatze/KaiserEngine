@@ -11,6 +11,7 @@ private:
     const AbstractWindow& parent;
     std::map<GLstring, GLProgram> programs;
     std::map<GLstring, GLVertexArray> vaos;
+    std::map<GLstring, GLTexture> texs;
 
 protected:
     bool AddVertexArray(GLstring name, const GLVertexArray& array);
