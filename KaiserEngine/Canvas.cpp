@@ -636,6 +636,8 @@ Render()
     VertexData<float>::DisableVertexAttribArray();
     vao.Unbind();
 
+    GLProgram::UseProgram();
+
     HDC hDC = wglGetCurrentDC();
     SwapBuffers(hDC);
 }
