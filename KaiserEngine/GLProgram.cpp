@@ -285,13 +285,15 @@ Setup(const std::map<GLenum, GLstring>& shaders,
 
     // get all attribute variable locations
     if (attributes != nullptr)
+    {
         for (auto itr = attributes->cbegin();
             itr != attributes->cend();
             itr++)
-    {
-        GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
-        GLstring attributeName{ *itr };
-        BindAttribute(index, attributeName);
+        {
+            GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
+            GLstring attributeName{ *itr };
+            BindAttribute(index, attributeName);
+        }
     }
 
     LinkProgram();
@@ -299,12 +301,14 @@ Setup(const std::map<GLenum, GLstring>& shaders,
 
     // get all uniform variable locations
     if (uniforms != nullptr)
+    {
         for (auto itr = uniforms->begin();
             itr != uniforms->end();
             itr++)
-    {
-        GLstring uniformName{ itr->first };
-        GLint& uniformLocation{ itr->second };
-        uniformLocation = GetUniformLocation(uniformName);
+        {
+            GLstring uniformName{ itr->first };
+            GLint& uniformLocation{ itr->second };
+            uniformLocation = GetUniformLocation(uniformName);
+        }
     }
 }
