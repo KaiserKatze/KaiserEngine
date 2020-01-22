@@ -614,13 +614,7 @@ Render()
     // bind VBOs if any
     GLVertexArray& vao{ this->GetVertexArray("quad") };
     vao.Bind();
-    glEnableVertexAttribArray(0);
-    {
-        std::stringstream ss;
-        ss << "glEnableVertexAttribArray(0)"
-            << std::endl;
-        DetectGLError(ss);
-    }
+    VertexData<float>::EnableVertexAttribArray();
 
     GLBuffer& vboi{ vao.GetBuffer("index") };
     vboi.Bind();
