@@ -60,7 +60,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     int retCode{ 0 };
 
-#if !defined _DEBUG
+#define USE_TRY_CATCH   (!defined _DEBUG)
+
+#if USE_TRY_CATCH
     try
 #endif
     {
@@ -78,7 +80,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 #endif
 
     }
-#if !defined _DEBUG
+#if USE_TRY_CATCH
     catch (const std::exception& exc)
     {
         std::stringstream ss;
