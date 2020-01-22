@@ -541,21 +541,30 @@ Prepare()
     vbo.SetTarget(GL_ARRAY_BUFFER);
     vbo.SetUsage(GL_STATIC_DRAW);
     vbo.Bind();
-    float vertices[] =
-    {
-        -.5f, .5f, .0f,
-        -.5f, -.5f, .0f,
-        .5f, -.5f, .0f,
-        .5f, .5f, .0f,
+    VertexData<float> vertexData[] = {
+        VertexData<float>{
+            -.5f, .5f, .0f, .0f,
+            .0f, .0f, .0f, .0f,
+            .0f, .0f,
+        },
+        VertexData<float>{
+            -.5f, -.5f, .0f, .0f,
+            .0f, .0f, .0f, .0f,
+            .0f, 1.f,
+        },
+        VertexData<float>{
+            .5f, -.5f, .0f, .0f,
+            .0f, .0f, .0f, .0f,
+            1.f, 1.f,
+        },
+        VertexData<float>{
+            .5f, .5f, .0f, .0f,
+            .0f, .0f, .0f, .0f,
+            1.f, .0f,
+        },
     };
-    vbo.SetData(sizeof(vertices), vertices);
-    glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
-    {
-        std::stringstream ss;
-        ss << "glVertexAttribPointer(...)"
-            << std::endl;
-        DetectGLError(ss);
-    }
+    vbo.SetData(sizeof(vertexData), vertexData);
+    VertexData<float>::SetVertexAttribPointer();
     vbo.Unbind();
 
     vao.Unbind();
