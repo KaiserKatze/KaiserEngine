@@ -602,6 +602,12 @@ Render()
     //OutputDebugStringA("Rendering ... \r\n");
 
     // bind textures if any
+    GLProgram& program{ this->programs["default"] };
+    GLProgram::UseProgram(&program);
+
+    GLTexture& texture{ this->texs["default"] };
+    texture.ActiveTexture(GL_TEXTURE0);
+    texture.Bind();
 
     // bind VAOs if any
 
