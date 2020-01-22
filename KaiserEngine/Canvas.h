@@ -41,5 +41,6 @@ public:
     void Dispose();
 
     GLVertexArray& CreateVertexArray(GLstring name);
+    GLProgram& CreateProgram(GLstring name);
 };
 
