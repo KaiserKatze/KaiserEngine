@@ -467,6 +467,54 @@ DisableVertexAttribArray()
     SuppressGLError();
 }
 
+static
+void
+LoadTexture(GLTexture& texture, const std::wstring& path)
+{
+    const Image image{ Image::FromFile(path) };
+    
+    texture.Create();
+    texture.ActiveTexture(GL_TEXTURE0);
+    texture.SetTarget(GL_TEXTURE_2D);
+    texture.Bind();
+    texture.SetPixelStorage(GL_UNPACK_ALIGNMENT, 1);
+    texture.SetImage(image, GL_TEXTURE_2D, 0, GL_RGB, GL_RGBA, GL_UNSIGNED_BYTE);
+    texture.GenerateMipmap();
+
+    // setup the ST coordinate system
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    {
+        std::stringstream ss;
+        ss << "glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    {
+        std::stringstream ss;
+        ss << "glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    // setup what to do when the texture has to be scaled
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    {
+        std::stringstream ss;
+        ss << "glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    {
+        std::stringstream ss;
+        ss << "glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR)"
+            << std::endl;
+        DetectGLError(ss);
+    }
+
+    texture.Unbind();
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
