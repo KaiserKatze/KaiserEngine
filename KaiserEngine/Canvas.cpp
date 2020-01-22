@@ -633,8 +633,7 @@ Render()
     vboi.Unbind();
 
     // put everything back to default
-    glDisableVertexAttribArray(0);
-    SuppressGLError();
+    VertexData<float>::DisableVertexAttribArray();
     vao.Unbind();
 
     HDC hDC = wglGetCurrentDC();
