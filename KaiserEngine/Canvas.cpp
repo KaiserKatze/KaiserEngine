@@ -445,6 +445,16 @@ EnableVertexAttribArray(const GLuint& index)
     }
 }
 
+template <typename _Ty>
+void
+VertexData<_Ty>::
+EnableVertexAttribArray()
+{
+    ::EnableVertexAttribArray(0);
+    ::EnableVertexAttribArray(1);
+    ::EnableVertexAttribArray(2);
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
