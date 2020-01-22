@@ -43,5 +43,6 @@ public:
 
     GLVertexArray& CreateVertexArray(GLstring name);
     GLProgram& CreateProgram(GLstring name);
+    GLTexture& CreateTexture(GLstring name);
 };
 
