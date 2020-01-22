@@ -456,6 +456,17 @@ EnableVertexAttribArray()
     ::EnableVertexAttribArray(2);
 }
 
+template <typename _Ty>
+void
+VertexData<_Ty>::
+DisableVertexAttribArray()
+{
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
+    SuppressGLError();
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
