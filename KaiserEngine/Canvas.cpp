@@ -592,6 +592,13 @@ CreateVertexArray(GLstring name)
     return this->GetVertexArray(name);
 }
 
+GLProgram&
+Canvas::
+CreateProgram(GLstring name)
+{
+    return this->programs[name] = GLProgram();
+}
+
 // CanvasEventListener
 
 CanvasEventListener::
