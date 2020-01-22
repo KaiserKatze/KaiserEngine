@@ -430,6 +430,21 @@ SetVertexAttribPointer()
         reinterpret_cast<void*>(TextureByteOffset));
 }
 
+static
+void
+EnableVertexAttribArray(const GLuint& index)
+{
+    glEnableVertexAttribArray(index);
+    {
+        std::stringstream ss;
+        ss << "glEnableVertexAttribArray("
+            << index
+            << ")"
+            << std::endl;
+        DetectGLError(ss);
+    }
+}
+
 // @see: http://falloutsoftware.com/tutorials/gl/gl2.htm
 void
 Canvas::
