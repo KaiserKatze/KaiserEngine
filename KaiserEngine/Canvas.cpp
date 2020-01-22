@@ -336,6 +336,7 @@ struct VertexData final
 
     static void SetVertexAttribPointer();
     static void EnableVertexAttribArray();
+    static void DisableVertexAttribArray();
 };
 
 template <typename _Ty>
