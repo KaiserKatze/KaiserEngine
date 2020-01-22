@@ -645,8 +645,7 @@ void
 Canvas::
 Dispose()
 {
-    glDisableVertexAttribArray(0);
-    SuppressGLError();
+    VertexData<float>::DisableVertexAttribArray();
 
     for (auto itr = vaos.begin();
         itr != vaos.end();
@@ -656,6 +655,17 @@ Dispose()
         vao.Destroy();
     }
     this->vaos.clear();
+
+    for (auto itr = texs.begin();
+        itr != texs.end();
+        itr++)
+    {
+        GLTexture& texture{ itr->second };
+        texture.Destroy();
+    }
+    this->texs.clear();
+
+    this->programs.clear();
 
     SuppressGLError();
 }
