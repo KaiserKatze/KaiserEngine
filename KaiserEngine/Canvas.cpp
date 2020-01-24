@@ -628,7 +628,8 @@ Render()
     vboi.Bind();
 
     // draw vertices
-    glDrawElements(GL_TRIANGLES, vboi.GetCount(), GL_UNSIGNED_BYTE, 0);
+    const GLsizeiptr& count{ vboi.GetCount() };
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(count & 0xffffffff), GL_UNSIGNED_BYTE, 0);
     {
         std::stringstream ss;
         ss << "glDrawElements(GL_TRIANGLES, "
