@@ -417,6 +417,8 @@ SetVertexAttribPointer()
     const static int ColorByteOffset    = PositionByteOffset + PositionByteCount;
     const static int TextureByteOffset  = ColorByteOffset + ColorByteCount;
 
+#pragma warning(push)
+#pragma warning(disable: 4312)
     ::SetVertexAttribPointer(0,
         VertexData<float>::PositionElementCount,
         type, normalized, stride,
@@ -429,6 +431,7 @@ SetVertexAttribPointer()
         VertexData<float>::TextureElementCount,
         type, normalized, stride,
         reinterpret_cast<void*>(TextureByteOffset));
+#pragma warning(pop)
 }
 
 static
