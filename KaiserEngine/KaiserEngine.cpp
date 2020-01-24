@@ -58,7 +58,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 #endif
 
-    int retCode{ 0 };
+    WPARAM retCode{ 0 };
 
 #define USE_TRY_CATCH   (!defined _DEBUG)
 
@@ -90,5 +90,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
 #endif
 
-    return retCode;
+    return static_cast<int>(0xffffffff & retCode);
 }
