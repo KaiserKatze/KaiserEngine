@@ -16,7 +16,7 @@ private:
     GLuint id{ 0 };
     GLenum target{ 0 };
     GLenum usage{ 0 };
-    GLsizei count{ 0 };
+    GLsizeiptr count{ 0 };
     bool isBound{ false };
     bool isFilled{ false };
 
@@ -30,7 +30,7 @@ public:
     const GLenum& GetTarget() const noexcept;
     void SetUsage(const GLenum& usage) noexcept;
     const GLenum& GetUsage() const noexcept;
-    const GLsizei& GetCount() const noexcept;
+    const GLsizeiptr& GetCount() const noexcept;
 
     void Create();
     void Bind();
