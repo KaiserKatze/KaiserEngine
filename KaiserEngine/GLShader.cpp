@@ -50,7 +50,7 @@ GLShader(GLstring path, const GLenum& type)
         }
         const GLsizei count = 1;
         const GLchar* string = text.c_str();
-        const GLint length = text.length();
+        const GLint length = static_cast<GLint>(0xffffffff & text.length());
         glShaderSource(shaderId, count, &string, &length);
         {
             std::stringstream ss;
