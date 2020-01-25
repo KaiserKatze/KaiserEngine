@@ -17,6 +17,7 @@ public:
     static void UseProgram();
 
     void Create();
+    void Destroy();
     void AttachShader(GLShader* shader);
     // Create and attach shaders to this program
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
