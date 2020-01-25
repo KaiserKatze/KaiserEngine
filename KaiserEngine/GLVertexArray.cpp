@@ -29,6 +29,8 @@ void
 GLVertexArray::
 Create()
 {
+    if (this->id) return; // GLVertexArray is already created!
+
     glGenVertexArrays(1, &(this->id));
     {
         std::stringstream ss;
