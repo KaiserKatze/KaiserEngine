@@ -297,7 +297,8 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             itr++)
         {
             ptrdiff_t pdiff{ std::distance(attributes->cbegin(), itr) };
-            GLuint index = static_cast<GLuint>(pdiff & 0xffffffff);
+            assert(("Is the size of `attributes` really so large?", pdiff < 0xffffffff));
+            GLuint index{ static_cast<GLuint>(pdiff & 0xffffffff) };
             const GLstring& attributeName{ *itr };
             BindAttribute(index, attributeName);
         }
