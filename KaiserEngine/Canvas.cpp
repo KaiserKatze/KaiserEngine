@@ -766,7 +766,10 @@ GLProgram&
 Canvas::
 CreateProgram(GLstring name)
 {
-    return this->programs[name] = GLProgram();
+    auto& [itr, result] = this->programs.insert({ name, GLProgram() });
+    if (!result)
+        throw std::runtime_error("Fail to insert GLProgram with duplicate names!");
+    return itr->second;
 }
 
 GLTexture&
