@@ -56,7 +56,7 @@ void
 GLProgram::
 UseProgram(const GLProgram& program)
 {
-    const GLuint& pId{ program.getID() };
+    const GLuint& pId{ program.GetID() };
     glUseProgram(pId);
     {
         std::stringstream ss;
@@ -77,7 +77,7 @@ void
 GLProgram::
 AttachShader(GLShader* shader)
 {
-    GLuint pId = getID();
+    GLuint pId = GetID();
     GLuint sId = shader->getID();
     glAttachShader(pId, sId);
     {
@@ -107,7 +107,7 @@ void
 GLProgram::
 BindAttribute(const GLuint& index, GLstring name) const
 {
-    const GLuint pId = getID();
+    const GLuint pId = GetID();
     glBindAttribLocation(pId, index, name);
     {
         std::stringstream ss;
@@ -123,7 +123,7 @@ void
 GLProgram::
 LinkProgram() const
 {
-    const GLuint pId = getID();
+    const GLuint pId = GetID();
     glLinkProgram(pId);
     {
         std::stringstream ss;
@@ -136,7 +136,7 @@ void
 GLProgram::
 ValidateProgram() const
 {
-    const GLuint pId = getID();
+    const GLuint pId = GetID();
     glValidateProgram(pId);
     {
         std::stringstream ss;
@@ -149,7 +149,7 @@ const GLint
 GLProgram::
 GetUniformLocation(GLstring name) const
 {
-    const GLuint pId = getID();
+    const GLuint pId = GetID();
     GLint result = glGetUniformLocation(pId, name);
     {
         std::stringstream ss;
@@ -161,7 +161,7 @@ GetUniformLocation(GLstring name) const
 
 const GLuint
 GLProgram::
-getID() const
+GetID() const
 {
     if (id == 0)
         throw std::exception("GLProgram refuses to return 0 as its ID!");

@@ -22,7 +22,7 @@ public:
     void LinkProgram() const;
     void ValidateProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
-    const GLuint getID() const;
+    const GLuint GetID() const;
 
     void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>* attributes, std::map<GLstring, GLint>* uniforms);
 
