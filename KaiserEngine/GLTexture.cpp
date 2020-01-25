@@ -113,6 +113,8 @@ void
 GLTexture::
 Create()
 {
+    if (this->id) return; // GLTexture is already created!
+
     GLuint& textureId{ this->id };
     glGenTextures(1, &textureId);
     {
