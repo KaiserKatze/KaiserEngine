@@ -93,6 +93,8 @@ Open(const std::wstring& path)
     {
         std::wstringstream wss;
         wss
+            << "==============================================================="
+            << std::endl
             << "FilePath = "
             << path
             << std::endl;
@@ -157,6 +159,8 @@ Open(const std::wstring& path)
             << std::endl
             << "InfoHeader::biClrImportant = "
             << pInfoHeader->biClrImportant
+            << std::endl
+            << "==============================================================="
             << std::endl;
         OutputDebugStringA(ss.str().c_str());
     }
