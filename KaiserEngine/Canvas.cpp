@@ -273,10 +273,11 @@ Setup(const int& screenWidth, const int& screenHeight)
             "in_texture_coord",     // 2
         };
 
-        std::map<GLstring, GLint> uniforms;
-        uniforms["matrix_projection"] = 0;
-        uniforms["matrix_view"] = 0;
-        uniforms["matrix_model"] = 0;
+        std::map<GLstring, GLint> uniforms{
+            { "matrix_projection", 0 },
+            { "matrix_view", 0 },
+            { "matrix_model", 0 },
+        };
 
 
         GLProgram& program{ this->CreateProgram("default") };
