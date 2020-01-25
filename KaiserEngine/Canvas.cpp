@@ -308,10 +308,8 @@ Setup(const int& screenWidth, const int& screenHeight)
         DetectGLError(ss.str().c_str());
     }
 
-    if (this->programs.find("default") == this->programs.end()) // no program is named as default
     {
         GLProgram& program{ this->CreateProgram("default") };
-        program.Create();
 
         // setup shaders
         std::map<GLenum, GLstring> shaders{
