@@ -110,7 +110,7 @@ void
 GLProgram::
 BindAttribute(const GLuint& index, GLstring name) const
 {
-    const GLuint pId = GetID();
+    const GLuint& pId{ this->GetID() };
     glBindAttribLocation(pId, index, name);
     {
         std::stringstream ss;
@@ -126,7 +126,7 @@ void
 GLProgram::
 LinkProgram() const
 {
-    const GLuint pId = GetID();
+    const GLuint& pId{ this->GetID() };
     glLinkProgram(pId);
     {
         std::stringstream ss;
@@ -139,7 +139,7 @@ void
 GLProgram::
 ValidateProgram() const
 {
-    const GLuint pId = GetID();
+    const GLuint& pId{ this->GetID() };
     glValidateProgram(pId);
     {
         std::stringstream ss;
@@ -152,7 +152,7 @@ const GLint
 GLProgram::
 GetUniformLocation(GLstring name) const
 {
-    const GLuint pId = GetID();
+    const GLuint& pId{ this->GetID() };
     GLint result = glGetUniformLocation(pId, name);
     {
         std::stringstream ss;
