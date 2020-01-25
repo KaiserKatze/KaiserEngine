@@ -283,6 +283,7 @@ Setup(const std::map<GLenum, GLstring>& shaders,
     const std::vector<GLstring>* attributes,
     std::map<GLstring, GLint>* uniforms)
 {
+    // Create and attach shaders
     LoadShader(shaders);
 
     // get all attribute variable locations
