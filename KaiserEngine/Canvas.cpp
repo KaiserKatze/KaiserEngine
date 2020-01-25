@@ -769,6 +769,7 @@ CreateProgram(GLstring name)
     auto& [itr, result] = this->programs.insert({ name, GLProgram() });
     if (!result)
         throw std::runtime_error("Fail to insert GLProgram with duplicate names!");
+    itr->second.Create();
     return itr->second;
 }
 
