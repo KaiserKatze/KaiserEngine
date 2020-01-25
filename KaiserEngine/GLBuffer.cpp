@@ -66,6 +66,8 @@ void
 GLBuffer::
 Create()
 {
+    if (this->id) return; // GLBuffer is already created!
+
     glGenBuffers(1, &(this->id));
     {
         std::stringstream ss;
