@@ -78,7 +78,7 @@ GLProgram::
 AttachShader(GLShader* shader)
 {
     GLuint pId = GetID();
-    GLuint sId = shader->getID();
+    GLuint sId = shader->GetID();
     glAttachShader(pId, sId);
     {
         std::stringstream ss;
@@ -87,7 +87,7 @@ AttachShader(GLShader* shader)
             << sId << ")";
         DetectGLError(ss);
     }
-    shaders[shader->getType()] = shader;
+    shaders[shader->GetType()] = shader;
 }
 
 void

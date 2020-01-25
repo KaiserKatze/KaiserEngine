@@ -12,7 +12,7 @@ public:
     GLShader();
     GLShader(GLstring path, const GLenum& type);
     ~GLShader();
-    const bool isShader() const;
-    const GLuint getID() const;
-    const GLenum getType() const;
+    const bool IsShader() const;
+    const GLuint GetID() const;
+    const GLenum GetType() const;
 };

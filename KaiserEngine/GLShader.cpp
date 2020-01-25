@@ -97,21 +97,21 @@ GLShader::
 
 const bool
 GLShader::
-isShader() const
+IsShader() const
 {
     return id != 0 && glIsShader(id);
 }
 
 const GLuint
 GLShader::
-getID() const
+GetID() const
 {
     return id;
 }
 
 const GLenum
 GLShader::
-getType() const
+GetType() const
 {
     return tp;
 }
