@@ -19,6 +19,7 @@
 
 // C RunTime Header Files
 #include <cstdlib>
+#include <cassert>
 #include <cstring>
 #include <tchar.h>
 #include <strsafe.h>
