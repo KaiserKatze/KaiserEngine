@@ -14,8 +14,6 @@ private:
     std::map<GLstring, GLVertexArray> vaos;
     std::map<GLstring, GLTexture> texs;
 
-protected:
-    bool AddVertexArray(GLstring name, const GLVertexArray& array);
     GLVertexArray& GetVertexArray(GLstring name);
 
 public:

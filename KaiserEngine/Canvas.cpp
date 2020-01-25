@@ -734,17 +734,6 @@ Dispose()
     SuppressGLError();
 }
 
-bool
-Canvas::
-AddVertexArray(GLstring name, const GLVertexArray& array)
-{
-    if (this->vaos.find(name) != this->vaos.end())
-        return false;
-
-    this->vaos[name] = array;
-    return true;
-}
-
 GLVertexArray&
 Canvas::
 GetVertexArray(GLstring name)
@@ -756,8 +745,11 @@ GLVertexArray&
 Canvas::
 CreateVertexArray(GLstring name)
 {
-    this->AddVertexArray(name, GLVertexArray());
-    return this->GetVertexArray(name);
+    auto& [itr, result] = this->vaos.insert({ name, GLVertexArray() });
+    if (!result)
+        throw std::runtime_error("Fail to insert GLVertexArray with duplicate names!");
+    itr->second.Create();
+    return itr->second;
 }
 
 GLProgram&
