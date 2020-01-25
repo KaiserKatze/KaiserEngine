@@ -10,31 +10,6 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
-    const GLuint& pId{ this->GetID() };
-    for (auto itr = shaders.begin();
-        itr != shaders.end();
-        itr++)
-    {
-        GLShader* shader = itr->second;
-        const GLuint& sId{ shader->GetID() };
-        glDetachShader(pId, sId);
-        if (shader)
-            delete shader;
-    }
-    shaders.clear();
-
-    if (id)
-    {
-        glDeleteProgram(id);
-
-        {
-            std::stringstream ss;
-            ss << "Deleted program ID = " << id
-                << std::endl;
-            OutputDebugStringA(ss.str().c_str());
-        }
-    }
-    id = 0;
 }
 
 void
@@ -80,6 +55,37 @@ Create()
         DetectGLError("glCreateProgram()");
         throw std::runtime_error("Fail to create program!");
     }
+}
+
+void
+GLProgram::
+Destroy()
+{
+    const GLuint& pId{ this->GetID() };
+    for (auto itr = shaders.begin();
+        itr != shaders.end();
+        itr++)
+    {
+        GLShader* shader = itr->second;
+        const GLuint& sId{ shader->GetID() };
+        glDetachShader(pId, sId);
+        if (shader)
+            delete shader;
+    }
+    shaders.clear();
+
+    if (pId)
+    {
+        glDeleteProgram(pId);
+
+        {
+            std::stringstream ss;
+            ss << "Deleted program ID = " << pId
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+    }
+    this->id = 0;
 }
 
 void
