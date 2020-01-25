@@ -283,8 +283,7 @@ Setup(const int& screenWidth, const int& screenHeight)
         GLProgram& program{ this->CreateProgram("default") };
         program.Setup(shaders, &attributes, &uniforms);
 
-        // beware the following matrices are instances of MatrixQ<double, 4>
-
+#if 0
         // make matrices
 #pragma warning(push)
 #pragma warning(disable: 4244) // suppress the warning about the following implicit conversion from int to _Ty(float)
@@ -300,6 +299,7 @@ Setup(const int& screenWidth, const int& screenHeight)
         program.LoadUniformMatrix(uniforms["matrix_model"], mm);
 
         GLProgram::UseProgram();
+#endif
     }
 }
 
