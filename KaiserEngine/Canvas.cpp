@@ -745,9 +745,9 @@ GLVertexArray&
 Canvas::
 CreateVertexArray(GLstring name)
 {
-    auto& [itr, result] = this->vaos.insert({ name, GLVertexArray() });
+    auto& [itr, result] = this->vaos.try_emplace(name, GLVertexArray());
     if (!result)
-        throw std::runtime_error("Fail to insert GLVertexArray with duplicate names!");
+        throw std::runtime_error("Fail to emplace GLVertexArray with duplicate names!");
     itr->second.Create();
     return itr->second;
 }
@@ -756,9 +756,9 @@ GLProgram&
 Canvas::
 CreateProgram(GLstring name)
 {
-    auto& [itr, result] = this->programs.insert({ name, GLProgram() });
+    auto& [itr, result] = this->programs.try_emplace(name, GLProgram());
     if (!result)
-        throw std::runtime_error("Fail to insert GLProgram with duplicate names!");
+        throw std::runtime_error("Fail to emplace GLProgram with duplicate names!");
     itr->second.Create();
     return itr->second;
 }
@@ -767,9 +767,9 @@ GLTexture&
 Canvas::
 CreateTexture(GLstring name)
 {
-    auto& [itr, result] = this->texs.insert({ name, GLTexture() });
+    auto& [itr, result] = this->texs.try_emplace(name, GLTexture());
     if (!result)
-        throw std::runtime_error("Fail to insert GLTexture with duplicate names!");
+        throw std::runtime_error("Fail to emplace GLTexture with duplicate names!");
     itr->second.Create();
     return itr->second;
 }
