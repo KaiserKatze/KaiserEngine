@@ -17,6 +17,7 @@ public:
     static void UseProgram();
 
     void AttachShader(GLShader* shader);
+    // Create and attach shaders to this program
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
     void BindAttribute(const GLuint& index, GLstring name) const;
     void LinkProgram() const;
