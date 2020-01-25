@@ -162,6 +162,50 @@ GetUniformLocation(GLstring name) const
     return result;
 }
 
+void
+GLProgram::
+GetProgramState(const GLenum& pname, GLint* params) const
+{
+    switch (pname)
+    {
+    case GL_DELETE_STATUS:
+    case GL_LINK_STATUS:
+    case GL_VALIDATE_STATUS:
+    case GL_INFO_LOG_LENGTH:
+    case GL_ATTACHED_SHADERS:
+    case GL_ACTIVE_ATOMIC_COUNTER_BUFFERS:
+    case GL_ACTIVE_ATTRIBUTES:
+    case GL_ACTIVE_ATTRIBUTE_MAX_LENGTH:
+    case GL_ACTIVE_UNIFORMS:
+    case GL_ACTIVE_UNIFORM_BLOCKS:
+    case GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH:
+    case GL_ACTIVE_UNIFORM_MAX_LENGTH:
+    case GL_PROGRAM_BINARY_LENGTH:
+    case GL_TRANSFORM_FEEDBACK_BUFFER_MODE:
+    case GL_TRANSFORM_FEEDBACK_VARYINGS:
+    case GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH:
+    case GL_GEOMETRY_VERTICES_OUT:
+    case GL_GEOMETRY_INPUT_TYPE:
+    case GL_GEOMETRY_OUTPUT_TYPE:
+        break;
+    default:
+        throw std::invalid_argument("Invalid argument 'pname'!");
+    }
+
+    if (params == nullptr)
+        throw std::invalid_argument("Invalid argument 'params'!");
+
+    const GLuint& pId{ this->GetID() };
+    glGetProgramiv(pId, GL_VALIDATE_STATUS, params);
+    {
+        std::stringstream ss;
+        ss << "glGetProgramiv("
+            << pId << ", GL_VALIDATE_STATUS, []"
+            << ")";
+        DetectGLError(ss);
+    }
+}
+
 const GLuint
 GLProgram::
 GetID() const

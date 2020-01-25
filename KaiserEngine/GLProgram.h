@@ -23,6 +23,7 @@ public:
     void LinkProgram() const;
     void ValidateProgram() const;
     const GLint GetUniformLocation(GLstring name) const;
+    void GetProgramState(const GLenum& pname, GLint* params) const;
     const GLuint GetID() const;
 
     void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>* const attributes, std::map<GLstring, GLint>* const uniforms);
