@@ -262,9 +262,10 @@ Setup(const int& screenWidth, const int& screenHeight)
     if (programs.find("default") != programs.end()) // no program is named as default
     {
         // setup shaders
-        std::map<GLenum, GLstring> shaders;
-        shaders[GL_VERTEX_SHADER] = "vertex.shader";
-        shaders[GL_FRAGMENT_SHADER] = "fragment.shader";
+        std::map<GLenum, GLstring> shaders{
+            { GL_VERTEX_SHADER, "vertex.shader" },
+            { GL_FRAGMENT_SHADER, "fragment.shader" },
+        };
 
         std::vector<GLstring> attributes{
             "in_position",          // 0
