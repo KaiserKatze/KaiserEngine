@@ -91,6 +91,15 @@ AttachShader(GLShader* shader)
         DetectGLError(ss);
     }
     const GLenum& type{ shader->GetType() };
+
+    auto itr{ this->shaders.find(type) };
+    if (itr != this->shaders.end()) // found keyVal
+    {
+        const GLShader* other{ itr->second };
+        if (other == shader) return; // the exaclty same shader is already attached
+
+        throw std::runtime_error("Trying to attach different shaders to the same program!");
+    }
     this->shaders[type] = shader;
 }
 
