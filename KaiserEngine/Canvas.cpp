@@ -209,11 +209,60 @@ void
 CALLBACK
 MessageCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
+    std::string sSource, sType;
+
+    switch (source)
+    {
+    case GL_DEBUG_SOURCE_APPLICATION:
+        sSource = "GL_DEBUG_SOURCE_APPLICATION";
+        break;
+    case GL_DEBUG_SOURCE_THIRD_PARTY:
+        sSource = "GL_DEBUG_SOURCE_THIRD_PARTY";
+        break;
+    default:
+        sSource = "";
+        break;
+    }
+
+    switch (type)
+    {
+    case GL_DEBUG_TYPE_ERROR:
+        sType = "GL_DEBUG_TYPE_ERROR";
+        break;
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+        sType = "GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR";
+        break;
+    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+        sType = "GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR";
+        break;
+    case GL_DEBUG_TYPE_PORTABILITY:
+        sType = "GL_DEBUG_TYPE_PORTABILITY";
+        break;
+    case GL_DEBUG_TYPE_PERFORMANCE:
+        sType = "GL_DEBUG_TYPE_PERFORMANCE";
+        break;
+    case GL_DEBUG_TYPE_MARKER:
+        sType = "GL_DEBUG_TYPE_MARKER";
+        break;
+    case GL_DEBUG_TYPE_PUSH_GROUP:
+        sType = "GL_DEBUG_TYPE_PUSH_GROUP";
+        break;
+    case GL_DEBUG_TYPE_POP_GROUP:
+        sType = "GL_DEBUG_TYPE_POP_GROUP";
+        break;
+    case GL_DEBUG_TYPE_OTHER:
+        sType = "GL_DEBUG_TYPE_OTHER";
+        break;
+    default:
+        sType = "";
+        break;
+    }
+
     std::stringstream ss;
     ss << std::hex << "GL CALLBACK: "
         << (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : "")
-        << " source = 0x" << source
-        << ", type = 0x" << type
+        << " source = 0x" << source << " " << sSource
+        << ", type = 0x" << type << " " << sType
         << ", id = 0x" << id
         << ", severity = 0x" << severity
         << ", message = " << message
