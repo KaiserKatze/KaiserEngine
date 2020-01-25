@@ -10,6 +10,7 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
+    this->Destroy();
 }
 
 void
