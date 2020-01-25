@@ -296,8 +296,9 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             itr != attributes->cend();
             itr++)
         {
-            GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
-            GLstring attributeName{ *itr };
+            ptrdiff_t pdiff{ std::distance(attributes->cbegin(), itr) };
+            GLuint index = static_cast<GLuint>(pdiff & 0xffffffff);
+            const GLstring& attributeName{ *itr };
             BindAttribute(index, attributeName);
         }
     }
