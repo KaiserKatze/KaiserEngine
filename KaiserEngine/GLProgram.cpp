@@ -28,11 +28,14 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
+    const GLuint& pId{ this->GetID() };
     for (auto itr = shaders.begin();
         itr != shaders.end();
         itr++)
     {
         GLShader* shader = itr->second;
+        const GLuint& sId{ shader->GetID() };
+        glDetachShader(pId, sId);
         if (shader)
             delete shader;
     }
