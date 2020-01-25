@@ -77,13 +77,20 @@ static int CreateFakeContext(HWND hWnd)
         const char* demiliter{ " " };
         char* token{ nullptr };
         char* context{ nullptr };
-        ss << "Available extensions:" << std::endl;
+
+        ss
+            << std::endl
+            << "Available extensions:"
+            << std::endl;
+
         token = strtok_s(extensions, demiliter, &context);
         while (token != nullptr)
         {
             ss << " - " << token << std::endl;
             token = strtok_s(nullptr, demiliter, &context);
         }
+        ss << std::endl;
+
         OutputDebugStringA(ss.str().c_str());
     }
 #endif
