@@ -157,6 +157,15 @@ ValidateProgram() const
                 << "} is invalid!";
             throw std::runtime_error(ss.str());
         }
+        else if (result == GL_TRUE)
+        {
+            std::stringstream ss;
+            ss << "GLProgram {" << pId
+                << "} is validated: ("
+                << "GL_VALIDATE_STATUS -> GL_TRUE)!"
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
     }
 }
 
