@@ -38,6 +38,8 @@ void
 GLProgram::
 Create()
 {
+    if (this->id) return; // GLProgram is already created!
+
     if (GLuint pId{ glCreateProgram() })
     {
         this->id = pId;
