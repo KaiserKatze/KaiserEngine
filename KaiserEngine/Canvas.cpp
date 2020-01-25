@@ -767,7 +767,11 @@ GLTexture&
 Canvas::
 CreateTexture(GLstring name)
 {
-    return this->texs[name] = GLTexture();
+    auto& [itr, result] = this->texs.insert({ name, GLTexture() });
+    if (!result)
+        throw std::runtime_error("Fail to insert GLTexture with duplicate names!");
+    itr->second.Create();
+    return itr->second;
 }
 
 // CanvasEventListener
