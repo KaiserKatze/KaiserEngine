@@ -21,7 +21,7 @@ GLProgram()
     else
     {
         DetectGLError("glCreateProgram()");
-        throw std::exception("Fail to create program!");
+        throw std::runtime_error("Fail to create program!");
     }
 }
 
@@ -164,7 +164,7 @@ GLProgram::
 GetID() const
 {
     if (id == 0)
-        throw std::exception("GLProgram refuses to return 0 as its ID!");
+        throw std::runtime_error("GLProgram refuses to return 0 as its ID!");
     return id;
 }
 

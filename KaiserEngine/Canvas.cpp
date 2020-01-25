@@ -230,7 +230,7 @@ Setup()
     const AbstractWindow& parent = this->GetParent();
     HWND hWnd = parent.GetWindowHandle();
     if (hWnd == nullptr)
-        throw std::exception("NullPointerException: hWnd(HWND) is nullptr!");
+        throw std::runtime_error("NullPointerException: hWnd(HWND) is nullptr!");
     GetClientRect(hWnd, &rect);
     const LONG screenWidth = rect.right - rect.left;
     const LONG screenHeight = rect.bottom - rect.top;
@@ -244,8 +244,8 @@ Setup(const int& screenWidth, const int& screenHeight)
     static const int trimX = 10;
     static const int trimY = 10;
 
-    if (screenWidth <= 0) throw std::exception("Invalid screen width!");
-    if (screenHeight <= 0) throw std::exception("Invalid screen height!");
+    if (screenWidth <= 0) throw std::runtime_error("Invalid screen width!");
+    if (screenHeight <= 0) throw std::runtime_error("Invalid screen height!");
 
     const GLsizei width{ screenWidth - 2 * trimX };
     const GLsizei height{ screenHeight - 2 * trimY };

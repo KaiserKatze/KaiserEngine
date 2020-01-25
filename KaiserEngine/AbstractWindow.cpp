@@ -35,11 +35,11 @@ AbstractWindow::
 RegisterWindowClass(HINSTANCE hInstance, WNDPROC wndproc, LPCWSTR lpClass)
 {
     if (hInstance == nullptr)
-        throw std::exception("Invalid argument: 'hInstance' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'hInstance' is nullptr!");
     if (wndproc == nullptr)
-        throw std::exception("Invalid argument: 'wndproc' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'wndproc' is nullptr!");
     if (lpClass == nullptr)
-        throw std::exception("Invalid argument: 'lpClass' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'lpClass' is nullptr!");
 
     // @see: https://docs.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-wndclassexa
     WNDCLASSEX wcex = { 0 };
@@ -100,11 +100,11 @@ InitWindowInstance(HINSTANCE hInstance,
     int nCmdShow)
 {
     if (hInstance == nullptr)
-        throw std::exception("Invalid argument: 'hInstance' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'hInstance' is nullptr!");
     if (lpClass == nullptr)
-        throw std::exception("Invalid argument: 'lpClass' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'lpClass' is nullptr!");
     if (lpTitle == nullptr)
-        throw std::exception("Invalid argument: 'lpTitle' is nullptr!");
+        throw std::runtime_error("Invalid argument: 'lpTitle' is nullptr!");
 
     hWnd = CreateWindow(lpClass, lpTitle,
         MakeWindowStyle(),

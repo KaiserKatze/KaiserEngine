@@ -202,14 +202,14 @@ FakeWindow(HINSTANCE hInstance)
     LoadStringW(hInstance, IDC_KAISERENGINE_OPENLOADER, szWindowClass, MAX_LOADSTRING);
     LoadStringW(hInstance, IDS_APP_TITLE_LOADING, szTitle, MAX_LOADSTRING);
 
-    std::exception fail_to_create("Fail to create FakeWindow instance!");
+    std::runtime_error fail_to_create("Fail to create FakeWindow instance!");
 
     if (!Create(hInstance, HWND_MESSAGE, szWindowClass, szTitle,
         0, 0, DefWindowProc, 0, 0, 0, 0, SW_HIDE))
         throw fail_to_create;
     const HWND handle = GetWindowHandle();
     if (!handle)
-        throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
+        throw std::runtime_error("AssertionError: getWindowHandle() returns nullptr!");
     // disable user input for fake window
     EnableWindow(handle, false);
     if (CreateFakeContext(handle) != 0)
@@ -267,17 +267,17 @@ MainWindow(HINSTANCE hInstance)
         CW_USEDEFAULT, CW_USEDEFAULT,
         SW_HIDE))
     {
-        throw std::exception("Fail to create MainWindow instance!");
+        throw std::runtime_error("Fail to create MainWindow instance!");
     }
 
     const HWND handle = GetWindowHandle();
     if (!handle)
-        throw std::exception("AssertionError: getWindowHandle() returns nullptr!");
+        throw std::runtime_error("AssertionError: getWindowHandle() returns nullptr!");
 
     FakeWindow fakeWin(hInstance);
 
     if (CreateTrueContext(handle) != 0)
-        throw std::exception("Fail to create true context for OpenGL!");
+        throw std::runtime_error("Fail to create true context for OpenGL!");
 
     // allow user input
     EnableWindow(handle, true);
@@ -307,7 +307,7 @@ MainWindow(HINSTANCE hInstance)
     // if no timer has been created yet
     if (timerId == 0)
     {
-        throw std::exception("Fail to create a timer for MainWindow instance!");
+        throw std::runtime_error("Fail to create a timer for MainWindow instance!");
     }
 }
 
