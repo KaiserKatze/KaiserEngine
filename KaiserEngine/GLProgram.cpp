@@ -91,7 +91,7 @@ AttachShader(GLShader* shader)
         DetectGLError(ss);
     }
     const GLenum& type{ shader->GetType() };
-    shaders[type] = shader;
+    this->shaders[type] = shader;
 }
 
 void
