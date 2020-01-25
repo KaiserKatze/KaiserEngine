@@ -267,7 +267,7 @@ Setup(const int& screenWidth, const int& screenHeight)
             { GL_FRAGMENT_SHADER, "fragment.shader" },
         };
 
-        std::vector<GLstring> attributes{
+        const std::vector<GLstring> attributes{
             "in_position",          // 0
             "in_color",             // 1
             "in_texture_coord",     // 2
