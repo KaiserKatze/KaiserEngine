@@ -54,21 +54,23 @@ GLProgram::
 
 void
 GLProgram::
-UseProgram(const GLProgram* program)
+UseProgram(const GLProgram& program)
 {
-    GLuint pId{ 0 };
-    if (program) pId = program->getID();
-    glUseProgram(pId); // need not to detect gl error, if pId == 0
-    if (pId != 0)
+    const GLuint& pId{ program.getID() };
+    glUseProgram(pId);
     {
         std::stringstream ss;
         ss << "glUseProgram(" << pId << ")";
         DetectGLError(ss);
     }
-    else
-    {
-        glGetError(); // suppress possible error
-    }
+}
+
+void
+GLProgram::
+UseProgram()
+{
+    glUseProgram(0);
+    SuppressGLError();
 }
 
 void

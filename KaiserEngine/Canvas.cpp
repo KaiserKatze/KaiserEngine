@@ -291,7 +291,7 @@ Setup(const int& screenWidth, const int& screenHeight)
         const mat4 mm = MakeModelMatrix<float>();
 #pragma warning(pop)
 
-        GLProgram::UseProgram(&program);
+        GLProgram::UseProgram(program);
 
         program.LoadUniformMatrix(uniforms["matrix_projection"], mp);
         program.LoadUniformMatrix(uniforms["matrix_view"], mv);
@@ -611,7 +611,7 @@ Render()
 
     // bind textures if any
     GLProgram& program{ this->programs["default"] };
-    GLProgram::UseProgram(&program);
+    GLProgram::UseProgram(program);
 
     GLTexture& texture{ this->texs["default"] };
     texture.ActiveTexture(GL_TEXTURE0);

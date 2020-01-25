@@ -13,7 +13,8 @@ public:
     GLProgram();
     ~GLProgram();
 
-    static void UseProgram(const GLProgram* program = nullptr);
+    static void UseProgram(const GLProgram& program);
+    static void UseProgram();
 
     void AttachShader(GLShader* shader);
     void LoadShader(const std::map<GLenum, GLstring>& shaders);
