@@ -310,6 +310,9 @@ Setup(const int& screenWidth, const int& screenHeight)
 
     if (programs.find("default") == programs.end()) // no program is named as default
     {
+        GLProgram& program{ this->CreateProgram("default") };
+        program.Create();
+
         // setup shaders
         std::map<GLenum, GLstring> shaders{
             { GL_VERTEX_SHADER, "vertex.shader" },
@@ -328,9 +331,6 @@ Setup(const int& screenWidth, const int& screenHeight)
             { "matrix_model", 0 },
         };
 
-
-        GLProgram& program{ this->CreateProgram("default") };
-        program.Create();
         program.Setup(shaders, &attributes, &uniforms);
 
 #if 0
