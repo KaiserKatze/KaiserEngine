@@ -283,8 +283,8 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& 
 void
 GLProgram::
 Setup(const std::map<GLenum, GLstring>& shaders,
-    const std::vector<GLstring>* attributes,
-    std::map<GLstring, GLint>* uniforms)
+    const std::vector<GLstring>* const attributes,
+    std::map<GLstring, GLint>* const uniforms)
 {
     // Create and attach shaders
     LoadShader(shaders);
