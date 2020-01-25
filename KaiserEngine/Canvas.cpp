@@ -308,7 +308,7 @@ Setup(const int& screenWidth, const int& screenHeight)
         DetectGLError(ss.str().c_str());
     }
 
-    if (programs.find("default") == programs.end()) // no program is named as default
+    if (this->programs.find("default") == this->programs.end()) // no program is named as default
     {
         GLProgram& program{ this->CreateProgram("default") };
         program.Create();
