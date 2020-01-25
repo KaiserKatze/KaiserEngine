@@ -146,6 +146,18 @@ ValidateProgram() const
         ss << "glValidateProgram(" << pId << ")";
         DetectGLError(ss);
     }
+
+    {
+        GLint result{ 0 };
+        this->GetProgramState(GL_VALIDATE_STATUS, &result);
+        if (result == GL_FALSE)
+        {
+            std::stringstream ss;
+            ss << "GLProgram {" << pId
+                << "} is invalid!";
+            throw std::runtime_error(ss.str());
+        }
+    }
 }
 
 const GLint
