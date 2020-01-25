@@ -5,24 +5,6 @@
 GLProgram::
 GLProgram()
 {
-    if (GLuint pId = glCreateProgram())
-    {
-        id = pId;
-        {
-            std::stringstream ss;
-            ss << "Generated program ID = " << pId
-                << " "
-                << std::boolalpha
-                << static_cast<bool>(glIsProgram(pId))
-                << std::endl;
-            OutputDebugStringA(ss.str().c_str());
-        }
-    }
-    else
-    {
-        DetectGLError("glCreateProgram()");
-        throw std::runtime_error("Fail to create program!");
-    }
 }
 
 GLProgram::
@@ -74,6 +56,30 @@ UseProgram()
 {
     glUseProgram(0);
     SuppressGLError();
+}
+
+void
+GLProgram::
+Create()
+{
+    if (GLuint pId{ glCreateProgram() })
+    {
+        this->id = pId;
+        {
+            std::stringstream ss;
+            ss << "Generated program ID = " << pId
+                << " "
+                << std::boolalpha
+                << static_cast<bool>(glIsProgram(pId))
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+    }
+    else
+    {
+        DetectGLError("glCreateProgram()");
+        throw std::runtime_error("Fail to create program!");
+    }
 }
 
 void

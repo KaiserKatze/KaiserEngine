@@ -330,6 +330,7 @@ Setup(const int& screenWidth, const int& screenHeight)
 
 
         GLProgram& program{ this->CreateProgram("default") };
+        program.Create();
         program.Setup(shaders, &attributes, &uniforms);
 
 #if 0
