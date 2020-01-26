@@ -656,9 +656,6 @@ Render()
 {
     this->Clear();
 
-    // TODO
-    //OutputDebugStringA("Rendering ... \r\n");
-
     // bind textures if any
     GLProgram& program{ this->GetProgram("default") };
     GLProgram::UseProgram(program);
