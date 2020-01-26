@@ -4,12 +4,13 @@
 
 GLBuffer::
 GLBuffer()
+    : GLNamedObject()
 {
 }
 
 GLBuffer::
 GLBuffer(const GLBuffer& other)
-    : id{ other.id }
+    : GLNamedObject(other.id)
     , target{ other.target }
     , usage{ other.usage }
 {
@@ -18,13 +19,6 @@ GLBuffer(const GLBuffer& other)
 GLBuffer::
 ~GLBuffer()
 {
-}
-
-const GLuint&
-GLBuffer::
-GetID() const noexcept
-{
-    return id;
 }
 
 void

@@ -12,9 +12,9 @@
 // // Do something else
 // buffer->Unbind();
 class GLBuffer
+    : public GLNamedObject
 {
 private:
-    GLuint id{ 0 };
     GLenum target{ 0 };
     GLenum usage{ 0 };
     GLsizeiptr count{ 0 };
@@ -24,7 +24,6 @@ public:
     GLBuffer(const GLBuffer& other);
     ~GLBuffer();
 
-    const GLuint& GetID() const noexcept;
     void SetTarget(const GLenum& target) noexcept;
     const GLenum& GetTarget() const noexcept;
     void SetUsage(const GLenum& usage) noexcept;
