@@ -81,9 +81,6 @@ void
 GLBuffer::
 Bind()
 {
-    if (this->isBound)
-        throw std::runtime_error("This buffer is already bound!");
-
     glBindBuffer(this->target, this->id);
     {
         std::stringstream ss;
@@ -94,21 +91,14 @@ Bind()
             << std::endl;
         DetectGLError(ss);
     }
-
-    this->isBound = true;
 }
 
 void
 GLBuffer::
 Unbind()
 {
-    if (!this->isBound)
-        throw std::runtime_error("This buffer is not bound yet!");
-
     glBindBuffer(this->target, 0);
     SuppressGLError();
-
-    this->isBound = false;
 }
 
 void
@@ -133,9 +123,6 @@ void
 GLBuffer::
 SetData(const GLsizeiptr& size, const void* data)
 {
-    if (!this->isBound)
-        throw std::runtime_error("This buffer is not bound yet!");
-
     this->count = size;
 
     glBufferData(this->target, size, data, this->usage);

@@ -17,8 +17,6 @@ private:
     GLenum target{ 0 };
     GLenum usage{ 0 };
     GLsizeiptr count{ 0 };
-    bool isBound{ false };
-    bool isFilled{ false };
 
 public:
     GLBuffer();
