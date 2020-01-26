@@ -6,7 +6,7 @@
 class GLNamedObject
     : public GLObject
 {
-private:
+protected:
     GLuint id;
 
 public:
