@@ -112,3 +112,5 @@ if __name__ == "__main__":
     # Modify header files
 
     GenerateCpp()
+
+    print("The prerequisites have been generated.")
