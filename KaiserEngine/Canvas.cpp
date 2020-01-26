@@ -5,7 +5,7 @@
 #include "MainWindow.h"
 #include "GLTexture.h"
 
-class CanvasEventListener final
+class CanvasEventListener
     : public WindowEventListener
 {
 private:
@@ -352,7 +352,7 @@ Setup(const int& screenWidth, const int& screenHeight)
 }
 
 template <typename _Ty>
-struct VertexData final
+struct VertexData
 {
     struct      // positions
     {

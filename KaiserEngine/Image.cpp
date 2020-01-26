@@ -39,7 +39,7 @@ GetPixels() const
     return pixels;
 }
 
-class FileImage final
+class FileImage
     : public Image
 {
 public:
