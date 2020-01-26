@@ -10,11 +10,11 @@ class Canvas
 {
 private:
     const AbstractWindow& parent;
-    std::map<GLstring, GLProgram> programs;
-    std::map<GLstring, GLVertexArray> vaos;
-    std::map<GLstring, GLTexture> texs;
+    std::map<std::string, GLProgram> programs;
+    std::map<std::string, GLVertexArray> vaos;
+    std::map<std::string, GLTexture> texs;
 
-    GLVertexArray& GetVertexArray(GLstring name);
+    GLVertexArray& GetVertexArray(const std::string& name);
 
 public:
     Canvas(const AbstractWindow& window);
@@ -40,8 +40,8 @@ public:
     // Dispose OpenGL resources
     void Dispose();
 
-    GLVertexArray& CreateVertexArray(GLstring name);
-    GLProgram& CreateProgram(GLstring name);
-    GLTexture& CreateTexture(GLstring name);
+    GLVertexArray& CreateVertexArray(const std::string& name);
+    GLProgram& CreateProgram(const std::string& name);
+    GLTexture& CreateTexture(const std::string& name);
 };
 

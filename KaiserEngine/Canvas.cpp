@@ -312,18 +312,18 @@ Setup(const int& screenWidth, const int& screenHeight)
         GLProgram& program{ this->CreateProgram("default") };
 
         // setup shaders
-        std::map<GLenum, GLstring> shaders{
+        std::map<GLenum, std::string> shaders{
             { GL_VERTEX_SHADER, "vertex.shader" },
             { GL_FRAGMENT_SHADER, "fragment.shader" },
         };
 
-        const std::vector<GLstring> attributes{
+        const std::vector<std::string> attributes{
             "in_position",          // 0
             "in_color",             // 1
             "in_texture_coord",     // 2
         };
 
-        std::map<GLstring, GLint> uniforms{
+        std::map<std::string, GLint> uniforms{
             { "matrix_projection", 0 },
             { "matrix_view", 0 },
             { "matrix_model", 0 },
@@ -740,14 +740,14 @@ Dispose()
 
 GLVertexArray&
 Canvas::
-GetVertexArray(GLstring name)
+GetVertexArray(const std::string& name)
 {
     return this->vaos.at(name);
 }
 
 GLVertexArray&
 Canvas::
-CreateVertexArray(GLstring name)
+CreateVertexArray(const std::string& name)
 {
     auto& [itr, result] = this->vaos.try_emplace(name, GLVertexArray());
     if (!result)
@@ -758,7 +758,7 @@ CreateVertexArray(GLstring name)
 
 GLProgram&
 Canvas::
-CreateProgram(GLstring name)
+CreateProgram(const std::string& name)
 {
     auto& [itr, result] = this->programs.try_emplace(name, GLProgram());
     if (!result)
@@ -769,7 +769,7 @@ CreateProgram(GLstring name)
 
 GLTexture&
 Canvas::
-CreateTexture(GLstring name)
+CreateTexture(const std::string& name)
 {
     auto& [itr, result] = this->texs.try_emplace(name, GLTexture());
     if (!result)

@@ -17,11 +17,8 @@ GLShader()
 }
 
 GLShader::
-GLShader(GLstring path, const GLenum& type)
+GLShader(const std::string& path, const GLenum& type)
 {
-    if (path == nullptr)
-        throw std::invalid_argument("Invalid argument 'path'!");
-
     switch (type)
     {
     case GL_VERTEX_SHADER:

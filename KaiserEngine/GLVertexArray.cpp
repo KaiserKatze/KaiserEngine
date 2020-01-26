@@ -92,7 +92,7 @@ Destroy()
 
 bool
 GLVertexArray::
-AddBuffer(GLstring name, const GLBuffer& buffer)
+AddBuffer(const std::string& name, const GLBuffer& buffer)
 {
     // There is a buffer having the exactly same name with this one in record!
     if (this->buffers.find(name) != this->buffers.end())
@@ -104,14 +104,14 @@ AddBuffer(GLstring name, const GLBuffer& buffer)
 
 GLBuffer&
 GLVertexArray::
-GetBuffer(GLstring name)
+GetBuffer(const std::string& name)
 {
     return this->buffers.at(name);
 }
 
 GLBuffer&
 GLVertexArray::
-CreateBuffer(GLstring name)
+CreateBuffer(const std::string& name)
 {
     this->AddBuffer(name, GLBuffer());
     return this->GetBuffer(name);

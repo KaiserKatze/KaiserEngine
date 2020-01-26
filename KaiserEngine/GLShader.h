@@ -10,7 +10,7 @@ private:
 
 public:
     GLShader();
-    GLShader(GLstring path, const GLenum& type);
+    GLShader(const std::string& path, const GLenum& type);
     ~GLShader();
     const bool IsShader() const;
     const GLuint GetID() const;

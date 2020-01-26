@@ -119,7 +119,7 @@ AttachShader(GLShader* shader)
 
 void
 GLProgram::
-LoadShader(const std::map<GLenum, GLstring>& shaders)
+LoadShader(const std::map<GLenum, std::string>& shaders)
 {
     for (auto itr = shaders.cbegin();
         itr != shaders.cend();
@@ -132,10 +132,10 @@ LoadShader(const std::map<GLenum, GLstring>& shaders)
 
 void
 GLProgram::
-BindAttribute(const GLuint& index, GLstring name) const
+BindAttribute(const GLuint& index, const std::string& name) const
 {
     const GLuint& pId{ this->GetID() };
-    glBindAttribLocation(pId, index, name);
+    glBindAttribLocation(pId, index, name.c_str());
     {
         std::stringstream ss;
         ss << "glBindAttribLocation("
@@ -195,10 +195,10 @@ ValidateProgram() const
 
 const GLint
 GLProgram::
-GetUniformLocation(GLstring name) const
+GetUniformLocation(const std::string& name) const
 {
     const GLuint& pId{ this->GetID() };
-    GLint result = glGetUniformLocation(pId, name);
+    GLint result = glGetUniformLocation(pId, name.c_str());
     {
         std::stringstream ss;
         ss << "glGetUniformLocation(" << pId << ", " << name << ")";
@@ -369,9 +369,9 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& 
 
 void
 GLProgram::
-Setup(const std::map<GLenum, GLstring>& shaders,
-    const std::vector<GLstring>* const attributes,
-    std::map<GLstring, GLint>* const uniforms)
+Setup(const std::map<GLenum, std::string>& shaders,
+    const std::vector<std::string>* const attributes,
+    std::map<std::string, GLint>* const uniforms)
 {
     // Create and attach shaders
     LoadShader(shaders);
@@ -386,7 +386,7 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             ptrdiff_t pdiff{ std::distance(attributes->cbegin(), itr) };
             assert(("Is the size of `attributes` really so large?", pdiff < 0xffffffff));
             GLuint index{ static_cast<GLuint>(pdiff & 0xffffffff) };
-            const GLstring& attributeName{ *itr };
+            const std::string& attributeName{ *itr };
             BindAttribute(index, attributeName);
         }
     }
@@ -401,7 +401,7 @@ Setup(const std::map<GLenum, GLstring>& shaders,
             itr != uniforms->end();
             itr++)
         {
-            GLstring uniformName{ itr->first };
+            const std::string& uniformName{ itr->first };
             GLint& uniformLocation{ itr->second };
             uniformLocation = GetUniformLocation(uniformName);
         }

@@ -20,15 +20,15 @@ public:
     void Destroy();
     void AttachShader(GLShader* shader);
     // Create and attach shaders to this program
-    void LoadShader(const std::map<GLenum, GLstring>& shaders);
-    void BindAttribute(const GLuint& index, GLstring name) const;
+    void LoadShader(const std::map<GLenum, std::string>& shaders);
+    void BindAttribute(const GLuint& index, const std::string& name) const;
     void LinkProgram() const;
     void ValidateProgram() const;
-    const GLint GetUniformLocation(GLstring name) const;
+    const GLint GetUniformLocation(const std::string& name) const;
     void GetProgramState(const GLenum& pname, GLint* params) const;
     const GLuint GetID() const;
 
-    void Setup(const std::map<GLenum, GLstring>& shaders, const std::vector<GLstring>* const attributes, std::map<GLstring, GLint>* const uniforms);
+    void Setup(const std::map<GLenum, std::string>& shaders, const std::vector<std::string>* const attributes, std::map<std::string, GLint>* const uniforms);
 
     // @see: https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glUniform.xhtml
     void LoadUniformMatrix(const GLint& location, const MatrixMath::MatrixQ<float, 2>& matrix) const;

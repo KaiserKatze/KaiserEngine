@@ -8,10 +8,10 @@ class GLVertexArray
 {
 private:
     GLuint id{ 0 };
-    std::map<GLstring, GLBuffer> buffers;
+    std::map<std::string, GLBuffer> buffers;
 
 protected:
-    bool AddBuffer(GLstring name, const GLBuffer& buffer);
+    bool AddBuffer(const std::string& name, const GLBuffer& buffer);
 
 public:
     GLVertexArray();
@@ -25,8 +25,8 @@ public:
     void Unbind();
     void Destroy();
 
-    GLBuffer& GetBuffer(GLstring name);
-    GLBuffer& CreateBuffer(GLstring name);
+    GLBuffer& GetBuffer(const std::string& name);
+    GLBuffer& CreateBuffer(const std::string& name);
 
     bool operator==(const GLVertexArray& other) const;
     bool operator!=(const GLVertexArray& other) const;
