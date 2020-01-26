@@ -160,6 +160,7 @@
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLVertexArray.h" />
     <ClInclude Include="GLBuffer.h" />
     <ClInclude Include="GLProgram.h" />

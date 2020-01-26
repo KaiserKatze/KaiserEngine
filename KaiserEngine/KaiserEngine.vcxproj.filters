@@ -126,6 +126,9 @@
     <ClInclude Include="Image.h">
       <Filter>Header Files\Image</Filter>
     </ClInclude>
+    <ClInclude Include="GLObject.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
