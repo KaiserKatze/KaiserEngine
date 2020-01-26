@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include "GLNamedObject.h"
 
 // Routines:
 // GLBuffer* buffer = new GLBuffer();
