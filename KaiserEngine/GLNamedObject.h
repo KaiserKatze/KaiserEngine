@@ -11,6 +11,7 @@ protected:
 
 public:
     GLNamedObject();
+    GLNamedObject(const GLuint& id);
     virtual ~GLNamedObject();
 
     const GLuint& GetID() const;

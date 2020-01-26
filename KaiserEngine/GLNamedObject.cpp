@@ -8,6 +8,12 @@ GLNamedObject()
 }
 
 GLNamedObject::
+GLNamedObject(const GLuint& id)
+    : id{ id }
+{
+}
+
+GLNamedObject::
 ~GLNamedObject()
 {
 }
