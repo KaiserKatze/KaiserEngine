@@ -14,7 +14,7 @@ GLNamedObject::
 
 const GLuint&
 GLNamedObject::
-GetId() const
+GetID() const
 {
     return this->id;
 }

@@ -13,5 +13,5 @@ public:
     GLNamedObject();
     virtual ~GLNamedObject();
 
-    const GLuint& GetId() const;
+    const GLuint& GetID() const;
 };
