@@ -23,35 +23,35 @@ GLBuffer::
 
 void
 GLBuffer::
-SetTarget(const GLenum& target) noexcept
+SetTarget(const GLenum& target)
 {
     this->target = target;
 }
 
 const GLenum&
 GLBuffer::
-GetTarget() const noexcept
+GetTarget() const
 {
     return target;
 }
 
 void
 GLBuffer::
-SetUsage(const GLenum& usage) noexcept
+SetUsage(const GLenum& usage)
 {
     this->usage = usage;
 }
 
 const GLenum&
 GLBuffer::
-GetUsage() const noexcept
+GetUsage() const
 {
     return usage;
 }
 
 const GLsizeiptr&
 GLBuffer::
-GetCount() const noexcept
+GetCount() const
 {
     return count;
 }

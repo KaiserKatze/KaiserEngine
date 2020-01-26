@@ -24,11 +24,11 @@ public:
     GLBuffer(const GLBuffer& other);
     ~GLBuffer();
 
-    void SetTarget(const GLenum& target) noexcept;
-    const GLenum& GetTarget() const noexcept;
-    void SetUsage(const GLenum& usage) noexcept;
-    const GLenum& GetUsage() const noexcept;
-    const GLsizeiptr& GetCount() const noexcept;
+    void SetTarget(const GLenum& target);
+    const GLenum& GetTarget() const;
+    void SetUsage(const GLenum& usage);
+    const GLenum& GetUsage() const;
+    const GLsizeiptr& GetCount() const;
 
     void Create();
     void Bind();
