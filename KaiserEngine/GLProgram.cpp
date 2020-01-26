@@ -10,7 +10,6 @@ GLProgram()
 GLProgram::
 ~GLProgram()
 {
-    this->Destroy();
 }
 
 void
@@ -256,8 +255,6 @@ const GLuint
 GLProgram::
 GetID() const
 {
-    if (id == 0)
-        throw std::runtime_error("GLProgram refuses to return 0 as its ID!");
     return id;
 }
 
