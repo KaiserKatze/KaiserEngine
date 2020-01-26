@@ -668,12 +668,11 @@ Render()
     texture.Bind();
 
     // bind VAOs if any
-
-    // bind VBOs if any
     GLVertexArray& vao{ this->GetVertexArray("quad") };
     vao.Bind();
     VertexData<float>::EnableVertexAttribArray();
 
+    // bind VBOs if any
     GLBuffer& vboi{ vao.GetBuffer("index") };
     vboi.Bind();
 
