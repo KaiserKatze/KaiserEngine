@@ -660,13 +660,9 @@ Render()
     //OutputDebugStringA("Rendering ... \r\n");
 
     // bind textures if any
-    if (this->programs.find("default") == this->programs.end())
-        throw std::runtime_error("GLProgram 'default' is not created yet!");
     GLProgram& program{ this->GetProgram("default") };
     GLProgram::UseProgram(program);
 
-    if (this->texs.find("default") == this->texs.end())
-        throw std::runtime_error("GLTexture 'default' is not created yet!");
     GLTexture& texture{ this->GetTexture("default") };
     texture.ActiveTexture(GL_TEXTURE0);
     texture.Bind();
