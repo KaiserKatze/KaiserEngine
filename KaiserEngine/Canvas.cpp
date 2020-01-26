@@ -738,11 +738,25 @@ Dispose()
     SuppressGLError();
 }
 
+GLProgram&
+Canvas::
+GetProgram(const std::string& name)
+{
+    return this->programs.at(name);
+}
+
 GLVertexArray&
 Canvas::
 GetVertexArray(const std::string& name)
 {
     return this->vaos.at(name);
+}
+
+GLTexture&
+Canvas::
+GetTexture(const std::string& name)
+{
+    return this->texs.at(name);
 }
 
 GLVertexArray&

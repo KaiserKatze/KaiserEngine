@@ -14,7 +14,9 @@ private:
     std::map<std::string, GLVertexArray> vaos;
     std::map<std::string, GLTexture> texs;
 
+    GLProgram& GetProgram(const std::string& name);
     GLVertexArray& GetVertexArray(const std::string& name);
+    GLTexture& GetTexture(const std::string& name);
 
 public:
     Canvas(const AbstractWindow& window);
