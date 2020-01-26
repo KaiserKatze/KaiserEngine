@@ -729,6 +729,10 @@ Dispose()
     }
     this->texs.clear();
 
+    for (auto& [name, program] : this->programs)
+    {
+        program.Destroy();
+    }
     this->programs.clear();
 
     SuppressGLError();
