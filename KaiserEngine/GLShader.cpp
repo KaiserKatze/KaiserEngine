@@ -13,11 +13,13 @@ slurp(std::ifstream& ifs)
 
 GLShader::
 GLShader()
+    : GLNamedObject()
 {
 }
 
 GLShader::
 GLShader(const std::string& path, const GLenum& type)
+    : GLShader()
 {
     switch (type)
     {
@@ -97,13 +99,6 @@ GLShader::
 IsShader() const
 {
     return id != 0 && glIsShader(id);
-}
-
-const GLuint
-GLShader::
-GetID() const
-{
-    return id;
 }
 
 const GLenum
