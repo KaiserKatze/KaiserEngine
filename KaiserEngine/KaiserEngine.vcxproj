@@ -190,6 +190,7 @@
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GLNamedObject.cpp" />
     <ClCompile Include="GLObject.cpp" />
     <ClCompile Include="GLVertexArray.cpp" />
     <ClCompile Include="GLBuffer.cpp" />
