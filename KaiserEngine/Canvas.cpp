@@ -667,7 +667,7 @@ Render()
 
     if (this->texs.find("default") == this->texs.end())
         throw std::runtime_error("GLTexture 'default' is not created yet!");
-    GLTexture& texture{ this->texs["default"] };
+    GLTexture& texture{ this->GetTexture("default") };
     texture.ActiveTexture(GL_TEXTURE0);
     texture.Bind();
 
