@@ -42,6 +42,7 @@
 #include <initializer_list>
 #include <algorithm>
 #include <iterator>
+#include <optional>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
