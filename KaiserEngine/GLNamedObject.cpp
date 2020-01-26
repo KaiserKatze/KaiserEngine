@@ -24,3 +24,17 @@ GetID() const
 {
     return this->id;
 }
+
+bool
+GLNamedObject::
+operator==(const GLNamedObject& other) const
+{
+    return this == &other;
+}
+
+bool
+GLNamedObject::
+operator!=(const GLNamedObject& other) const
+{
+    return this != &other;
+}
