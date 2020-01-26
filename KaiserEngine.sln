@@ -12,6 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageViewer", "ImageViewer\ImageViewer.vcxproj", "{0BF7C625-FE68-453D-B3BD-368B7E9FD07A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C910A84-A749-412D-AFAC-D6E0C9FA5936} = {9C910A84-A749-412D-AFAC-D6E0C9FA5936}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
