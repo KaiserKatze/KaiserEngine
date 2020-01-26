@@ -15,4 +15,7 @@ public:
     virtual ~GLNamedObject();
 
     const GLuint& GetID() const;
+
+    bool operator==(const GLNamedObject& other) const;
+    bool operator!=(const GLNamedObject& other) const;
 };
