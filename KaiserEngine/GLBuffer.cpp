@@ -142,10 +142,3 @@ operator==(const GLBuffer& other) const
         && this->target == other.target
         && this->usage == other.usage;
 }
-
-bool
-GLBuffer::
-operator!=(const GLBuffer& other) const
-{
-    return !(this->operator==(other));
-}

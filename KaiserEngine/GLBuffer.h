@@ -37,5 +37,4 @@ public:
     void SetData(const GLsizeiptr& size, const void* data);
 
     bool operator==(const GLBuffer& other) const;
-    bool operator!=(const GLBuffer& other) const;
 };
