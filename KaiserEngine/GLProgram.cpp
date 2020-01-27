@@ -251,13 +251,6 @@ GetProgramState(const GLenum& pname, GLint* params) const
     }
 }
 
-const GLuint
-GLProgram::
-GetID() const
-{
-    return id;
-}
-
 
 void
 GLProgram::

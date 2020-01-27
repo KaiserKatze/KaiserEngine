@@ -1,12 +1,13 @@
 #pragma once
 
 #include "GLShader.h"
+#include "GLNamedObject.h"
 #include "Matrix.h"
 
 class GLProgram
+    : public GLNamedObject
 {
 private:
-    GLuint id{ 0 };
     std::map<GLenum, GLShader*> shaders;
 
 public:
@@ -26,7 +27,6 @@ public:
     void ValidateProgram() const;
     const GLint GetUniformLocation(const std::string& name) const;
     void GetProgramState(const GLenum& pname, GLint* params) const;
-    const GLuint GetID() const;
 
     void Setup(const std::map<GLenum, std::string>& shaders, const std::vector<std::string>* const attributes, std::map<std::string, GLint>* const uniforms);
 
