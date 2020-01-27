@@ -16,6 +16,6 @@ public:
 
     const GLuint& GetID() const;
 
-    bool operator==(const GLNamedObject& other) const;
-    bool operator!=(const GLNamedObject& other) const;
+    virtual bool operator==(const GLNamedObject& other) const;
+    virtual bool operator!=(const GLNamedObject& other) const;
 };
