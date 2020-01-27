@@ -4,6 +4,7 @@
 
 #include <initializer_list>
 #include <sstream>
+#include <algorithm>
 #include <gl/GL.h>
 
 #include "loadgl.h"
@@ -70,7 +71,10 @@ VertexData(const std::initializer_list<_Ty>& initializerList)
     : VertexData()
 {
     _Ty* dataBegin = reinterpret_cast<_Ty*>(&(this->positions));
-    std::copy(initializerList.begin(), initializerList.end(), dataBegin);
+    size_t size{ std::min<size_t>(initializerList.size(), sizeof(VertexData) / sizeof(_Ty)) };
+    const _Ty* sourceBegin{ initializerList.begin() };
+    const _Ty* sourceEnd{ sourceBegin + size };
+    std::copy(sourceBegin, sourceEnd, dataBegin);
 }
 
 template <typename _Ty>
