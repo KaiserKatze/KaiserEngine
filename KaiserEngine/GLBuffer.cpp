@@ -147,7 +147,5 @@ bool
 GLBuffer::
 operator!=(const GLBuffer& other) const
 {
-    return this->id != other.id
-        || this->target != other.target
-        || this->usage != other.usage;
+    return !(this->operator==(other));
 }
