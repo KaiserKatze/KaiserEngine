@@ -36,5 +36,5 @@ bool
 GLNamedObject::
 operator!=(const GLNamedObject& other) const
 {
-    return this != &other;
+    return !(this->operator==(other));
 }
