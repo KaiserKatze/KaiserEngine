@@ -1,7 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
-
 #include <initializer_list>
 #include <sstream>
 #include <algorithm>
