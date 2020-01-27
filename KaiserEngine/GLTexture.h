@@ -1,11 +1,12 @@
 #pragma once
 
+#include "GLNamedObject.h"
 #include "Image.h"
 
 class GLTexture
+    : public GLNamedObject
 {
 private:
-    GLuint id{ 0 };
     GLenum target{ 0 };
 
 public:
