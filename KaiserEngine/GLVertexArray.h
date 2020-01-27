@@ -2,12 +2,13 @@
 
 #include <map>
 
+#include "GLNamedObject.h"
 #include "GLBuffer.h"
 
 class GLVertexArray
+    : public GLNamedObject
 {
 private:
-    GLuint id{ 0 };
     std::map<std::string, GLBuffer> buffers;
 
 protected:
@@ -17,8 +18,6 @@ public:
     GLVertexArray();
     GLVertexArray(const GLVertexArray& other);
     ~GLVertexArray();
-
-    const GLuint& GetID() const noexcept;
 
     void Create();
     void Bind();

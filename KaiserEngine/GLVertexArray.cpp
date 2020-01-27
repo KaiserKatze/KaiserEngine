@@ -9,20 +9,13 @@ GLVertexArray()
 
 GLVertexArray::
 GLVertexArray(const GLVertexArray& other)
-    : id{ other.id }
+    : GLNamedObject(other.id)
 {
 }
 
 GLVertexArray::
 ~GLVertexArray()
 {
-}
-
-const GLuint&
-GLVertexArray::
-GetID() const noexcept
-{
-    return this->id;
 }
 
 void
