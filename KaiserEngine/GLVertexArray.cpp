@@ -114,5 +114,6 @@ bool
 GLVertexArray::
 operator==(const GLVertexArray& other) const
 {
-    return this->id == other.id;
+    return this->GLNamedObject::operator==(other)
+        || this->id == other.id;
 }
