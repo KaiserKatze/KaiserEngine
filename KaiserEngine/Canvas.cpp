@@ -331,7 +331,6 @@ Setup(const int& screenWidth, const int& screenHeight)
 
         program.Setup(shaders, &attributes, &uniforms);
 
-#if 0
         // make matrices
 #pragma warning(push)
 #pragma warning(disable: 4244) // suppress the warning about the following implicit conversion from int to _Ty(float)
@@ -347,7 +346,6 @@ Setup(const int& screenWidth, const int& screenHeight)
         program.LoadUniformMatrix(uniforms["matrix_model"], mm);
 
         GLProgram::UseProgram();
-#endif
     }
 }
 
