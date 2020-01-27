@@ -595,22 +595,22 @@ Prepare()
     VertexData<float> vertexData[] = {
         VertexData<float>{
             -.5f, .5f, .0f, .0f,
-            .0f, .0f, .0f, .0f,
+            1.0f, .0f, .0f, 1.0f,
             .0f, .0f,
         },
         VertexData<float>{
             -.5f, -.5f, .0f, .0f,
-            .0f, .0f, .0f, .0f,
+            .0f, 1.0f, .0f, 1.0f,
             .0f, 1.f,
         },
         VertexData<float>{
             .5f, -.5f, .0f, .0f,
-            .0f, .0f, .0f, .0f,
+            .0f, .0f, 1.0f, 1.0f,
             1.f, 1.f,
         },
         VertexData<float>{
             .5f, .5f, .0f, .0f,
-            .0f, .0f, .0f, .0f,
+            1.0f, 1.0f, 1.0f, 1.0f,
             1.f, .0f,
         },
     };
