@@ -116,10 +116,3 @@ operator==(const GLVertexArray& other) const
 {
     return this->id == other.id;
 }
-
-bool
-GLVertexArray::
-operator!=(const GLVertexArray& other) const
-{
-    return this->id != other.id;
-}
