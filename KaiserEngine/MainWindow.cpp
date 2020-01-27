@@ -183,8 +183,11 @@ static int CreateTrueContext(HWND hWnd)
         glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
         glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
         std::stringstream ss;
-        ss << "Requested OpenGL version: "
+        ss
+            << std::endl
+            << "Requested OpenGL version: "
             << majorVersion << "." << minorVersion
+            << std::endl
             << std::endl;
         OutputDebugStringA(ss.str().c_str());
     }
