@@ -132,6 +132,9 @@
     <ClInclude Include="GLNamedObject.h">
       <Filter>Header Files\Video</Filter>
     </ClInclude>
+    <ClInclude Include="VertexData.h">
+      <Filter>Header Files\Video</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
