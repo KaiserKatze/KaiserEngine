@@ -188,6 +188,7 @@
     <ClCompile Include="AttributeList.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventHandler.cpp" />

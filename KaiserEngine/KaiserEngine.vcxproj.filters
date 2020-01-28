@@ -209,6 +209,9 @@
     <ClCompile Include="GLNamedObject.cpp">
       <Filter>Source Files\Video</Filter>
     </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>Source Files\Video</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KaiserEngine.rc">
