@@ -156,6 +156,7 @@
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventHandler.h" />
