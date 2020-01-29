@@ -11,3 +11,10 @@ Drawable()
     : context{ new DrawableContext }
 {
 }
+
+Drawable::
+~Drawable()
+{
+    delete context;
+    context = nullptr;
+}
