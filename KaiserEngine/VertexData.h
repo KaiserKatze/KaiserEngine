@@ -92,7 +92,7 @@ SetVertexAttribPointer()
     const static int ColorByteOffset = PositionByteOffset + PositionByteCount;
     const static int TextureByteOffset = ColorByteOffset + ColorByteCount;
 
-    static const auto setVertexAttribPointer0 = [](
+    static const auto setVAP = [](
         const GLuint & index,
         const GLint & size,
         const GLenum & type,
@@ -118,15 +118,15 @@ SetVertexAttribPointer()
 
 #pragma warning(push)
 #pragma warning(disable: 4312)
-    setVertexAttribPointer0(0,
+    setVAP(0,
         VertexData::PositionElementCount,
         type, normalized, stride,
         PositionByteOffset);
-    setVertexAttribPointer0(1,
+    setVAP(1,
         VertexData::ColorElementCount,
         type, normalized, stride,
         reinterpret_cast<void*>(ColorByteOffset));
-    setVertexAttribPointer0(2,
+    setVAP(2,
         VertexData::TextureElementCount,
         type, normalized, stride,
         reinterpret_cast<void*>(TextureByteOffset));
