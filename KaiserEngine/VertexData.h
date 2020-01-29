@@ -40,7 +40,7 @@ struct VertexData
     const static int ColorElementCount      = sizeof(ColorArray)    / sizeof(_Ty);  /* r, g, b, a */
     const static int TextureElementCount    = sizeof(TextureArray)  / sizeof(_Ty);  /* u, v */
 
-    static void SetVertexAttribPointer();
+    static void SetVertexAttribPointer() {}
     static void EnableVertexAttribArray();
     static void DisableVertexAttribArray();
 };
@@ -73,14 +73,6 @@ VertexData(const std::initializer_list<_Ty>& initializerList)
     const _Ty* sourceBegin{ initializerList.begin() };
     const _Ty* sourceEnd{ sourceBegin + size };
     std::copy(sourceBegin, sourceEnd, dataBegin);
-}
-
-template <typename _Ty>
-void
-VertexData<_Ty>::
-SetVertexAttribPointer()
-{
-    throw std::runtime_error("Unsupported <typename _Ty>!");
 }
 
 template <>
