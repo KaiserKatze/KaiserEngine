@@ -13,15 +13,14 @@ slurp(std::ifstream& ifs)
 
 GLShader::
 GLShader()
+    : GLNamedObject()
 {
 }
 
 GLShader::
-GLShader(GLstring path, const GLenum& type)
+GLShader(const std::string& path, const GLenum& type)
+    : GLShader()
 {
-    if (path == nullptr)
-        throw std::invalid_argument("Invalid argument 'path'!");
-
     switch (type)
     {
     case GL_VERTEX_SHADER:
@@ -50,7 +49,7 @@ GLShader(GLstring path, const GLenum& type)
         }
         const GLsizei count = 1;
         const GLchar* string = text.c_str();
-        const GLint length = text.length();
+        const GLint length = static_cast<GLint>(0xffffffff & text.length());
         glShaderSource(shaderId, count, &string, &length);
         {
             std::stringstream ss;
@@ -74,7 +73,7 @@ GLShader(GLstring path, const GLenum& type)
     }
     else
     {
-        throw std::exception("Fail to create shader!");
+        throw std::runtime_error("Fail to create shader!");
     }
 }
 
@@ -97,21 +96,14 @@ GLShader::
 
 const bool
 GLShader::
-isShader() const
+IsShader() const
 {
     return id != 0 && glIsShader(id);
 }
 
-const GLuint
-GLShader::
-getID() const
-{
-    return id;
-}
-
 const GLenum
 GLShader::
-getType() const
+GetType() const
 {
     return tp;
 }

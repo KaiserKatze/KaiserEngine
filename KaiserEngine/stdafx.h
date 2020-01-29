@@ -19,6 +19,7 @@
 
 // C RunTime Header Files
 #include <cstdlib>
+#include <cassert>
 #include <cstring>
 #include <tchar.h>
 #include <strsafe.h>
@@ -41,6 +42,7 @@
 #include <initializer_list>
 #include <algorithm>
 #include <iterator>
+#include <optional>
 
 // TODO: reference additional headers your program requires here
 #include <gl/GL.h>
@@ -50,7 +52,6 @@
 
 #include "include/glext.h"
 #include "include/wglext.h"
-using GLstring = const GLchar*;
 
 void ErrorExit(LPTSTR lpszFunction);
 

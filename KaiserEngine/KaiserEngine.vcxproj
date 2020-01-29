@@ -103,6 +103,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,10 +156,13 @@
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Drawable.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventListener.h" />
     <ClInclude Include="EventHandler.h" />
     <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GLNamedObject.h" />
+    <ClInclude Include="GLObject.h" />
     <ClInclude Include="GLVertexArray.h" />
     <ClInclude Include="GLBuffer.h" />
     <ClInclude Include="GLProgram.h" />
@@ -177,16 +181,20 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UserInput.h" />
+    <ClInclude Include="VertexData.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AbstractWindow.cpp" />
     <ClCompile Include="AttributeList.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventListener.cpp" />
     <ClCompile Include="EventHandler.cpp" />
     <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GLNamedObject.cpp" />
+    <ClCompile Include="GLObject.cpp" />
     <ClCompile Include="GLVertexArray.cpp" />
     <ClCompile Include="GLBuffer.cpp" />
     <ClCompile Include="GLProgram.cpp" />

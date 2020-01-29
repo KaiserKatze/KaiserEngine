@@ -5,9 +5,43 @@
 GLProgram::
 GLProgram()
 {
-    if (GLuint pId = glCreateProgram())
+}
+
+GLProgram::
+~GLProgram()
+{
+}
+
+void
+GLProgram::
+UseProgram(const GLProgram& program)
+{
+    const GLuint& pId{ program.GetID() };
+    glUseProgram(pId);
     {
-        id = pId;
+        std::stringstream ss;
+        ss << "glUseProgram(" << pId << ")";
+        DetectGLError(ss);
+    }
+}
+
+void
+GLProgram::
+UseProgram()
+{
+    glUseProgram(0);
+    SuppressGLError();
+}
+
+void
+GLProgram::
+Create()
+{
+    if (this->id) return; // GLProgram is already created!
+
+    if (GLuint pId{ glCreateProgram() })
+    {
+        this->id = pId;
         {
             std::stringstream ss;
             ss << "Generated program ID = " << pId
@@ -21,62 +55,47 @@ GLProgram()
     else
     {
         DetectGLError("glCreateProgram()");
-        throw std::exception("Fail to create program!");
+        throw std::runtime_error("Fail to create program!");
     }
 }
 
+void
 GLProgram::
-~GLProgram()
+Destroy()
 {
+    const GLuint& pId{ this->GetID() };
     for (auto itr = shaders.begin();
         itr != shaders.end();
         itr++)
     {
         GLShader* shader = itr->second;
+        const GLuint& sId{ shader->GetID() };
+        glDetachShader(pId, sId);
         if (shader)
             delete shader;
     }
     shaders.clear();
 
-    if (id)
+    if (pId)
     {
-        glDeleteProgram(id);
+        glDeleteProgram(pId);
 
         {
             std::stringstream ss;
-            ss << "Deleted program ID = " << id
+            ss << "Deleted program ID = " << pId
                 << std::endl;
             OutputDebugStringA(ss.str().c_str());
         }
     }
-    id = 0;
-}
-
-void
-GLProgram::
-UseProgram(const GLProgram* program)
-{
-    GLuint pId{ 0 };
-    if (program) pId = program->getID();
-    glUseProgram(pId); // need not to detect gl error, if pId == 0
-    if (pId != 0)
-    {
-        std::stringstream ss;
-        ss << "glUseProgram(" << pId << ")";
-        DetectGLError(ss);
-    }
-    else
-    {
-        glGetError(); // suppress possible error
-    }
+    this->id = 0;
 }
 
 void
 GLProgram::
 AttachShader(GLShader* shader)
 {
-    GLuint pId = getID();
-    GLuint sId = shader->getID();
+    const GLuint& pId{ GetID() };
+    const GLuint& sId{ shader->GetID() };
     glAttachShader(pId, sId);
     {
         std::stringstream ss;
@@ -85,12 +104,22 @@ AttachShader(GLShader* shader)
             << sId << ")";
         DetectGLError(ss);
     }
-    shaders[shader->getType()] = shader;
+    const GLenum& type{ shader->GetType() };
+
+    auto itr{ this->shaders.find(type) };
+    if (itr != this->shaders.end()) // found keyVal
+    {
+        const GLShader* other{ itr->second };
+        if (other == shader) return; // the exaclty same shader is already attached
+
+        throw std::runtime_error("Trying to attach different shaders to the same program!");
+    }
+    this->shaders[type] = shader;
 }
 
 void
 GLProgram::
-LoadShader(const std::map<GLenum, GLstring>& shaders)
+LoadShader(const std::map<GLenum, std::string>& shaders)
 {
     for (auto itr = shaders.cbegin();
         itr != shaders.cend();
@@ -103,10 +132,10 @@ LoadShader(const std::map<GLenum, GLstring>& shaders)
 
 void
 GLProgram::
-BindAttribute(const GLuint& index, GLstring name) const
+BindAttribute(const GLuint& index, const std::string& name) const
 {
-    const GLuint pId = getID();
-    glBindAttribLocation(pId, index, name);
+    const GLuint& pId{ this->GetID() };
+    glBindAttribLocation(pId, index, name.c_str());
     {
         std::stringstream ss;
         ss << "glBindAttribLocation("
@@ -121,7 +150,7 @@ void
 GLProgram::
 LinkProgram() const
 {
-    const GLuint pId = getID();
+    const GLuint& pId{ this->GetID() };
     glLinkProgram(pId);
     {
         std::stringstream ss;
@@ -134,21 +163,42 @@ void
 GLProgram::
 ValidateProgram() const
 {
-    const GLuint pId = getID();
+    const GLuint& pId{ this->GetID() };
     glValidateProgram(pId);
     {
         std::stringstream ss;
         ss << "glValidateProgram(" << pId << ")";
         DetectGLError(ss);
     }
+
+    {
+        GLint result{ 0 };
+        this->GetProgramState(GL_VALIDATE_STATUS, &result);
+        if (result == GL_FALSE)
+        {
+            std::stringstream ss;
+            ss << "GLProgram {" << pId
+                << "} is invalid!";
+            throw std::runtime_error(ss.str());
+        }
+        else if (result == GL_TRUE)
+        {
+            std::stringstream ss;
+            ss << "GLProgram {" << pId
+                << "} is validated: ("
+                << "GL_VALIDATE_STATUS -> GL_TRUE)!"
+                << std::endl;
+            OutputDebugStringA(ss.str().c_str());
+        }
+    }
 }
 
 const GLint
 GLProgram::
-GetUniformLocation(GLstring name) const
+GetUniformLocation(const std::string& name) const
 {
-    const GLuint pId = getID();
-    GLint result = glGetUniformLocation(pId, name);
+    const GLuint& pId{ this->GetID() };
+    GLint result = glGetUniformLocation(pId, name.c_str());
     {
         std::stringstream ss;
         ss << "glGetUniformLocation(" << pId << ", " << name << ")";
@@ -157,13 +207,48 @@ GetUniformLocation(GLstring name) const
     return result;
 }
 
-const GLuint
+void
 GLProgram::
-getID() const
+GetProgramState(const GLenum& pname, GLint* params) const
 {
-    if (id == 0)
-        throw std::exception("GLProgram refuses to return 0 as its ID!");
-    return id;
+    switch (pname)
+    {
+    case GL_DELETE_STATUS:
+    case GL_LINK_STATUS:
+    case GL_VALIDATE_STATUS:
+    case GL_INFO_LOG_LENGTH:
+    case GL_ATTACHED_SHADERS:
+    case GL_ACTIVE_ATOMIC_COUNTER_BUFFERS:
+    case GL_ACTIVE_ATTRIBUTES:
+    case GL_ACTIVE_ATTRIBUTE_MAX_LENGTH:
+    case GL_ACTIVE_UNIFORMS:
+    case GL_ACTIVE_UNIFORM_BLOCKS:
+    case GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH:
+    case GL_ACTIVE_UNIFORM_MAX_LENGTH:
+    case GL_PROGRAM_BINARY_LENGTH:
+    case GL_TRANSFORM_FEEDBACK_BUFFER_MODE:
+    case GL_TRANSFORM_FEEDBACK_VARYINGS:
+    case GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH:
+    case GL_GEOMETRY_VERTICES_OUT:
+    case GL_GEOMETRY_INPUT_TYPE:
+    case GL_GEOMETRY_OUTPUT_TYPE:
+        break;
+    default:
+        throw std::invalid_argument("Invalid argument 'pname'!");
+    }
+
+    if (params == nullptr)
+        throw std::invalid_argument("Invalid argument 'params'!");
+
+    const GLuint& pId{ this->GetID() };
+    glGetProgramiv(pId, GL_VALIDATE_STATUS, params);
+    {
+        std::stringstream ss;
+        ss << "glGetProgramiv("
+            << pId << ", GL_VALIDATE_STATUS, []"
+            << ")";
+        DetectGLError(ss);
+    }
 }
 
 
@@ -277,21 +362,26 @@ LoadUniformMatrix(const GLint& location, const MatrixMath::Matrix<float, 4, 3>& 
 
 void
 GLProgram::
-Setup(const std::map<GLenum, GLstring>& shaders,
-    const std::vector<GLstring>* attributes,
-    std::map<GLstring, GLint>* uniforms)
+Setup(const std::map<GLenum, std::string>& shaders,
+    const std::vector<std::string>* const attributes,
+    std::map<std::string, GLint>* const uniforms)
 {
+    // Create and attach shaders
     LoadShader(shaders);
 
     // get all attribute variable locations
     if (attributes != nullptr)
+    {
         for (auto itr = attributes->cbegin();
             itr != attributes->cend();
             itr++)
-    {
-        GLuint index = static_cast<GLuint>(std::distance(attributes->cbegin(), itr));
-        GLstring attributeName{ *itr };
-        BindAttribute(index, attributeName);
+        {
+            ptrdiff_t pdiff{ std::distance(attributes->cbegin(), itr) };
+            assert(("Is the size of `attributes` really so large?", pdiff < 0xffffffff));
+            GLuint index{ static_cast<GLuint>(pdiff & 0xffffffff) };
+            const std::string& attributeName{ *itr };
+            BindAttribute(index, attributeName);
+        }
     }
 
     LinkProgram();
@@ -299,12 +389,14 @@ Setup(const std::map<GLenum, GLstring>& shaders,
 
     // get all uniform variable locations
     if (uniforms != nullptr)
+    {
         for (auto itr = uniforms->begin();
             itr != uniforms->end();
             itr++)
-    {
-        GLstring uniformName{ itr->first };
-        GLint& uniformLocation{ itr->second };
-        uniformLocation = GetUniformLocation(uniformName);
+        {
+            const std::string& uniformName{ itr->first };
+            GLint& uniformLocation{ itr->second };
+            uniformLocation = GetUniformLocation(uniformName);
+        }
     }
 }

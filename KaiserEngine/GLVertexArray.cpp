@@ -9,7 +9,7 @@ GLVertexArray()
 
 GLVertexArray::
 GLVertexArray(const GLVertexArray& other)
-    : id{ other.id }
+    : GLNamedObject(other.id)
 {
 }
 
@@ -18,17 +18,12 @@ GLVertexArray::
 {
 }
 
-const GLuint&
-GLVertexArray::
-GetID() const noexcept
-{
-    return this->id;
-}
-
 void
 GLVertexArray::
 Create()
 {
+    if (this->id) return; // GLVertexArray is already created!
+
     glGenVertexArrays(1, &(this->id));
     {
         std::stringstream ss;
@@ -90,7 +85,7 @@ Destroy()
 
 bool
 GLVertexArray::
-AddBuffer(GLstring name, const GLBuffer& buffer)
+AddBuffer(const std::string& name, const GLBuffer& buffer)
 {
     // There is a buffer having the exactly same name with this one in record!
     if (this->buffers.find(name) != this->buffers.end())
@@ -102,14 +97,14 @@ AddBuffer(GLstring name, const GLBuffer& buffer)
 
 GLBuffer&
 GLVertexArray::
-GetBuffer(GLstring name)
+GetBuffer(const std::string& name)
 {
     return this->buffers.at(name);
 }
 
 GLBuffer&
 GLVertexArray::
-CreateBuffer(GLstring name)
+CreateBuffer(const std::string& name)
 {
     this->AddBuffer(name, GLBuffer());
     return this->GetBuffer(name);
@@ -119,12 +114,6 @@ bool
 GLVertexArray::
 operator==(const GLVertexArray& other) const
 {
-    return this->id == other.id;
-}
-
-bool
-GLVertexArray::
-operator!=(const GLVertexArray& other) const
-{
-    return this->id != other.id;
+    return this->GLNamedObject::operator==(other)
+        || this->id == other.id;
 }

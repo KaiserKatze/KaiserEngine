@@ -5,6 +5,10 @@ import os
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+SOURCEFILE_LINE_FORMAT_LOADER = """
+    {1} = static_cast<{0}>(GetAnyGLFuncAddress("{1}"));
+    if ({1} == nullptr) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");"""
+
 def GenerateCpp():
     """
     Generate loadgl.h and loadgl.cpp
@@ -47,9 +51,7 @@ def GenerateCpp():
             gltype = "PFN{}PROC".format(line.upper())
 
             # cpp
-            line = """
-    {1} = static_cast<{0}>(GetAnyGLFuncAddress("{1}"));
-    if ({1} == nullptr) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
+            line = SOURCEFILE_LINE_FORMAT_LOADER.format(gltype, func)
             buffer_cpp.append(line)
 
             # init
@@ -110,3 +112,5 @@ if __name__ == "__main__":
     # Modify header files
 
     GenerateCpp()
+
+    print("The prerequisites have been generated.")

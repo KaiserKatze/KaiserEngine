@@ -1,6 +1,7 @@
 #pragma once
 
 #include <map>
+#include "GLNamedObject.h"
 
 // Routines:
 // GLBuffer* buffer = new GLBuffer();
@@ -11,24 +12,23 @@
 // // Do something else
 // buffer->Unbind();
 class GLBuffer
+    : public GLNamedObject
 {
 private:
-    GLuint id{ 0 };
     GLenum target{ 0 };
     GLenum usage{ 0 };
-    bool isBound{ false };
-    bool isFilled{ false };
+    GLsizeiptr count{ 0 };
 
 public:
     GLBuffer();
     GLBuffer(const GLBuffer& other);
     ~GLBuffer();
 
-    const GLuint& GetID() const noexcept;
-    void SetTarget(const GLenum& target) noexcept;
-    const GLenum& GetTarget() const noexcept;
-    void SetUsage(const GLenum& usage) noexcept;
-    const GLenum& GetUsage() const noexcept;
+    void SetTarget(const GLenum& target);
+    const GLenum& GetTarget() const;
+    void SetUsage(const GLenum& usage);
+    const GLenum& GetUsage() const;
+    const GLsizeiptr& GetCount() const;
 
     void Create();
     void Bind();
@@ -37,5 +37,4 @@ public:
     void SetData(const GLsizeiptr& size, const void* data);
 
     bool operator==(const GLBuffer& other) const;
-    bool operator!=(const GLBuffer& other) const;
 };

@@ -4,12 +4,13 @@
 
 GLBuffer::
 GLBuffer()
+    : GLNamedObject()
 {
 }
 
 GLBuffer::
 GLBuffer(const GLBuffer& other)
-    : id{ other.id }
+    : GLNamedObject(other.id)
     , target{ other.target }
     , usage{ other.usage }
 {
@@ -20,45 +21,47 @@ GLBuffer::
 {
 }
 
-const GLuint&
-GLBuffer::
-GetID() const noexcept
-{
-    return id;
-}
-
 void
 GLBuffer::
-SetTarget(const GLenum& target) noexcept
+SetTarget(const GLenum& target)
 {
     this->target = target;
 }
 
 const GLenum&
 GLBuffer::
-GetTarget() const noexcept
+GetTarget() const
 {
     return target;
 }
 
 void
 GLBuffer::
-SetUsage(const GLenum& usage) noexcept
+SetUsage(const GLenum& usage)
 {
     this->usage = usage;
 }
 
 const GLenum&
 GLBuffer::
-GetUsage() const noexcept
+GetUsage() const
 {
     return usage;
+}
+
+const GLsizeiptr&
+GLBuffer::
+GetCount() const
+{
+    return count;
 }
 
 void
 GLBuffer::
 Create()
 {
+    if (this->id) return; // GLBuffer is already created!
+
     glGenBuffers(1, &(this->id));
     {
         std::stringstream ss;
@@ -72,9 +75,6 @@ void
 GLBuffer::
 Bind()
 {
-    if (this->isBound)
-        throw std::runtime_error("This buffer is already bound!");
-
     glBindBuffer(this->target, this->id);
     {
         std::stringstream ss;
@@ -85,21 +85,14 @@ Bind()
             << std::endl;
         DetectGLError(ss);
     }
-
-    this->isBound = true;
 }
 
 void
 GLBuffer::
 Unbind()
 {
-    if (!this->isBound)
-        throw std::runtime_error("This buffer is not bound yet!");
-
     glBindBuffer(this->target, 0);
     SuppressGLError();
-
-    this->isBound = false;
 }
 
 void
@@ -124,8 +117,7 @@ void
 GLBuffer::
 SetData(const GLsizeiptr& size, const void* data)
 {
-    if (!this->isBound)
-        throw std::runtime_error("This buffer is not bound yet!");
+    this->count = size;
 
     glBufferData(this->target, size, data, this->usage);
     {
@@ -145,16 +137,8 @@ bool
 GLBuffer::
 operator==(const GLBuffer& other) const
 {
-    return this->id == other.id
+    return this->GLNamedObject::operator==(other)
+        || this->id == other.id
         && this->target == other.target
         && this->usage == other.usage;
-}
-
-bool
-GLBuffer::
-operator!=(const GLBuffer& other) const
-{
-    return this->id != other.id
-        || this->target != other.target
-        || this->usage != other.usage;
 }

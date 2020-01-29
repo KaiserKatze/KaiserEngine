@@ -36,10 +36,10 @@ namespace MatrixMath
             return row + column * Height;   // column-first
         }
 
-        Matrix(const _Ty* buffer, int count)
+        Matrix(const _Ty* buffer, size_t count)
             : Matrix()
         {
-            count = std::min<int>(count, Height * Width);
+            count = std::min<size_t>(count, Height * Width);
             memcpy(data, buffer, count * sizeof(_Ty));
         }
 
@@ -52,7 +52,7 @@ namespace MatrixMath
         }
 
         Matrix(std::initializer_list<_Ty> init)
-            : Matrix(std::vector<_Ty>(init.begin(), init.end()).data(), init.size())
+            : Matrix(init.begin(), init.size())
         {
         }
 
