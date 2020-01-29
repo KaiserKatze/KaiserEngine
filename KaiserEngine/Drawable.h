@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "VertexData.h"
 
@@ -8,7 +9,7 @@ struct DrawableContext;
 class Drawable
 {
 private:
-    DrawableContext* context;
+    std::unique_ptr<DrawableContext> context;
 
 public:
     Drawable();

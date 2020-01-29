@@ -8,15 +8,13 @@ struct DrawableContext
 
 Drawable::
 Drawable()
-    : context{ new DrawableContext }
+    : context{ std::make_unique<DrawableContext>() }
 {
 }
 
 Drawable::
 ~Drawable()
 {
-    delete context;
-    context = nullptr;
 }
 
 const std::vector<VertexData<float>>&
