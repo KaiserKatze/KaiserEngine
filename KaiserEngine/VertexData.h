@@ -54,6 +54,7 @@ struct VertexData
 };
 
 template <typename _Ty>
+inline
 VertexData<_Ty>::
 VertexData()
     : positions{ 0, 0, 0, 0 }
@@ -63,6 +64,7 @@ VertexData()
 }
 
 template <>
+inline
 VertexData<float>::
 VertexData()
     : positions{ 0.0f, 0.0f, 0.0f, 0.0f }
@@ -72,6 +74,7 @@ VertexData()
 }
 
 template <typename _Ty>
+inline
 VertexData<_Ty>::
 VertexData(const std::initializer_list<_Ty>& initializerList)
     : VertexData()
@@ -84,6 +87,7 @@ VertexData(const std::initializer_list<_Ty>& initializerList)
 }
 
 template <>
+inline
 void
 VertexData<float>::
 SetVertexAttribPointer()
@@ -149,6 +153,7 @@ EnableVertexAttribArray(const GLuint& index)
 }
 
 template <typename _Ty>
+inline
 void
 VertexData<_Ty>::
 EnableVertexAttribArray()
@@ -159,6 +164,7 @@ EnableVertexAttribArray()
 }
 
 template <typename _Ty>
+inline
 void
 VertexData<_Ty>::
 DisableVertexAttribArray()
