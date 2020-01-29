@@ -36,9 +36,17 @@ struct VertexData
     VertexData(const std::initializer_list<_Ty>& initializerList);
     ~VertexData() {}
 
-    const static int PositionElementCount   = sizeof(PositionArray) / sizeof(_Ty);  /* x, y, z, w */
-    const static int ColorElementCount      = sizeof(ColorArray)    / sizeof(_Ty);  /* r, g, b, a */
-    const static int TextureElementCount    = sizeof(TextureArray)  / sizeof(_Ty);  /* u, v */
+    constexpr static int PositionElementCount   = sizeof(PositionArray) / sizeof(_Ty);  /* x, y, z, w */
+    constexpr static int ColorElementCount      = sizeof(ColorArray)    / sizeof(_Ty);  /* r, g, b, a */
+    constexpr static int TextureElementCount    = sizeof(TextureArray)  / sizeof(_Ty);  /* u, v */
+
+    constexpr static int PositionByteCount      = PositionElementCount * sizeof(DataType);
+    constexpr static int ColorByteCount         = ColorElementCount * sizeof(DataType);
+    constexpr static int TextureByteCount       = TextureElementCount * sizeof(DataType);
+
+    constexpr static int PositionByteOffset     = 0;
+    constexpr static int ColorByteOffset        = PositionByteOffset + PositionByteCount;
+    constexpr static int TextureByteOffset      = ColorByteOffset + ColorByteCount;
 
     static void SetVertexAttribPointer() {}
     static void EnableVertexAttribArray();
@@ -84,15 +92,7 @@ SetVertexAttribPointer()
     const GLboolean normalized{ GL_FALSE };
     const GLsizei stride{ sizeof(VertexData) };
 
-    const static int PositionByteCount = VertexData::PositionElementCount * sizeof(VertexData::DataType);
-    const static int ColorByteCount = VertexData::ColorElementCount * sizeof(VertexData::DataType);
-    const static int TextureByteCount = VertexData::TextureElementCount * sizeof(VertexData::DataType);
-
-    const static int PositionByteOffset = 0;
-    const static int ColorByteOffset = PositionByteOffset + PositionByteCount;
-    const static int TextureByteOffset = ColorByteOffset + ColorByteCount;
-
-    static const auto setVAP = [](
+    const auto setVAP = [](
         const GLuint & index,
         const GLint & size,
         const GLenum & type,
@@ -121,15 +121,15 @@ SetVertexAttribPointer()
     setVAP(0,
         VertexData::PositionElementCount,
         type, normalized, stride,
-        PositionByteOffset);
+        VertexData::PositionByteOffset);
     setVAP(1,
         VertexData::ColorElementCount,
         type, normalized, stride,
-        reinterpret_cast<void*>(ColorByteOffset));
+        reinterpret_cast<void*>(VertexData::ColorByteOffset));
     setVAP(2,
         VertexData::TextureElementCount,
         type, normalized, stride,
-        reinterpret_cast<void*>(TextureByteOffset));
+        reinterpret_cast<void*>(VertexData::TextureByteOffset));
 #pragma warning(pop)
 }
 
