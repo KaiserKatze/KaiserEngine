@@ -23,32 +23,32 @@
     <ProjectGuid>{9C910A84-A749-412D-AFAC-D6E0C9FA5936}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>KaiserEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -89,6 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,13 +103,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
-      <Command>python loadgl.py</Command>
+      <Command>python $(ProjectDir)loadgl.py</Command>
+      <Message>Generate loadgl.h and loadgl.cpp</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,26 +150,69 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="loadgl.txt" />
-    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractWindow.h" />
+    <ClInclude Include="AttributeList.h" />
+    <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventListener.h" />
+    <ClInclude Include="EventHandler.h" />
+    <ClInclude Include="EventManager.h" />
+    <ClInclude Include="GLNamedObject.h" />
+    <ClInclude Include="GLObject.h" />
+    <ClInclude Include="GLVertexArray.h" />
+    <ClInclude Include="GLBuffer.h" />
+    <ClInclude Include="GLProgram.h" />
+    <ClInclude Include="GLShader.h" />
+    <ClInclude Include="GLTexture.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="include\glext.h" />
     <ClInclude Include="include\wglext.h" />
     <ClInclude Include="KaiserEngine.h" />
+    <ClInclude Include="KeyboardEvent.h" />
     <ClInclude Include="loadgl.h" />
+    <ClInclude Include="MainWindow.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="MouseEvent.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UserInput.h" />
+    <ClInclude Include="VertexData.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbstractWindow.cpp" />
+    <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventListener.cpp" />
+    <ClCompile Include="EventHandler.cpp" />
+    <ClCompile Include="EventManager.cpp" />
+    <ClCompile Include="GLNamedObject.cpp" />
+    <ClCompile Include="GLObject.cpp" />
+    <ClCompile Include="GLVertexArray.cpp" />
+    <ClCompile Include="GLBuffer.cpp" />
+    <ClCompile Include="GLProgram.cpp" />
+    <ClCompile Include="GLShader.cpp" />
+    <ClCompile Include="GLTexture.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="KaiserEngine.cpp" />
+    <ClCompile Include="KeyboardEvent.cpp" />
     <ClCompile Include="loadgl.cpp" />
+    <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="MouseEvent.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="UserInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="KaiserEngine.rc" />
@@ -176,7 +222,10 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="fragment.shader" />
     <None Include="loadgl.py" />
+    <None Include="README.md" />
+    <None Include="vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,10 @@ import os
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
+SOURCEFILE_LINE_FORMAT_LOADER = """
+    {1} = static_cast<{0}>(GetAnyGLFuncAddress("{1}"));
+    if ({1} == nullptr) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");"""
+
 def GenerateCpp():
     """
     Generate loadgl.h and loadgl.cpp
@@ -14,24 +18,44 @@ def GenerateCpp():
     buffer_init = []
     buffer_h = []
 
+    # detect possible file lock
+
+    try:
+        with open(os.path.join(HERE, "loadgl.h"),
+                  mode="w", encoding="utf-8") as file:
+            pass
+    except PermissionError:
+        raise AssertionError("Please ensure file 'loadgl.h' is writable!")
+
+    try:
+        with open(os.path.join(HERE, "loadgl.cpp"),
+                  mode="w", encoding="utf-8") as file:
+            pass
+    except PermissionError:
+        raise AssertionError("Please ensure file 'loadgl.cpp' is writable!")
+
+    # start generating c++ files
+
     with open(os.path.join(HERE, "loadgl.txt"),
               mode="r", encoding="utf-8") as file:
         lines = file.read().splitlines()
         lines = list(dict.fromkeys(lines))
         for line in lines:
+            # Skip empty line
             if not line:
+                continue
+            # Skip comment line (starting with hash sign '#')
+            if line[0] == '#':
                 continue
             func = line
             gltype = "PFN{}PROC".format(line.upper())
 
             # cpp
-            line = """
-    {1} = ({0}) GetAnyGLFuncAddress("{1}");
-    if ({1} == NULL) ErrorExit(L"GetAnyGLFuncAddress(\\"{1}\\")");""".format(gltype, func)
+            line = SOURCEFILE_LINE_FORMAT_LOADER.format(gltype, func)
             buffer_cpp.append(line)
 
             # init
-            line = """{0} {1} = ({0}) NULL;
+            line = """{0} {1}{{ nullptr }};
 """.format(gltype, func)
             buffer_init.append(line)
 
@@ -88,3 +112,5 @@ if __name__ == "__main__":
     # Modify header files
 
     GenerateCpp()
+
+    print("The prerequisites have been generated.")

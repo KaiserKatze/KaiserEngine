@@ -262,12 +262,13 @@ __pycache__/
 
 # Third-party dependencies
 */deps/*
-glext.h
-glcorearb.h
-glxext.h
-wglext.h
-khrplatform.h
 
 # Generated files
 loadgl.h
 loadgl.cpp
+
+# Images
+*.bmp
+*.png
+*.jpg
+*.jpeg
