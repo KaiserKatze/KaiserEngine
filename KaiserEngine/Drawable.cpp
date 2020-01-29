@@ -18,3 +18,10 @@ Drawable::
     delete context;
     context = nullptr;
 }
+
+const std::vector<VertexData<float>>&
+Drawable::
+GetVertexData() const
+{
+    return this->context->vertices;
+}
