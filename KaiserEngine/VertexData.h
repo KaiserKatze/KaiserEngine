@@ -127,15 +127,15 @@ SetVertexAttribPointer()
 #pragma warning(push)
 #pragma warning(disable: 4312)
     setVertexAttribPointer0(0,
-        VertexData<float>::PositionElementCount,
+        VertexData::PositionElementCount,
         type, normalized, stride,
         PositionByteOffset);
     setVertexAttribPointer0(1,
-        VertexData<float>::ColorElementCount,
+        VertexData::ColorElementCount,
         type, normalized, stride,
         reinterpret_cast<void*>(ColorByteOffset));
     setVertexAttribPointer0(2,
-        VertexData<float>::TextureElementCount,
+        VertexData::TextureElementCount,
         type, normalized, stride,
         reinterpret_cast<void*>(TextureByteOffset));
 #pragma warning(pop)
