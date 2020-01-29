@@ -25,3 +25,10 @@ GetVertexData() const
 {
     return this->context->vertices;
 }
+
+std::vector<VertexData<float>>&
+Drawable::
+GetVertexData()
+{
+    return this->context->vertices;
+}
