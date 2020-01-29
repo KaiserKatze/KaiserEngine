@@ -5,7 +5,6 @@
 #include "GLProgram.h"
 #include "GLVertexArray.h"
 #include "GLTexture.h"
-#include "Drawable.h"
 
 class Canvas
 {
