@@ -5,7 +5,6 @@
 #include "MainWindow.h"
 #include "GLTexture.h"
 #include "Drawable.h"
-#include "VertexData.h"
 
 class CanvasEventListener
     : public WindowEventListener
