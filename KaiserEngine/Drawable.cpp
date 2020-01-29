@@ -5,3 +5,9 @@ struct DrawableContext
 {
     std::vector<VertexData<float>> vertices;
 };
+
+Drawable::
+Drawable()
+    : context{ new DrawableContext }
+{
+}
