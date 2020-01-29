@@ -8,7 +8,7 @@ struct DrawableContext;
 class Drawable
 {
 private:
-    const DrawableContext* context;
+    DrawableContext* context;
 
 public:
     Drawable();
